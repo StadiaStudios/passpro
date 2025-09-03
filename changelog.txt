@@ -1,0 +1,3 @@
+V1.0.0
+----------
+Dashboard, Passwords, Settings, Download/import accounts/passwords.Username feature, Local Data Saving.
