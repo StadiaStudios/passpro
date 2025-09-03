@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassPro | PIN Recovery</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        body.dark-mode {
+            background-color: #111;
+            color: #ccc;
+        }
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .bg-card {
+            background-color: #222;
+        }
+        .light-mode .bg-card {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="dark-mode min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="bg-card p-8 rounded-lg shadow-xl max-w-lg mx-auto w-full text-main">
+        <h1 class="text-3xl font-bold text-center mb-6 text-white light-mode:text-gray-800">Forgot Your PIN?</h1>
+        <p class="text-center mb-6 text-gray-400">
+            Unfortunately Your PIN is stored locally on your device and cannot be recovered or reset by us.
+            This is a security feature to ensure your passwords remain private.
+        </p>
+        <div class="space-y-4 mb-6">
+            <div class="bg-gray-800 p-4 rounded-md border border-gray-700 light-mode:bg-gray-100 light-mode:border-gray-200">
+                <h2 class="font-semibold text-lg mb-2 text-orange-500">Tips to Remember Your PIN:</h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-400">
+                    <li>Try a common number sequence you often use.</li>
+                    <li>Consider important dates or years that you might use for a PIN.</li>
+                    <li>Think about when you first set up the app and what number was on your mind.</li>
+                </ul>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-md border border-gray-700 light-mode:bg-gray-100 light-mode:border-gray-200">
+                <h2 class="font-semibold text-lg mb-2 text-orange-500">Account Recovery:</h2>
+                <p class="text-gray-400">
+                    If you have previously downloaded your account backup file, you can
+                    <a href="index.html" class="text-orange-500 hover:text-orange-600 underline font-semibold">re-import your data</a>
+                    after resetting the app. Make sure you have a Backup somewhere.
+                </p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-md border border-gray-700 light-mode:bg-gray-100 light-mode:border-gray-200">
+                <h2 class="font-semibold text-lg mb-2 text-orange-500">Reset Data:</h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-400">
+                    <li>Open Inspect Element on your PC or Laptop.</li>
+                    <li>Go to Application.</li>
+                    <li>Go to Storage.</li>
+                    <li>Clear Site data, Then Reload.</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="index.html" class="w-full block text-center bg-gradient-to-r from-orange-500 to-orange-700 text-white font-semibold py-2 px-4 rounded-md hover:from-orange-600 hover:to-orange-800 transition-colors">
+            Go Back
+        </a>
+    </div>
+
+</body>
+</html>

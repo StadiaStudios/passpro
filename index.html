@@ -16,7 +16,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        body.dark-mode {
             background-color: #111;
+        }
+        body.light-mode {
+            background-color: #f0f0f0;
         }
         .nav-link {
             position: relative;
@@ -34,8 +40,31 @@
             background-color: orange;
             transition: width 0.3s ease-in-out;
         }
+        .light-mode .nav-link::after {
+            background-color: #2563EB;
+        }
         .nav-link:hover::after,
         .nav-link.active::after {
+            width: 100%;
+        }
+        /* New styles for the forgot-pin-link to match the navbar links */
+        .forgot-pin-link {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 4px;
+            transition: all 0.3s ease-in-out;
+        }
+        .forgot-pin-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #f97316; /* Tailwind orange-500 */
+            transition: width 0.3s ease-in-out;
+        }
+        .forgot-pin-link:hover::after {
             width: 100%;
         }
         input[type="file"]::file-selector-button {
@@ -51,7 +80,6 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: #1A1A1A;
                 flex-direction: column;
                 padding-top: 1rem;
                 padding-bottom: 1rem;
@@ -63,9 +91,51 @@
                 padding: 0.5rem 1rem;
             }
         }
+        /* Custom styles for password item to fix long text */
+        .password-item-content {
+            overflow-wrap: break-word;
+            word-break: break-all;
+            white-space: normal;
+        }
+        .dark-mode .bg-card {
+            background-color: #222;
+        }
+        .light-mode .bg-card {
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+        .dark-mode .bg-nav {
+            background-color: #1A1A1A;
+        }
+        .light-mode .bg-nav {
+            background-color: #e0e0e0;
+            color: #1a1a1a;
+        }
+        .dark-mode .text-main {
+            color: white;
+        }
+        .light-mode .text-main {
+            color: #1a1a1a;
+        }
+        .dark-mode .text-secondary {
+            color: #ccc;
+        }
+        .light-mode .text-secondary {
+            color: #444;
+        }
+        .dark-mode .input-field {
+            background-color: #1A1A1A;
+            border-color: #4A4A4A;
+            color: white;
+        }
+        .light-mode .input-field {
+            background-color: #f5f5f5;
+            border-color: #ddd;
+            color: #1a1a1a;
+        }
     </style>
 </head>
-<body class="bg-[#111] min-h-screen flex flex-col items-center">
+<body class="dark-mode min-h-screen flex flex-col items-center">
 
     <!-- Custom Modal for Messages -->
     <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
@@ -78,75 +148,93 @@
             </div>
         </div>
     </div>
+    
+    <!-- Pin Lock Modal -->
+    <div id="pin-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+        <div class="bg-[#2A2A2A] p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center text-white flex flex-col items-center">
+            <h3 class="text-xl font-bold mb-4">Enter PIN</h3>
+            <p id="pin-error" class="text-red-400 mb-2 hidden">Incorrect PIN. Please try again.</p>
+            <input type="password" id="pin-input" placeholder="Enter 4-digit PIN" class="text-center tracking-[0.25em] w-full px-4 py-2 mb-4 border border-gray-600 rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition bg-[#1A1A1A] text-white">
+            <button id="pin-submit-btn" class="w-full bg-gradient-to-r from-orange-500 to-orange-700 text-white rounded-md font-semibold hover:from-orange-600 hover:to-orange-800 transition">Enter</button>
+            <a href="pin_recovery.html" class="mt-4 text-sm text-gray-400 hover:text-orange-500 transition forgot-pin-link">Forgot PIN?</a>
+        </div>
+    </div>
+
 
     <!-- Top Navigation Bar -->
-    <nav class="w-full bg-[#1A1A1A] shadow-sm sticky top-0 z-10">
+    <nav class="w-full bg-nav shadow-sm sticky top-0 z-10">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center relative">
-            <div class="text-2xl font-bold text-white flex items-center">
+            <div class="text-2xl font-bold text-main flex items-center">
                 <a href="index.html"><img src="assets/favicon.png" alt="PassPro Logo" class="w-8 h-8 rounded-md mr-2"></a>
                 PassPro
             </div>
             
             <!-- Mobile Menu Button (Hamburger) -->
-            <button id="mobile-menu-btn" class="text-white md:hidden focus:outline-none">
+            <button id="mobile-menu-btn" class="text-main md:hidden focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
             </button>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-6" id="desktop-menu">
-                <a href="#" id="dashboard-link" class="nav-link text-white font-semibold text-lg transition-colors active">Dashboard</a>
-                <a href="#" id="passwords-link" class="nav-link text-white font-semibold text-lg transition-colors">Passwords</a>
-                <a href="#" id="settings-link" class="nav-link text-white font-semibold text-lg transition-colors">Settings</a>
+            <div class="hidden md:flex space-x-6 items-center" id="desktop-menu">
+                <div id="user-display-name" class="text-secondary font-semibold text-lg flex items-center"></div>
+                <a href="#" id="dashboard-link" class="nav-link text-main font-semibold text-lg transition-colors active">Dashboard</a>
+                <a href="#" id="passwords-link" class="nav-link text-main font-semibold text-lg transition-colors">Passwords</a>
+                <a href="#" id="settings-link" class="nav-link text-main font-semibold text-lg transition-colors">Settings</a>
             </div>
 
             <!-- Mobile Menu -->
-            <div class="hidden mobile-menu" id="mobile-menu">
-                <a href="#" id="dashboard-link-mobile" class="nav-link text-white font-semibold text-lg transition-colors block w-full text-center">Dashboard</a>
-                <a href="#" id="passwords-link-mobile" class="nav-link text-white font-semibold text-lg transition-colors block w-full text-center">Passwords</a>
-                <a href="#" id="settings-link-mobile" class="nav-link text-white font-semibold text-lg transition-colors block w-full text-center">Settings</a>
+            <div class="hidden mobile-menu bg-nav" id="mobile-menu">
+                <div id="user-display-name-mobile" class="text-secondary font-semibold text-lg px-4 py-2"></div>
+                <a href="#" id="dashboard-link-mobile" class="nav-link text-main font-semibold text-lg transition-colors block w-full text-center">Dashboard</a>
+                <a href="#" id="passwords-link-mobile" class="nav-link text-main font-semibold text-lg transition-colors block w-full text-center">Passwords</a>
+                <a href="#" id="settings-link-mobile" class="nav-link text-main font-semibold text-lg transition-colors block w-full text-center">Settings</a>
             </div>
         </div>
     </nav>
 
     <!-- Main Content Container -->
-    <div class="container mx-auto px-4 py-8">
-        <div class="bg-[#222] p-8 rounded-lg shadow-xl max-w-2xl mx-auto mt-8 text-white">
+    <div id="main-content" class="container mx-auto px-4 py-8">
+        <div id="dashboard-container" class="bg-card p-8 rounded-lg shadow-xl max-w-2xl mx-auto mt-8 text-main">
 
             <!-- Dashboard Section -->
             <div id="dashboard-section">
                 <h1 class="text-3xl font-bold text-center mb-6">Save Your Passwords</h1>
-                <p id="auth-status" class="text-center text-sm text-gray-300 mb-4">Welcome to Password Saver!</p>
+                <p id="auth-status" class="text-center text-sm text-secondary mb-4">Welcome to Password Saver!</p>
                 <form id="password-form" class="space-y-4">
                     <div>
                         <label for="website" class="block font-medium">Website/Service</label>
-                        <input type="text" id="website" placeholder="e.g., Google, Amazon" class="mt-1 block w-full px-4 py-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition bg-[#1A1A1A] text-white" required>
+                        <input type="text" id="website" placeholder="e.g., Google, Amazon" class="mt-1 block w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition input-field" required>
                     </div>
                     <div>
                         <label for="username" class="block font-medium">Username/Email</label>
-                        <input type="text" id="username" placeholder="e.g., yourname@example.com" class="mt-1 block w-full px-4 py-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition bg-[#1A1A1A] text-white" required>
+                        <input type="text" id="username" placeholder="e.g., yourname@example.com" class="mt-1 block w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition input-field" required>
                     </div>
                     <div>
                         <label for="password" class="block font-medium">Password</label>
-                        <input type="password" id="password" placeholder="Enter your password" class="mt-1 block w-full px-4 py-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition bg-[#1A1A1A] text-white" required>
+                        <input type="password" id="password" placeholder="Enter your password" class="mt-1 block w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition input-field" required>
                     </div>
                     <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold py-2 px-4 rounded-md hover:from-orange-600 hover:to-orange-700 transition-colors">
                         Add Password
                     </button>
                 </form>
             </div>
+        </div>
 
-            <!-- Password List Section -->
-            <div id="passwords-section" class="hidden">
-                <h2 class="text-2xl font-bold mb-4">Saved Passwords</h2>
-                <div id="password-list" class="space-y-4">
+        <!-- Password List Section -->
+        <div id="passwords-section" class="hidden">
+            <div class="bg-card p-8 rounded-lg shadow-xl mx-auto mt-8 text-main h-full">
+                <h2 class="text-2xl font-bold mb-4 text-center">Saved Passwords</h2>
+                <div id="password-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <!-- Password items will be injected here by JavaScript -->
                 </div>
             </div>
-
-            <!-- Settings Section -->
-            <div id="settings-section" class="hidden">
+        </div>
+        
+        <!-- Settings Section -->
+        <div id="settings-section" class="hidden">
+            <div class="bg-card p-8 rounded-lg shadow-xl mx-auto mt-8 text-main h-full">
                 <h2 class="text-2xl font-bold mb-4 text-center">Account Settings</h2>
                 <div class="space-y-6">
                     <div>
@@ -154,7 +242,7 @@
                         <div class="flex items-center space-x-4 mb-4">
                             <div class="flex-grow">
                                 <label for="username-input" class="block font-medium">Username</label>
-                                <input type="text" id="username-input" placeholder="Enter username" class="mt-1 block w-full px-4 py-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition bg-[#1A1A1A] text-white">
+                                <input type="text" id="username-input" placeholder="Enter username" class="mt-1 block w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition input-field">
                             </div>
                         </div>
                         <div class="flex flex-col space-y-2">
@@ -162,16 +250,43 @@
                         </div>
                     </div>
 
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">Security</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <label for="pin-lock-toggle" class="font-medium text-main">PIN Lock</label>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="pin-lock-toggle" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
+                            </label>
+                        </div>
+                        <div id="pin-setup-container" class="space-y-2 mt-4 hidden">
+                            <label for="new-pin-input" class="block font-medium">Enter 4-digit PIN</label>
+                            <input type="password" id="new-pin-input" placeholder="e.g., 1234" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none transition input-field">
+                            <p id="pin-setup-error" class="text-red-400 text-sm hidden"></p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">Appearance</h3>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-main">Light Mode</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="theme-toggle" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="flex space-x-4">
-                        <button id="download-account-btn" class="flex-1 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition">Download Account</button>
-                        <button id="import-account-btn" class="flex-1 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition">Import Account</button>
+                        <button id="download-account-btn" class="flex-1 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition light-mode-button">Download Account</button>
+                        <button id="import-account-btn" class="flex-1 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition light-mode-button">Import Account</button>
                         <input type="file" id="import-file-input" class="hidden" accept=".json">
                     </div>
                     
                     <!-- App Version Section -->
                     <div class="pt-4">
                         <h3 class="font-semibold text-lg mb-2">App Version</h3>
-                        <p id="app-version-info" class="text-sm text-gray-300"></p>
+                        <p id="app-version-info" class="text-sm text-secondary"></p>
                     </div>
                 </div>
             </div>
@@ -182,13 +297,22 @@
     <script type="module">
         let passwords = [];
         let userProfile = { username: 'Guest' };
-        const appVersion = "1.0.0";
+        let pin = null;
+        let isLightMode = false;
+        const appVersion = "1.1.1";
 
         // Functions to save and load data from local storage
         const saveData = () => {
             try {
                 localStorage.setItem('passwords', JSON.stringify(passwords));
                 localStorage.setItem('userProfile', JSON.stringify(userProfile));
+                // Save the pin
+                if (pin) {
+                    localStorage.setItem('pin', JSON.stringify(pin));
+                } else {
+                    localStorage.removeItem('pin');
+                }
+                localStorage.setItem('lightMode', isLightMode);
             } catch (e) {
                 console.error("Error saving to local storage", e);
             }
@@ -198,11 +322,20 @@
             try {
                 const savedPasswords = localStorage.getItem('passwords');
                 const savedProfile = localStorage.getItem('userProfile');
+                const savedPin = localStorage.getItem('pin');
+                const savedTheme = localStorage.getItem('lightMode');
+
                 if (savedPasswords) {
                     passwords = JSON.parse(savedPasswords);
                 }
                 if (savedProfile) {
                     userProfile = JSON.parse(savedProfile);
+                }
+                if (savedPin) {
+                    pin = JSON.parse(savedPin);
+                }
+                if (savedTheme) {
+                    isLightMode = savedTheme === 'true';
                 }
             } catch (e) {
                 console.error("Error loading from local storage", e);
@@ -240,7 +373,7 @@
             const passwordList = document.getElementById('password-list');
             passwordList.innerHTML = '';
             if (passwords.length === 0) {
-                passwordList.innerHTML = '<p class="text-gray-300 text-center">No passwords saved yet. Add one above!</p>';
+                passwordList.innerHTML = '<p class="text-secondary text-center col-span-full">No passwords saved yet. Add one above!</p>';
                 return;
             }
             passwords.forEach(data => {
@@ -254,8 +387,31 @@
             sections.forEach(id => {
                 document.getElementById(id).classList.add('hidden');
             });
-            document.getElementById(pageId).classList.remove('hidden');
 
+            // Toggle the fullscreen container's visibility based on the page
+            const passwordsContainer = document.getElementById('passwords-section').querySelector('div');
+            const settingsContainer = document.getElementById('settings-section').querySelector('div');
+            const dashboardContainer = document.getElementById('dashboard-container');
+            
+            if (pageId === 'passwords-section') {
+                dashboardContainer.classList.add('hidden');
+                passwordsContainer.classList.add('w-full');
+                passwordsContainer.classList.remove('max-w-2xl');
+                document.getElementById(pageId).classList.remove('hidden');
+            } else if (pageId === 'settings-section') {
+                dashboardContainer.classList.add('hidden');
+                settingsContainer.classList.add('w-full');
+                settingsContainer.classList.remove('max-w-2xl');
+                document.getElementById(pageId).classList.remove('hidden');
+            } else {
+                dashboardContainer.classList.remove('hidden');
+                passwordsContainer.classList.remove('w-full');
+                passwordsContainer.classList.add('max-w-2xl');
+                settingsContainer.classList.remove('w-full');
+                settingsContainer.classList.add('max-w-2xl');
+                document.getElementById(pageId).classList.remove('hidden');
+            }
+            
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => link.classList.remove('active'));
             if (pageId === 'dashboard-section') {
@@ -276,6 +432,10 @@
         const updateProfileUI = () => {
             document.getElementById('username-input').value = userProfile.username || '';
             document.getElementById('auth-status').textContent = `Welcome, ${userProfile.username}!`;
+            document.getElementById('user-display-name').textContent = `Welcome, ${userProfile.username}!`;
+            document.getElementById('user-display-name-mobile').textContent = `Welcome, ${userProfile.username}!`;
+            document.getElementById('pin-lock-toggle').checked = !!pin;
+            document.getElementById('pin-setup-container').classList.toggle('hidden', !pin);
         };
 
         const updateAppVersionUI = () => {
@@ -344,6 +504,8 @@
             const accountData = {
                 profile: userProfile,
                 passwords: passwords,
+                pin: pin,
+                isLightMode: isLightMode
             };
             
             const jsonContent = JSON.stringify(accountData, null, 2);
@@ -358,7 +520,14 @@
         };
 
         const importAccount = () => {
-            document.getElementById('import-file-input').click();
+            showModal(
+                'Confirm Import',
+                'Are you sure you want to re-import your data? This will overwrite your current account.',
+                true,
+                () => {
+                    document.getElementById('import-file-input').click();
+                }
+            );
         };
         
         const handleImportFile = (event) => {
@@ -373,17 +542,29 @@
                     if (accountData.profile) {
                         userProfile = accountData.profile;
                         console.log('Profile imported successfully.');
-                        updateProfileUI();
                     }
 
                     if (accountData.passwords && Array.isArray(accountData.passwords)) {
                         passwords = accountData.passwords.map(p => ({ ...p, id: Date.now() + Math.random() }));
-                        saveData();
                         showModal('Import Complete', `Successfully imported ${passwords.length} passwords.`);
-                        renderPasswords();
                     } else {
                         showModal('Import Failed', 'Invalid file format. Passwords array not found.');
                     }
+                    
+                    if (accountData.pin) {
+                        pin = accountData.pin;
+                        showModal('PIN Imported', 'A PIN lock has been imported with your account data.');
+                    } else {
+                        pin = null;
+                    }
+                    
+                    if (accountData.isLightMode !== undefined) {
+                        isLightMode = accountData.isLightMode;
+                    }
+
+                    saveData();
+                    updateUI();
+                    
                 } catch (error) {
                     console.error("Error handling import file:", error);
                     showModal('Import Failed', 'Could not parse the file. Please ensure it is a valid JSON file.');
@@ -394,14 +575,21 @@
 
         const createPasswordItem = (docId, data) => {
             const div = document.createElement('div');
-            div.className = 'bg-[#333] p-4 rounded-md shadow-sm flex items-center justify-between';
+            div.className = 'bg-card p-4 rounded-md shadow-sm flex flex-col items-start space-y-2';
             div.innerHTML = `
-                <div class="flex-grow">
-                    <h3 class="font-semibold text-white">${data.website}</h3>
-                    <p class="text-sm text-gray-400">Username: ${data.username}</p>
-                    <p class="text-sm text-gray-400">Password: <span class="font-mono text-gray-300">********</span></p>
+                <div class="flex-grow password-item-content w-full">
+                    <h3 class="font-semibold text-main text-lg">${data.website}</h3>
+                    <p class="text-sm text-secondary">Username: ${data.username}</p>
+                    <p class="text-sm text-secondary">Password: <span class="font-mono text-secondary" data-password="${data.password}">********</span></p>
                 </div>
-                <div class="flex space-x-2">
+                <div class="flex justify-end w-full space-x-2 mt-2">
+                    <button class="show-hide-btn p-2 rounded-full bg-gray-500 text-white hover:bg-gray-600 transition" aria-label="Show/Hide password">
+                         <!-- Eye Icon (SVG) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
+                            <path fill-rule="evenodd" d="M.661 10.155A10.05 10.05 0 0110 3.75c3.228 0 6.275 1.543 8.163 4.105a1.25 1.25 0 01-2.296 1.056C14.734 7.64 12.5 6.25 10 6.25S5.266 7.64 4.133 9.416a1.25 1.25 0 01-2.296-1.056zM10 16.25a10.05 10.05 0 01-9.339-6.095 1.25 1.25 0 012.296-1.056C5.266 12.36 7.5 13.75 10 13.75s4.734-1.39 5.867-3.176a1.25 1.25 0 012.296 1.056A10.05 10.05 0 0110 16.25z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
                     <button class="copy-btn p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition" aria-label="Copy password">
                         <!-- Copy Icon (SVG) -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -419,8 +607,94 @@
             `;
             div.querySelector('.copy-btn').addEventListener('click', () => copyPassword(data.password));
             div.querySelector('.delete-btn').addEventListener('click', () => deletePassword(docId));
+            div.querySelector('.show-hide-btn').addEventListener('click', (event) => {
+                const passwordSpan = event.currentTarget.parentNode.parentNode.querySelector('[data-password]');
+                const passwordText = passwordSpan.dataset.password;
+                if (passwordSpan.textContent === '********') {
+                    passwordSpan.textContent = passwordText;
+                } else {
+                    passwordSpan.textContent = '********';
+                }
+            });
             return div;
         };
+
+        const validatePin = () => {
+            const enteredPin = document.getElementById('pin-input').value;
+            if (enteredPin === pin) {
+                document.getElementById('pin-modal').classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            } else {
+                const pinError = document.getElementById('pin-error');
+                pinError.classList.remove('hidden');
+            }
+        };
+
+        const handlePinToggle = () => {
+            const isChecked = document.getElementById('pin-lock-toggle').checked;
+            const pinContainer = document.getElementById('pin-setup-container');
+            const pinInput = document.getElementById('new-pin-input');
+            const pinError = document.getElementById('pin-setup-error');
+
+            if (isChecked) {
+                pinContainer.classList.remove('hidden');
+                pinInput.focus();
+                pinInput.oninput = () => {
+                    if (pinInput.value.length === 4) {
+                        pin = pinInput.value;
+                        pinError.classList.add('hidden');
+                        showModal('PIN Set', 'Your new PIN has been saved. Remember to download your account data to back it up!');
+                        saveData();
+                    } else {
+                        pinError.textContent = 'PIN must be 4 digits.';
+                        pinError.classList.remove('hidden');
+                        pin = null;
+                        saveData();
+                    }
+                };
+            } else {
+                pinContainer.classList.add('hidden');
+                pin = null;
+                saveData();
+                showModal('PIN Removed', 'PIN lock has been disabled.');
+            }
+        };
+        
+        const toggleTheme = () => {
+            isLightMode = !isLightMode;
+            updateThemeUI();
+            saveData();
+        };
+
+        const updateThemeUI = () => {
+            const body = document.body;
+            const themeToggle = document.getElementById('theme-toggle');
+
+            if (isLightMode) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                document.querySelectorAll('.light-mode-button').forEach(btn => {
+                    btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                    btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                });
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                document.querySelectorAll('.light-mode-button').forEach(btn => {
+                    btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                    btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                });
+            }
+            themeToggle.checked = isLightMode;
+        };
+        
+        const updateUI = () => {
+            updateProfileUI();
+            updateAppVersionUI();
+            renderPasswords();
+            updateThemeUI();
+        };
+
 
         document.getElementById('password-form').addEventListener('submit', addPassword);
         document.getElementById('dashboard-link').addEventListener('click', () => showPage('dashboard-section'));
@@ -431,7 +705,7 @@
         document.getElementById('settings-link').addEventListener('click', () => {
             showPage('settings-section');
             updateProfileUI();
-            updateAppVersionUI(); // Call the new function
+            updateAppVersionUI(); 
         });
         
         // Mobile Menu Nav links
@@ -455,12 +729,28 @@
         document.getElementById('download-account-btn').addEventListener('click', downloadAccount);
         document.getElementById('import-account-btn').addEventListener('click', importAccount);
         document.getElementById('import-file-input').addEventListener('change', handleImportFile);
+        document.getElementById('pin-lock-toggle').addEventListener('change', handlePinToggle);
+        document.getElementById('theme-toggle').addEventListener('change', toggleTheme);
+        document.getElementById('pin-submit-btn').addEventListener('click', validatePin);
+        document.getElementById('pin-input').addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                validatePin();
+            }
+        });
         
         // Initial setup
         loadData();
-        updateProfileUI();
-        updateAppVersionUI();
-        showPage('dashboard-section');
+        updateUI();
+        
+        // Check for pin and show lock screen if necessary
+        if (pin) {
+            document.getElementById('pin-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden'); // Prevent scrolling while locked
+        } else {
+            document.getElementById('pin-modal').classList.add('hidden');
+            showPage('dashboard-section');
+        }
+
     </script>
 </body>
 </html>

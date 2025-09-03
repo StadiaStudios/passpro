@@ -1,3 +1,7 @@
+V1.1.1
+----------
+Pin Lock Profiles. Username display on Navbar. Show Password Button Added. Mobile Layout issues fix. New Light and Blue theme. Layout resizes. Forgot PIN Tips.
+
 V1.0.0
 ----------
 Dashboard, Passwords, Settings, Download/import accounts/passwords.Username feature, Local Data Saving.
