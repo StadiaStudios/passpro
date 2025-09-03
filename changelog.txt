@@ -1,6 +1,10 @@
+V1.2.1
+----------
+PassPro now has a Terms of Service, By continuing to use the website you hereby agree to the terms and conditions. Theme Color Adjustments
+
 V1.1.1
 ----------
-Pin Lock Profiles. Username display on Navbar. Show Password Button Added. Mobile Layout issues fix. New Light and Blue theme. Layout resizes. Forgot PIN Tips.
+Pin Lock Profiles. Username display on Navbar. Show Password Button Added. Mobile Layout issues fix. New Light and Blue theme. Layout resizes. Forgot PIN Tips. Arrangeable Passwords.
 
 V1.0.0
 ----------

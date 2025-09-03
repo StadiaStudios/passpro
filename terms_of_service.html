@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassPro | Terms of Service</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        body.dark-mode {
+            background-color: #111;
+            color: #ccc;
+        }
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .bg-nav {
+            background-color: #1A1A1A;
+        }
+        .light-mode .bg-nav {
+            background-color: #e0e0e0;
+        }
+        .nav-link {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 4px;
+            transition: all 0.3s ease-in-out;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: orange;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        .light-mode .nav-link:hover::after,
+        .light-mode .nav-link.active::after {
+            background-color: red;
+        }
+    </style>
+</head>
+<body class="dark-mode min-h-screen flex flex-col items-center">
+    <!-- Top Navigation Bar (re-using the same structure) -->
+    <nav class="w-full bg-nav shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center relative">
+            <div class="text-2xl font-bold text-white flex items-center">
+                <a href="index.html"><img src="assets/favicon.png" alt="PassPro Logo" class="w-8 h-8 rounded-md mr-2"></a>
+                PassPro
+            </div>
+            <div class="flex space-x-6 items-center">
+                <a href="index.html" class="nav-link text-white font-semibold text-lg transition-colors">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-[#222] p-8 rounded-lg shadow-xl max-w-4xl mx-auto mt-8">
+            <h1 class="text-3xl font-bold text-center mb-6 text-white">Terms of Service</h1>
+
+            <div class="prose max-w-none text-white leading-relaxed">
+                <p>Welcome to PassPro! By using our service, you agree to:
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Use the Service in a way that follows all applicable laws and regulations.</li>
+                    <li>Provide accurate and current information when creating your account.</li>
+                    <li>Keep your master password confidential.</li>
+                    <li>Keep a Downloaded Account backup file somewhere else backed up.</li>
+                    <li>Keep your device and software secure and updated to prevent unauthorized access.</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold mt-8 mb-4">Our Service and Data Handling</h2>
+                <p>PassPro is a zero-knowledge password manager. This means that all encryption and decryption of your data happen only on your device. We do not access or see any of the passwords, notes, or other data you store in the application. We do not have a copy of your master password and cannot recover it for you.</p>
+                <p>We are not responsible for any loss of data or unauthorized access to your files due to your failure to protect your master password or device, or from a security breach on your part.</p>
+
+                <h2 class="text-2xl font-bold mt-8 mb-4">Limitation of Liability</h2>
+                <p>The Service is provided on an "as is" and "as available" basis. We make no warranties, express or implied, regarding the Service. We do not guarantee that the Service will be uninterrupted, error-free, or secure. To the fullest extent permitted by law, we shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages. This includes, but is not limited to, damages for loss of profits, goodwill, data, or other intangible losses, resulting from:</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Your use or inability to use the Service.</li>
+                    <li>Unauthorized access to or alteration of your transmissions or data.</li>
+                    <li>The acts or conduct of any third party on the Service.</li>
+                    <li>Any other matter relating to the Service.</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold mt-8 mb-4">Changes to the Terms</h2>
+                <p>We reserve the right to modify these Terms at any time. We will notify you of any changes by posting the new Terms on our website or within the app. Your continued use of the Service after the changes take effect means you accept the revised Terms.</p>
+
+                <h2 class="text-2xl font-bold mt-8 mb-4">Governing Law</h2>
+                <p>These Terms shall be governed by and interpreted in accordance with the laws of The United States, without regard to its conflict of law provisions.</p>
+                
+                <h2 class="text-2xl font-bold mt-8 mb-4">Purchase Terms</h2>
+                <p>All purchases made through the Service are non-refundable. PassPro is a digital service, and all sales are considered final upon completion of the transaction. By making a purchase, you acknowledge and agree to these terms. If you purchase a Service like for example PassPro Premium it will only be a one time payment. Unless official website says otherwise</p>
+
+                <h2 class="text-2xl font-bold mt-8 mb-4">Forgot Code but have the downloaded account?</h2>
+                <p class="font-bold">(Complex Process + Requires Backup, And can previously have a password as long as you have the file)</p>
+                <ol class="list-decimal list-inside space-y-2">
+                    <li>Download your account via the settings within PassPro.</li>
+                    <li>Open the .txt file with a code editor such as VSC or NotePad++ or any other NotePad or text editor works.</li>
+                    <li>Passwords and usernames will be listed within the file. You can change the password by changing the input value in “PIN Lock: Null (Displays Your Password)”.</li>
+                    <li>Simply change the Pin Lock number to “Null”.</li>
+                </ol>
+                <p class="mt-4">If you’ve already lost your account beforehand and do not have any archives or trash bins unfortunately an account can't be recovered without the minimum requirement.</p>
+
+                <p class="mt-8 text-center text-sm">Last updated: September 3, 2025</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
