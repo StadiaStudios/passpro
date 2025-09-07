@@ -1,3 +1,7 @@
+V1.4.3
+----------
+Extra Level Security: Fixes inspect bypass PIN, Adds Blurred Navbar, Custom Loading Screen,
+
 V1.3.3
 ----------
 Various Bug Fixes, Arrange Mobile Bug fix. Removes Light Mode Exclusive Dark Mode Theme, Search Bar to Passwords Page, New Hamburger Menu, New Quick Actions Section, Lock Button in Dashboard, Clear Cache Option,

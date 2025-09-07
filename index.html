@@ -24,15 +24,15 @@
         body.dark-mode {
             background-color: #111;
         }
-        body.light-mode {
-            background-color: #f0f0f0;
-        }
         .nav-link, .link-effect, .password-url-link {
             position: relative;
             display: inline-block;
             padding-bottom: 4px;
             transition: all 0.3s ease-in-out;
         }
+        #modal {
+    z-index: 9999 !important; /* Always above navbar */
+}
         .nav-link::after, .link-effect::after, .password-url-link::after {
             content: '';
             position: absolute;
@@ -56,9 +56,6 @@
             transition: all 0.3s ease-in-out;
             color: #ccc;
         }
-        .light-mode .forgot-pin-link {
-            color: #444;
-        }
         .forgot-pin-link::after {
             content: '';
             position: absolute;
@@ -75,18 +72,10 @@
         .dark-mode .text-secondary {
             color: #ccc;
         }
-        .light-mode .text-secondary {
-            color: #444;
-        }
         .dark-mode .input-field {
             background-color: #1A1A1A;
             border-color: #4A4A4A;
             color: white;
-        }
-        .light-mode .input-field {
-            background-color: #f5f5f5;
-            border-color: #ddd;
-            color: #1a1a1a;
         }
         .terms-link {
             position: relative;
@@ -94,9 +83,6 @@
             padding-bottom: 2px;
             transition: all 0.3s ease-in-out;
             color: white; 
-        }
-        .light-mode .terms-link {
-            color: black;
         }
         .terms-link::after {
             content: '';
@@ -121,19 +107,19 @@
         }
         /* Custom scrollbar styles */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 3px;
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #2a2a2a;
+            background: #222;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #555;
+            background: blue;
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #666;
+            background: rgba(22, 150, 255, 0);
         }
 
         .custom-file-input::-webkit-file-upload-button {
@@ -166,6 +152,12 @@
         #pin-lock-toggle:checked ~ .dot {
             transform: translateX(100%);
         }
+        header {
+    background-color: rgba(17, 17, 17, 0.5); /* Semi-transparent dark */
+    backdrop-filter: blur(12px); /* Blur effect */
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+}
+
 
         /* Mobile Nav Specific Styles */
         .mobile-nav-menu {
@@ -175,12 +167,33 @@
         .mobile-nav-menu.open {
             transform: translateX(0);
         }
+.page-section {
+    padding-top: 6rem; /* Adjust for navbar height (about 96px) */
+}
+
 
         /* Fullscreen Settings Page overrides */
         #user-profile-section.page-section > div {
             background-color: transparent !important;
             box-shadow: none !important;
         }
+        #loading-screen {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: #111;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 9999;
+transition: opacity 1s ease;
+}
+#loading-screen.hidden {
+opacity: 0;
+pointer-events: none;
+}
     </style>
 </head>
 <body class="dark-mode min-h-screen flex flex-col items-center">
@@ -212,7 +225,7 @@
     </div>
 
     <!-- Header Navigation -->
-    <header class="w-full bg-transparent p-4 flex justify-between items-center text-white">
+    <header class="fixed top-0 left-0 w-full bg-transparent backdrop-blur-md p-4 flex justify-between items-center text-white z-50">
         <div class="flex items-center space-x-2">
             <img src="assets/favicon.png" alt="PassPro Logo" class="h-8 w-8">
             <h1 class="text-xl font-bold text-white">PassPro</h1>
@@ -247,7 +260,8 @@
         </div>
     </div>
 
-    <main class="flex-grow w-full p-4 md:p-8">
+    <main class="flex-grow w-full p-4 md:p-8 pt-24">
+
 
         <!-- Dashboard Section -->
         <section id="dashboard-section" class="page-section hidden max-w-4xl mx-auto">
@@ -345,7 +359,7 @@
                 </div>
                 <!-- App Version Display -->
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.3.3</span></p>
+                    <p>App Version: <span id="app-version">1.4.3</span></p>
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">Terms and Conditions</a>
                 </div>
             </div>
@@ -407,9 +421,10 @@
         let editIndex = -1;
         let draggedItem = null;
         let username = '';
+        let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.3.3";
+        const APP_VERSION = "1.4.3";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
@@ -477,24 +492,30 @@
         }
 
         function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.add('hidden');
-            });
-            document.getElementById(pageId).classList.remove('hidden');
+    // Prevent navigation if locked
+    if (!isUnlocked && pageId !== 'dashboard-section') {
+        showMessage('Locked', 'Enter your PIN to access passwords or settings.');
+        return;
+    }
 
-            // Highlight active link for both desktop and mobile nav
-            const allNavLinks = document.querySelectorAll('.nav-link');
-            allNavLinks.forEach(link => {
-                if (link.dataset.page === pageId) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
+    document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.add('hidden');
+    });
+    document.getElementById(pageId).classList.remove('hidden');
 
-            // Close mobile menu if open
-            mobileNavMenu.classList.remove('open');
+    // Highlight active link
+    const allNavLinks = document.querySelectorAll('.nav-link');
+    allNavLinks.forEach(link => {
+        if (link.dataset.page === pageId) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
         }
+    });
+
+    mobileNavMenu.classList.remove('open');
+}
+
 
         function saveData() {
             const pin = localStorage.getItem('pin'); 
@@ -594,20 +615,23 @@
         }
         
         function validatePin() {
-            const enteredPin = pinInput.value;
-            const storedPin = localStorage.getItem('pin');
-            
-            if (enteredPin === storedPin) {
-                pinModal.classList.add('hidden');
-                pinErrorMessage.classList.add('hidden');
-                showMessage('Success', 'PIN is correct. Welcome back!');
-                pinInput.value = '';
-                showPage('dashboard-section');
-            } else {
-                pinErrorMessage.classList.remove('hidden');
-                pinInput.value = '';
-            }
-        }
+    const enteredPin = pinInput.value;
+    const storedPin = localStorage.getItem('pin');
+    
+    if (enteredPin === storedPin) {
+        isUnlocked = true;
+        pinModal.classList.add('hidden');
+        pinErrorMessage.classList.add('hidden');
+        pinInput.value = '';
+        showMessage('Success', 'PIN is correct. Welcome back!');
+        showPage('dashboard-section');
+        updateUI(); // Only render passwords now
+    } else {
+        pinErrorMessage.classList.remove('hidden');
+        pinInput.value = '';
+    }
+}
+
 
         // Event Listeners
         document.getElementById('add-password-btn').addEventListener('click', () => {
@@ -630,12 +654,15 @@
         
         document.getElementById('lock-app-btn').addEventListener('click', () => {
             const pin = localStorage.getItem('pin');
-            if (pin) {
-                pinModal.classList.remove('hidden');
-                showPage('dashboard-section');
-            } else {
-                showMessage('PIN Lock Disabled', 'Please enable PIN Lock in Settings to use this feature.');
-            }
+if (pin) {
+    isUnlocked = false;
+    pinModal.classList.remove('hidden');
+} else {
+    isUnlocked = true;
+    pinModal.classList.add('hidden');
+    showPage('dashboard-section');
+}
+
         });
 
         document.getElementById('password-modal-cancel').addEventListener('click', () => {
@@ -939,13 +966,36 @@
         updateUI();
         
         const pin = localStorage.getItem('pin');
-        if (pin) {
-            document.getElementById('pin-modal').classList.remove('hidden');
-        } else {
-            document.getElementById('pin-modal').classList.add('hidden');
-            showPage('dashboard-section');
-        }
+
+if (pin && pin.trim() !== "") {
+    // PIN exists → lock app
+    isUnlocked = false;
+    pinModal.classList.remove('hidden');
+} else {
+    // No PIN set → unlock immediately
+    isUnlocked = true;
+    pinModal.classList.add('hidden');
+    showPage('dashboard-section');
+    updateUI(); // Render passwords right away
+}
+
         
     </script>
+
+    <script>
+window.addEventListener('load', () => {
+setTimeout(() => {
+document.getElementById('loading-screen').classList.add('hidden');
+setTimeout(() => {
+document.getElementById('loading-screen').remove();
+}, 1000);
+}, 2000);
+});
+</script>
+
+<div id="loading-screen">
+<img src="assets/favicon.png" alt="App Icon" class="w-20 h-20 animate-pulse">
+</div>
+
 </body>
 </html>
