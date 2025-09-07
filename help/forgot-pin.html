@@ -46,7 +46,7 @@
 <body class="flex flex-col min-h-screen items-center justify-center p-4 dark-mode">
 
     <div class="max-w-xl w-full p-8 space-y-6 bg-[#222] rounded-3xl shadow-lg border border-[#333]">
-        <h1 class="text-3xl font-bold text-center text-orange-500">Forgot Your PIN?</h1>
+        <h1 class="text-3xl font-bold text-center text-white-500">Forgot Your PIN?</h1>
         <div class="space-y-4 text-center">
             <p class="text-gray-400">
                 Unfortunately, your PIN is stored locally on your device and cannot be recovered or reset by us. This is a security feature to ensure your passwords remain private.
@@ -67,7 +67,7 @@
                 <h2 class="text-xl font-semibold text-white mb-2">Account Recovery:</h2>
                 <p class="text-gray-400">
                     If you have previously downloaded your account backup file, you can 
-                    <a href="#" id="import-link" class="text-orange-400 cool-underline">re-import your data</a> 
+                    <a href="#" id="import-link" class="text-[white] cool-underline">re-import your data</a> 
                     after resetting the app. Make sure you have a Backup somewhere.
                 </p>
                 <input type="file" id="import-file" accept=".json" class="hidden">
@@ -80,7 +80,7 @@
                     If you cannot remember your PIN, you can reset all your data by clearing your browser's site data.
                 </p>
                 <div class="mt-4">
-                    <button id="reset-button" class="w-full px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-2xl transition-colors duration-200 shadow-md">
+                    <button id="reset-button" class="w-full px-6 py-3 bg-[#222] hover:bg-[#444] text-white font-semibold rounded-2xl transition-colors duration-200 shadow-md">
                         Clear Site Data
                     </button>
                     <p id="reset-message" class="mt-2 text-center text-sm text-yellow-400 hidden"></p>
@@ -88,8 +88,8 @@
             </div>
         </div>
 
-        <div class="mt-6 text-center text-orange-400">
-            <a href="../index.html" class="text-orange-500 cool-underline">Return to Login</a>
+        <div class="mt-6 text-center text-white-400">
+            <a href="../index.html" class="text-white-500 cool-underline">Return to Login</a>
         </div>
     </div>
     <script>

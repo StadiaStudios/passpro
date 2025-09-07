@@ -1,3 +1,7 @@
+V1.5.4
+----------
+Mayonaise link in settings, ChangeLog in Settings, Displays Device Model, Shows Last Sync fix, Blue theme, Other Updates and Fixes.
+
 V1.4.3
 ----------
 Extra Level Security: Fixes inspect bypass PIN, Adds Blurred Navbar, Custom Loading Screen,

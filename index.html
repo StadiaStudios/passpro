@@ -40,11 +40,8 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(109, 109, 255);
             transition: width 0.3s ease-in-out;
-        }
-        .light-mode .nav-link::after, .light-mode .link-effect::after, .light-mode .password-url-link::after {
-            background-color: orange;
         }
         .nav-link:hover::after, .nav-link.active::after, .link-effect:hover::after, .link-effect.active::after, .password-url-link:hover::after, .password-url-link.active::after {
             width: 100%;
@@ -63,7 +60,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(109, 109, 255);
             transition: width 0.3s ease-in-out;
         }
         .forgot-pin-link:hover::after {
@@ -91,7 +88,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(109, 109, 255);
             transition: width 0.3s ease-in-out;
         }
         .terms-link:hover::after {
@@ -115,13 +112,12 @@
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: blue;
+            background: rgb(123, 123, 255);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(22, 150, 255, 0);
+            background: blue;
         }
-
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
         }
@@ -147,18 +143,16 @@
         }
         /* Toggle Switch Styles */
         #pin-lock-toggle:checked ~ .block {
-            background-color: #FFA500; /* Orange background when checked */
+            background-color: rgb(102, 102, 255); /* Orange background when checked */
         }
         #pin-lock-toggle:checked ~ .dot {
             transform: translateX(100%);
         }
         header {
-    background-color: rgba(17, 17, 17, 0.5); /* Semi-transparent dark */
-    backdrop-filter: blur(12px); /* Blur effect */
-    -webkit-backdrop-filter: blur(12px); /* Safari support */
-}
-
-
+        background-color: rgba(17, 17, 17, 0.5); /* Semi-transparent dark */
+        backdrop-filter: blur(12px); /* Blur effect */
+        -webkit-backdrop-filter: blur(12px); /* Safari support */
+        }
         /* Mobile Nav Specific Styles */
         .mobile-nav-menu {
             transition: transform 0.3s ease-in-out;
@@ -167,9 +161,9 @@
         .mobile-nav-menu.open {
             transform: translateX(0);
         }
-.page-section {
-    padding-top: 6rem; /* Adjust for navbar height (about 96px) */
-}
+        .page-section {
+        padding-top: 6rem; /* Adjust for navbar height (about 96px) */
+        }
 
 
         /* Fullscreen Settings Page overrides */
@@ -178,22 +172,22 @@
             box-shadow: none !important;
         }
         #loading-screen {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: #111;
-display: flex;
-align-items: center;
-justify-content: center;
-z-index: 9999;
-transition: opacity 1s ease;
-}
-#loading-screen.hidden {
-opacity: 0;
-pointer-events: none;
-}
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 1s ease;
+        }
+        #loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+        }
     </style>
 </head>
 <body class="dark-mode min-h-screen flex flex-col items-center">
@@ -214,12 +208,12 @@ pointer-events: none;
     <div id="pin-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-75">
         <div class="bg-[#1A1A1A] p-8 rounded-lg shadow-xl max-w-md w-full mx-4 text-center text-white">
             <h2 id="pin-modal-title" class="text-2xl font-bold mb-4"></h2>
-            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <!-- Incorrect PIN message element -->
-            <p id="pin-error-message" class="text-red-500 text-sm mt-2 mb-4 hidden">Incorrect PIN. Please try again.</p>
-            <button id="pin-submit-btn" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
+            <p id="pin-error-message" class="text-blue-500 text-sm mt-2 mb-4 hidden">Incorrect PIN. Please try again.</p>
+            <button id="pin-submit-btn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
             <p class="mt-4 text-sm text-gray-400">
-                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link hover:text-orange-400">Forgot PIN?</a>
+                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-white hover:text-blue-400">Forgot PIN?</a>
             </p>
         </div>
     </div>
@@ -268,20 +262,26 @@ pointer-events: none;
             <div class="p-6 bg-[#1A1A1A] rounded-lg shadow-xl text-white">
                 <h2 class="text-3xl font-bold mb-4">Welcome to PassPro!</h2>
                 <p class="text-lg text-secondary">Your secure and customizable password manager.</p>
-                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="p-6 bg-[#2A2A2A] rounded-lg">
-                        <h3 class="text-xl font-semibold mb-2 text-orange-500">Quick Actions</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-white-500">Quick Actions</h3>
                         <ul class="space-y-2 text-secondary">
-                            <li><button class="text-white-800 hover:text-orange-500 transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
-                            <li><button class="text-white-80 hover:text-orange-500 transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
-                            <li><button class="text-white-80 hover:text-orange-500 transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
+                            <li><button class="text-white-800 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
+                            <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
+                            <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
                         </ul>
                     </div>
                     <div class="p-6 bg-[#2A2A2A] rounded-lg">
-                        <h3 class="text-xl font-semibold mb-2 text-orange-500">Local Data</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-white-500">Local Data</h3>
                         <p class="text-secondary">Total Passwords: <span id="total-passwords">0</span></p>
                         <p class="text-secondary">Last Sync: <span id="last-sync">N/A</span></p>
+                        <p class="text-secondary">Username: <span id="display-username"></span></p>
+                        <p class="text-secondary">Device: <span id="device-info"></span></p>
                     </div>
+                    <div class="p-6 bg-[#2A2A2A] rounded-lg">
+    <h3 class="text-xl font-semibold mb-2 text-white-500">Glad You're Back!</h3>
+    <p class="text-secondary">Welcome! <span id="dashboard-username"></span>,</p>
+  </div>
                 </div>
             </div>
         </section>
@@ -292,7 +292,7 @@ pointer-events: none;
                 <h2 class="text-3xl font-bold mb-6">My Passwords</h2>
                 <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
                     <input type="text" id="search-input" placeholder="Search passwords..." class="input-field flex-grow p-3 rounded-lg">
-                    <button id="add-password-btn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                    <button id="add-password-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                         <i class="fas fa-plus-circle mr-2"></i> Add Password
                     </button>
                     <button id="arrange-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
@@ -309,10 +309,11 @@ pointer-events: none;
         <section id="user-profile-section" class="page-section hidden max-w-4xl mx-auto">
             <div class="p-6 text-white w-full h-full flex flex-col items-center">
                 <h2 class="text-3xl font-bold mb-6 text-center">Settings</h2>
+                <span id="premium-badge" class="hidden bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">PRO</span>
                 <div class="w-full max-w-2xl mx-auto space-y-8 flex-grow">
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-orange-500">User Settings</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-500">User Settings</h3>
                         <div>
                             <label for="username-input" class="block text-sm font-medium text-secondary mb-1">Username</label>
                             <input type="text" id="username-input" class="input-field w-full p-3 rounded-lg" placeholder="Enter your username">
@@ -320,7 +321,7 @@ pointer-events: none;
                     </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Security Settings</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Security Settings</h3>
                         <div class="flex items-center justify-between">
                             <label for="pin-lock-toggle" class="flex items-center cursor-pointer">
                                 <div class="relative">
@@ -334,13 +335,13 @@ pointer-events: none;
                     </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Data Management</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Data Management</h3>
                         <div class="space-y-4">
-                            <button id="download-account-btn" class="w-full bg-[#222] hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                            <button id="download-account-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                                 Download Account
                             </button>
                             <div class="relative">
-                                <button id="import-account-btn" class="w-full bg-[#222] hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                                <button id="import-account-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                                     Import Account
                                 </button>
                                 <input type="file" id="import-file-input" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
@@ -349,9 +350,9 @@ pointer-events: none;
                     </div>
 
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Local Storage</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Local Storage</h3>
                         <p class="text-secondary mb-4">Storage Used: <span id="storage-size">0 KB</span></p>
-                        <button id="clear-cache-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                        <button id="clear-cache-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                             Clear All Data
                         </button>
                     </div>
@@ -359,8 +360,14 @@ pointer-events: none;
                 </div>
                 <!-- App Version Display -->
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.4.3</span></p>
+                    <p>App Version: <span id="app-version">1.5.4</span></p>
+                    <p class="mt-1 text-gray-500">StadiaStudios | Mayonaise Production</p>
+                    <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">Terms and Conditions</a>
+                    <a href="https://yaktenz.github.io/mayolibrary/" id="terms-link" class="terms-link mt-2 text-white">Mayonaise</a>
+                    <a href="changelog.txt" id="terms-link" class="terms-link mt-2 text-white">ChangeLog</a>
+                    <a href="notices.html" id="terms-link" class="terms-link mt-2 text-white">Notices</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -392,7 +399,7 @@ pointer-events: none;
                     </div>
                     <div class="flex justify-end space-x-4">
                         <button type="button" id="password-modal-cancel" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
-                        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save</button>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save</button>
                     </div>
                 </form>
             </div>
@@ -424,7 +431,7 @@ pointer-events: none;
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.4.3";
+        const APP_VERSION = "1.5.4";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
@@ -467,6 +474,26 @@ pointer-events: none;
         const pinModalTitle = document.getElementById('pin-modal-title');
         const storageSizeSpan = document.getElementById('storage-size');
         const clearCacheBtn = document.getElementById('clear-cache-btn');
+
+function getDeviceInfo() {
+  const userAgent = navigator.userAgent;
+
+  if (/windows phone/i.test(userAgent)) {
+    return "Windows Phone";
+  } else if (/win/i.test(userAgent)) {
+    return "Windows";
+  } else if (/android/i.test(userAgent)) {
+    return "Android";
+  } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+    return "iOS";
+  } else if (/mac/i.test(userAgent)) {
+    return "MacOS";
+  } else if (/linux/i.test(userAgent)) {
+    return "Linux";
+  } else {
+    return "Unknown Device";
+  }
+}
 
 
         // Functions for core logic
@@ -543,6 +570,10 @@ pointer-events: none;
                 username = 'Guest';
             }
         }
+
+        const displayUsername = document.getElementById('display-username');
+        document.getElementById('device-info').textContent = getDeviceInfo();
+        const dashboardUsername = document.getElementById('dashboard-username');
         
         function updateUI() {
             renderPasswords(passwords);
@@ -550,10 +581,14 @@ pointer-events: none;
             const pin = localStorage.getItem('pin');
             pinLockToggle.checked = !!pin;
             usernameInput.value = username;
-            welcomeMessageSpan.textContent = `Welcome! ${username}`;
-            mobileWelcomeMessageSpan.textContent = `Welcome! ${username}`;
+            welcomeMessageSpan.textContent = `Welcome, ${username}!`;
+            mobileWelcomeMessageSpan.textContent = `Welcome Back, ${username}!`;
             pinModalTitle.textContent = `Welcome back, ${username}!`;
             appVersionSpan.textContent = APP_VERSION;
+            displayUsername.textContent = username;
+            dashboardUsername.textContent = username;
+            const lastSync = localStorage.getItem('lastSync') || 'N/A';
+            document.getElementById('last-sync').textContent = lastSync;
             const block = pinLockToggle.nextElementSibling;
             const dot = block.nextElementSibling;
             if (pinLockToggle.checked) {
@@ -756,24 +791,30 @@ if (pin) {
         });
 
         document.getElementById('download-account-btn').addEventListener('click', () => {
-            const dataToDownload = {
-                passwords: passwords,
-                username: username,
-                pin: localStorage.getItem('pin') || null
-            };
+    const dataToDownload = {
+        passwords: passwords,
+        username: username,
+        pin: localStorage.getItem('pin') || null
+    };
 
-            const dataStr = JSON.stringify(dataToDownload, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'local-save1999.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showMessage('Success', 'Account data downloaded successfully!');
-        });
+    const dataStr = JSON.stringify(dataToDownload, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'helloworld.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    // 🔥 Save last sync time
+    const now = new Date().toLocaleString();
+    localStorage.setItem('lastSync', now);
+
+    showMessage('Success', 'Account data downloaded successfully!');
+});
+
         
         document.getElementById('import-file-input').addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -989,7 +1030,7 @@ document.getElementById('loading-screen').classList.add('hidden');
 setTimeout(() => {
 document.getElementById('loading-screen').remove();
 }, 1000);
-}, 2000);
+}, 500);
 });
 </script>
 
