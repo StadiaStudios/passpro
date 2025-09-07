@@ -1,4 +1,8 @@
-V1.2.1
+V1.3.3
+----------
+Various Bug Fixes, Arrange Mobile Bug fix. Removes Light Mode Exclusive Dark Mode Theme, Search Bar to Passwords Page, New Hamburger Menu, New Quick Actions Section, Lock Button in Dashboard, Clear Cache Option,
+
+V1.2.2
 ----------
 PassPro now has a Terms of Service, By continuing to use the website you hereby agree to the terms and conditions. Theme Color Adjustments
 

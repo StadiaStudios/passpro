@@ -11,8 +11,177 @@
     <link rel="apple-touch-icon" href="assets/favicon.png">
     <link rel="manifest" href="manifest.json">
     
+    <!-- Font Awesome for hamburger icon and eye icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        body.dark-mode {
+            background-color: #111;
+        }
+        body.light-mode {
+            background-color: #f0f0f0;
+        }
+        .nav-link, .link-effect, .password-url-link {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 4px;
+            transition: all 0.3s ease-in-out;
+        }
+        .nav-link::after, .link-effect::after, .password-url-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: orange;
+            transition: width 0.3s ease-in-out;
+        }
+        .light-mode .nav-link::after, .light-mode .link-effect::after, .light-mode .password-url-link::after {
+            background-color: orange;
+        }
+        .nav-link:hover::after, .nav-link.active::after, .link-effect:hover::after, .link-effect.active::after, .password-url-link:hover::after, .password-url-link.active::after {
+            width: 100%;
+        }
+        .forgot-pin-link {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 2px;
+            transition: all 0.3s ease-in-out;
+            color: #ccc;
+        }
+        .light-mode .forgot-pin-link {
+            color: #444;
+        }
+        .forgot-pin-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: orange;
+            transition: width 0.3s ease-in-out;
+        }
+        .forgot-pin-link:hover::after {
+            width: 100%;
+        }
+        .dark-mode .text-secondary {
+            color: #ccc;
+        }
+        .light-mode .text-secondary {
+            color: #444;
+        }
+        .dark-mode .input-field {
+            background-color: #1A1A1A;
+            border-color: #4A4A4A;
+            color: white;
+        }
+        .light-mode .input-field {
+            background-color: #f5f5f5;
+            border-color: #ddd;
+            color: #1a1a1a;
+        }
+        .terms-link {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 2px;
+            transition: all 0.3s ease-in-out;
+            color: white; 
+        }
+        .light-mode .terms-link {
+            color: black;
+        }
+        .terms-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: orange;
+            transition: width 0.3s ease-in-out;
+        }
+        .terms-link:hover::after {
+            width: 100%;
+        }
+        .password-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+        .password-item.drag-over {
+            border: 2px solid orange;
+            box-shadow: 0 0 8px orange;
+        }
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2a2a2a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+        .custom-file-input::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+        .custom-file-input::before {
+            content: 'Choose File';
+            display: inline-block;
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 8px 12px;
+            outline: none;
+            white-space: nowrap;
+            cursor: pointer;
+            font-weight: 500;
+            text-shadow: 1px 1px #000;
+            font-size: 10pt;
+        }
+        .custom-file-input:hover::before {
+            border-color: black;
+        }
+        .custom-file-input:active::before {
+            background: -webkit-linear-gradient(top, #e3e3e3, #f5f5f5);
+        }
+        /* Toggle Switch Styles */
+        #pin-lock-toggle:checked ~ .block {
+            background-color: #FFA500; /* Orange background when checked */
+        }
+        #pin-lock-toggle:checked ~ .dot {
+            transform: translateX(100%);
+        }
+
+        /* Mobile Nav Specific Styles */
+        .mobile-nav-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        .mobile-nav-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Fullscreen Settings Page overrides */
+        #user-profile-section.page-section > div {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+    </style>
 </head>
 <body class="dark-mode min-h-screen flex flex-col items-center">
 
@@ -22,675 +191,721 @@
             <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
             <p id="modal-message" class="text-gray-300 mb-4"></p>
             <div id="modal-buttons" class="flex justify-center space-x-4">
-                <button id="modal-ok-btn" onclick="closeModal()" class="px-4 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white rounded-md font-semibold hover:from-red-600 hover:to-red-800 transition">OK</button>
-                <button id="modal-cancel-btn" onclick="closeModal()" class="px-4 py-2 bg-gray-700 text-white rounded-md font-semibold hover:bg-gray-600 transition hidden">Cancel</button>
+                <button id="modal-ok-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">OK</button>
+                <button id="modal-cancel-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
             </div>
         </div>
     </div>
-    
-    <!-- Pin Lock Modal -->
-    <div id="pin-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
-        <div class="bg-[#2A2A2A] p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center text-white flex flex-col items-center">
-            <h3 class="text-xl font-bold mb-4">Enter PIN</h3>
-            <p id="pin-error" class="text-red-400 mb-2 hidden">Incorrect PIN. Please try again.</p>
-            <input type="password" id="pin-input" placeholder="Enter 4-digit PIN" class="text-center tracking-[0.25em] w-full px-4 py-2 mb-4 border border-gray-600 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none transition bg-[#1A1A1A] text-white">
-            <button id="pin-submit-btn" class="w-full bg-gradient-to-r from-red-500 to-red-700 text-white rounded-md font-semibold hover:from-red-600 hover:to-red-800 transition">Enter</button>
-            <a href="pin_recovery.html" class="mt-4 text-sm text-gray-400 hover:text-red-500 transition forgot-pin-link">Forgot PIN?</a>
+
+    <!-- PIN Modal -->
+    <div id="pin-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-75">
+        <div class="bg-[#1A1A1A] p-8 rounded-lg shadow-xl max-w-md w-full mx-4 text-center text-white">
+            <h2 id="pin-modal-title" class="text-2xl font-bold mb-4"></h2>
+            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <!-- Incorrect PIN message element -->
+            <p id="pin-error-message" class="text-red-500 text-sm mt-2 mb-4 hidden">Incorrect PIN. Please try again.</p>
+            <button id="pin-submit-btn" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
+            <p class="mt-4 text-sm text-gray-400">
+                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link hover:text-orange-400">Forgot PIN?</a>
+            </p>
         </div>
     </div>
 
+    <!-- Header Navigation -->
+    <header class="w-full bg-transparent p-4 flex justify-between items-center text-white">
+        <div class="flex items-center space-x-2">
+            <img src="assets/favicon.png" alt="PassPro Logo" class="h-8 w-8">
+            <h1 class="text-xl font-bold text-white">PassPro</h1>
+        </div>
+        <nav class="hidden md:flex items-center space-x-4">
+            <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
+            <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
+            <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
+            <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
+        </nav>
+        
+        <!-- Mobile Hamburger Menu Icon -->
+        <button id="hamburger-btn" class="text-white md:hidden focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </header>
 
-    <!-- Top Navigation Bar -->
-    <nav class="w-full bg-nav shadow-sm sticky top-0 z-10">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center relative">
-            <div class="text-2xl font-bold text-main flex items-center">
-                <a href="index.html"><img src="assets/favicon.png" alt="PassPro Logo" class="w-8 h-8 rounded-md mr-2"></a>
-                PassPro
-            </div>
-            
-            <!-- Mobile Menu Button (Hamburger) -->
-            <button id="mobile-menu-btn" class="text-main md:hidden focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-nav-menu" class="fixed top-0 right-0 h-full w-2/3 bg-[#1A1A1A] text-white shadow-xl z-40 mobile-nav-menu p-6 md:hidden">
+        <div class="flex justify-end mb-6">
+            <button id="close-mobile-nav" class="text-white focus:outline-none">
+                <i class="fas fa-times text-2xl"></i>
             </button>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-6 items-center" id="desktop-menu">
-                <div id="user-display-name" class="text-secondary font-semibold text-lg flex items-center"></div>
-                <a href="#" id="dashboard-link" class="nav-link text-main font-semibold text-lg transition-colors active">Dashboard</a>
-                <a href="#" id="passwords-link" class="nav-link text-main font-semibold text-lg transition-colors">Passwords</a>
-                <a href="#" id="settings-link" class="nav-link text-main font-semibold text-lg transition-colors">Settings</a>
-            </div>
-
-            <!-- Mobile Menu -->
-            <div class="hidden mobile-menu bg-nav" id="mobile-menu">
-                <div id="user-display-name-mobile" class="text-secondary font-semibold text-lg px-4 py-2"></div>
-                <a href="#" id="dashboard-link-mobile" class="nav-link text-main font-semibold text-lg transition-colors block w-full text-center">Dashboard</a>
-                <a href="#" id="passwords-link-mobile" class="nav-link text-main font-semibold text-lg transition-colors block w-full text-center">Passwords</a>
-                <a href="#" id="settings-link-mobile" class="nav-link text-main font-semibold text-lg transition-colors block w-full text-center">Settings</a>
-            </div>
         </div>
-    </nav>
-
-    <!-- Main Content Container -->
-    <div id="main-content" class="container mx-auto px-4 py-8">
-        <div id="dashboard-container" class="bg-card p-8 rounded-lg shadow-xl max-w-2xl mx-auto mt-8 text-main">
-
-            <!-- Dashboard Section -->
-            <div id="dashboard-section">
-                <h1 class="text-3xl font-bold text-center mb-6">Save Your Passwords</h1>
-                <p id="auth-status" class="text-center text-sm text-secondary mb-4">Welcome to Password Saver!</p>
-                <form id="password-form" class="space-y-4">
-                    <div>
-                        <label for="website" class="block font-medium">Website/Service</label>
-                        <input type="text" id="website" placeholder="e.g., Google, Amazon" class="mt-1 block w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none transition input-field" required>
-                    </div>
-                    <div>
-                        <label for="username" class="block font-medium">Username/Email</label>
-                        <input type="text" id="username" placeholder="e.g., yourname@example.com" class="mt-1 block w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none transition input-field" required>
-                    </div>
-                    <div>
-                        <label for="password" class="block font-medium">Password</label>
-                        <input type="password" id="password" placeholder="Enter your password" class="mt-1 block w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none transition input-field" required>
-                    </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold py-2 px-4 rounded-md hover:from-red-600 hover:to-red-700 transition-colors">
-                        Add Password
-                    </button>
-                </form>
-                <p class="text-sm text-center text-secondary mt-4">
-                    By using our password manager you agree to our <a href="terms_of_service.html" class="terms-link text-white">terms of service.</a>
-                </p>
-            </div>
+        <nav class="flex flex-col space-y-4 text-xl">
+            <a href="#" class="nav-link block" data-page="dashboard-section">Dashboard</a>
+            <a href="#" class="nav-link block" data-page="password-list-section">Passwords</a>
+            <a href="#" class="nav-link block" data-page="user-profile-section">Settings</a>
+        </nav>
+        <div class="absolute bottom-6 left-6 w-full pr-12">
+            <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
         </div>
+    </div>
+
+    <main class="flex-grow w-full p-4 md:p-8">
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="page-section hidden max-w-4xl mx-auto">
+            <div class="p-6 bg-[#1A1A1A] rounded-lg shadow-xl text-white">
+                <h2 class="text-3xl font-bold mb-4">Welcome to PassPro!</h2>
+                <p class="text-lg text-secondary">Your secure and customizable password manager.</p>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-[#2A2A2A] rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-orange-500">Quick Actions</h3>
+                        <ul class="space-y-2 text-secondary">
+                            <li><button class="text-white-800 hover:text-orange-500 transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
+                            <li><button class="text-white-80 hover:text-orange-500 transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
+                            <li><button class="text-white-80 hover:text-orange-500 transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-[#2A2A2A] rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-orange-500">Local Data</h3>
+                        <p class="text-secondary">Total Passwords: <span id="total-passwords">0</span></p>
+                        <p class="text-secondary">Last Sync: <span id="last-sync">N/A</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Password List Section -->
-        <div id="passwords-section" class="hidden">
-            <div class="bg-card p-8 rounded-lg shadow-xl mx-auto mt-8 text-main h-full">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold">Saved Passwords</h2>
-                    <button id="arrange-btn" class="px-4 py-2 bg-gray-700 text-white font-semibold rounded-md hover:bg-gray-600 transition">
+        <section id="password-list-section" class="page-section hidden w-full h-full p-0">
+            <div class="p-6 md:p-8 text-white w-full h-full flex flex-col">
+                <h2 class="text-3xl font-bold mb-6">My Passwords</h2>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
+                    <input type="text" id="search-input" placeholder="Search passwords..." class="input-field flex-grow p-3 rounded-lg">
+                    <button id="add-password-btn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                        <i class="fas fa-plus-circle mr-2"></i> Add Password
+                    </button>
+                    <button id="arrange-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                         Arrange
                     </button>
                 </div>
-                <div id="password-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Password items will be injected here by JavaScript -->
+                <div id="password-list" class="flex-grow grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto">
+                    <!-- Password items will be injected here -->
                 </div>
+            </div>
+        </section>
+
+        <!-- User Profile Section -->
+        <section id="user-profile-section" class="page-section hidden max-w-4xl mx-auto">
+            <div class="p-6 text-white w-full h-full flex flex-col items-center">
+                <h2 class="text-3xl font-bold mb-6 text-center">Settings</h2>
+                <div class="w-full max-w-2xl mx-auto space-y-8 flex-grow">
+                    
+                    <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
+                        <h3 class="text-xl font-semibold mb-4 text-orange-500">User Settings</h3>
+                        <div>
+                            <label for="username-input" class="block text-sm font-medium text-secondary mb-1">Username</label>
+                            <input type="text" id="username-input" class="input-field w-full p-3 rounded-lg" placeholder="Enter your username">
+                        </div>
+                    </div>
+                    
+                    <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
+                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Security Settings</h3>
+                        <div class="flex items-center justify-between">
+                            <label for="pin-lock-toggle" class="flex items-center cursor-pointer">
+                                <div class="relative">
+                                    <input type="checkbox" id="pin-lock-toggle" class="sr-only">
+                                    <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                                    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform transform"></div>
+                                </div>
+                                <span class="ml-3 font-medium text-gray-300">Enable PIN Lock</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
+                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Data Management</h3>
+                        <div class="space-y-4">
+                            <button id="download-account-btn" class="w-full bg-[#222] hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                                Download Account
+                            </button>
+                            <div class="relative">
+                                <button id="import-account-btn" class="w-full bg-[#222] hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                                    Import Account
+                                </button>
+                                <input type="file" id="import-file-input" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
+                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Local Storage</h3>
+                        <p class="text-secondary mb-4">Storage Used: <span id="storage-size">0 KB</span></p>
+                        <button id="clear-cache-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                            Clear All Data
+                        </button>
+                    </div>
+
+                </div>
+                <!-- App Version Display -->
+                <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
+                    <p>App Version: <span id="app-version">1.3.3</span></p>
+                    <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">Terms and Conditions</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Add/Edit Password Modal -->
+        <div id="password-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-75 p-4">
+            <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl max-w-lg w-full text-white">
+                <h2 id="password-modal-title" class="text-2xl font-bold mb-4">Add Password</h2>
+                <form id="password-form" class="space-y-4">
+                    <div>
+                        <label for="password-title" class="block text-sm font-medium text-secondary mb-1">Title</label>
+                        <input type="text" id="password-title" class="input-field w-full p-3 rounded-lg" required>
+                    </div>
+                    <div>
+                        <label for="password-username" class="block text-sm font-medium text-secondary mb-1">Username</label>
+                        <input type="text" id="password-username" class="input-field w-full p-3 rounded-lg" required>
+                    </div>
+                    <div>
+                        <label for="password-password" class="block text-sm font-medium text-secondary mb-1">Password</label>
+                        <input type="password" id="password-password" class="input-field w-full p-3 rounded-lg" required>
+                    </div>
+                    <div>
+                        <label for="password-url" class="block text-sm font-medium text-secondary mb-1">URL (optional)</label>
+                        <input type="url" id="password-url" class="input-field w-full p-3 rounded-lg">
+                    </div>
+                    <div>
+                        <label for="password-notes" class="block text-sm font-medium text-secondary mb-1">Notes (optional)</label>
+                        <textarea id="password-notes" rows="4" class="input-field w-full p-3 rounded-lg"></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="password-modal-cancel" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
+                        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
         
-        <!-- Settings Section -->
-        <div id="settings-section" class="hidden">
-            <div class="bg-card p-8 rounded-lg shadow-xl mx-auto mt-8 text-main h-full">
-                <h2 class="text-2xl font-bold mb-4 text-center">Account Settings</h2>
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="font-semibold text-lg mb-2">Profile Information</h3>
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex-grow">
-                                <label for="username-input" class="block font-medium">Username</label>
-                                <input type="text" id="username-input" placeholder="Enter username" class="mt-1 block w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none transition input-field">
-                            </div>
-                        </div>
-                        <div class="flex flex-col space-y-2">
-                             <button id="save-profile-btn" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold py-2 px-4 rounded-md hover:from-red-600 hover:to-red-700 transition-colors">Save Changes</button>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="font-semibold text-lg mb-2">Security</h3>
-                        <div class="flex items-center justify-between mb-2">
-                            <label for="pin-lock-toggle" class="font-medium text-main">PIN Lock</label>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="pin-lock-toggle" class="sr-only peer">
-                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
-                            </label>
-                        </div>
-                        <div id="pin-setup-container" class="space-y-2 mt-4 hidden">
-                            <label for="new-pin-input" class="block font-medium">Enter 4-digit PIN</label>
-                            <input type="password" id="new-pin-input" placeholder="e.g., 1234" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none transition input-field">
-                            <p id="pin-setup-error" class="text-red-400 text-sm hidden"></p>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="font-semibold text-lg mb-2">Appearance</h3>
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="font-medium text-main">Light Mode</span>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="theme-toggle" class="sr-only peer">
-                                <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-4">
-                        <button id="download-account-btn" class="flex-1 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition light-mode-button">Download Account</button>
-                        <button id="import-account-btn" class="flex-1 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-600 transition light-mode-button">Import Account</button>
-                        <input type="file" id="import-file-input" class="hidden" accept=".json">
-                    </div>
-                    
-                    <!-- App Version Section -->
-                    <div class="pt-4">
-                        <h3 class="font-semibold text-lg mb-2">App Version</h3>
-                        <p id="app-version-info" class="text-sm text-secondary"></p>
-                    </div>
+        <!-- Profile Details Modal -->
+        <div id="profile-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-75 p-4">
+            <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl max-w-md w-full text-white">
+                <h2 id="profile-title" class="text-2xl font-bold mb-4"></h2>
+                <div id="profile-details-content" class="text-secondary text-base space-y-2">
+                    <!-- Details will be injected here -->
+                </div>
+                <div class="mt-4 flex justify-end">
+                    <button id="profile-modal-close" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Close</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Firebase SDK Imports (now removed) -->
-    <script type="module">
+    </main>
+    
+    <script>
+        // Global variables for data
         let passwords = [];
-        let userProfile = { username: 'Guest' };
-        let pin = null;
-        let isLightMode = false;
-        const appVersion = "1.2.2";
-        let isArranging = false;
+        let arrangeMode = false;
+        let isEditing = false;
+        let editIndex = -1;
+        let draggedItem = null;
+        let username = '';
+        
+        // App Version
+        const APP_VERSION = "1.3.3";
+        
+        // Caching DOM elements
+        const dashboardSection = document.getElementById('dashboard-section');
+        const passwordListSection = document.getElementById('password-list-section');
+        const userProfileSection = document.getElementById('user-profile-section');
+        const passwordListContainer = document.getElementById('password-list');
+        const searchInput = document.getElementById('search-input');
+        const passwordModal = document.getElementById('password-modal');
+        const passwordForm = document.getElementById('password-form');
+        const passwordTitleInput = document.getElementById('password-title');
+        const passwordUsernameInput = document.getElementById('password-username');
+        const passwordPasswordInput = document.getElementById('password-password');
+        const passwordUrlInput = document.getElementById('password-url');
+        const passwordNotesTextarea = document.getElementById('password-notes');
+        const passwordModalTitle = document.getElementById('password-modal-title');
+        const totalPasswordsSpan = document.getElementById('total-passwords');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalOkBtn = document.getElementById('modal-ok-btn');
+        const modalCancelBtn = document.getElementById('modal-cancel-btn');
+        const pinModal = document.getElementById('pin-modal');
+        const pinInput = document.getElementById('pin-input');
+        const pinLockToggle = document.getElementById('pin-lock-toggle');
+        const body = document.body;
+        const profileModal = document.getElementById('profile-modal');
+        const profileTitle = document.getElementById('profile-title');
+        const profileDetailsContent = document.getElementById('profile-details-content');
+        const usernameInput = document.getElementById('username-input');
+        const welcomeMessageSpan = document.getElementById('welcome-message');
+        const mobileWelcomeMessageSpan = document.getElementById('mobile-welcome-message');
+        const appVersionSpan = document.getElementById('app-version');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileNavMenu = document.getElementById('mobile-nav-menu');
+        const closeMobileNavBtn = document.getElementById('close-mobile-nav');
+        const mobileNavLinks = document.querySelectorAll('#mobile-nav-menu .nav-link');
+        const pinErrorMessage = document.getElementById('pin-error-message');
+        const lockAppBtn = document.getElementById('lock-app-btn');
+        const pinModalTitle = document.getElementById('pin-modal-title');
+        const storageSizeSpan = document.getElementById('storage-size');
+        const clearCacheBtn = document.getElementById('clear-cache-btn');
 
-        // Functions to save and load data from local storage
-        const saveData = () => {
-            try {
-                localStorage.setItem('passwords', JSON.stringify(passwords));
-                localStorage.setItem('userProfile', JSON.stringify(userProfile));
-                // Save the pin
-                if (pin) {
-                    localStorage.setItem('pin', JSON.stringify(pin));
+
+        // Functions for core logic
+        function showMessage(title, message, showCancel = false) {
+            return new Promise(resolve => {
+                modalTitle.textContent = title;
+                modalMessage.textContent = message;
+                modalOkBtn.onclick = () => {
+                    modal.classList.add('hidden');
+                    resolve(true);
+                };
+                if (showCancel) {
+                    modalCancelBtn.classList.remove('hidden');
+                    modalCancelBtn.onclick = () => {
+                        modal.classList.add('hidden');
+                        resolve(false);
+                    };
+                } else {
+                    modalCancelBtn.classList.add('hidden');
+                }
+                modal.classList.remove('hidden');
+            });
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+
+            // Highlight active link for both desktop and mobile nav
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            allNavLinks.forEach(link => {
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Close mobile menu if open
+            mobileNavMenu.classList.remove('open');
+        }
+
+        function saveData() {
+            const pin = localStorage.getItem('pin'); 
+            const data = {
+                passwords: passwords,
+                username: username,
+                pin: pin || null 
+            };
+            localStorage.setItem('passproData', JSON.stringify(data));
+            updateStorageInfo();
+        }
+        
+        function loadData() {
+            const storedData = localStorage.getItem('passproData');
+            if (storedData) {
+                const data = JSON.parse(storedData);
+                passwords = data.passwords || [];
+                username = data.username || 'Guest';
+                if (data.pin) {
+                    localStorage.setItem('pin', data.pin);
                 } else {
                     localStorage.removeItem('pin');
                 }
-                localStorage.setItem('lightMode', isLightMode);
-            } catch (e) {
-                console.error("Error saving to local storage", e);
-            }
-        };
-
-        const loadData = () => {
-            try {
-                const savedPasswords = localStorage.getItem('passwords');
-                const savedProfile = localStorage.getItem('userProfile');
-                const savedPin = localStorage.getItem('pin');
-                const savedTheme = localStorage.getItem('lightMode');
-
-                if (savedPasswords) {
-                    passwords = JSON.parse(savedPasswords);
-                }
-                if (savedProfile) {
-                    userProfile = JSON.parse(savedProfile);
-                }
-                if (savedPin) {
-                    pin = JSON.parse(savedPin);
-                }
-                if (savedTheme) {
-                    isLightMode = savedTheme === 'true';
-                }
-            } catch (e) {
-                console.error("Error loading from local storage", e);
-            }
-        };
-
-        window.showModal = (title, message, isConfirm = false, onConfirm = null) => {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-message').textContent = message;
-            document.getElementById('modal-ok-btn').textContent = 'OK';
-            document.getElementById('modal-ok-btn').onclick = closeModal;
-            document.getElementById('modal-cancel-btn').classList.add('hidden');
-
-            if (isConfirm) {
-                document.getElementById('modal-ok-btn').textContent = 'Confirm';
-                document.getElementById('modal-cancel-btn').classList.remove('hidden');
-                document.getElementById('modal-ok-btn').onclick = () => {
-                    closeModal();
-                    if (onConfirm) onConfirm();
-                };
-                document.getElementById('modal-cancel-btn').onclick = closeModal;
-            }
-
-            document.getElementById('modal').classList.remove('hidden');
-            document.getElementById('modal').classList.add('flex');
-        };
-
-        window.closeModal = () => {
-            document.getElementById('modal').classList.remove('flex');
-            document.getElementById('modal').classList.add('hidden');
-        };
-
-        const toggleArrangeMode = () => {
-            isArranging = !isArranging;
-            const arrangeBtn = document.getElementById('arrange-btn');
-            if (isArranging) {
-                arrangeBtn.textContent = 'Save Arrangement';
-                arrangeBtn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
-                arrangeBtn.classList.add('bg-red-500', 'hover:bg-red-600', 'text-white');
-                document.getElementById('password-list').classList.add('cursor-grab');
             } else {
-                arrangeBtn.textContent = 'Arrange';
-                arrangeBtn.classList.remove('bg-red-500', 'hover:bg-red-600', 'text-white');
-                arrangeBtn.classList.add('bg-gray-700', 'hover:bg-gray-600');
-                document.getElementById('password-list').classList.remove('cursor-grab');
-                saveArrangement();
+                username = 'Guest';
             }
-            renderPasswords(); // Re-render to update drag and drop functionality
-        };
-
-        const saveArrangement = () => {
-            const passwordList = document.getElementById('password-list');
-            const items = Array.from(passwordList.children);
-            const newOrder = items.map(item => {
-                const id = parseInt(item.dataset.id);
-                return passwords.find(p => p.id === id);
-            });
-            passwords = newOrder.filter(Boolean); // Filter out any undefined items
-            saveData();
-            showModal('Saved', 'Password arrangement has been saved.');
-        };
-
-        // Renders the password list from the in-memory array
-        const renderPasswords = () => {
-            const passwordList = document.getElementById('password-list');
-            passwordList.innerHTML = '';
-            if (passwords.length === 0) {
-                passwordList.innerHTML = '<p class="text-secondary text-center col-span-full">No passwords saved yet. Add one above!</p>';
-                return;
-            }
-            passwords.forEach(data => {
-                const passwordItem = createPasswordItem(data.id, data);
-                passwordList.appendChild(passwordItem);
-            });
-
-            if (isArranging) {
-                makeItemsDraggable();
-            }
-        };
-
-        const makeItemsDraggable = () => {
-            const list = document.getElementById('password-list');
-            let draggingItem = null;
-
-            list.addEventListener('dragstart', (e) => {
-                if (!isArranging) return;
-                draggingItem = e.target.closest('.password-item');
-                if (draggingItem) {
-                    e.dataTransfer.effectAllowed = 'move';
-                    e.dataTransfer.setData('text/html', draggingItem.innerHTML);
-                    setTimeout(() => {
-                        draggingItem.classList.add('dragging');
-                    }, 0);
-                }
-            });
-
-            list.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                const targetItem = e.target.closest('.password-item');
-                if (draggingItem && targetItem && draggingItem !== targetItem) {
-                    const rect = targetItem.getBoundingClientRect();
-                    const next = (e.clientY - rect.top) / rect.height > 0.5;
-                    list.insertBefore(draggingItem, next && targetItem.nextSibling || targetItem);
-                }
-            });
-
-            list.addEventListener('dragend', () => {
-                if (draggingItem) {
-                    draggingItem.classList.remove('dragging');
-                    draggingItem = null;
-                }
-            });
-        };
-
-        const showPage = (pageId) => {
-            const sections = ['dashboard-section', 'passwords-section', 'settings-section'];
-            sections.forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-
-            // Toggle the fullscreen container's visibility based on the page
-            const passwordsContainer = document.getElementById('passwords-section').querySelector('div');
-            const settingsContainer = document.getElementById('settings-section').querySelector('div');
-            const dashboardContainer = document.getElementById('dashboard-container');
-            
-            if (pageId === 'passwords-section') {
-                dashboardContainer.classList.add('hidden');
-                passwordsContainer.classList.add('w-full');
-                passwordsContainer.classList.remove('max-w-2xl');
-                document.getElementById(pageId).classList.remove('hidden');
-            } else if (pageId === 'settings-section') {
-                dashboardContainer.classList.add('hidden');
-                settingsContainer.classList.add('w-full');
-                settingsContainer.classList.remove('max-w-2xl');
-                document.getElementById(pageId).classList.remove('hidden');
-            } else {
-                dashboardContainer.classList.remove('hidden');
-                passwordsContainer.classList.remove('w-full');
-                passwordsContainer.classList.add('max-w-2xl');
-                settingsContainer.classList.remove('w-full');
-                settingsContainer.classList.add('max-w-2xl');
-                document.getElementById(pageId).classList.remove('hidden');
-            }
-            
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
-            if (pageId === 'dashboard-section') {
-                document.getElementById('dashboard-link').classList.add('active');
-            } else if (pageId === 'passwords-section') {
-                document.getElementById('passwords-link').classList.add('active');
-            } else if (pageId === 'settings-section') {
-                document.getElementById('settings-link').classList.add('active');
-            }
-
-            // Close mobile menu after navigation
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
-        };
+        }
         
-        const updateProfileUI = () => {
-            document.getElementById('username-input').value = userProfile.username || '';
-            document.getElementById('auth-status').textContent = `Welcome, ${userProfile.username}!`;
-            document.getElementById('user-display-name').textContent = `Welcome, ${userProfile.username}!`;
-            document.getElementById('user-display-name-mobile').textContent = `Welcome, ${userProfile.username}!`;
-            document.getElementById('pin-lock-toggle').checked = !!pin;
-            document.getElementById('pin-setup-container').classList.toggle('hidden', !pin);
-        };
+        function updateUI() {
+            renderPasswords(passwords);
+            totalPasswordsSpan.textContent = passwords.length;
+            const pin = localStorage.getItem('pin');
+            pinLockToggle.checked = !!pin;
+            usernameInput.value = username;
+            welcomeMessageSpan.textContent = `Welcome! ${username}`;
+            mobileWelcomeMessageSpan.textContent = `Welcome! ${username}`;
+            pinModalTitle.textContent = `Welcome back, ${username}!`;
+            appVersionSpan.textContent = APP_VERSION;
+            const block = pinLockToggle.nextElementSibling;
+            const dot = block.nextElementSibling;
+            if (pinLockToggle.checked) {
+                block.classList.add('bg-orange-500');
+                block.classList.remove('bg-gray-600');
+                dot.classList.add('transform', 'translate-x-full');
+            } else {
+                block.classList.remove('bg-orange-500');
+                block.classList.add('bg-gray-600');
+                dot.classList.remove('transform', 'translate-x-full');
+            }
+            updateStorageInfo();
+        }
 
-        const updateAppVersionUI = () => {
-            document.getElementById('app-version-info').textContent = `Version: ${appVersion}`;
-        };
-
-        const saveUserProfile = () => {
-            const newUsername = document.getElementById('username-input').value;
-            userProfile.username = newUsername;
-            updateProfileUI();
-            saveData();
-            showModal('Success', 'Changes saved successfully!');
-        };
-
-        const addPassword = (event) => {
-            event.preventDefault();
-            const website = document.getElementById('website').value;
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (!website || !username || !password) {
-                showModal('Invalid Input', 'All fields are required.');
-                return;
+        function updateStorageInfo() {
+            let totalBytes = 0;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                totalBytes += key.length + (localStorage.getItem(key) || '').length;
             }
 
+            const units = ['Bytes', 'KB', 'MB', 'GB'];
+            let size = totalBytes;
+            let unitIndex = 0;
+            while (size >= 1024 && unitIndex < units.length - 1) {
+                size /= 1024;
+                unitIndex++;
+            }
+            storageSizeSpan.textContent = `${size.toFixed(2)} ${units[unitIndex]}`;
+        }
+
+
+        function renderPasswords(passwordList) {
+            passwordListContainer.innerHTML = '';
+            passwordList.forEach((item, index) => {
+                const passwordItem = document.createElement('div');
+                passwordItem.className = 'password-item p-4 bg-[#2A2A2A] rounded-lg shadow-md hover:bg-[#333] transition-colors duration-200 cursor-pointer flex justify-between items-center group';
+                passwordItem.draggable = true;
+                passwordItem.dataset.index = index;
+                passwordItem.innerHTML = `
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-lg font-semibold text-white truncate">${item.title}</h4>
+                        <p class="text-sm text-secondary truncate">${item.username}</p>
+                    </div>
+                    <div class="flex space-x-2 opacity-0 md:opacity-100 md:relative group-hover:opacity-100 transition-opacity duration-200 md:group-hover:opacity-100">
+                        <button class="view-btn p-2 rounded-full bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-index="${index}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="edit-btn p-2 rounded-full bg-orange-500 text-white hover:bg-orange-600 transition-colors" data-index="${index}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors" data-index="${index}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+                passwordListContainer.appendChild(passwordItem);
+            });
+        }
+        
+        function validatePin() {
+            const enteredPin = pinInput.value;
+            const storedPin = localStorage.getItem('pin');
+            
+            if (enteredPin === storedPin) {
+                pinModal.classList.add('hidden');
+                pinErrorMessage.classList.add('hidden');
+                showMessage('Success', 'PIN is correct. Welcome back!');
+                pinInput.value = '';
+                showPage('dashboard-section');
+            } else {
+                pinErrorMessage.classList.remove('hidden');
+                pinInput.value = '';
+            }
+        }
+
+        // Event Listeners
+        document.getElementById('add-password-btn').addEventListener('click', () => {
+            isEditing = false;
+            passwordModalTitle.textContent = 'Add Password';
+            passwordForm.reset();
+            passwordModal.classList.remove('hidden');
+        });
+
+        document.getElementById('go-to-add-password').addEventListener('click', () => {
+            isEditing = false;
+            passwordModalTitle.textContent = 'Add Password';
+            passwordForm.reset();
+            passwordModal.classList.remove('hidden');
+        });
+
+        document.getElementById('go-to-passwords').addEventListener('click', () => {
+            showPage('password-list-section');
+        });
+        
+        document.getElementById('lock-app-btn').addEventListener('click', () => {
+            const pin = localStorage.getItem('pin');
+            if (pin) {
+                pinModal.classList.remove('hidden');
+                showPage('dashboard-section');
+            } else {
+                showMessage('PIN Lock Disabled', 'Please enable PIN Lock in Settings to use this feature.');
+            }
+        });
+
+        document.getElementById('password-modal-cancel').addEventListener('click', () => {
+            passwordModal.classList.add('hidden');
+        });
+        
+        passwordForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             const newPassword = {
-                id: Date.now(), // Use a timestamp as a simple unique ID
-                website,
-                username,
-                password,
-                createdAt: new Date().toISOString()
-            };
-            passwords.push(newPassword);
-            console.log('Password added:', newPassword);
-            saveData();
-            showModal('Success', 'Password saved!');
-            document.getElementById('password-form').reset();
-            renderPasswords();
-        };
-
-        const deletePassword = (docId) => {
-            showModal('Confirm Deletion', 'Are you sure you want to delete this password?', true, () => {
-                const initialLength = passwords.length;
-                passwords = passwords.filter(p => p.id !== docId);
-                if (passwords.length < initialLength) {
-                    saveData();
-                    showModal('Success', 'Password deleted!');
-                    renderPasswords();
-                } else {
-                    showModal('Error', 'Failed to delete password.');
-                }
-            });
-        };
-
-        const copyPassword = (password) => {
-            const el = document.createElement('textarea');
-            el.value = password;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            showModal('Copied!', 'Password copied to clipboard.');
-        };
-        
-        const downloadAccount = () => {
-            const accountData = {
-                profile: userProfile,
-                passwords: passwords,
-                pin: pin,
-                isLightMode: isLightMode
+                title: passwordTitleInput.value,
+                username: passwordUsernameInput.value,
+                password: passwordPasswordInput.value,
+                url: passwordUrlInput.value,
+                notes: passwordNotesTextarea.value,
             };
             
-            const jsonContent = JSON.stringify(accountData, null, 2);
-            const blob = new Blob([jsonContent], { type: 'application/json' });
+            if (isEditing) {
+                passwords[editIndex] = newPassword;
+                isEditing = false;
+            } else {
+                passwords.push(newPassword);
+            }
+            
+            saveData();
+            updateUI();
+            passwordModal.classList.add('hidden');
+        });
+        
+        passwordListContainer.addEventListener('click', (e) => {
+            if (e.target.closest('.delete-btn')) {
+                const index = e.target.closest('.delete-btn').dataset.index;
+                showMessage('Delete Password', 'Are you sure you want to delete this password?', true).then(result => {
+                    if (result) {
+                        passwords.splice(index, 1);
+                        saveData();
+                        updateUI();
+                        showMessage('Success', 'Password deleted successfully.');
+                    }
+                });
+            } else if (e.target.closest('.edit-btn')) {
+                const index = e.target.closest('.edit-btn').dataset.index;
+                isEditing = true;
+                editIndex = index;
+                const item = passwords[index];
+                passwordModalTitle.textContent = 'Edit Password';
+                passwordTitleInput.value = item.title;
+                passwordUsernameInput.value = item.username;
+                passwordPasswordInput.value = item.password;
+                passwordUrlInput.value = item.url;
+                passwordNotesTextarea.value = item.notes;
+                passwordModal.classList.remove('hidden');
+            } else if (e.target.closest('.view-btn')) {
+                const index = e.target.closest('.view-btn').dataset.index;
+                const item = passwords[index];
+                profileTitle.textContent = item.title;
+                
+                const urlHtml = item.url ? `<a href="${item.url}" target="_blank" class="text-orange-400 password-url-link break-words">${item.url}</a>` : 'N/A';
+                
+                profileDetailsContent.innerHTML = `
+                    <p><strong class="text-orange-500">Username:</strong> ${item.username}</p>
+                    <p><strong class="text-orange-500">Password:</strong> <span id="displayed-password">${item.password}</span></p>
+                    <p><strong class="text-orange-500">URL:</strong> ${urlHtml}</p>
+                    <p><strong class="text-orange-500">Notes:</strong> ${item.notes || 'N/A'}</p>
+                    <button id="copy-password" class="mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">Copy Password</button>
+                `;
+                document.getElementById('copy-password').addEventListener('click', () => {
+                    const passwordText = document.getElementById('displayed-password').textContent;
+                    const tempInput = document.createElement('textarea');
+                    tempInput.value = passwordText;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    showMessage('Success', 'Password copied to clipboard!');
+                });
+                profileModal.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('profile-modal-close').addEventListener('click', () => {
+            profileModal.classList.add('hidden');
+        });
+        
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredPasswords = passwords.filter(item => 
+                item.title.toLowerCase().includes(searchTerm) ||
+                item.username.toLowerCase().includes(searchTerm)
+            );
+            renderPasswords(filteredPasswords);
+        });
+
+        document.getElementById('download-account-btn').addEventListener('click', () => {
+            const dataToDownload = {
+                passwords: passwords,
+                username: username,
+                pin: localStorage.getItem('pin') || null
+            };
+
+            const dataStr = JSON.stringify(dataToDownload, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'account-token.json';
+            a.href = url;
+            a.download = 'local-save1999.json';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            showModal('Success', 'Account data downloaded successfully!');
-        };
-
-        const importAccount = () => {
-            showModal(
-                'Confirm Import',
-                'Are you sure you want to re-import your data? This will overwrite your current account.',
-                true,
-                () => {
-                    document.getElementById('import-file-input').click();
-                }
-            );
-        };
+            URL.revokeObjectURL(url);
+            showMessage('Success', 'Account data downloaded successfully!');
+        });
         
-        const handleImportFile = (event) => {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const accountData = JSON.parse(e.target.result);
-                    
-                    if (accountData.profile) {
-                        userProfile = accountData.profile;
-                        console.log('Profile imported successfully.');
-                    }
-
-                    if (accountData.passwords && Array.isArray(accountData.passwords)) {
-                        passwords = accountData.passwords.map(p => ({ ...p, id: Date.now() + Math.random() }));
-                        showModal('Import Complete', `Successfully imported ${passwords.length} passwords.`);
-                    } else {
-                        showModal('Import Failed', 'Invalid file format. Passwords array not found.');
-                    }
-                    
-                    if (accountData.pin) {
-                        pin = accountData.pin;
-                        showModal('PIN Imported', 'A PIN lock has been imported with your account data.');
-                    } else {
-                        pin = null;
-                    }
-                    
-                    if (accountData.isLightMode !== undefined) {
-                        isLightMode = accountData.isLightMode;
-                    }
-
-                    saveData();
-                    updateUI();
-                    
-                } catch (error) {
-                    console.error("Error handling import file:", error);
-                    showModal('Import Failed', 'Could not parse the file. Please ensure it is a valid JSON file.');
-                }
-            };
-            reader.readAsText(file);
-        };
-
-        const createPasswordItem = (docId, data) => {
-            const div = document.createElement('div');
-            div.className = 'password-item bg-card p-4 rounded-md shadow-sm flex flex-col items-start space-y-2';
-            div.setAttribute('draggable', isArranging);
-            div.dataset.id = docId;
-
-            div.innerHTML = `
-                <div class="flex-grow password-item-content w-full">
-                    <h3 class="font-semibold text-main text-lg">${data.website}</h3>
-                    <p class="text-sm text-secondary">Username: ${data.username}</p>
-                    <p class="text-sm text-secondary">Password: <span class="font-mono text-secondary" data-password="${data.password}">********</span></p>
-                </div>
-                <div class="flex justify-end w-full space-x-2 mt-2">
-                    <button class="show-hide-btn p-2 rounded-full bg-gray-500 text-white hover:bg-gray-600 transition" aria-label="Show/Hide password">
-                         <!-- Eye Icon (SVG) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
-                            <path fill-rule="evenodd" d="M.661 10.155A10.05 10.05 0 0110 3.75c3.228 0 6.275 1.543 8.163 4.105a1.25 1.25 0 01-2.296 1.056C14.734 7.64 12.5 6.25 10 6.25S5.266 7.64 4.133 9.416a1.25 1.25 0 01-2.296-1.056zM10 16.25a10.05 10.05 0 01-9.339-6.095 1.25 1.25 0 012.296-1.056C5.266 12.36 7.5 13.75 10 13.75s4.734-1.39 5.867-3.176a1.25 1.25 0 012.296 1.056A10.05 10.05 0 0110 16.25z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                    <button class="copy-btn p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition" aria-label="Copy password">
-                        <!-- Copy Icon (SVG) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                            <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                        </svg>
-                    </button>
-                    <button class="delete-btn p-2 rounded-full bg-red-600 text-white hover:bg-red-700 transition" aria-label="Delete password">
-                        <!-- Delete Icon (SVG) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </div>
-            `;
-            div.querySelector('.copy-btn').addEventListener('click', () => copyPassword(data.password));
-            div.querySelector('.delete-btn').addEventListener('click', () => deletePassword(docId));
-            div.querySelector('.show-hide-btn').addEventListener('click', (event) => {
-                const passwordSpan = event.currentTarget.parentNode.parentNode.querySelector('[data-password]');
-                const passwordText = passwordSpan.dataset.password;
-                if (passwordSpan.textContent === '********') {
-                    passwordSpan.textContent = passwordText;
-                } else {
-                    passwordSpan.textContent = '********';
-                }
-            });
-            return div;
-        };
-
-        const validatePin = () => {
-            const enteredPin = document.getElementById('pin-input').value;
-            if (enteredPin === pin) {
-                document.getElementById('pin-modal').classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            } else {
-                const pinError = document.getElementById('pin-error');
-                pinError.classList.remove('hidden');
-            }
-        };
-
-        const handlePinToggle = () => {
-            const isChecked = document.getElementById('pin-lock-toggle').checked;
-            const pinContainer = document.getElementById('pin-setup-container');
-            const pinInput = document.getElementById('new-pin-input');
-            const pinError = document.getElementById('pin-setup-error');
-
-            if (isChecked) {
-                pinContainer.classList.remove('hidden');
-                pinInput.focus();
-                pinInput.oninput = () => {
-                    if (pinInput.value.length === 4) {
-                        pin = pinInput.value;
-                        pinError.classList.add('hidden');
-                        showModal('PIN Set', 'Your new PIN has been saved. Remember to download your account data to back it up!');
-                        saveData();
-                    } else {
-                        pinError.textContent = 'PIN must be 4 digits.';
-                        pinError.classList.remove('hidden');
-                        pin = null;
-                        saveData();
+        document.getElementById('import-file-input').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    try {
+                        const importedData = JSON.parse(event.target.result);
+                        if (importedData.passwords && importedData.username !== undefined) {
+                            const result = await showMessage('Import Account', 'Importing will overwrite your current data. Are you sure?', true);
+                            if (result) {
+                                passwords = importedData.passwords;
+                                username = importedData.username;
+                                if (importedData.pin) {
+                                    localStorage.setItem('pin', importedData.pin);
+                                    pinLockToggle.checked = true;
+                                } else {
+                                    localStorage.removeItem('pin');
+                                    pinLockToggle.checked = false;
+                                }
+                                saveData();
+                                updateUI();
+                                showMessage('Success', 'Account data imported successfully!');
+                            }
+                        } else {
+                            showMessage('Error', 'Invalid file format. Please import a valid PassPro account file.');
+                        }
+                    } catch (error) {
+                        showMessage('Error', 'Failed to parse file. Please ensure it is a valid JSON file.');
                     }
                 };
+                reader.readAsText(file);
+            }
+        });
+        
+        document.getElementById('arrange-btn').addEventListener('click', () => {
+            arrangeMode = !arrangeMode;
+            const passwords = document.querySelectorAll('.password-item');
+            if (arrangeMode) {
+                document.getElementById('arrange-btn').textContent = 'Done';
+                passwords.forEach(item => item.style.cursor = 'grab');
             } else {
-                pinContainer.classList.add('hidden');
-                pin = null;
+                document.getElementById('arrange-btn').textContent = 'Arrange';
+                passwords.forEach(item => item.style.cursor = 'pointer');
                 saveData();
-                showModal('PIN Removed', 'PIN lock has been disabled.');
             }
-        };
-        
-        const toggleTheme = () => {
-            isLightMode = !isLightMode;
-            updateThemeUI();
+        });
+
+        // Drag and Drop Logic
+        passwordListContainer.addEventListener('dragstart', (e) => {
+            if (arrangeMode && e.target.classList.contains('password-item')) {
+                draggedItem = e.target;
+                e.dataTransfer.effectAllowed = 'move';
+                setTimeout(() => draggedItem.classList.add('dragging'), 0);
+            }
+        });
+
+        passwordListContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (arrangeMode && e.target.closest('.password-item') && e.target.closest('.password-item') !== draggedItem) {
+                const dragOverItem = e.target.closest('.password-item');
+                const bounding = dragOverItem.getBoundingClientRect();
+                const offset = bounding.y + bounding.height / 2;
+                if (e.clientY > offset) {
+                    dragOverItem.style.borderBottom = '2px solid orange';
+                    dragOverItem.style.borderTop = '';
+                } else {
+                    dragOverItem.style.borderTop = '2px solid orange';
+                    dragOverItem.style.borderBottom = '';
+                }
+            }
+        });
+
+        passwordListContainer.addEventListener('dragleave', (e) => {
+            if (e.target.closest('.password-item')) {
+                const item = e.target.closest('.password-item');
+                item.style.borderTop = '';
+                item.style.borderBottom = '';
+            }
+        });
+
+        passwordListContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (arrangeMode && e.target.closest('.password-item')) {
+                const dragOverItem = e.target.closest('.password-item');
+                const fromIndex = parseInt(draggedItem.dataset.index);
+                const toIndex = parseInt(dragOverItem.dataset.index);
+                
+                const [movedItem] = passwords.splice(fromIndex, 1);
+                passwords.splice(toIndex, 0, movedItem);
+                
+                renderPasswords(passwords);
+                
+                const item = e.target.closest('.password-item');
+                item.style.borderTop = '';
+                item.style.borderBottom = '';
+            }
+            if (draggedItem) {
+                draggedItem.classList.remove('dragging');
+                draggedItem = null;
+            }
+        });
+
+        passwordListContainer.addEventListener('dragend', () => {
+            const allItems = document.querySelectorAll('.password-item');
+            allItems.forEach(item => {
+                item.classList.remove('dragging');
+                item.style.borderTop = '';
+                item.style.borderBottom = '';
+            });
             saveData();
-        };
+        });
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(e.target.dataset.page);
+            });
+        });
 
-        const updateThemeUI = () => {
-            const body = document.body;
-            const themeToggle = document.getElementById('theme-toggle');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(e.target.dataset.page);
+            });
+        });
 
-            if (isLightMode) {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                document.querySelectorAll('.light-mode-button').forEach(btn => {
-                    btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
-                    btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
-                });
+        pinLockToggle.addEventListener('change', async (e) => {
+            const block = pinLockToggle.nextElementSibling;
+            const dot = block.nextElementSibling;
+            if (e.target.checked) {
+                const userPin = prompt('Enter a 4-digit PIN to secure your passwords:');
+                if (userPin && userPin.length === 4 && /^\d+$/.test(userPin)) {
+                    localStorage.setItem('pin', userPin);
+                    showMessage('Success', 'PIN lock enabled successfully.');
+                    block.classList.add('bg-orange-500');
+                    block.classList.remove('bg-gray-600');
+                    dot.classList.add('transform', 'translate-x-full');
+                    saveData();
+                } else {
+                    showMessage('Error', 'Invalid PIN. Please enter a 4-digit number.');
+                    pinLockToggle.checked = false;
+                }
             } else {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                document.querySelectorAll('.light-mode-button').forEach(btn => {
-                    btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
-                    btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-                });
+                localStorage.removeItem('pin');
+                showMessage('Success', 'PIN lock disabled.');
+                block.classList.remove('bg-orange-500');
+                block.classList.add('bg-gray-600');
+                dot.classList.remove('transform', 'translate-x-full');
+                saveData();
             }
-            themeToggle.checked = isLightMode;
-        };
-        
-        const updateUI = () => {
-            updateProfileUI();
-            updateAppVersionUI();
-            renderPasswords();
-            updateThemeUI();
-        };
-
-
-        document.getElementById('password-form').addEventListener('submit', addPassword);
-        document.getElementById('dashboard-link').addEventListener('click', () => showPage('dashboard-section'));
-        document.getElementById('passwords-link').addEventListener('click', () => {
-            showPage('passwords-section');
-            renderPasswords();
-        });
-        document.getElementById('settings-link').addEventListener('click', () => {
-            showPage('settings-section');
-            updateProfileUI();
-            updateAppVersionUI(); 
-        });
-        
-        // Mobile Menu Nav links
-        document.getElementById('dashboard-link-mobile').addEventListener('click', () => showPage('dashboard-section'));
-        document.getElementById('passwords-link-mobile').addEventListener('click', () => {
-            showPage('passwords-section');
-            renderPasswords();
-        });
-        document.getElementById('settings-link-mobile').addEventListener('click', () => {
-            showPage('settings-section');
-            updateProfileUI();
-            updateAppVersionUI();
         });
 
-        // Toggle mobile menu
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        usernameInput.addEventListener('input', () => {
+            username = usernameInput.value;
+            saveData();
+            updateUI();
         });
 
-        document.getElementById('arrange-btn').addEventListener('click', toggleArrangeMode);
-        document.getElementById('save-profile-btn').addEventListener('click', saveUserProfile);
-        document.getElementById('download-account-btn').addEventListener('click', downloadAccount);
-        document.getElementById('import-account-btn').addEventListener('click', importAccount);
-        document.getElementById('import-file-input').addEventListener('change', handleImportFile);
-        document.getElementById('pin-lock-toggle').addEventListener('change', handlePinToggle);
-        document.getElementById('theme-toggle').addEventListener('change', toggleTheme);
         document.getElementById('pin-submit-btn').addEventListener('click', validatePin);
         document.getElementById('pin-input').addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
@@ -698,19 +913,39 @@
             }
         });
         
-        // Initial setup
+        hamburgerBtn.addEventListener('click', () => {
+            mobileNavMenu.classList.add('open');
+        });
+        closeMobileNavBtn.addEventListener('click', () => {
+            mobileNavMenu.classList.remove('open');
+        });
+
+        clearCacheBtn.addEventListener('click', async () => {
+            const result = await showMessage(
+                'Clear All Data',
+                'This will permanently delete all passwords and settings from your device. Are you sure?',
+                true
+            );
+            if (result) {
+                localStorage.clear();
+                loadData();
+                updateUI();
+                showMessage('Success', 'All local data has been cleared.');
+                showPage('dashboard-section');
+            }
+        });
+
         loadData();
         updateUI();
         
-        // Check for pin and show lock screen if necessary
+        const pin = localStorage.getItem('pin');
         if (pin) {
             document.getElementById('pin-modal').classList.remove('hidden');
-            document.body.classList.remove('overflow-hidden'); // Prevent scrolling while locked
         } else {
             document.getElementById('pin-modal').classList.add('hidden');
             showPage('dashboard-section');
         }
-
+        
     </script>
 </body>
 </html>
