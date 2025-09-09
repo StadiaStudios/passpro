@@ -1,3 +1,7 @@
+V1.6.5
+----------
+"Terms And Conditions" Was renamed to TOS to save screen space on smaller devices, Link Color Change, DashBoard Layout Adjustments, More Quick Actions, Mobile Arrangement fix,
+
 V1.5.4
 ----------
 Mayonaise link in settings, ChangeLog in Settings, Displays Device Model, Shows Last Sync fix, Blue theme, Other Updates and Fixes.

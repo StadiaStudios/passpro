@@ -258,33 +258,34 @@
 
 
         <!-- Dashboard Section -->
-        <section id="dashboard-section" class="page-section hidden max-w-4xl mx-auto">
-            <div class="p-6 bg-[#1A1A1A] rounded-lg shadow-xl text-white">
-                <h2 class="text-3xl font-bold mb-4">Welcome to PassPro!</h2>
-                <p class="text-lg text-secondary">Your secure and customizable password manager.</p>
-                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="p-6 bg-[#2A2A2A] rounded-lg">
-                        <h3 class="text-xl font-semibold mb-2 text-white-500">Quick Actions</h3>
-                        <ul class="space-y-2 text-secondary">
-                            <li><button class="text-white-800 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
-                            <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
-                            <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
-                        </ul>
-                    </div>
-                    <div class="p-6 bg-[#2A2A2A] rounded-lg">
-                        <h3 class="text-xl font-semibold mb-2 text-white-500">Local Data</h3>
-                        <p class="text-secondary">Total Passwords: <span id="total-passwords">0</span></p>
-                        <p class="text-secondary">Last Sync: <span id="last-sync">N/A</span></p>
-                        <p class="text-secondary">Username: <span id="display-username"></span></p>
-                        <p class="text-secondary">Device: <span id="device-info"></span></p>
-                    </div>
-                    <div class="p-6 bg-[#2A2A2A] rounded-lg">
-    <h3 class="text-xl font-semibold mb-2 text-white-500">Glad You're Back!</h3>
-    <p class="text-secondary">Welcome! <span id="dashboard-username"></span>,</p>
-  </div>
-                </div>
+        <section id="dashboard-section" class="page-section hidden h-screen">
+    <div class="text-white">
+        <h2 class="text-3xl font-bold mb-4">Welcome to PassPro Dashboard!</h2>
+        <p class="text-lg text-secondary">Your secure and customizable password manager.</p>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-white">
+                <h3 class="text-xl font-semibold mb-2 text-white-500">Quick Actions</h3>
+                <ul class="space-y-2 text-secondary">
+                    <li><button class="text-white-800 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
+                    <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
+                    <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
+                    <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-import-account">Import Account</button></li>
+                </ul>
             </div>
-        </section>
+            <div class="text-white">
+                <h3 class="text-xl font-semibold mb-2 text-white-500">Local Data</h3>
+                <p class="text-secondary">Total Passwords: <span id="total-passwords">0</span></p>
+                <p class="text-secondary">Last Sync: <span id="last-sync">N/A</span></p>
+                <p class="text-secondary">Username: <span id="display-username"></span></p>
+                <p class="text-secondary">Device: <span id="device-info"></span></p>
+            </div>
+            <div class="text-white">
+                <h3 class="text-xl font-semibold mb-2 text-white-500">Glad You're Back!</h3>
+                <p class="text-secondary">Welcome! <span id="dashboard-username"></span>,</p>
+            </div>
+        </div>
+    </div>
+</section>
 
         <!-- Password List Section -->
         <section id="password-list-section" class="page-section hidden w-full h-full p-0">
@@ -353,7 +354,7 @@
                         <h3 class="text-xl font-semibold mb-4 text-blue-500">Local Storage</h3>
                         <p class="text-secondary mb-4">Storage Used: <span id="storage-size">0 KB</span></p>
                         <button id="clear-cache-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
-                            Clear All Data
+                            Clear Cache
                         </button>
                     </div>
 
@@ -363,8 +364,8 @@
                     <p>App Version: <span id="app-version">1.5.4</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios | Mayonaise Production</p>
                     <div class="flex space-x-4 mt-2">
-                    <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">Terms and Conditions</a>
-                    <a href="https://yaktenz.github.io/mayolibrary/" id="terms-link" class="terms-link mt-2 text-white">Mayonaise</a>
+                    <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
+                    <a href="https://stadiastudios.github.io/Stadia/" id="terms-link" class="terms-link mt-2 text-white">StadiaStudios</a>
                     <a href="changelog.txt" id="terms-link" class="terms-link mt-2 text-white">ChangeLog</a>
                     <a href="notices.html" id="terms-link" class="terms-link mt-2 text-white">Notices</a>
                     </div>
@@ -431,13 +432,16 @@
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.5.4";
+        const APP_VERSION = "1.6.5";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
         const passwordListSection = document.getElementById('password-list-section');
         const userProfileSection = document.getElementById('user-profile-section');
         const passwordListContainer = document.getElementById('password-list');
+        document.getElementById('go-to-import-account').addEventListener('click', () => {
+    document.getElementById('import-file-input').click();
+});
         const searchInput = document.getElementById('search-input');
         const passwordModal = document.getElementById('password-modal');
         const passwordForm = document.getElementById('password-form');
@@ -474,6 +478,9 @@
         const pinModalTitle = document.getElementById('pin-modal-title');
         const storageSizeSpan = document.getElementById('storage-size');
         const clearCacheBtn = document.getElementById('clear-cache-btn');
+        
+        // Added caching for the Glad You're Back section
+        const gladYoureBackSection = document.querySelector('#dashboard-section > div > div > div:last-child');
 
 function getDeviceInfo() {
   const userAgent = navigator.userAgent;
@@ -601,6 +608,13 @@ function getDeviceInfo() {
                 dot.classList.remove('transform', 'translate-x-full');
             }
             updateStorageInfo();
+            
+            // Check if the username is the default 'Guest' to show/hide the "Glad You're Back!" section.
+            if (username === 'Guest') {
+                gladYoureBackSection.classList.add('hidden');
+            } else {
+                gladYoureBackSection.classList.remove('hidden');
+            }
         }
 
         function updateStorageInfo() {
@@ -754,7 +768,7 @@ if (pin) {
                 const item = passwords[index];
                 profileTitle.textContent = item.title;
                 
-                const urlHtml = item.url ? `<a href="${item.url}" target="_blank" class="text-orange-400 password-url-link break-words">${item.url}</a>` : 'N/A';
+                const urlHtml = item.url ? `<a href="${item.url}" target="_blank" class="text-white-800 password-url-link break-words">${item.url}</a>` : 'N/A';
                 
                 profileDetailsContent.innerHTML = `
                     <p><strong class="text-orange-500">Username:</strong> ${item.username}</p>
@@ -863,70 +877,141 @@ if (pin) {
             }
         });
 
-        // Drag and Drop Logic
-        passwordListContainer.addEventListener('dragstart', (e) => {
-            if (arrangeMode && e.target.classList.contains('password-item')) {
-                draggedItem = e.target;
-                e.dataTransfer.effectAllowed = 'move';
-                setTimeout(() => draggedItem.classList.add('dragging'), 0);
-            }
-        });
 
-        passwordListContainer.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            if (arrangeMode && e.target.closest('.password-item') && e.target.closest('.password-item') !== draggedItem) {
-                const dragOverItem = e.target.closest('.password-item');
-                const bounding = dragOverItem.getBoundingClientRect();
-                const offset = bounding.y + bounding.height / 2;
-                if (e.clientY > offset) {
-                    dragOverItem.style.borderBottom = '2px solid orange';
-                    dragOverItem.style.borderTop = '';
-                } else {
-                    dragOverItem.style.borderTop = '2px solid orange';
-                    dragOverItem.style.borderBottom = '';
-                }
-            }
-        });
+        
+        // Drag and Drop Logic for Desktop
+passwordListContainer.addEventListener('dragstart', (e) => {
+    if (arrangeMode && e.target.classList.contains('password-item')) {
+        draggedItem = e.target;
+        e.dataTransfer.effectAllowed = 'move';
+        setTimeout(() => draggedItem.classList.add('dragging'), 0);
+    }
+});
 
-        passwordListContainer.addEventListener('dragleave', (e) => {
-            if (e.target.closest('.password-item')) {
-                const item = e.target.closest('.password-item');
-                item.style.borderTop = '';
-                item.style.borderBottom = '';
-            }
-        });
+passwordListContainer.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    if (arrangeMode && e.target.closest('.password-item') && e.target.closest('.password-item') !== draggedItem) {
+        const dragOverItem = e.target.closest('.password-item');
+        const bounding = dragOverItem.getBoundingClientRect();
+        const offset = bounding.y + bounding.height / 2;
+        if (e.clientY > offset) {
+            dragOverItem.style.borderBottom = '2px solid orange';
+            dragOverItem.style.borderTop = '';
+        } else {
+            dragOverItem.style.borderTop = '2px solid orange';
+            dragOverItem.style.borderBottom = '';
+        }
+    }
+});
 
-        passwordListContainer.addEventListener('drop', (e) => {
-            e.preventDefault();
-            if (arrangeMode && e.target.closest('.password-item')) {
-                const dragOverItem = e.target.closest('.password-item');
-                const fromIndex = parseInt(draggedItem.dataset.index);
-                const toIndex = parseInt(dragOverItem.dataset.index);
-                
-                const [movedItem] = passwords.splice(fromIndex, 1);
-                passwords.splice(toIndex, 0, movedItem);
-                
-                renderPasswords(passwords);
-                
-                const item = e.target.closest('.password-item');
-                item.style.borderTop = '';
-                item.style.borderBottom = '';
-            }
-            if (draggedItem) {
-                draggedItem.classList.remove('dragging');
-                draggedItem = null;
-            }
-        });
+passwordListContainer.addEventListener('dragleave', (e) => {
+    if (e.target.closest('.password-item')) {
+        const item = e.target.closest('.password-item');
+        item.style.borderTop = '';
+        item.style.borderBottom = '';
+    }
+});
 
-        passwordListContainer.addEventListener('dragend', () => {
-            const allItems = document.querySelectorAll('.password-item');
-            allItems.forEach(item => {
-                item.classList.remove('dragging');
-                item.style.borderTop = '';
-                item.style.borderBottom = '';
-            });
+passwordListContainer.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (arrangeMode && e.target.closest('.password-item')) {
+        const dragOverItem = e.target.closest('.password-item');
+        const fromIndex = parseInt(draggedItem.dataset.index);
+        const toIndex = parseInt(dragOverItem.dataset.index);
+        
+        const [movedItem] = passwords.splice(fromIndex, 1);
+        passwords.splice(toIndex, 0, movedItem);
+        
+        renderPasswords(passwords);
+        
+        const item = e.target.closest('.password-item');
+        item.style.borderTop = '';
+        item.style.borderBottom = '';
+    }
+    if (draggedItem) {
+        draggedItem.classList.remove('dragging');
+        draggedItem = null;
+    }
+});
+
+passwordListContainer.addEventListener('dragend', () => {
+    const allItems = document.querySelectorAll('.password-item');
+    allItems.forEach(item => {
+        item.classList.remove('dragging');
+        item.style.borderTop = '';
+        item.style.borderBottom = '';
+    });
+    saveData();
+});
+
+// Touch Events Logic for Mobile
+let touchStartItem = null;
+let touchMoved = false;
+
+passwordListContainer.addEventListener('touchstart', (e) => {
+    if (arrangeMode && e.target.closest('.password-item')) {
+        e.preventDefault(); // Prevent default browser behavior (e.g., scrolling)
+        touchStartItem = e.target.closest('.password-item');
+        touchStartItem.classList.add('dragging');
+        touchMoved = false;
+    }
+}, { passive: false });
+
+passwordListContainer.addEventListener('touchmove', (e) => {
+    if (!arrangeMode || !touchStartItem) return;
+    e.preventDefault();
+    touchMoved = true;
+    
+    const touch = e.touches[0];
+    const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+    const dragOverItem = targetElement.closest('.password-item');
+
+    // Remove highlighting from all items
+    document.querySelectorAll('.password-item').forEach(item => {
+        item.style.borderTop = '';
+        item.style.borderBottom = '';
+    });
+
+    if (dragOverItem && dragOverItem !== touchStartItem) {
+        const bounding = dragOverItem.getBoundingClientRect();
+        const offset = bounding.y + bounding.height / 2;
+        if (touch.clientY > offset) {
+            dragOverItem.style.borderBottom = '2px solid orange';
+        } else {
+            dragOverItem.style.borderTop = '2px solid orange';
+        }
+    }
+}, { passive: false });
+
+passwordListContainer.addEventListener('touchend', (e) => {
+    if (!arrangeMode || !touchStartItem) return;
+
+    if (touchMoved) {
+        const lastTouch = e.changedTouches[0];
+        const targetElement = document.elementFromPoint(lastTouch.clientX, lastTouch.clientY);
+        const dragOverItem = targetElement.closest('.password-item');
+
+        if (dragOverItem && dragOverItem !== touchStartItem) {
+            const fromIndex = parseInt(touchStartItem.dataset.index);
+            const toIndex = parseInt(dragOverItem.dataset.index);
+            
+            const [movedItem] = passwords.splice(fromIndex, 1);
+            passwords.splice(toIndex, 0, movedItem);
+            
+            renderPasswords(passwords);
             saveData();
-        });
+        }
+    }
+
+    // Clean up
+    touchStartItem.classList.remove('dragging');
+    document.querySelectorAll('.password-item').forEach(item => {
+        item.style.borderTop = '';
+        item.style.borderBottom = '';
+    });
+    touchStartItem = null;
+    touchMoved = false;
+});
         
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
