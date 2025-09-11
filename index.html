@@ -220,22 +220,22 @@
 
     <!-- Header Navigation -->
     <header class="fixed top-0 left-0 w-full bg-transparent backdrop-blur-md p-4 flex justify-between items-center text-white z-50">
-        <div class="flex items-center space-x-2">
-            <img src="assets/favicon.png" alt="PassPro Logo" class="h-8 w-8">
-            <h1 class="text-xl font-bold text-white">PassPro</h1>
-        </div>
-        <nav class="hidden md:flex items-center space-x-4">
-            <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-            <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
-            <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
-            <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
-        </nav>
-        
-        <!-- Mobile Hamburger Menu Icon -->
-        <button id="hamburger-btn" class="text-white md:hidden focus:outline-none">
-            <i class="fas fa-bars text-2xl"></i>
-        </button>
-    </header>
+    <div class="flex items-center space-x-2">
+        <img src="assets/favicon.png" alt="PassPro Logo" class="h-8 w-8">
+        <h1 class="text-xl font-bold text-white">PassPro</h1>
+    </div>
+    <nav class="hidden md:flex items-center space-x-4">
+        <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.7.8</span>
+        <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
+        <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
+        <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
+    </nav>
+    
+    <button id="hamburger-btn" class="text-white md:hidden focus:outline-none">
+        <i class="fas fa-bars text-2xl"></i>
+    </button>
+</header>
 
     <!-- Mobile Navigation Menu -->
     <div id="mobile-nav-menu" class="fixed top-0 right-0 h-full w-2/3 bg-[#1A1A1A] text-white shadow-xl z-40 mobile-nav-menu p-6 md:hidden">
@@ -250,8 +250,9 @@
             <a href="#" class="nav-link block" data-page="user-profile-section">Settings</a>
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
-            <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-        </div>
+    <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.7.8</span>
+</div>
     </div>
 
     <main class="flex-grow w-full p-4 md:p-8 pt-24">
@@ -365,7 +366,7 @@
                     <p class="mt-1 text-gray-500">StadiaStudios | Mayonaise Production</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
-                    <a href="https://stadiastudios.github.io/Stadia/" id="terms-link" class="terms-link mt-2 text-white">StadiaStudios</a>
+                    <a href="https://stadiastudios.github.io/stadia/" id="terms-link" class="terms-link mt-2 text-white">StadiaStudios</a>
                     <a href="changelog.txt" id="terms-link" class="terms-link mt-2 text-white">ChangeLog</a>
                     <a href="notices.html" id="terms-link" class="terms-link mt-2 text-white">Notices</a>
                     </div>
@@ -432,7 +433,7 @@
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.6.5";
+        const APP_VERSION = "1.7.8";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
