@@ -40,7 +40,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: rgb(109, 109, 255);
+            background-color: white;
             transition: width 0.3s ease-in-out;
         }
         .nav-link:hover::after, .nav-link.active::after, .link-effect:hover::after, .link-effect.active::after, .password-url-link:hover::after, .password-url-link.active::after {
@@ -60,7 +60,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: rgb(109, 109, 255);
+            background-color: white;
             transition: width 0.3s ease-in-out;
         }
         .forgot-pin-link:hover::after {
@@ -88,7 +88,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: rgb(109, 109, 255);
+            background-color: white;
             transition: width 0.3s ease-in-out;
         }
         .terms-link:hover::after {
@@ -99,8 +99,8 @@
             cursor: grabbing;
         }
         .password-item.drag-over {
-            border: 2px solid orange;
-            box-shadow: 0 0 8px orange;
+            border: 2px solid rgb(255, 62, 62);
+            box-shadow: 0 0 8px rgb(255, 0, 0);
         }
         /* Custom scrollbar styles */
         ::-webkit-scrollbar {
@@ -143,7 +143,7 @@
         }
         /* Toggle Switch Styles */
         #pin-lock-toggle:checked ~ .block {
-            background-color: rgb(102, 102, 255); /* Orange background when checked */
+            background-color: rgb(255, 0, 0); /* Orange background when checked */
         }
         #pin-lock-toggle:checked ~ .dot {
             transform: translateX(100%);
@@ -208,12 +208,12 @@
     <div id="pin-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-75">
         <div class="bg-[#1A1A1A] p-8 rounded-lg shadow-xl max-w-md w-full mx-4 text-center text-white">
             <h2 id="pin-modal-title" class="text-2xl font-bold mb-4"></h2>
-            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-red-500">
             <!-- Incorrect PIN message element -->
-            <p id="pin-error-message" class="text-blue-500 text-sm mt-2 mb-4 hidden">Incorrect PIN. Please try again.</p>
-            <button id="pin-submit-btn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
+            <p id="pin-error-message" class="text-red-500 text-sm mt-2 mb-4 hidden">Incorrect PIN. Please try again.</p>
+            <button id="pin-submit-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
             <p class="mt-4 text-sm text-gray-400">
-                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-white hover:text-blue-400">Forgot PIN?</a>
+                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-[#888] hover:text-[white]">Forgot PIN?</a>
             </p>
         </div>
     </div>
@@ -262,15 +262,15 @@
         <section id="dashboard-section" class="page-section hidden h-screen">
     <div class="text-white">
         <h2 class="text-3xl font-bold mb-4">Welcome to PassPro Dashboard!</h2>
-        <p class="text-lg text-secondary">Your secure and customizable password manager.</p>
+        <p style="color: #999;" class="text-lg text-secondary">Your secure and customizable password manager.</p>
         <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="text-white">
                 <h3 class="text-xl font-semibold mb-2 text-white-500">Quick Actions</h3>
                 <ul class="space-y-2 text-secondary">
-                    <li><button class="text-white-800 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
-                    <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
-                    <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
-                    <li><button class="text-white-80 hover:text-blue-500 transition-colors duration-200 link-effect" id="go-to-import-account">Import Account</button></li>
+                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
+                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
+                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
+                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-import-account">Import Account</button></li>
                 </ul>
             </div>
             <div class="text-white">
@@ -315,7 +315,7 @@
                 <div class="w-full max-w-2xl mx-auto space-y-8 flex-grow">
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-500">User Settings</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-red-500">User Settings</h3>
                         <div>
                             <label for="username-input" class="block text-sm font-medium text-secondary mb-1">Username</label>
                             <input type="text" id="username-input" class="input-field w-full p-3 rounded-lg" placeholder="Enter your username">
@@ -323,7 +323,7 @@
                     </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Security Settings</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-red-500">Security Settings</h3>
                         <div class="flex items-center justify-between">
                             <label for="pin-lock-toggle" class="flex items-center cursor-pointer">
                                 <div class="relative">
@@ -337,7 +337,7 @@
                     </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Data Management</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-red-500">Data Management</h3>
                         <div class="space-y-4">
                             <button id="download-account-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                                 Download Account
@@ -352,7 +352,7 @@
                     </div>
 
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Local Storage</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-red-500">Local Storage</h3>
                         <p class="text-secondary mb-4">Storage Used: <span id="storage-size">0 KB</span></p>
                         <button id="clear-cache-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                             Clear Cache
@@ -401,7 +401,7 @@
                     </div>
                     <div class="flex justify-end space-x-4">
                         <button type="button" id="password-modal-cancel" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save</button>
+                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save</button>
                     </div>
                 </form>
             </div>
