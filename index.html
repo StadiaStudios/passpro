@@ -112,11 +112,11 @@
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgb(123, 123, 255);
+            background: rgb(207, 207, 207);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: blue;
+            background: rgb(83, 83, 83);
         }
         .custom-file-input::-webkit-file-upload-button {
             visibility: hidden;
@@ -149,9 +149,7 @@
             transform: translateX(100%);
         }
         header {
-        background-color: rgba(17, 17, 17, 0.5); /* Semi-transparent dark */
-        backdrop-filter: blur(12px); /* Blur effect */
-        -webkit-backdrop-filter: blur(12px); /* Safari support */
+            background-color: #111; /* Solid dark background */
         }
         /* Mobile Nav Specific Styles */
         .mobile-nav-menu {
@@ -219,14 +217,14 @@
     </div>
 
     <!-- Header Navigation -->
-    <header class="fixed top-0 left-0 w-full bg-transparent backdrop-blur-md p-4 flex justify-between items-center text-white z-50">
+    <header class="fixed top-0 left-0 w-full p-4 flex justify-between items-center text-white z-50">
     <div class="flex items-center space-x-2">
         <img src="assets/favicon.png" alt="PassPro Logo" class="h-8 w-8">
         <h1 class="text-xl font-bold text-white">PassPro</h1>
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.8.9</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.9.10</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -238,7 +236,7 @@
 </header>
 
     <!-- Mobile Navigation Menu -->
-    <div id="mobile-nav-menu" class="fixed top-0 right-0 h-full w-2/3 bg-[#1A1A1A] text-white shadow-xl z-40 mobile-nav-menu p-6 md:hidden">
+    <div id="mobile-nav-menu" class="fixed top-0 right-0 h-full w-2/3 bg-[#111] text-white shadow-xl z-40 mobile-nav-menu p-6 md:hidden">
         <div class="flex justify-end mb-6">
             <button id="close-mobile-nav" class="text-white focus:outline-none">
                 <i class="fas fa-times text-2xl"></i>
@@ -251,7 +249,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.8.9</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.9.10</span>
 </div>
     </div>
 
@@ -284,6 +282,15 @@
                 <h3 class="text-xl font-semibold mb-2 text-white-500">Glad You're Back!</h3>
                 <p class="text-secondary">Welcome! <span id="dashboard-username"></span>,</p>
             </div>
+        </div>
+
+        <!-- GameDrive Announcement Section -->
+        <div class="mt-8 bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
+            <h3 class="text-2xl font-bold text-blue-500 mb-3">GameDrive Announcement!</h3>
+            <p class="text-secondary mb-4">From the creators of PassPro, discover GameDrive - One of the simplest ways to Backup your save game files with nothing needed. Learn More and Start using GameDrive today below</p>
+            <a href="https://stadiastudios.github.io/gamedrive/" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
+                Learn More
+            </a>
         </div>
     </div>
 </section>
@@ -342,8 +349,8 @@
                             <button id="download-account-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                                 Download Account
                             </button>
-                            <div class="relative">
-                                <button id="import-account-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                            <div class="relative group">
+                                <button id="import-account-btn" class="w-full bg-[#222] group-hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                                     Import Account
                                 </button>
                                 <input type="file" id="import-file-input" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
@@ -353,8 +360,13 @@
 
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
                         <h3 class="text-xl font-semibold mb-4 text-blue-500">Local Storage</h3>
-                        <p class="text-secondary mb-4">Storage Used: <span id="storage-size">0 KB</span></p>
-                        <button id="clear-cache-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                        <div class="mb-4">
+                            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-2">
+                                <div id="storage-progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p class="text-secondary text-sm">Storage Used: <span id="storage-size">0 KB / 5 MB</span></p>
+                        </div>
+                        <button id="clear-cache-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 mt-4">
                             Clear Cache
                         </button>
                     </div>
@@ -362,7 +374,7 @@
                 </div>
                 <!-- App Version Display -->
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.5.4</span></p>
+                    <p>App Version: <span id="app-version">1.9.10</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios | Mayonaise Production</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
@@ -433,7 +445,7 @@
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.8.9";
+        const APP_VERSION = "1.9.10";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
@@ -479,6 +491,7 @@
         const pinModalTitle = document.getElementById('pin-modal-title');
         const storageSizeSpan = document.getElementById('storage-size');
         const clearCacheBtn = document.getElementById('clear-cache-btn');
+        const storageProgressBar = document.getElementById('storage-progress-bar');
         
         // Added caching for the Glad You're Back section
         const gladYoureBackSection = document.querySelector('#dashboard-section > div > div > div:last-child');
@@ -619,12 +632,18 @@ function getDeviceInfo() {
         }
 
         function updateStorageInfo() {
+            const MAX_STORAGE_BYTES = 5 * 1024 * 1024; // 5MB limit
             let totalBytes = 0;
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
                 totalBytes += key.length + (localStorage.getItem(key) || '').length;
             }
 
+            // Calculate percentage for the progress bar
+            const percentageUsed = Math.min((totalBytes / MAX_STORAGE_BYTES) * 100, 100);
+            storageProgressBar.style.width = `${percentageUsed}%`;
+
+            // Format the used storage for display
             const units = ['Bytes', 'KB', 'MB', 'GB'];
             let size = totalBytes;
             let unitIndex = 0;
@@ -632,9 +651,10 @@ function getDeviceInfo() {
                 size /= 1024;
                 unitIndex++;
             }
-            storageSizeSpan.textContent = `${size.toFixed(2)} ${units[unitIndex]}`;
+            const usedStorageText = `${size.toFixed(2)} ${units[unitIndex]}`;
+            
+            storageSizeSpan.textContent = `${usedStorageText} / 5 MB`;
         }
-
 
         function renderPasswords(passwordList) {
             passwordListContainer.innerHTML = '';
