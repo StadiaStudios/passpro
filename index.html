@@ -22,7 +22,7 @@
             transition: background-color 0.3s ease;
         }
         body.dark-mode {
-            background-color: #111;
+            background-image: linear-gradient(rgb(24, 24, 24), rgb(30, 1, 39));
         }
         .nav-link, .link-effect, .password-url-link {
             position: relative;
@@ -40,7 +40,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: white;
+            background-color: orange;
             transition: width 0.3s ease-in-out;
         }
         .nav-link:hover::after, .nav-link.active::after, .link-effect:hover::after, .link-effect.active::after, .password-url-link:hover::after, .password-url-link.active::after {
@@ -60,7 +60,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: white;
+            background-color: orange;
             transition: width 0.3s ease-in-out;
         }
         .forgot-pin-link:hover::after {
@@ -88,7 +88,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: white;
+            background-color: orange;
             transition: width 0.3s ease-in-out;
         }
         .terms-link:hover::after {
@@ -149,7 +149,7 @@
             transform: translateX(100%);
         }
         header {
-            background-color: #111; /* Solid dark background */
+            background-image: linear-gradient(rgb(30, 1, 39), rgb(24, 24, 24))
         }
         /* Mobile Nav Specific Styles */
         .mobile-nav-menu {
@@ -283,10 +283,11 @@
         </div>
 
         <!-- GameDrive Announcement Section -->
-        <div class="mt-8 bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-            <h3 class="text-2xl font-bold text-blue-500 mb-3">GameDrive Announcement!</h3>
+        <div class="mt-8 bg-[#222] p-6 shadow-xl">
+            <img style="width:90px;" src="assets/gamedrive.png"></img><br>
+            <h3 class="text-2xl font-bold text-[white] mb-3">GameDrive Out Now!</h3>
             <p class="text-secondary mb-4">From the creators of PassPro, discover GameDrive - One of the simplest ways to Backup your save game files with nothing needed. Learn More and Start using GameDrive today below</p>
-            <a href="https://stadiastudios.github.io/gamedrive/" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
+            <a href="https://stadiastudios.github.io/stadia/webapp/gamedrive/" target="_blank" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
                 Learn More
             </a>
         </div>
