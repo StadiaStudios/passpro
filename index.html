@@ -22,7 +22,7 @@
             transition: background-color 0.3s ease;
         }
         body.dark-mode {
-            background-image: linear-gradient(black, black);
+            background-image: linear-gradient(#111);
         }
         .nav-link, .link-effect, .password-url-link {
             position: relative;
@@ -40,7 +40,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(0, 140, 255);
             transition: width 0.3s ease-in-out;
         }
         .nav-link:hover::after, .nav-link.active::after, .link-effect:hover::after, .link-effect.active::after, .password-url-link:hover::after, .password-url-link.active::after {
@@ -60,7 +60,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(35, 149, 255);
             transition: width 0.3s ease-in-out;
         }
         .forgot-pin-link:hover::after {
@@ -88,7 +88,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(35, 149, 255);
             transition: width 0.3s ease-in-out;
         }
         .terms-link:hover::after {
@@ -149,7 +149,7 @@
             transform: translateX(100%);
         }
         header {
-            background-image: linear-gradient(rgb(30, 1, 39), black)
+            background-color: #222;
         }
         /* Mobile Nav Specific Styles */
         .mobile-nav-menu {
@@ -190,7 +190,7 @@
 
     <!-- Custom Modal for Messages -->
     <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-        <div class="bg-[#2A2A2A] p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center text-white">
+        <div class="bg-[#111] p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center text-white">
             <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
             <p id="modal-message" class="text-gray-300 mb-4"></p>
             <div id="modal-buttons" class="flex justify-center space-x-4">
@@ -222,7 +222,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.9.10</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.10.11</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -247,7 +247,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.9.10</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.10.11</span>
 </div>
     </div>
 
@@ -256,7 +256,7 @@
 
         <!-- Dashboard Section -->
         <section id="dashboard-section" class="page-section hidden h-screen">
-    <div class="text-white"><br>
+    <div class="text-white"><br><br>
         <h2 class="text-3xl font-bold mb-4">Welcome to PassPro Dashboard!</h2>
         <p style="color: #999;" class="text-lg text-secondary">Your secure and customizable password manager.</p>
         <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -285,10 +285,10 @@
         <!-- GameDrive Announcement Section -->
         <div class="mt-8 bg-[#222] p-6 shadow-xl">
             <img style="width:90px;" src="assets/gamedrive.png"></img><br>
-            <h3 class="text-2xl font-bold text-[white] mb-3">GameDrive Out Now!</h3>
-            <p class="text-secondary mb-4">From the creators of PassPro, discover GameDrive - One of the simplest ways to Backup your save game files with nothing needed. Learn More and Start using GameDrive today below</p>
-            <a href="https://stadiastudios.github.io/stadia/webapp/gamedrive/" target="_blank" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
-                Learn More
+            <h3 class="text-2xl font-bold text-[white] mb-3">JetSurfers 2 Out Now!</h3>
+            <p class="text-secondary mb-4">JetSurfers 2: Collect coins, use HeadStarts for instant speed, and activate Shields to survive longer. The skies are waiting. Can you handle the speed?</p>
+            <a href="https://stadiastudios.github.io/JetSurfers2/" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
+                Play Now in Browser
             </a>
         </div>
     </div>
@@ -373,7 +373,7 @@
                 </div>
                 <!-- App Version Display -->
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.9.10</span></p>
+                    <p>App Version: <span id="app-version">1.10.11</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios | Mayonaise Production</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
@@ -387,7 +387,7 @@
         
         <!-- Add/Edit Password Modal -->
         <div id="password-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-75 p-4">
-            <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl max-w-lg w-full text-white">
+            <div class="bg-[#111] p-6 rounded-lg shadow-xl max-w-lg w-full text-white">
                 <h2 id="password-modal-title" class="text-2xl font-bold mb-4">Add Password</h2>
                 <form id="password-form" class="space-y-4">
                     <div>
@@ -420,7 +420,7 @@
         
         <!-- Profile Details Modal -->
         <div id="profile-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-75 p-4">
-            <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl max-w-md w-full text-white">
+            <div class="bg-[#111] p-6 rounded-lg shadow-xl max-w-md w-full text-white">
                 <h2 id="profile-title" class="text-2xl font-bold mb-4"></h2>
                 <div id="profile-details-content" class="text-secondary text-base space-y-2">
                     <!-- Details will be injected here -->
@@ -444,7 +444,7 @@
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.9.10";
+        const APP_VERSION = "1.10.11";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
@@ -787,14 +787,14 @@ if (pin) {
                 const index = e.target.closest('.view-btn').dataset.index;
                 const item = passwords[index];
                 profileTitle.textContent = item.title;
-                
-                const urlHtml = item.url ? `<a href="${item.url}" target="_blank" class="text-white-800 password-url-link break-words">${item.url}</a>` : 'N/A';
+
+                const urlHtml = item.url ? `<a href="${item.url}" target="_blank" class="text-white-800 password-url-link" style="word-break: break-all;">${item.url}</a>` : 'N/A';
                 
                 profileDetailsContent.innerHTML = `
-                    <p><strong class="text-blue-500">Username:</strong> ${item.username}</p>
-                    <p><strong class="text-blue-500">Password:</strong> <span id="displayed-password">${item.password}</span></p>
-                    <p><strong class="text-blue-500">URL:</strong> ${urlHtml}</p>
-                    <p><strong class="text-blue-500">Notes:</strong> ${item.notes || 'N/A'}</p>
+                    <p class="break-words"><strong class="text-blue-500">Username:</strong> ${item.username}</p>
+                    <p class="break-words"><strong class="text-blue-500">Password:</strong> <span id="displayed-password">${item.password}</span></p>
+                    <p class="break-words"><strong class="text-blue-500">URL:</strong> ${urlHtml}</p>
+                    <p class="break-words"><strong class="text-blue-500">Notes:</strong> ${item.notes || 'N/A'}</p>
                     <button id="copy-password" class="mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">Copy Password</button>
                 `;
                 document.getElementById('copy-password').addEventListener('click', () => {
@@ -1145,6 +1145,3 @@ document.getElementById('loading-screen').remove();
 
 </body>
 </html>
-
-
-

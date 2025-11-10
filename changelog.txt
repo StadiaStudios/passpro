@@ -1,3 +1,7 @@
+V1.10.11
+----------
+Brings back classic dark and blue theme. Bug Fixes to Modals, 
+
 V1.9.10
 ----------
 NavBar is now black, New app icon, Minor Bug Fixes, Settings updates, GameDrive announcment banner in dashboard.
