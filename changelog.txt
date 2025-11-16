@@ -1,3 +1,7 @@
+V1.11.12
+----------
+Christmas icon, Reverts Blue theme to Orange Theme, Search bar bug fixes
+
 V1.10.11
 ----------
 Brings back classic dark and blue theme. Bug Fixes to Modals, 
