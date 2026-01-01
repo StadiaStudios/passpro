@@ -3,150 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot PIN</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <title>Forgot PIN - Secure Access</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.png">
     
     <!-- PWA meta tags -->
-    <meta name="theme-color" content="#111"/>
-    <link rel="apple-touch-icon" href="assets/favicon.png">
-    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0a"/>
+    <link rel="apple-touch-icon" href="../assets/favicon.png">
+    <link rel="manifest" href="../manifest.json">
     
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111;
-            color: #ccc;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --bg-main: #0a0a0a;
+            --surface: #111111;
+            --border: #222222;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --accent: #3b82f6;
         }
 
-        /* Cool underline effect for links */
-        .cool-underline {
-            position: relative;
-            text-decoration: none;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-secondary);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-        .cool-underline::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+
+        .action-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .action-card:hover {
+            border-color: #333;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger-outline {
+            border: 1px solid #451a1a;
+            color: #f87171;
+            transition: all 0.2s ease;
+        }
+
+        .btn-danger-outline:hover {
+            background-color: #451a1a;
+            color: #ffffff;
+        }
+
+        .gradient-blur {
+            position: fixed;
+            top: 0;
             left: 0;
-            background-color: currentColor;
-            transition: width 0.3s ease-out;
-        }
-        .cool-underline:hover::after {
-            width: 100%;
+            right: 0;
+            height: 300px;
+            background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen items-center justify-center p-4 dark-mode">
+<body class="min-h-screen flex flex-col">
+    <div class="gradient-blur"></div>
 
-    <div class="max-w-xl w-full p-8 space-y-6 bg-[#222] rounded-3xl shadow-lg border border-[#333]">
-        <h1 class="text-3xl font-bold text-center text-white-500">Forgot Your PIN?</h1>
-        <div class="space-y-4 text-center">
-            <p class="text-gray-400">
-                Unfortunately, your PIN is stored locally on your device and cannot be recovered or reset by us. This is a security feature to ensure your passwords remain private.
-            </p>
-        </div>
-
-        <div class="space-y-4">
-            <div class="p-4 bg-[#333] rounded-2xl">
-                <h2 class="text-xl font-semibold text-white mb-2">Tips to Remember Your PIN:</h2>
-                <ul class="list-disc list-inside space-y-1 text-gray-400">
-                    <li>Try a common number sequence you often use.</li>
-                    <li>Consider important dates or years that you might use</li>
-                    <li>Think about when you first set up the app and what number was on your mind.</li>
-                </ul>
-            </div>
-
-            <div class="p-4 bg-[#333] rounded-2xl">
-                <h2 class="text-xl font-semibold text-white mb-2">Account Recovery:</h2>
-                <p class="text-gray-400">
-                    If you have previously downloaded your account backup file, you can 
-                    <a href="#" id="import-link" class="text-[white] cool-underline">re-import your data</a> 
-                    after resetting the app. Make sure you have a Backup somewhere.
+    <!-- Main Content -->
+    <main class="relative z-10 flex-grow flex flex-col items-center py-12 px-6">
+        
+        <!-- Center Column -->
+        <div class="max-w-2xl w-full space-y-12">
+            
+            <!-- Header Section -->
+            <header class="text-center space-y-4">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 mb-2">
+                    <i data-lucide="shield-alert" class="text-blue-500 w-8 h-8"></i>
+                </div>
+                <h1 class="text-4xl font-bold text-white tracking-tight">Access Recovery</h1>
+                <p class="text-lg text-neutral-400 max-w-lg mx-auto leading-relaxed">
+                    Your security is our priority. Because your PIN is encrypted locally, we cannot reset it for you. Please review the recovery options below.
                 </p>
-                <input type="file" id="import-file" accept=".json" class="hidden">
-                <p id="import-message" class="mt-2 text-center text-sm text-green-400 hidden"></p>
-            </div>
+            </header>
 
-            <div class="p-4 bg-[#333] rounded-2xl">
-                <h2 class="text-xl font-semibold text-white mb-2">Reset Data:</h2>
-                <p class="text-gray-400">
-                    If you cannot remember your PIN, you can reset all your data by clearing your browser's site data.
-                </p>
-                <div class="mt-4">
-                    <button id="reset-button" class="w-full px-6 py-3 bg-[#222] hover:bg-[#444] text-white font-semibold rounded-2xl transition-colors duration-200 shadow-md">
-                        Clear Site Data
-                    </button>
-                    <p id="reset-message" class="mt-2 text-center text-sm text-yellow-400 hidden"></p>
+            <!-- Content Grid -->
+            <div class="grid gap-6">
+                
+                <!-- Tips -->
+                <section class="action-card p-8 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-2 rounded-lg bg-amber-500/10">
+                            <i data-lucide="lightbulb" class="text-amber-400 w-5 h-5"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold text-white">Troubleshooting Tips</h2>
+                    </div>
+                    <ul class="grid sm:grid-cols-2 gap-4 text-sm">
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
+                            <span class="text-amber-500 font-bold">01</span>
+                            Check for common digit patterns or dates of birth.
+                        </li>
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
+                            <span class="text-amber-500 font-bold">02</span>
+                            Recall pins used for other legacy applications.
+                        </li>
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
+                            <span class="text-amber-500 font-bold">03</span>
+                            Check if you wrote it down in a secure physical location.
+                        </li>
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/5">
+                            <span class="text-amber-500 font-bold">04</span>
+                            Consider digits related to the device setup date.
+                        </li>
+                    </ul>
+                </section>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Backup Recovery -->
+                    <section class="action-card p-8 rounded-2xl flex flex-col">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-2 rounded-lg bg-blue-500/10">
+                                <i data-lucide="upload-cloud" class="text-blue-400 w-5 h-5"></i>
+                            </div>
+                            <h2 class="text-lg font-semibold text-white">Restore Backup</h2>
+                        </div>
+                        <p class="text-sm mb-8 flex-grow">
+                            Use a previously exported JSON backup file to restore your data and set a new PIN.
+                        </p>
+                        <button id="import-trigger" class="w-full py-3 px-4 bg-white text-black font-semibold rounded-xl hover:bg-neutral-200 transition-colors">
+                            Upload .json Backup
+                        </button>
+                        <input type="file" id="import-file" accept=".json" class="hidden">
+                        <p id="import-message" class="mt-4 text-center text-xs font-medium hidden"></p>
+                    </section>
+
+                    <!-- Reset -->
+                    <section class="action-card p-8 rounded-2xl border-red-900/20 flex flex-col">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-2 rounded-lg bg-red-500/10">
+                                <i data-lucide="trash-2" class="text-red-500 w-5 h-5"></i>
+                            </div>
+                            <h2 class="text-lg font-semibold text-red-500">Wipe Data</h2>
+                        </div>
+                        <p class="text-sm mb-8 flex-grow">
+                            If recovery is impossible, you must clear all local storage to start over. This deletes everything.
+                        </p>
+                        <button id="reset-button" class="w-full py-3 px-4 btn-danger-outline font-semibold rounded-xl">
+                            Clear Site Data
+                        </button>
+                        <p id="reset-message" class="mt-4 text-center text-xs text-red-400 font-medium hidden"></p>
+                    </section>
                 </div>
             </div>
-        </div>
 
-        <div class="mt-6 text-center text-white-400">
-            <a href="../index.html" class="text-white-500 cool-underline">Return to Login</a>
+            <!-- Footer Navigation -->
+            <footer class="text-center pt-8 border-t border-white/5">
+                <a href="../index.html" class="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-all group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 transition-transform group-hover:-translate-x-1"></i>
+                    <span class="font-medium">Return to Login</span>
+                </a>
+            </footer>
         </div>
-    </div>
+    </main>
+
     <script>
+        lucide.createIcons();
+
+        // Reset functionality
         document.getElementById('reset-button').addEventListener('click', () => {
             const messageElement = document.getElementById('reset-message');
             try {
-                if (navigator.storage && navigator.storage.estimate) {
-                    navigator.storage.estimate().then(estimate => {
-                        console.log(`Clearing ${estimate.usage} bytes of storage...`);
-                    });
-                }
                 localStorage.clear();
                 indexedDB.deleteDatabase("firebaseLocalStorageDb");
-                messageElement.textContent = "Data has been cleared. Please reload the page.";
+                messageElement.textContent = "Data cleared. Restarting session...";
                 messageElement.classList.remove('hidden');
-                setTimeout(() => {
-                    location.reload();
-                }, 1000);
-
+                setTimeout(() => location.reload(), 1200);
             } catch (e) {
-                messageElement.textContent = "Could not clear data. Please follow the manual instructions below.";
+                messageElement.textContent = "Error: Please clear browser storage manually.";
                 messageElement.classList.remove('hidden');
             }
         });
 
-        document.getElementById('import-link').addEventListener('click', (e) => {
-            e.preventDefault();
+        // Import functionality
+        document.getElementById('import-trigger').addEventListener('click', () => {
             document.getElementById('import-file').click();
         });
 
         document.getElementById('import-file').addEventListener('change', (event) => {
             const file = event.target.files[0];
             const messageElement = document.getElementById('import-message');
-
-            if (!file) {
-                return;
-            }
+            if (!file) return;
 
             const reader = new FileReader();
             reader.onload = (e) => {
                 try {
                     const data = JSON.parse(e.target.result);
-                    // Assuming the backup file is a JSON object with keys like 'username', 'passwords', 'pin', etc.
                     for (const key in data) {
                         if (Object.prototype.hasOwnProperty.call(data, key)) {
                             localStorage.setItem(key, JSON.stringify(data[key]));
                         }
                     }
-                    messageElement.textContent = "Backup file imported successfully! Please reload the page.";
+                    messageElement.textContent = "Data restored. Redirecting...";
                     messageElement.classList.remove('hidden', 'text-red-400');
                     messageElement.classList.add('text-green-400');
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
+                    setTimeout(() => location.reload(), 1500);
                 } catch (error) {
-                    console.error("Failed to parse or import backup file:", error);
-                    messageElement.textContent = "Invalid backup file. Please try again.";
+                    messageElement.textContent = "Invalid backup format.";
                     messageElement.classList.remove('hidden', 'text-green-400');
                     messageElement.classList.add('text-red-400');
                 }
