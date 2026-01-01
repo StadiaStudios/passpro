@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PassPro - A Simple Password Manager By StadiaStudios</title>
-    <script src="snowfall_effect.js"></script>
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
     
     <!-- PWA meta tags and manifest file -->
@@ -41,7 +40,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(0, 140, 255);
             transition: width 0.3s ease-in-out;
         }
         .nav-link:hover::after, .nav-link.active::after, .link-effect:hover::after, .link-effect.active::after, .password-url-link:hover::after, .password-url-link.active::after {
@@ -61,7 +60,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(0, 140, 255);
             transition: width 0.3s ease-in-out;
         }
         .forgot-pin-link:hover::after {
@@ -89,7 +88,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: orange;
+            background-color: rgb(0, 140, 255);
             transition: width 0.3s ease-in-out;
         }
         .terms-link:hover::after {
@@ -144,7 +143,7 @@
         }
         /* Toggle Switch Styles */
         #pin-lock-toggle:checked ~ .block {
-            background-color: orange; /* Blue background when checked */
+            background-color: rgb(0, 140, 255); /* Blue background when checked */
         }
         #pin-lock-toggle:checked ~ .dot {
             transform: translateX(100%);
@@ -195,7 +194,7 @@
             <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
             <p id="modal-message" class="text-gray-300 mb-4"></p>
             <div id="modal-buttons" class="flex justify-center space-x-4">
-                <button id="modal-ok-btn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">OK</button>
+                <button id="modal-ok-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">OK</button>
                 <button id="modal-cancel-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
             </div>
         </div>
@@ -205,12 +204,12 @@
     <div id="pin-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-75">
         <div class="bg-[#1A1A1A] p-8 rounded-lg shadow-xl max-w-md w-full mx-4 text-center text-white">
             <h2 id="pin-modal-title" class="text-2xl font-bold mb-4"></h2>
-            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <!-- Incorrect PIN message element -->
             <p id="pin-error-message" class="text-red-500 text-sm mt-2 mb-4 hidden">Incorrect PIN. Please try again.</p>
-            <button id="pin-submit-btn" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
+            <button id="pin-submit-btn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
             <p class="mt-4 text-sm text-gray-400">
-                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-[#888] hover:text-[orange]">Forgot PIN?</a>
+                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-[#888] hover:text-[#90D5FF]">Forgot PIN?</a>
             </p>
         </div>
     </div>
@@ -223,7 +222,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.11.12</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.12.12</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -248,7 +247,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.11.12</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.12.12</span>
 </div>
     </div>
 
@@ -262,35 +261,29 @@
         <p style="color: #999;" class="text-lg text-secondary">Your secure and customizable password manager.</p>
         <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="text-white">
-                <h3 class="text-xl font-semibold mb-2 text-white-500">Quick Actions</h3>
+                <h3 class="text-xl font-semibold mb-2 text-white-500">Quick Access 🔐</h3>
                 <ul class="space-y-2 text-secondary">
-                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
-                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
-                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
+                    <li><button class="text-[#999] hover:text-[#90D5FF] transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
+                    <li><button class="text-[#999] hover:text-[#90D5FF] transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
+                    <li><button class="text-[#999] hover:text-[#90D5FF] transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li><hr>
                     <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-import-account">Import Account</button></li>
+                    <li><a href="https://stadiastudios.github.io/stadia/"><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect">Official Website</button></a></li>
                 </ul>
             </div>
             <div class="text-white">
-                <h3 class="text-xl font-semibold mb-2 text-white-500">Local Data</h3>
+                <h3 class="text-xl font-semibold mb-2 text-white-500">Local Data 🗂️</h3>
                 <p class="text-secondary">Total Passwords: <span id="total-passwords">0</span></p>
                 <p class="text-secondary">Last Sync: <span id="last-sync">N/A</span></p>
                 <p class="text-secondary">Username: <span id="display-username"></span></p>
                 <p class="text-secondary">Device: <span id="device-info"></span></p>
             </div>
             <div class="text-white">
-                <h3 class="text-xl font-semibold mb-2 text-white-500">Glad You're Back!</h3>
+                <h3 class="text-xl font-semibold mb-2 text-white-500">Glad You're Back! 👋</h3>
                 <p class="text-secondary">Welcome! <span id="dashboard-username"></span>,</p>
             </div>
-        </div>
-
-        <!-- GameDrive Announcement Section -->
-        <div class="mt-8 bg-[#222] p-6 shadow-xl">
-            <img style="width:90px;" src="assets/gamedrive.png"></img><br>
-            <h3 class="text-2xl font-bold text-[white] mb-3">JetSurfers 2 Out Now!</h3>
-            <p class="text-secondary mb-4">JetSurfers 2: Collect coins, use HeadStarts for instant speed, and activate Shields to survive longer. The skies are waiting. Can you handle the speed?</p>
-            <a href="https://stadiastudios.github.io/JetSurfers2/" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
-                Play Now in Browser
-            </a>
+        </div><br>
+        <div style="text-align:center;">
+        <h1>Improvements since last time! Welcome to the first official update after our First Christmas! </h1>
         </div>
     </div>
 </section>
@@ -301,7 +294,7 @@
                 <h2 class="text-3xl font-bold mb-6">My Passwords</h2>
                 <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
                     <input type="text" id="search-input" placeholder="Search passwords..." class="input-field flex-grow p-3 rounded-lg">
-                    <button id="add-password-btn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                    <button id="add-password-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                         <i class="fas fa-plus-circle mr-2"></i> Add Password
                     </button>
                     <button id="arrange-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
@@ -317,12 +310,12 @@
         <!-- User Profile Section -->
         <section id="user-profile-section" class="page-section hidden max-w-4xl mx-auto">
             <div class="p-6 text-white w-full h-full flex flex-col items-center"><br>
-                <h2 class="text-3xl font-bold mb-6 text-center">Settings</h2>
+                <h2 class="text-3xl font-bold mb-6 text-center">⚙️Settings⚙️</h2>
                 <span id="premium-badge" class="hidden bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">PRO</span>
                 <div class="w-full max-w-2xl mx-auto space-y-8 flex-grow">
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-orange-500">User Settings</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-500">User Settings</h3>
                         <div>
                             <label for="username-input" class="block text-sm font-medium text-secondary mb-1">Username</label>
                             <input type="text" id="username-input" class="input-field w-full p-3 rounded-lg" placeholder="Enter your username">
@@ -330,7 +323,7 @@
                     </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Security Settings</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Security Settings</h3>
                         <div class="flex items-center justify-between">
                             <label for="pin-lock-toggle" class="flex items-center cursor-pointer">
                                 <div class="relative">
@@ -344,7 +337,7 @@
                     </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Data Management</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Data Management</h3>
                         <div class="space-y-4">
                             <button id="download-account-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                                 Download Account
@@ -359,10 +352,10 @@
                     </div>
 
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-orange-500">Local Storage</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Local Storage</h3>
                         <div class="mb-4">
                             <div class="w-full bg-gray-700 rounded-full h-2.5 mb-2">
-                                <div id="storage-progress-bar" class="bg-orange-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                <div id="storage-progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
                             </div>
                             <p class="text-secondary text-sm">Storage Used: <span id="storage-size">0 KB / 5 MB</span></p>
                         </div>
@@ -374,13 +367,13 @@
                 </div>
                 <!-- App Version Display -->
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.11.12</span></p>
+                    <p>App Version: <span id="app-version">1.12.12</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios | Mayonaise Production</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
+                    <a href="changelog.txt" id="terms-link" class="terms-link mt-2 text-white">Changelog</a>
+                    <a href="https://yaktenz.github.io/mayonaise.gg/" id="terms-link" class="terms-link mt-2 text-white">mayonaise.gg</a>
                     <a href="https://stadiastudios.github.io/stadia/" id="terms-link" class="terms-link mt-2 text-white">StadiaStudios</a>
-                    <a href="changelog.txt" id="terms-link" class="terms-link mt-2 text-white">ChangeLog</a>
-                    <a href="notices.html" id="terms-link" class="terms-link mt-2 text-white">Notices</a>
                     </div>
                 </div>
             </div>
@@ -446,7 +439,7 @@
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.11.12";
+        const APP_VERSION = "1.12.12";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
@@ -615,7 +608,7 @@ function getDeviceInfo() {
             const block = pinLockToggle.nextElementSibling;
             const dot = block.nextElementSibling;
             if (pinLockToggle.checked) {
-                block.classList.add('bg-orange-500');
+                block.classList.add('bg-blue-500');
                 block.classList.remove('bg-gray-600');
                 dot.classList.add('transform', 'translate-x-full');
             } else {

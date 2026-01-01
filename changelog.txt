@@ -1,3 +1,7 @@
+V1.12.12
+----------
+Theme Back to normal, Removed Snowfall effect, Reverted Icon, Website Link In Dashboard, Removed Ads, Bug Fixes, Forgot-Pin.html updated. UI Improvements. Emojis to make the app feel more alive.
+
 V1.11.12
 ----------
 Christmas icon, Reverts Blue theme to Orange Theme, Search bar bug fixes
