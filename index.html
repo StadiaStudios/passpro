@@ -222,7 +222,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.12.12</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.13.12</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -247,7 +247,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.12.12</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.13.12</span>
 </div>
     </div>
 
@@ -263,9 +263,9 @@
             <div class="text-white">
                 <h3 class="text-xl font-semibold mb-2 text-white-500">Quick Access 🔐</h3>
                 <ul class="space-y-2 text-secondary">
-                    <li><button class="text-[#999] hover:text-[#90D5FF] transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
-                    <li><button class="text-[#999] hover:text-[#90D5FF] transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
-                    <li><button class="text-[#999] hover:text-[#90D5FF] transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li><hr>
+                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-add-password">Add a new password</button></li>
+                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
+                    <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
                     <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-import-account">Import Account</button></li>
                     <li><a href="https://stadiastudios.github.io/stadia/"><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect">Official Website</button></a></li>
                 </ul>
@@ -281,9 +281,6 @@
                 <h3 class="text-xl font-semibold mb-2 text-white-500">Glad You're Back! 👋</h3>
                 <p class="text-secondary">Welcome! <span id="dashboard-username"></span>,</p>
             </div>
-        </div><br>
-        <div style="text-align:center;">
-        <h1>Improvements since last time! Welcome to the first official update after our First Christmas! </h1>
         </div>
     </div>
 </section>
@@ -310,7 +307,7 @@
         <!-- User Profile Section -->
         <section id="user-profile-section" class="page-section hidden max-w-4xl mx-auto">
             <div class="p-6 text-white w-full h-full flex flex-col items-center"><br>
-                <h2 class="text-3xl font-bold mb-6 text-center">⚙️Settings⚙️</h2>
+                <h2 class="text-3xl font-bold mb-6 text-center">Settings</h2>
                 <span id="premium-badge" class="hidden bg-yellow-500 text-black text-xs font-bold px-2 py-1 rounded-full">PRO</span>
                 <div class="w-full max-w-2xl mx-auto space-y-8 flex-grow">
                     
@@ -367,12 +364,11 @@
                 </div>
                 <!-- App Version Display -->
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.12.12</span></p>
-                    <p class="mt-1 text-gray-500">StadiaStudios | Mayonaise Production</p>
+                    <p>App Version: <span id="app-version">1.13.12</span></p>
+                    <p class="mt-1 text-gray-500">StadiaStudios</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
                     <a href="changelog.txt" id="terms-link" class="terms-link mt-2 text-white">Changelog</a>
-                    <a href="https://yaktenz.github.io/mayonaise.gg/" id="terms-link" class="terms-link mt-2 text-white">mayonaise.gg</a>
                     <a href="https://stadiastudios.github.io/stadia/" id="terms-link" class="terms-link mt-2 text-white">StadiaStudios</a>
                     </div>
                 </div>
@@ -439,7 +435,7 @@
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.12.12";
+        const APP_VERSION = "1.13.12";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');

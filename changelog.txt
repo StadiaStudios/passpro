@@ -1,3 +1,7 @@
+V1.13.12
+----------
+Minor Fixes. Changes to Emojis. 
+
 V1.12.12
 ----------
 Theme Back to normal, Removed Snowfall effect, Reverted Icon, Website Link In Dashboard, Removed Ads, Bug Fixes, Forgot-Pin.html updated. UI Improvements. Emojis to make the app feel more alive.
