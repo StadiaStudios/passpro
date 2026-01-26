@@ -40,8 +40,8 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: rgb(0, 140, 255);
-            transition: width 0.3s ease-in-out;
+            background-color: rgb(255, 116, 116);
+            transition: width 0.2s ease-in-out;
         }
         .nav-link:hover::after, .nav-link.active::after, .link-effect:hover::after, .link-effect.active::after, .password-url-link:hover::after, .password-url-link.active::after {
             width: 100%;
@@ -60,8 +60,8 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: rgb(0, 140, 255);
-            transition: width 0.3s ease-in-out;
+            background-color: rgb(255, 116, 116);
+            transition: width 0.2s ease-in-out;
         }
         .forgot-pin-link:hover::after {
             width: 100%;
@@ -88,7 +88,7 @@
             bottom: 0;
             width: 0;
             height: 2px;
-            background-color: rgb(0, 140, 255);
+            background-color: rgb(255, 116, 116);
             transition: width 0.3s ease-in-out;
         }
         .terms-link:hover::after {
@@ -99,8 +99,8 @@
             cursor: grabbing;
         }
         .password-item.drag-over {
-            border: 2px solid rgb(59, 130, 246);
-            box-shadow: 0 0 8px rgb(37, 99, 235);
+            border: 2px solid rgb(247, 60, 60);
+            box-shadow: 0 0 8px rgb(255, 116, 116);
         }
         /* Custom scrollbar styles */
         ::-webkit-scrollbar {
@@ -143,7 +143,7 @@
         }
         /* Toggle Switch Styles */
         #pin-lock-toggle:checked ~ .block {
-            background-color: rgb(0, 140, 255); /* Blue background when checked */
+            background-color: rgb(255, 35, 35); /* Blue background when checked */
         }
         #pin-lock-toggle:checked ~ .dot {
             transform: translateX(100%);
@@ -194,8 +194,8 @@
             <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
             <p id="modal-message" class="text-gray-300 mb-4"></p>
             <div id="modal-buttons" class="flex justify-center space-x-4">
-                <button id="modal-ok-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">OK</button>
-                <button id="modal-cancel-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
+                <button id="modal-ok-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">OK</button>
+                <button id="modal-cancel-btn" class="bg-[#222] hover:bg-[#333] text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
             </div>
         </div>
     </div>
@@ -204,12 +204,12 @@
     <div id="pin-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-75">
         <div class="bg-[#1A1A1A] p-8 rounded-lg shadow-xl max-w-md w-full mx-4 text-center text-white">
             <h2 id="pin-modal-title" class="text-2xl font-bold mb-4"></h2>
-            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="password" id="pin-input" placeholder="••••" class="w-full text-center bg-[#2A2A2A] text-white rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-red-500">
             <!-- Incorrect PIN message element -->
             <p id="pin-error-message" class="text-red-500 text-sm mt-2 mb-4 hidden">Incorrect PIN. Please try again.</p>
-            <button id="pin-submit-btn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
+            <button id="pin-submit-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
             <p class="mt-4 text-sm text-gray-400">
-                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-[#888] hover:text-[#90D5FF]">Forgot PIN?</a>
+                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-[#888] hover:text-[white]">Forgot PIN?</a>
             </p>
         </div>
     </div>
@@ -222,7 +222,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.13.12</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.14.14</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -247,7 +247,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.13.12</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.14.14</span>
 </div>
     </div>
 
@@ -291,10 +291,10 @@
                 <h2 class="text-3xl font-bold mb-6">My Passwords</h2>
                 <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
                     <input type="text" id="search-input" placeholder="Search passwords..." class="input-field flex-grow p-3 rounded-lg">
-                    <button id="add-password-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                    <button id="add-password-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                         <i class="fas fa-plus-circle mr-2"></i> Add Password
                     </button>
-                    <button id="arrange-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                    <button id="arrange-btn" class="bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                         Arrange
                     </button>
                 </div>
@@ -312,7 +312,7 @@
                 <div class="w-full max-w-2xl mx-auto space-y-8 flex-grow">
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-500">User Settings</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-red-500">User Settings</h3>
                         <div>
                             <label for="username-input" class="block text-sm font-medium text-secondary mb-1">Username</label>
                             <input type="text" id="username-input" class="input-field w-full p-3 rounded-lg" placeholder="Enter your username">
@@ -320,7 +320,7 @@
                     </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Security Settings</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-red-500">Security Settings</h3>
                         <div class="flex items-center justify-between">
                             <label for="pin-lock-toggle" class="flex items-center cursor-pointer">
                                 <div class="relative">
@@ -334,7 +334,7 @@
                     </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Data Management</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-red-500">Data Management</h3>
                         <div class="space-y-4">
                             <button id="download-account-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                                 Download Account
@@ -349,22 +349,22 @@
                     </div>
 
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-500">Local Storage</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-red-500">Local Storage</h3>
                         <div class="mb-4">
-                            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-2">
-                                <div id="storage-progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                            <div class="w-full bg-red-700 rounded-full h-2.5 mb-2">
+                                <div id="storage-progress-bar" class="bg-red-600 h-2.5 rounded-full" style="width: 0%"></div>
                             </div>
                             <p class="text-secondary text-sm">Storage Used: <span id="storage-size">0 KB / 5 MB</span></p>
                         </div>
                         <button id="clear-cache-btn" class="w-full bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 mt-4">
-                            Clear Cache
+                            Clear ick
                         </button>
                     </div>
 
                 </div>
                 <!-- App Version Display -->
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.13.12</span></p>
+                    <p>App Version: <span id="app-version">1.14.14</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
@@ -401,8 +401,8 @@
                         <textarea id="password-notes" rows="4" class="input-field w-full p-3 rounded-lg"></textarea>
                     </div>
                     <div class="flex justify-end space-x-4">
-                        <button type="button" id="password-modal-cancel" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save</button>
+                        <button type="button" id="password-modal-cancel" class="bg-[#222] hover:bg-[#333] text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Cancel</button>
+                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Save</button>
                     </div>
                 </form>
             </div>
@@ -435,7 +435,7 @@
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.13.12";
+        const APP_VERSION = "1.14.14";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
@@ -604,7 +604,7 @@ function getDeviceInfo() {
             const block = pinLockToggle.nextElementSibling;
             const dot = block.nextElementSibling;
             if (pinLockToggle.checked) {
-                block.classList.add('bg-blue-500');
+                block.classList.add('bg-red-500');
                 block.classList.remove('bg-gray-600');
                 dot.classList.add('transform', 'translate-x-full');
             } else {
@@ -660,10 +660,10 @@ function getDeviceInfo() {
                         <p class="text-sm text-secondary break-words">${item.username}</p>
                     </div>
                     <div class="flex space-x-2 opacity-0 md:opacity-100 md:relative group-hover:opacity-100 transition-opacity duration-200 md:group-hover:opacity-100">
-                        <button class="view-btn p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors" data-index="${index}">
+                        <button class="view-btn p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors" data-index="${index}">
                             <i class="fas fa-eye"></i>
                         </button>
-                        <button class="edit-btn p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors" data-index="${index}">
+                        <button class="edit-btn p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors" data-index="${index}">
                             <i class="fas fa-edit"></i>
                         </button>
                         <button class="delete-btn p-2 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors" data-index="${index}">
@@ -748,26 +748,65 @@ if (pin) {
             }
             
             saveData();
-            updateUI();
+            
+            // Check if we are currently searching. If so, refresh search instead of full reset.
+            if(searchInput.value.trim() !== '') {
+                searchInput.dispatchEvent(new Event('input'));
+                // Manually update counts since updateUI isn't called
+                totalPasswordsSpan.textContent = passwords.length;
+                updateStorageInfo();
+            } else {
+                updateUI();
+            }
+            
             passwordModal.classList.add('hidden');
         });
         
         passwordListContainer.addEventListener('click', (e) => {
-            if (e.target.closest('.delete-btn')) {
-                const index = e.target.closest('.delete-btn').dataset.index;
+            const target = e.target;
+            
+            // Helper function to correctly identify the clicked item from the CURRENTLY DISPLAYED list
+            const getClickedItem = (element) => {
+                const index = parseInt(element.dataset.index);
+                // CRITICAL FIX: Use currentlyDisplayedPasswords instead of passwords
+                // This ensures we get the correct item even if the list is filtered by search
+                return {
+                    item: currentlyDisplayedPasswords[index],
+                    displayedIndex: index
+                };
+            };
+
+            if (target.closest('.delete-btn')) {
+                const { item } = getClickedItem(target.closest('.delete-btn'));
+                
                 showMessage('Delete Password', 'Are you sure you want to delete this password?', true).then(result => {
                     if (result) {
-                        passwords.splice(index, 1);
-                        saveData();
-                        updateUI();
-                        showMessage('Success', 'Password deleted successfully.');
+                        // Find the original index in the main passwords array
+                        const originalIndex = passwords.indexOf(item);
+                        
+                        if (originalIndex > -1) {
+                            passwords.splice(originalIndex, 1);
+                            saveData();
+                            
+                            // If searching, keep the search active
+                            if (searchInput.value.trim() !== '') {
+                                searchInput.dispatchEvent(new Event('input'));
+                                totalPasswordsSpan.textContent = passwords.length;
+                                updateStorageInfo();
+                            } else {
+                                updateUI();
+                            }
+                            showMessage('Success', 'Password deleted successfully.');
+                        }
                     }
                 });
-            } else if (e.target.closest('.edit-btn')) {
-                const index = e.target.closest('.edit-btn').dataset.index;
+            } else if (target.closest('.edit-btn')) {
+                const { item } = getClickedItem(target.closest('.edit-btn'));
+                const originalIndex = passwords.indexOf(item);
+                
                 isEditing = true;
-                editIndex = index;
-                const item = passwords[index];
+                editIndex = originalIndex; // Store the original index for saving
+                
                 passwordModalTitle.textContent = 'Edit Password';
                 passwordTitleInput.value = item.title;
                 passwordUsernameInput.value = item.username;
@@ -775,21 +814,23 @@ if (pin) {
                 passwordUrlInput.value = item.url;
                 passwordNotesTextarea.value = item.notes;
                 passwordModal.classList.remove('hidden');
-            } else if (e.target.closest('.view-btn')) {
-                const index = e.target.closest('.view-btn').dataset.index;
-                const item = passwords[index];
+            } else if (target.closest('.view-btn')) {
+                const { item } = getClickedItem(target.closest('.view-btn'));
+                
                 profileTitle.textContent = item.title;
 
                 const urlHtml = item.url ? `<a href="${item.url}" target="_blank" class="text-white-800 password-url-link" style="word-break: break-all;">${item.url}</a>` : 'N/A';
                 
                 profileDetailsContent.innerHTML = `
-                    <p class="break-words"><strong class="text-blue-500">Username:</strong> ${item.username}</p>
-                    <p class="break-words"><strong class="text-blue-500">Password:</strong> <span id="displayed-password">${item.password}</span></p>
-                    <p class="break-words"><strong class="text-blue-500">URL:</strong> ${urlHtml}</p>
-                    <p class="break-words"><strong class="text-blue-500">Notes:</strong> ${item.notes || 'N/A'}</p>
+                    <p class="break-words"><strong class="text-red-500">Username:</strong> ${item.username}</p>
+                    <p class="break-words"><strong class="text-red-500">Password:</strong> <span id="displayed-password">${item.password}</span></p>
+                    <p class="break-words"><strong class="text-red-500">URL:</strong> ${urlHtml}</p>
+                    <p class="break-words"><strong class="text-red-500">Notes:</strong> ${item.notes || 'N/A'}</p>
                     <button id="copy-password" class="mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">Copy Password</button>
                 `;
-                document.getElementById('copy-password').addEventListener('click', () => {
+                
+                // Add event listener for the copy button
+                document.getElementById('copy-password').onclick = () => {
                     const passwordText = document.getElementById('displayed-password').textContent;
                     const tempInput = document.createElement('textarea');
                     tempInput.value = passwordText;
@@ -798,7 +839,8 @@ if (pin) {
                     document.execCommand('copy');
                     document.body.removeChild(tempInput);
                     showMessage('Success', 'Password copied to clipboard!');
-                });
+                };
+                
                 profileModal.classList.remove('hidden');
             }
         });
@@ -908,10 +950,10 @@ passwordListContainer.addEventListener('dragover', (e) => {
         const bounding = dragOverItem.getBoundingClientRect();
         const offset = bounding.y + bounding.height / 2;
         if (e.clientY > offset) {
-            dragOverItem.style.borderBottom = '2px solid #3B82F6'; /* blue-500 */
+            dragOverItem.style.borderBottom = '2px solid red'; /* blue-500 */
             dragOverItem.style.borderTop = '';
         } else {
-            dragOverItem.style.borderTop = '2px solid #3B82F6'; /* blue-500 */
+            dragOverItem.style.borderTop = '2px solid red'; /* blue-500 */
             dragOverItem.style.borderBottom = '';
         }
     }
@@ -1048,7 +1090,7 @@ passwordListContainer.addEventListener('touchend', (e) => {
                 if (userPin && userPin.length === 4 && /^\d+$/.test(userPin)) {
                     localStorage.setItem('pin', userPin);
                     showMessage('Success', 'PIN lock enabled successfully.');
-                    block.classList.add('bg-blue-500');
+                    block.classList.add('bg-red-500');
                     block.classList.remove('bg-gray-600');
                     dot.classList.add('transform', 'translate-x-full');
                     saveData();
@@ -1059,7 +1101,7 @@ passwordListContainer.addEventListener('touchend', (e) => {
             } else {
                 localStorage.removeItem('pin');
                 showMessage('Success', 'PIN lock disabled.');
-                block.classList.remove('bg-blue-500');
+                block.classList.remove('bg-red-500');
                 block.classList.add('bg-gray-600');
                 dot.classList.remove('transform', 'translate-x-full');
                 saveData();
@@ -1146,4 +1188,3 @@ document.getElementById('loading-screen').remove();
 
 </body>
 </html>
-

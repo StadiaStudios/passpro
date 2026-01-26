@@ -1,3 +1,7 @@
+V1.14.13
+----------
+Red Theme. Bug Fixes to Password Search Bar. 
+
 V1.13.12
 ----------
 Minor Fixes. Changes to Emojis. 
