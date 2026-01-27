@@ -7,4 +7,8 @@ To save passwords and transfer between devices. Open Settings within the PassPro
 How to Download: 
 IOS: Share > Add to Homescreen in Safari.
 Windows/Chromebook: Install site as app.
+
 Android: Add to Homescreen
+
+Install the official Autofill extension here: https://github.com/StadiaStudios/passpro-autofill-extension/releases/tag/security
+More downloads and info coming soon related to the extension.
