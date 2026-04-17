@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>PassPro - A Simple Password Manager By StadiaStudios</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
 
@@ -14,12 +14,10 @@
 <meta property="og:url" content="https://stadiastudios.github.io/passpro">
 
     
-    <!-- PWA meta tags and manifest file -->
     <meta name="theme-color" content="#222"/>
     <link rel="apple-touch-icon" href="assets/favicon.png">
     <link rel="manifest" href="manifest.json">
     
-    <!-- Font Awesome for hamburger icon and eye icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -230,7 +228,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.14.14</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.15.14</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -255,7 +253,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.14.14</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.15.14</span>
 </div>
     </div>
 
@@ -372,7 +370,7 @@
                 </div>
                 <!-- App Version Display -->
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.14.14</span></p>
+                    <p>App Version: <span id="app-version">1.15.14</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
@@ -443,7 +441,7 @@
         let isUnlocked = false; // Track whether the app is unlocked
         
         // App Version
-        const APP_VERSION = "1.14.14";
+        const APP_VERSION = "1.15.14";
         
         // Caching DOM elements
         const dashboardSection = document.getElementById('dashboard-section');
