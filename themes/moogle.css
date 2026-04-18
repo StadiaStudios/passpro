@@ -1,0 +1,180 @@
+:root {
+    /* Google Dark Palette */
+    --google-bg: #202124;
+    --google-surface: #292a2d;
+    --google-surface-variant: #3c4043;
+    --google-primary: #8ab4f8; /* Google Blue Light */
+    --google-primary-hover: #aecbfa;
+    --google-text: #e8eaed;
+    --google-text-muted: #9aa0a6;
+    --google-border: #3c4043;
+    --google-error: #f28b82; /* Google Red */
+    --google-success: #81c995; /* Google Green */
+    --google-header: #171717;
+}
+
+/* Base Body Styles */
+body.dark-mode {
+    background-color: var(--google-bg) !important;
+    color: var(--google-text) !important;
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif !important;
+    background-image: none !important; /* Remove any gradients from other themes */
+}
+
+/* Header & Navigation */
+header {
+    background-color: var(--google-header) !important;
+    border-bottom: 1px solid var(--google-border) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+header h1 {
+    color: var(--google-text) !important;
+    font-weight: 500 !important;
+}
+
+/* Tab/Navigation Icons */
+nav button i {
+    transition: color 0.2s ease;
+}
+
+nav button:hover i {
+    color: var(--google-primary) !important;
+}
+
+/* Active State for Navigation */
+nav button.text-red-500, 
+nav button.text-blue-500 {
+    color: var(--google-primary) !important;
+}
+
+/* Containers & Cards */
+.password-item, 
+.bg-\[\#1A1A1A\], 
+.bg-\[\#111\], 
+.bg-\[\#222\],
+.bg-\[\#2A2A2A\],
+#pin-modal > div {
+    background-color: var(--google-surface) !important;
+    border: 1px solid var(--google-border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+}
+
+.password-item:hover {
+    background-color: var(--google-surface-variant) !important;
+    border-color: var(--google-text-muted) !important;
+}
+
+/* Inputs */
+input, select, textarea, .input-field, #pin-input {
+    background-color: var(--google-surface-variant) !important;
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    color: var(--google-text) !important;
+    padding: 10px 14px !important;
+    transition: border 0.2s, background 0.2s !important;
+}
+
+input:focus, #pin-input:focus {
+    border-color: var(--google-primary) !important;
+    background-color: #303134 !important;
+    outline: none !important;
+}
+
+/* Buttons - The Google Blue Theme */
+button.bg-red-500, 
+button.bg-blue-600,
+#add-password-btn,
+#pin-submit-btn,
+.view-btn,
+.bg-blue-500 {
+    background-color: var(--google-primary) !important;
+    color: #202124 !important; /* Dark text on light blue button */
+    font-weight: 600 !important;
+    border-radius: 24px !important; /* Pill shape */
+    padding: 8px 24px !important;
+    text-transform: none !important;
+    letter-spacing: 0.25px !important;
+    transition: background-color 0.2s, box-shadow 0.2s !important;
+    border: none !important;
+}
+
+button.bg-red-500:hover, 
+#add-password-btn:hover, 
+#pin-submit-btn:hover {
+    background-color: var(--google-primary-hover) !important;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15) !important;
+}
+
+/* Secondary/Outline Buttons */
+button.bg-gray-500, 
+button.bg-gray-600,
+.edit-btn,
+.delete-btn {
+    background-color: transparent !important;
+    border: 1px solid var(--google-border) !important;
+    color: var(--google-primary) !important;
+    border-radius: 24px !important;
+}
+
+button.bg-gray-500:hover,
+.edit-btn:hover {
+    background-color: rgba(138, 180, 248, 0.08) !important;
+}
+
+/* Specific Delete Button Overrides (Optional - keeping it Google Red) */
+.delete-btn:hover {
+    color: var(--google-error) !important;
+    background-color: rgba(242, 139, 130, 0.08) !important;
+}
+
+/* Settings Toggle Switch (if applicable) */
+input[type="checkbox"]:checked + div {
+    background-color: var(--google-primary) !important;
+}
+
+/* Search Bar Specifics */
+#search-bar {
+    background-color: var(--google-surface-variant) !important;
+    border-radius: 28px !important;
+    padding-left: 45px !important;
+}
+
+/* Typography Colors */
+.text-gray-400, .text-gray-500 {
+    color: var(--google-text-muted) !important;
+}
+
+.text-white {
+    color: var(--google-text) !important;
+}
+
+/* Modals */
+#message-modal > div {
+    background-color: var(--google-surface) !important;
+    border-radius: 28px !important; /* Larger radius for modern Google dialogs */
+    border: 1px solid var(--google-border) !important;
+}
+
+#loading-screen {
+    background-color: var(--google-bg) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--google-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--google-surface-variant);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--google-text-muted);
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>PassPro - Themes</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .theme-list-item {
+            transition: all 0.2s ease;
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 1px solid #333;
+        }
+        .theme-list-item:hover {
+            background-color: rgba(34, 34, 34, 1);
+            transform: scale(1.01);
+        }
+        .theme-list-item.active {
+            border-color: #ff4d4d;
+            background-color: rgba(255, 77, 77, 0.05);
+        }
+        .palette-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 99px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        #modal { z-index: 9999 !important; }
+    </style>
+</head>
+<body class="dark-mode min-h-screen flex flex-col items-center">
+
+    <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-[#111] p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center text-white border border-[#333]">
+            <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
+            <p id="modal-message" class="text-gray-300 mb-4"></p>
+            <div id="modal-buttons" class="flex justify-center">
+                <button id="modal-ok-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-lg transition-colors duration-200">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="w-full p-4 flex items-center bg-[#222] shadow-md relative z-50">
+        <a href="index.html" class="text-white hover:text-gray-300 transition-colors mr-4">
+            <i class="fas fa-arrow-left text-xl"></i>
+        </a>
+        <h1 class="text-xl font-bold text-white">Appearance</h1>
+    </header>
+
+    <main class="w-full max-w-2xl p-6 mt-4">
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-1">Theme Gallery</h2>
+            <p class="text-gray-400 text-sm">Select a look for your dashboard. Changes apply to the main app.</p>
+        </div>
+
+        <div class="flex flex-col gap-3" id="theme-list-container">
+            
+        </div>
+    </main>
+
+    <script>
+        const THEMES_DATA = [
+            {
+                id: 'default',
+                name: 'Default Dark',
+                palette: ['#ff4d4d', '#222222', '#111111', '#ffffff']
+            },
+            {
+                id: 'themes/moogle.css',
+                name: 'Moogle Theme',
+                palette: ['#ef4444', '#ffffff', '#f3f4f6', '#111827']
+            },
+            {
+                id: 'themes/purple-nitro.css',
+                name: 'Purple Nitro',
+                palette: ['#8547c6', '#b559f3', '#1e112a', '#f0e6ff']
+            },
+            {
+                id: 'themes/ocean-blue.css',
+                name: 'Ocean Blue',
+                palette: ['#0070f3', '#00c6ff', '#020c1b', '#e6f1ff']
+            },
+            {
+                id: 'themes/emerald-forest.css',
+                name: 'Emerald Forest',
+                palette: ['#10b981', '#059669', '#06100d', '#ecfdf5']
+            },
+            {
+                id: 'themes/barbie-pink.css',
+                name: 'Barbie Pink',
+                palette: ['#ff1493', '#ff69b4', '#2d0a1e', '#fff0f5']
+            },
+            {
+                id: 'themes/winter-theme.css',
+                name: 'Winter Theme',
+                palette: ['#38bdf8', '#ef4444', '#0f172a', '#ffffff']
+            },
+            {
+                id: 'themes/spooky-halloween.css',
+                name: 'Spooky Halloween',
+                palette: ['#f97316', '#ea580c', '#8b5cf6', '#0a050d']
+            },
+        ];
+
+        const listContainer = document.getElementById('theme-list-container');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalOkBtn = document.getElementById('modal-ok-btn');
+
+        function showMessage(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modal.classList.remove('hidden');
+            modalOkBtn.onclick = () => modal.classList.add('hidden');
+        }
+
+        function renderThemes() {
+            const currentTheme = localStorage.getItem('passpro_theme') || 'default';
+            listContainer.innerHTML = '';
+
+            THEMES_DATA.forEach(theme => {
+                const item = document.createElement('div');
+                item.className = `theme-list-item p-4 rounded-xl cursor-pointer flex items-center justify-between ${currentTheme === theme.id ? 'active' : ''}`;
+                item.onclick = () => selectTheme(theme.id);
+                
+                const paletteHtml = theme.palette.map(color => `<div class="palette-dot" style="background-color: ${color};"></div>`).join('');
+
+                item.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div>
+                            <h3 class="font-bold">${theme.name}</h3>
+                        </div>
+                    </div>
+                    <div class="flex gap-1 bg-[#111] p-2 rounded-full border border-[#333]">
+                        ${paletteHtml}
+                    </div>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
+
+        function selectTheme(themeId) {
+            localStorage.setItem('passpro_theme', themeId);
+            renderThemes();
+            
+            if (themeId !== 'default' && themeId !== 'purpletheme.css') {
+
+            }
+        }
+
+        renderThemes();
+    </script>
+</body>
+</html>

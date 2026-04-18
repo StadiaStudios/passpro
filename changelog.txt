@@ -1,3 +1,7 @@
+V1.15.14
+----------
+New Themes Can now be applied. Fixed zooming in the webapp.
+
 V1.14.13
 ----------
 Red Theme. Bug Fixes to Password Search Bar. 

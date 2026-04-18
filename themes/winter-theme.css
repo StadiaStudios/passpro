@@ -1,0 +1,121 @@
+:root {
+    --winter-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    --winter-surface: rgba(255, 255, 255, 0.05);
+    --winter-surface-hover: rgba(255, 255, 255, 0.1);
+    --winter-surface-solid: #0f172a;
+    --winter-primary: #38bdf8;
+    --winter-primary-gradient: linear-gradient(90deg, #38bdf8, #7dd3fc);
+    --winter-accent: #ef4444;
+    --winter-text: #f1f5f9;
+    --winter-text-muted: #94a3b8;
+    --winter-border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode {
+    background: var(--winter-bg) !important;
+    background-attachment: fixed !important;
+    color: var(--winter-text) !important;
+    overflow-x: hidden;
+}
+
+body.dark-mode::before {
+    content: "";
+    position: fixed;
+    top: -100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 40px 70px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 90px 40px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 160px 120px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: snow 10s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes snow {
+    from { transform: translateY(0); }
+    to { transform: translateY(100%); }
+}
+
+header {
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+#mobile-nav-menu {
+    background-color: #0f172a !important;
+    border-left: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.nav-link::after, 
+.link-effect::after, 
+.password-url-link::after {
+    background: var(--winter-primary-gradient) !important;
+}
+
+.text-red-500 { color: var(--winter-primary) !important; }
+.text-secondary, .text-gray-400, .text-gray-500 { 
+    color: var(--winter-text-muted) !important; 
+}
+
+.bg-red-500, button.bg-red-500, 
+#pin-submit-btn, #add-password-btn, .view-btn, .edit-btn, .delete-btn {
+    background: #ef4444 !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+}
+
+.bg-red-500:hover, button.bg-red-500:hover, 
+#pin-submit-btn:hover, #add-password-btn:hover, .view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background: #dc2626 !important;
+    transform: translateY(-1px);
+}
+
+.bg-\[\#222\], button.bg-\[\#222\] {
+    background-color: rgba(56, 189, 248, 0.1) !important;
+    border: 1px solid rgba(56, 189, 248, 0.2) !important;
+}
+
+.password-item, 
+.bg-\[\#1A1A1A\], 
+.bg-\[\#111\], 
+.bg-\[\#2A2A2A\] {
+    background: var(--winter-surface) !important;
+    border: var(--winter-border) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+.password-item:hover {
+    background: var(--winter-surface-hover) !important;
+    border-color: var(--winter-primary) !important;
+}
+
+.input-field, #pin-input {
+    background-color: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(56, 189, 248, 0.3) !important;
+}
+
+#pin-lock-toggle:checked ~ .block {
+    background: var(--winter-primary-gradient) !important;
+}
+
+.bg-red-600 { background: #ef4444 !important; }
+
+#loading-screen { background: var(--winter-bg) !important; }
+
+#premium-badge {
+    background: var(--winter-primary-gradient) !important;
+    color: #0f172a !important;
+    font-weight: bold;
+}
