@@ -1,0 +1,148 @@
+:root {
+    --nitro-bg-gradient: radial-gradient(circle at top, #001f3f 0%, #000000 100%);
+    --nitro-surface: rgba(31, 31, 31, 0.8);
+    --nitro-surface-hover: rgba(45, 45, 45, 0.9);
+    --nitro-surface-solid: #121212;
+    --nitro-primary: #ffffff;
+    --nitro-primary-gradient: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+    --nitro-primary-hover: linear-gradient(180deg, #f0f0f0 0%, #d0d0d0 100%);
+    --nitro-accent: #0072ce;
+    --nitro-text-main: #ffffff;
+    --nitro-text-muted: #a0a0a0;
+    --nitro-glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --nitro-glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode {
+    background: var(--nitro-bg-gradient) !important;
+    background-attachment: fixed !important;
+    color: var(--nitro-text-main) !important;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#mobile-nav-menu {
+    background-color: #0a0a0a !important;
+    border-left: var(--nitro-glass-border);
+}
+
+.nav-link::after, 
+.link-effect::after, 
+.password-url-link::after, 
+.forgot-pin-link::after, 
+.terms-link::after {
+    background: var(--nitro-accent) !important;
+    box-shadow: 0 0 10px var(--nitro-accent);
+}
+
+.text-red-500 { color: var(--nitro-accent) !important; }
+
+.text-secondary, .text-\[\#999\], .text-gray-300, .text-gray-400, .text-gray-500 { 
+    color: var(--nitro-text-muted) !important; 
+}
+
+.text-white { color: var(--nitro-text-main) !important; }
+
+.bg-red-500, button.bg-red-500, 
+#pin-submit-btn, #add-password-btn, .view-btn, .edit-btn, .delete-btn {
+    background: var(--nitro-primary-gradient) !important;
+    color: #000000 !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 50px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-transform: none !important;
+}
+
+.bg-red-500:hover, button.bg-red-500:hover, 
+#pin-submit-btn:hover, #add-password-btn:hover, .view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background: var(--nitro-primary-hover) !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4) !important;
+}
+
+.bg-\[\#222\], button.bg-\[\#222\], .bg-gray-500, .bg-gray-600 {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 50px !important;
+}
+
+.bg-\[\#222\]:hover, button.bg-\[\#222\]:hover, .bg-gray-500:hover, .bg-gray-600:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.password-item, 
+.bg-\[\#1A1A1A\], 
+.bg-\[\#111\], 
+.bg-\[\#2A2A2A\] {
+    background: var(--nitro-surface) !important;
+    border: var(--nitro-glass-border) !important;
+    border-radius: 20px !important;
+    box-shadow: var(--nitro-glass-shadow) !important;
+    transition: transform 0.3s ease, border-color 0.3s ease !important;
+}
+
+.password-item:hover {
+    background: var(--nitro-surface-hover) !important;
+    border-color: var(--nitro-accent) !important;
+    transform: translateY(-5px);
+}
+
+.input-field, #pin-input {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 12px !important;
+}
+
+.input-field:focus, #pin-input:focus {
+    border-color: var(--nitro-accent) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 0 0 2px rgba(0, 114, 206, 0.3) !important;
+    outline: none !important;
+}
+
+#pin-lock-toggle:checked ~ .block {
+    background: var(--nitro-accent) !important;
+}
+
+.bg-red-700 { background-color: rgba(255, 255, 255, 0.05) !important; }
+.bg-red-600 { background: var(--nitro-primary-gradient) !important; }
+
+#loading-screen { 
+    background: #000000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-item.drag-over {
+    border: 2px solid var(--nitro-accent) !important;
+    background: rgba(0, 114, 206, 0.1) !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+#premium-badge {
+    background: var(--nitro-accent) !important;
+    color: white !important;
+    font-weight: 700;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 114, 206, 0.5);
+}

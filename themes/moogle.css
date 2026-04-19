@@ -1,27 +1,24 @@
 :root {
-    /* Google Dark Palette */
     --google-bg: #202124;
     --google-surface: #292a2d;
     --google-surface-variant: #3c4043;
-    --google-primary: #8ab4f8; /* Google Blue Light */
+    --google-primary: #8ab4f8;
     --google-primary-hover: #aecbfa;
     --google-text: #e8eaed;
     --google-text-muted: #9aa0a6;
     --google-border: #3c4043;
-    --google-error: #f28b82; /* Google Red */
-    --google-success: #81c995; /* Google Green */
+    --google-error: #f28b82;
+    --google-success: #81c995; 
     --google-header: #171717;
 }
 
-/* Base Body Styles */
 body.dark-mode {
     background-color: var(--google-bg) !important;
     color: var(--google-text) !important;
     font-family: 'Roboto', 'Segoe UI', Arial, sans-serif !important;
-    background-image: none !important; /* Remove any gradients from other themes */
+    background-image: none !important;
 }
 
-/* Header & Navigation */
 header {
     background-color: var(--google-header) !important;
     border-bottom: 1px solid var(--google-border) !important;
@@ -33,7 +30,6 @@ header h1 {
     font-weight: 500 !important;
 }
 
-/* Tab/Navigation Icons */
 nav button i {
     transition: color 0.2s ease;
 }
@@ -42,13 +38,11 @@ nav button:hover i {
     color: var(--google-primary) !important;
 }
 
-/* Active State for Navigation */
 nav button.text-red-500, 
 nav button.text-blue-500 {
     color: var(--google-primary) !important;
 }
 
-/* Containers & Cards */
 .password-item, 
 .bg-\[\#1A1A1A\], 
 .bg-\[\#111\], 
@@ -66,7 +60,6 @@ nav button.text-blue-500 {
     border-color: var(--google-text-muted) !important;
 }
 
-/* Inputs */
 input, select, textarea, .input-field, #pin-input {
     background-color: var(--google-surface-variant) !important;
     border: 1px solid transparent !important;
@@ -82,7 +75,6 @@ input:focus, #pin-input:focus {
     outline: none !important;
 }
 
-/* Buttons - The Google Blue Theme */
 button.bg-red-500, 
 button.bg-blue-600,
 #add-password-btn,
@@ -90,9 +82,9 @@ button.bg-blue-600,
 .view-btn,
 .bg-blue-500 {
     background-color: var(--google-primary) !important;
-    color: #202124 !important; /* Dark text on light blue button */
+    color: #202124 !important;
     font-weight: 600 !important;
-    border-radius: 24px !important; /* Pill shape */
+    border-radius: 24px !important;
     padding: 8px 24px !important;
     text-transform: none !important;
     letter-spacing: 0.25px !important;
@@ -107,7 +99,6 @@ button.bg-red-500:hover,
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15) !important;
 }
 
-/* Secondary/Outline Buttons */
 button.bg-gray-500, 
 button.bg-gray-600,
 .edit-btn,
@@ -123,25 +114,21 @@ button.bg-gray-500:hover,
     background-color: rgba(138, 180, 248, 0.08) !important;
 }
 
-/* Specific Delete Button Overrides (Optional - keeping it Google Red) */
 .delete-btn:hover {
     color: var(--google-error) !important;
     background-color: rgba(242, 139, 130, 0.08) !important;
 }
 
-/* Settings Toggle Switch (if applicable) */
 input[type="checkbox"]:checked + div {
     background-color: var(--google-primary) !important;
 }
 
-/* Search Bar Specifics */
 #search-bar {
     background-color: var(--google-surface-variant) !important;
     border-radius: 28px !important;
     padding-left: 45px !important;
 }
 
-/* Typography Colors */
 .text-gray-400, .text-gray-500 {
     color: var(--google-text-muted) !important;
 }
@@ -150,10 +137,9 @@ input[type="checkbox"]:checked + div {
     color: var(--google-text) !important;
 }
 
-/* Modals */
 #message-modal > div {
     background-color: var(--google-surface) !important;
-    border-radius: 28px !important; /* Larger radius for modern Google dialogs */
+    border-radius: 28px !important; 
     border: 1px solid var(--google-border) !important;
 }
 
@@ -161,7 +147,6 @@ input[type="checkbox"]:checked + div {
     background-color: var(--google-bg) !important;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
