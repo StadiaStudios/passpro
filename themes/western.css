@@ -1,0 +1,135 @@
+/* Western Theme for PassPro */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Rye&display=swap');
+
+:root {
+    --west-dust: #d2b48c;
+    --west-leather: #8b4513;
+    --west-iron: #2b2b2b;
+    --west-paper: #f4e4bc;
+    --west-accent: #cd853f;
+    --west-sunset: #a0522d;
+}
+
+/* Base Body Styling */
+body {
+    background-color: #2c1e14 !important;
+    background-image: 
+        linear-gradient(rgba(44, 30, 20, 0.8), rgba(44, 30, 20, 0.8)),
+        url('https://www.transparenttextures.com/patterns/wood-pattern.png') !important;
+    font-family: 'Special+Elite', 'Courier New', serif !important;
+    color: var(--west-iron) !important;
+}
+
+/* Header and Navigation Override */
+nav, .bg-[#111], .bg-[#1a1a1a] {
+    background-color: var(--west-leather) !important;
+    border-bottom: 4px solid #5d2e0a !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+}
+
+nav h1, nav span, .font-bold {
+    font-family: 'Rye', cursive !important;
+    color: var(--west-paper) !important;
+    letter-spacing: 1px;
+}
+
+/* Cards and Sections (Wanted Poster Look) */
+section, .bg-[#1a1a1a], .p-6, .rounded-2xl {
+    background-color: var(--west-paper) !important;
+    background-image: url('https://www.transparenttextures.com/patterns/paper.png') !important;
+    border: 2px solid var(--west-leather) !important;
+    border-radius: 4px !important; /* Squarer for that old paper feel */
+    box-shadow: 5px 5px 0px var(--west-leather) !important;
+    color: #3d2b1f !important;
+}
+
+/* Override Tailwind specific background classes */
+.bg-white\/5, .bg-white\/10 {
+    background-color: rgba(139, 69, 19, 0.1) !important;
+    border: 1px dashed var(--west-leather) !important;
+}
+
+/* Buttons (Wood Plank Style) */
+button, .bg-blue-600, .bg-indigo-600 {
+    background-color: var(--west-leather) !important;
+    border: 2px solid #5d2e0a !important;
+    color: var(--west-paper) !important;
+    font-family: 'Rye', cursive !important;
+    text-transform: uppercase !important;
+    transition: transform 0.1s, filter 0.2s !important;
+    box-shadow: 0 4px 0 #3d1f08 !important;
+}
+
+button:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 2px 0 #3d1f08 !important;
+}
+
+button:hover {
+    filter: brightness(1.2) !important;
+    background-color: var(--west-sunset) !important;
+}
+
+/* Inputs (Old Typewriter Style) */
+input, select, textarea {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    border: 2px solid var(--west-leather) !important;
+    border-radius: 0 !important;
+    color: var(--west-iron) !important;
+}
+
+input:focus {
+    outline: 2px solid var(--west-accent) !important;
+    background-color: #fff !important;
+}
+
+/* Icons */
+.fas, .fab, .far {
+    color: var(--west-leather) !important;
+}
+
+/* Loading Screen */
+#loading-screen {
+    background-color: var(--west-iron) !important;
+}
+
+#loading-screen::after {
+    content: "HEADING WEST...";
+    font-family: 'Rye', cursive;
+    color: var(--west-paper);
+    display: block;
+    margin-top: 20px;
+    font-size: 1.5rem;
+}
+
+/* Badges and Labels */
+.text-gray-400, .text-gray-500 {
+    color: #6d4c41 !important;
+}
+
+/* Search Bar specific */
+#search-bar {
+    border-radius: 20px !important;
+    padding-left: 40px !important;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--west-iron);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--west-leather);
+    border: 2px solid var(--west-iron);
+}
+
+/* Modal Styling */
+#pin-modal, #message-modal {
+    background-color: rgba(0,0,0,0.85) !important;
+}
+
+#pin-modal > div, #message-modal > div {
+    border: 8px double var(--west-leather) !important;
+}

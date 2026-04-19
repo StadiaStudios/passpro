@@ -1,3 +1,9 @@
+V1.16.15
+----------
+New Update Screen that lists updates in the version, Themes are categorized, New Themes, Classic Legacy Blue Original Theme,
+Search added to themes page,
+
+
 V1.15.14
 ----------
 New Themes Can now be applied. Fixed zooming in the webapp.

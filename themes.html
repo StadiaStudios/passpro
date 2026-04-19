@@ -3,201 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>PassPro - Themes</title>
+    <title>PassPro - Appearance</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="manifest" href="manifest.json">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111;
+            background-color: #0a0a0a;
             color: white;
             transition: background-color 0.3s ease;
         }
         .theme-list-item {
-            transition: all 0.2s ease;
-            background-color: rgba(26, 26, 26, 0.8);
-            border: 1px solid #333;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: rgba(26, 26, 26, 0.6);
+            border: 1px solid #222;
         }
         .theme-list-item:hover {
-            background-color: rgba(34, 34, 34, 1);
-            transform: scale(1.01);
+            background-color: rgba(38, 38, 38, 0.9);
+            transform: translateY(-1px);
+            border-color: #444;
         }
         .theme-list-item.active {
             border-color: #ff4d4d;
-            background-color: rgba(255, 77, 77, 0.05);
+            background-color: rgba(255, 77, 77, 0.08);
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.1);
         }
         .palette-dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 99px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
             border: 1px solid rgba(255,255,255,0.1);
         }
-        #modal { z-index: 9999 !important; }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .category-header::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #222;
+        }
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+        .search-input {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 10px 15px 10px 40px;
+            color: white;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .search-input:focus {
+            border-color: #555;
+            background: #222;
+        }
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
     </style>
 </head>
-<body class="dark-mode min-h-screen flex flex-col items-center">
+<body class="min-h-screen flex flex-col items-center pb-12">
 
-    <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
-        <div class="bg-[#111] p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center text-white border border-[#333]">
+    <div id="modal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
+        <div class="bg-[#111] p-6 rounded-2xl shadow-2xl max-w-sm w-full mx-4 text-center text-white border border-[#333]">
             <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
-            <p id="modal-message" class="text-gray-300 mb-4"></p>
-            <div id="modal-buttons" class="flex justify-center">
-                <button id="modal-ok-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-lg transition-colors duration-200">OK</button>
-            </div>
+            <p id="modal-message" class="text-gray-400 mb-6"></p>
+            <button id="modal-ok-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl">Got it</button>
         </div>
     </div>
 
-    <header class="w-full p-4 flex items-center bg-[#222] shadow-md sticky top-0 z-50">
-    <a href="index.html" class="text-white hover:text-gray-300 transition-colors mr-4">
-        <i class="fas fa-arrow-left text-xl"></i>
-    </a>
-    <h1 class="text-xl font-bold text-white">Appearance</h1>
-</header>
-
-    <main class="w-full max-w-2xl p-6 mt-4">
-        <div class="mb-8">
-            <h2 class="text-2xl font-bold mb-1">Theme Gallery</h2>
-            <p class="text-gray-400 text-sm">Select a look for your dashboard. Changes apply to the main app.</p>
+    <header class="w-full p-4 flex flex-col gap-4 bg-[#111]/80 backdrop-blur-md border-b border-[#222] sticky top-0 z-50">
+        <div class="flex items-center">
+            <a href="index.html" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors mr-2">
+                <i class="fas fa-arrow-left text-lg"></i>
+            </a>
+            <div>
+                <h1 class="text-lg font-bold">Appearance</h1>
+                <p class="text-xs text-gray-500">Personalize your PassPro experience</p>
+            </div>
         </div>
-
-        <div class="flex flex-col gap-3" id="theme-list-container">
-            
+        <div class="search-container px-2 pb-1">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="theme-search" class="search-input" placeholder="Search themes or categories...">
         </div>
-    </main>
+    </header>
+
+    <main class="w-full max-w-2xl px-6" id="themes-grid"></main>
 
     <script>
         const THEMES_DATA = [
-            {
-                id: 'default',
-                name: 'Default Dark',
-                palette: ['#ff4d4d', '#222222', '#111111', '#ffffff']
-            },
-            {
-                id: 'themes/moogle.css',
-                name: 'Moogle Theme',
-                palette: ['#ef4444', '#ffffff', '#f3f4f6', '#111827']
-            },
-            {
-                id: 'themes/purple-nitro.css',
-                name: 'Purple Nitro',
-                palette: ['#8547c6', '#b559f3', '#1e112a', '#f0e6ff']
-            },
-            {
-                id: 'themes/ocean-blue.css',
-                name: 'Ocean Blue',
-                palette: ['#0070f3', '#00c6ff', '#020c1b', '#e6f1ff']
-            },
-            {
-                id: 'themes/emerald-forest.css',
-                name: 'Emerald Forest',
-                palette: ['#10b981', '#059669', '#06100d', '#ecfdf5']
-            },
-            {
-                id: 'themes/orange-ember.css',
-                name: 'Orange Ember',
-                palette: ['#ff8c00', '#ff4500', '#2d1b0d'] 
-            },
-            {
-                id: 'themes/barbie-pink.css',
-                name: 'Barbie Pink',
-                palette: ['#ff1493', '#ff69b4', '#2d0a1e', '#fff0f5']
-            },
-            {
-                id: 'themes/winter-theme.css',
-                name: 'Winter Theme',
-                palette: ['#38bdf8', '#ef4444', '#0f172a', '#ffffff']
-            },
-            {
-                id: 'themes/spooky-halloween.css',
-                name: 'Spooky Halloween',
-                palette: ['#f97316', '#ea580c', '#8b5cf6', '#0a050d']
-            },
-            {
-                id: 'themes/crimson-red.css',
-                name: 'Crimson Red',
-                palette: ['#c64747', '#ff4d4d', '#ffffff']
-            },
-            {
-                id: 'themes/clash-season.css',
-                name: 'Clash Season',
-                palette: ['#4C8C2B', '#FFD700', '#00D2FF', '#2E1A1A']
-            },
-            {
-                id: 'themes/macecook.css',
-                name: 'Mace Cook',
-                palette: ['#0866FF', '#F0F2F5', '#FFFFFF', '#65676B']
-            },
-            {
-                id: 'themes/microloft.css',
-                name: 'Microloft',
-                palette: ['#0078D4', '#F3F3F3', '#FFFFFF', '#505050']
-            },
-            {
-                id: 'themes/tethesda.css',
-                name: 'Tethesda',
-                palette: ['#4285F4', '#EA4335', '#FBBC05', '#34A853']
-            },
-            {
-                id: 'themes/ts5.css',
-                name: 'TS5',
-                palette: ['#000000', '#1F1F1F', '#0072CE', '#FFFFFF']
-            },
-            {
-                id: 'themes/exbox.css',
-                name: 'ExBox',
-                palette: ['#107C10', '#0A0A0A', '#1F1F1F', '#FFFFFF']
-            },
+            { id: 'default', name: 'PassPro Default', category: 'Core', palette: ['#ff4d4d', '#222222', '#111111'] },
+            { id: 'themes/crimson-red.css', name: 'Crimson Red', category: 'Core', palette: ['#c64747', '#ff4d4d', '#ffffff'] },
+            { id: 'themes/legacy-blue.css', name: 'Classic Legacy Blue', category: 'Core', palette: ['#3b82f6', '#f97316', '#6666ff'] },
+            { id: 'themes/pro-hacker.css', name: 'Pro Hacker', category: 'Dark & Stealth', palette: ['#00FF41', '#003B00', '#0D0208'] },
+            { id: 'themes/purple-nitro.css', name: 'Purple Nitro', category: 'Dark & Stealth', palette: ['#8547c6', '#b559f3', '#1e112a'] },
+            { id: 'themes/ocean-blue.css', name: 'Ocean Blue', category: 'Dark & Stealth', palette: ['#0070f3', '#00c6ff', '#020c1b'] },
+            { id: 'themes/emerald-forest.css', name: 'Emerald Forest', category: 'Dark & Stealth', palette: ['#10b981', '#059669', '#06100d'] },
+            { id: 'themes/orange-ember.css', name: 'Orange Ember', category: 'Dark & Stealth', palette: ['#ff8c00', '#ff4500', '#2d1b0d'] },
+            { id: 'themes/acebuk.css', name: 'AceBuk (Social)', category: 'Light Themes', palette: ['#0866FF', '#F0F2F5', '#FFFFFF'] },
+            { id: 'themes/bos.css', name: 'BOS Theme', category: 'Light Themes', palette: ['#007AFF', '#F2F2F7', '#FFFFFF'] },
+            { id: 'themes/microloft.css', name: 'Microloft', category: 'Light Themes', palette: ['#0078D4', '#F3F3F3', '#FFFFFF'] },
+            { id: 'themes/moogle.css', name: 'Moogle', category: 'Tech Brands', palette: ['#ef4444', '#ffffff', '#f3f4f6'] },
+            { id: 'themes/tethesda.css', name: 'TSE', category: 'Tech Brands', palette: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'] },
+            { id: 'themes/ts5.css', name: 'Station Pro', category: 'Tech Brands', palette: ['#000000', '#1F1F1F', '#0072CE'] },
+            { id: 'themes/exbox.css', name: 'ExBox', category: 'Tech Brands', palette: ['#107C10', '#0A0A0A', '#1F1F1F'] },
+            { id: 'themes/cyber-pro.css', name: 'Cyber Pro', category: 'Gaming', palette: ['#00ffff', '#ff00ff', '#fdf004'] },
+            { id: 'themes/clash-season.css', name: 'Clash Season', category: 'Gaming', palette: ['#4C8C2B', '#FFD700', '#00D2FF'] },
+            { id: 'themes/game-interface.css', name: 'UI Interface', category: 'Gaming', palette: ['#4C8C2B', '#FFD700', '#00D2FF'] },
+            { id: 'themes/christmas.css', name: 'Christmas', category: 'Holiday & Seasonal', palette: ['#D42426', '#0D1B2A', '#F9D71C'] },
+            { id: 'themes/spooky-halloween.css', name: 'Spooky Halloween', category: 'Holiday & Seasonal', palette: ['#f97316', '#ea580c', '#8b5cf6'] },
+            { id: 'themes/winter-theme.css', name: 'Winter Theme', category: 'Holiday & Seasonal', palette: ['#38bdf8', '#ef4444', '#0f172a'] },
+            { id: 'themes/western.css', name: 'Western', category: 'Vibes', palette: ['#8b4513', '#f4e4bc', '#2b2b2b'] },
+            { id: 'themes/barbie-pink.css', name: 'Barbie Pink', category: 'Vibes', palette: ['#ff1493', '#ff69b4', '#2d0a1e'] }
         ];
 
-        const listContainer = document.getElementById('theme-list-container');
-        const modal = document.getElementById('modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalMessage = document.getElementById('modal-message');
-        const modalOkBtn = document.getElementById('modal-ok-btn');
+        const container = document.getElementById('themes-grid');
+        const searchInput = document.getElementById('theme-search');
 
-        function showMessage(title, message) {
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            modal.classList.remove('hidden');
-            modalOkBtn.onclick = () => modal.classList.add('hidden');
-        }
-
-        function renderThemes() {
+        function renderThemes(filter = '') {
             const currentTheme = localStorage.getItem('passpro_theme') || 'default';
-            listContainer.innerHTML = '';
-
-            THEMES_DATA.forEach(theme => {
-                const item = document.createElement('div');
-                item.className = `theme-list-item p-4 rounded-xl cursor-pointer flex items-center justify-between ${currentTheme === theme.id ? 'active' : ''}`;
-                item.onclick = () => selectTheme(theme.id);
-                
-                const paletteHtml = theme.palette.map(color => `<div class="palette-dot" style="background-color: ${color};"></div>`).join('');
-
-                item.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        <div>
-                            <h3 class="font-bold">${theme.name}</h3>
-                        </div>
-                    </div>
-                    <div class="flex gap-1 bg-[#111] p-2 rounded-full border border-[#333]">
-                        ${paletteHtml}
-                    </div>
-                `;
-                listContainer.appendChild(item);
-            });
-        }
-
-        function selectTheme(themeId) {
-            localStorage.setItem('passpro_theme', themeId);
-            renderThemes();
+            container.innerHTML = '';
             
-            if (themeId !== 'default' && themeId !== 'purpletheme.css') {
+            const searchTerm = filter.toLowerCase();
+            
+            const filteredData = THEMES_DATA.filter(t => 
+                t.name.toLowerCase().includes(searchTerm) || 
+                t.category.toLowerCase().includes(searchTerm)
+            );
 
+            const categories = [...new Set(filteredData.map(t => t.category))];
+
+            categories.forEach(catName => {
+                const section = document.createElement('section');
+                section.innerHTML = `<div class="category-header">${catName}</div>`;
+                
+                const list = document.createElement('div');
+                list.className = "flex flex-col gap-2";
+
+                const catThemes = filteredData.filter(t => t.category === catName);
+                
+                catThemes.forEach(theme => {
+                    const item = document.createElement('div');
+                    item.className = `theme-list-item p-4 rounded-2xl cursor-pointer flex items-center justify-between ${currentTheme === theme.id ? 'active' : ''}`;
+                    
+                    const paletteHtml = theme.palette.map(color => `<div class="palette-dot" style="background-color: ${color};"></div>`).join('');
+
+                    item.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 rounded-full ${currentTheme === theme.id ? 'bg-red-500' : 'bg-transparent'}"></div>
+                            <h3 class="font-semibold text-sm">${theme.name}</h3>
+                        </div>
+                        <div class="flex gap-1.5 bg-black/40 p-1.5 rounded-full border border-white/5">
+                            ${paletteHtml}
+                        </div>
+                    `;
+
+                    item.onclick = () => {
+                        localStorage.setItem('passpro_theme', theme.id);
+                        renderThemes(searchInput.value);
+                    };
+
+                    list.appendChild(item);
+                });
+
+                section.appendChild(list);
+                container.appendChild(section);
+            });
+
+            if (filteredData.length === 0) {
+                container.innerHTML = `<div class="mt-12 text-center text-gray-500 italic">No themes matching "${filter}"</div>`;
             }
         }
+
+        searchInput.addEventListener('input', (e) => {
+            renderThemes(e.target.value);
+        });
 
         renderThemes();
     </script>

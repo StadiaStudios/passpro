@@ -1,0 +1,117 @@
+:root {
+    --ios-background: #F2F2F7;
+    --ios-surface: #FFFFFF;
+    --ios-surface-hover: #E5E5EA;
+    --ios-primary: #007AFF;
+    --ios-primary-active: #0056b3;
+    --ios-text-main: #000000;
+    --ios-text-muted: #8E8E93;
+    --ios-border: #C6C6C8;
+    --ios-separator: rgba(60, 60, 67, 0.1);
+    --ios-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    background-color: var(--ios-background) !important;
+    color: var(--ios-text-main) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 0.5px solid var(--ios-border) !important;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.password-item, 
+.bg-\[\#1A1A1A\], 
+.bg-\[\#111\], 
+.bg-\[\#2A2A2A\],
+.ios-card {
+    background: var(--ios-surface) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    margin: 10px 16px !important;
+    box-shadow: var(--ios-shadow) !important;
+    transition: background 0.2s ease;
+}
+
+.password-item:active {
+    background: var(--ios-surface-hover) !important;
+}
+
+.input-field, #pin-input {
+    background-color: var(--ios-surface) !important;
+    border: 0.5px solid var(--ios-border) !important;
+    color: var(--ios-text-main) !important;
+    border-radius: 10px !important;
+    padding: 12px 16px !important;
+    font-size: 17px !important;
+}
+
+.input-field:focus, #pin-input:focus {
+    border-color: var(--ios-primary) !important;
+    box-shadow: none !important;
+}
+
+.bg-red-500, button.bg-red-500, 
+#pin-submit-btn, #add-password-btn, 
+.view-btn, .edit-btn, .delete-btn,
+.ios-btn-primary {
+    background: var(--ios-primary) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    padding: 12px 20px !important;
+    font-size: 17px !important;
+    transition: all 0.2s ease !important;
+}
+
+.bg-red-500:active, button.bg-red-500:active, 
+#pin-submit-btn:active, #add-password-btn:active {
+    background: var(--ios-primary-active) !important;
+    transform: scale(0.97) !important; 
+}
+
+.bg-\[\#222\], button.bg-\[\#222\], .bg-gray-500, .bg-gray-600 {
+    background-color: #E9E9EB !important;
+    border: none !important;
+    color: var(--ios-primary) !important;
+    border-radius: 10px !important;
+}
+
+.text-secondary, .text-\[\#999\], .text-gray-300, .text-gray-400, .text-gray-500 { 
+    color: var(--ios-text-muted) !important; 
+}
+.text-white { color: var(--ios-text-main) !important; }
+.text-red-500 { color: #FF3B30 !important; } 
+
+#premium-badge {
+    background: #E5E5EA !important;
+    color: #3A3A3C !important;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+#pin-lock-toggle:checked ~ .block {
+    background: #34C759 !important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 10px;
+}
