@@ -205,7 +205,7 @@
             <p id="pin-error-message" class="text-red-500 text-sm mt-2 mb-4 hidden">Incorrect PIN. Please try again.</p>
             <button id="pin-submit-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">Unlock</button>
             <p class="mt-4 text-sm text-gray-400">
-                <a href="help/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-[#888] hover:text-[white]">Forgot PIN?</a>
+                <a href="pages/forgot-pin.html" id="forgot-pin-link" class="forgot-pin-link text-[#888] hover:text-[white]">Forgot PIN?</a>
             </p>
         </div>
     </div>
@@ -217,7 +217,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.16.15</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.17.15</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -241,7 +241,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.16.15</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.17.15</span>
 </div>
     </div>
 
@@ -259,7 +259,7 @@
                     <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
                     <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
                     <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-import-account">Import Account</button></li>
-                    <li><a href="https://stadiastudios.github.io/stadia/"><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect">Official Website</button></a></li>
+                    <li><a href="pages/generator.html"><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect">Password Generator</button></a></li>
                 </ul>
             </div>
             <div class="text-white">
@@ -274,6 +274,17 @@
                 <p class="text-secondary">Welcome! <span id="dashboard-username"></span>,</p>
             </div>
         </div>
+
+    <div class="mt-8 bg-[#1A1A1A] p-6 rounded-lg shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 border border-white/5">
+    <div>
+        <h3 class="text-xl font-bold text-white">Advanced Password Generator</h3>
+        <p class="text-secondary opacity-80">Generate complex and secure passwords using our advanced tool.</p>
+    </div>
+    <a href="pages/generator.html" class="whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg">
+        TRY IT NOW
+    </a>
+</div>
+
         <div class="mt-8 bg-[#1A1A1A] p-6 rounded-lg shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
     <div>
         <h3 class="text-xl font-semibold text-white">🎨 New App Themes Available!</h3>
@@ -322,6 +333,18 @@
                             </a>
                         </div>
                     </div>
+
+                    <div class="bg-[#1A1A1A] p-6 rounded-2xl border border-zinc-800">
+                            <h3 class="text-xl font-semibold mb-4 text-red-500">Community & Support</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <a href="https://discord.gg/UGBFVrcKKxk" target="_blank" class="flex items-center justify-center gap-2 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                                    <i class="fab fa-discord text-xl"></i> Join Discord
+                                </a>
+                                <a href="https://stadiastudios.github.io/stadia/" target="_blank" class="flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 border border-zinc-700">
+                                    <i data-lucide="globe" class="w-5 h-5"></i> Official Website
+                                </a>
+                            </div>
+                        </div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
                         <h3 class="text-xl font-semibold mb-4 text-red-500">Security Settings</h3>
@@ -334,8 +357,12 @@
                                 </div>
                                 <span class="ml-3 font-medium text-gray-300">Enable PIN Lock</span>
                             </label>
-                        </div>
+                        </div><br>
+                        <a href="pages/generator.html" class="block w-full text-center bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                            <i class="fas fa-key mr-2"></i> Password Generator
+                        </a>
                     </div>
+                    
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
                         <h3 class="text-xl font-semibold mb-4 text-red-500">Data Management</h3>
@@ -367,7 +394,7 @@
 
                 </div>
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.16.15</span></p>
+                    <p>App Version: <span id="app-version">1.17.15</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
@@ -433,7 +460,7 @@
         let username = '';
         let isUnlocked = false;
         
-        const APP_VERSION = "1.16.15";
+        const APP_VERSION = "1.17.15";
         
         const dashboardSection = document.getElementById('dashboard-section');
         const passwordListSection = document.getElementById('password-list-section');
@@ -844,7 +871,8 @@ if (pin) {
     const dataToDownload = {
         passwords: passwords,
         username: username,
-        pin: localStorage.getItem('pin') || null
+        pin: localStorage.getItem('pin') || null,
+        theme: localStorage.getItem('passpro_theme') || 'default'
     };
 
     const dataStr = JSON.stringify(dataToDownload, null, 2);
@@ -864,40 +892,73 @@ if (pin) {
     showMessage('Success', 'Account data downloaded successfully!');
 });
 
+function applyTheme(themeUrl) {
+    let link = document.getElementById('dynamic-theme');
+    
+    // If resetting to default or no theme provided
+    if (themeUrl === 'default' || !themeUrl) {
+        if (link) link.remove();
+        localStorage.removeItem('passpro_theme');
+        return;
+    }
+    
+    // If applying a new theme
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.id = 'dynamic-theme';
+        document.head.appendChild(link);
+    }
+    link.href = themeUrl;
+    localStorage.setItem('passpro_theme', themeUrl);
+}
         
         document.getElementById('import-file-input').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = async (event) => {
-                    try {
-                        const importedData = JSON.parse(event.target.result);
-                        if (importedData.passwords && importedData.username !== undefined) {
-                            const result = await showMessage('Import Account', 'Importing will overwrite your current data. Are you sure?', true);
-                            if (result) {
-                                passwords = importedData.passwords;
-                                username = importedData.username;
-                                if (importedData.pin) {
-                                    localStorage.setItem('pin', importedData.pin);
-                                    pinLockToggle.checked = true;
-                                } else {
-                                    localStorage.removeItem('pin');
-                                    pinLockToggle.checked = false;
-                                }
-                                saveData();
-                                updateUI();
-                                showMessage('Success', 'Account data imported successfully!');
-                            }
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            try {
+                const importedData = JSON.parse(event.target.result);
+                
+                if (importedData.passwords && importedData.username !== undefined) {
+                    const result = await showMessage('Import Account', 'Importing will overwrite your current data. Are you sure?', true);
+                    
+                    if (result) {
+                        passwords = importedData.passwords;
+                        username = importedData.username;
+                        
+                        // Handle Theme
+                        if (importedData.theme) {
+                            applyTheme(importedData.theme);
                         } else {
-                            showMessage('Error', 'Invalid file format. Please import a valid PassPro account file.');
+                            applyTheme('default');
                         }
-                    } catch (error) {
-                        showMessage('Error', 'Failed to parse file. Please ensure it is a valid JSON file.');
+
+                        // Handle PIN
+                        if (importedData.pin) {
+                            localStorage.setItem('pin', importedData.pin);
+                            if (typeof pinLockToggle !== 'undefined') pinLockToggle.checked = true;
+                        } else {
+                            localStorage.removeItem('pin');
+                            if (typeof pinLockToggle !== 'undefined') pinLockToggle.checked = false;
+                        }
+                        
+                        saveData();
+                        updateUI();
+                        showMessage('Success', 'Account data imported successfully!');
                     }
-                };
-                reader.readAsText(file);
+                } else {
+                    showMessage('Error', 'Invalid file format. Please import a valid PassPro account file.');
+                }
+            } catch (error) {
+                console.error(error);
+                showMessage('Error', 'Failed to parse file. Please ensure it is a valid JSON file.');
             }
-        });
+        };
+        reader.readAsText(file);
+    }
+});
         
         document.getElementById('arrange-btn').addEventListener('click', () => {
             arrangeMode = !arrangeMode;

@@ -2,24 +2,29 @@
     const slides = [
         {
             title: "PassPro Updated!",
-            text: "We've improved the Dashboard With new Custom App Themes!",
+            text: "We've improved the Dashboard With new Custom App Themes! We have over 23+ currently with more to come! And as of V1.17.15 The themes save with your downloaded data.",
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.688-1.688h1.937c3.084 0 5.625-2.541 5.625-5.625 0-4.812-4.594-8.75-10-8.75Z"/></svg>`
         },
         {
             title: "Zero-Knowledge",
-            text: "Always Remember your data is encrypted locally. Not even WE can see your passwords.",
+            text: "Always Remember your data is encrypted locally. Not even WE can see your passwords. Make sure you download your account and have a backup somewhere safe like a USB!",
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`
         },
         {
             title: "Secure & Simple",
-            text: "A completely redesigned interface focused on speed and accessibility.",
+            text: "A completely redesigned interface focused on speed and accessibility. And as of April 2026 and all the before we have remained a Free Service with no Subscriptions!",
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`
+        },
+        {
+            title: "New Password Generator! V1.17.15",
+            text: "A Brand New Password Generator Tool has arrived Learn more and try it out now!",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2M15 16v-2M8 9h2M12 9h4M11 2l.912 2.736a2 2 0 0 0 1.352 1.352L16 7l-2.736.912a2 2 0 0 0 -1.352 1.352L11 12l-.912 -2.736a2 2 0 0 0 -1.352 -1.352L6 7l2.736 -.912a2 2 0 0 0 1.352 -1.352L11 2Z"/></svg>`        
         }
     ];
 
     let currentIndex = 0;
     const VERSION_KEY = 'passpro_last_seen_version';
-    const CURRENT_VERSION = '1.16.15'; 
+    const CURRENT_VERSION = '1.17.15'; 
 
     function hasSeenPopup() {
         try {

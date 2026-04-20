@@ -1,3 +1,8 @@
+V1.17.15
+----------
+Downloading Data now includes your Current theme, New Discord and Official Website buttons in settings, New Advanced Password Generator, 
+Forgot Pin page updated, Generator Banner, Official website link replaced with Generator link, 
+
 V1.16.15
 ----------
 New Update Screen that lists updates in the version, Themes are categorized, New Themes, Classic Legacy Blue Original Theme,
@@ -62,4 +67,4 @@ Pin Lock Profiles. Username display on Navbar. Show Password Button Added. Mobil
 
 V1.0.0
 ----------
-Dashboard, Passwords, Settings, Download/import accounts/passwords.Username feature, Local Data Saving.
+Dashboard, Passwords, Settings, Download/import accounts/passwords, Username feature, Local Data Saving.
