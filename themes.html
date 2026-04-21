@@ -2,296 +2,214 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Our Journey - Themes</title>
-    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>PassPro - Appearance</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-    <script>
-        (function () {
-            var theme = localStorage.getItem('__app_theme') || 'light';
-            if (theme === 'light') {
-                document.documentElement.classList.add('light-mode');
-            }
-        })();
-    </script>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #111111; 
-            color: #f3f4f6;
-            min-height: 100vh; 
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            transition: background-color 0.3s ease;
         }
-        header {
-            background-color: rgba(34, 34, 34, 0.7);
-            border-bottom-color: #334155;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        .theme-list-item {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: rgba(26, 26, 26, 0.6);
+            border: 1px solid #222;
         }
-        .theme-card { 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            position: relative; 
-            overflow: hidden; 
-            background-color: #222;
-            border: 2px solid transparent;
+        .theme-list-item:hover {
+            background-color: rgba(38, 38, 38, 0.9);
+            transform: translateY(-1px);
+            border-color: #444;
         }
-        .theme-card:hover { 
-            transform: translateY(-3px); 
-            background-color: #2d3748;
+        .theme-list-item.active {
+            border-color: #ff4d4d;
+            background-color: rgba(255, 77, 77, 0.08);
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.1);
         }
-        .active-theme { 
-            border-color: #db2777 !important; 
-            background-color: #2d1a24 !important; 
+        .palette-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-
-        .search-container {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 4px 12px;
+        .category-header {
             display: flex;
             align-items: center;
-            border: 1px solid #334155;
-            flex-grow: 1;
-            margin: 0 16px;
-            max-width: 400px;
-        }
-
-        .search-input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 8px;
-            width: 100%;
-            font-size: 14px;
-        }
-
-        .category-header {
+            gap: 10px;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #9ca3af;
             font-size: 0.875rem;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #94a3b8;
-            margin: 2rem 0 1rem 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        
         .category-header::after {
             content: "";
             flex: 1;
             height: 1px;
-            background: linear-gradient(to right, #334155, transparent);
+            background: #222;
         }
-
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+        .search-input {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 10px 15px 10px 40px;
+            color: white;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .search-input:focus {
+            border-color: #555;
+            background: #222;
+        }
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 6px;
         }
-
         ::-webkit-scrollbar-track {
-            background: #111;
+            background: #0a0a0a;
         }
-        
         ::-webkit-scrollbar-thumb {
-            background: rgb(122, 1, 116); 
+            background: #333;
             border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #da46ff; 
-        }
-
-        .light-mode body {
-            background-color: #f8fafc;
-            color: #1e293b;
-        }
-        .light-mode header {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-bottom-color: #e2e8f0;
-        }
-        .light-mode .search-container {
-            background: rgba(0, 0, 0, 0.05);
-            border-color: #cbd5e1;
-        }
-        .light-mode .search-input {
-            color: #1e293b;
-        }
-        .light-mode header h1 {
-            color: #db2777 !important;
-        }
-        .light-mode .theme-card {
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        .light-mode .theme-card:hover {
-            background-color: #f1f5f9;
-        }
-        .light-mode .theme-card h3 {
-            color: #1e293b;
-        }
-        .light-mode .theme-card p {
-            color: #64748b;
-        }
-        .light-mode .active-theme {
-            background-color: #fff1f2 !important;
-            border-color: #db2777 !important;
-        }
-        .light-mode .category-header {
-            color: #64748b;
         }
     </style>
 </head>
-<body>
-    <!-- Premium lock script removed -->
+<body class="min-h-screen flex flex-col items-center pb-12">
 
-    <header class="fixed top-0 left-0 w-full z-50 shadow-lg p-4 text-center border-b border-pink-600 flex justify-between items-center">
-        <a href="settings.html" class="text-gray-500 hover:text-pink-600 transition duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left">
-                <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
-            </svg>
-        </a>
-        
-        <div class="search-container">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input 
-                type="text" 
-                id="themeSearch" 
-                placeholder="Search themes..." 
-                class="search-input"
-                oninput="handleSearch(this.value)"
-            >
-        </div>
-
-        <div class="hidden sm:block">
-            <h1 class="text-xl font-extrabold text-[white]">Theme Library</h1>
-        </div>
-    </header>
-
-    <div class="max-w-xl mx-auto pt-24 px-6 pb-12">
-        <div id="themes-container"></div>
-        <div id="no-results" class="hidden text-center py-20 text-gray-500">
-            <p class="text-lg">No themes matching your search.</p>
-        </div>
-        <div id="statusMsg" class="mt-8 text-center text-pink-400 font-medium opacity-0 transition-opacity">
-            Theme applied successfully!
+    <div id="modal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
+        <div class="bg-[#111] p-6 rounded-2xl shadow-2xl max-w-sm w-full mx-4 text-center text-white border border-[#333]">
+            <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
+            <p id="modal-message" class="text-gray-400 mb-6"></p>
+            <button id="modal-ok-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl">Got it</button>
         </div>
     </div>
 
+    <header class="w-full p-4 flex flex-col gap-4 bg-[#111]/80 backdrop-blur-md border-b border-[#222] sticky top-0 z-50">
+        <div class="flex items-center">
+            <a href="index.html" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors mr-2">
+                <i class="fas fa-arrow-left text-lg"></i>
+            </a>
+            <div>
+                <h1 class="text-lg font-bold">Appearance</h1>
+                <p class="text-xs text-gray-500">Personalize your PassPro experience</p>
+            </div>
+        </div>
+        <div class="search-container px-2 pb-1">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="theme-search" class="search-input" placeholder="Search themes or categories...">
+        </div>
+    </header>
+
+    <main class="w-full max-w-2xl px-6" id="themes-grid"></main>
+
     <script>
-        // Storage keys kept for compatibility, but logic checking premium is removed
-        const STORAGE_KEY_CUSTOM_CSS = '__app_custom_theme_file';
-        const STORAGE_KEY_THEME = '__app_theme';
-
-        const CAT_DARK = "Dark Themes";
-        const CAT_LIGHT = "Light Themes";
-        const CAT_SEAS = "Seasonal Themes";
-        const CAT_GAME = "Game Themes";
-        const CAT_COMPANY = "Company Themes";
-
-        // All themes are now free (isPremium removed)
-        const THEMES = [
-            { id: 'none', category: CAT_DARK, name: 'Default', desc: 'The Free original Dark Mode', icon: '🌸', file: '', colors: ['bg-[white]', 'bg-[black]'] },
-            { id: 'darkspace', category: CAT_DARK, name: 'Dark Space', desc: 'Deep space aesthetic with subtle stars.', icon: '⭐', file: 'pro-themes/space.css', colors: ['bg-[darkblue]', 'bg-[black]'] },
-            { id: 'purple', category: CAT_DARK, name: 'Royal Purple', desc: 'Elegant and deep purple tones', icon: '🔮', file: 'pro-themes/purpletheme.css', colors: ['bg-purple-600', 'bg-indigo-700', 'bg-purple-200'] },
-            { id: 'redgaze', category: CAT_DARK, name: 'Red Gaze', desc: 'A Dark love theme.', icon: '⭐', file: 'pro-themes/redtheme.css', colors: ['bg-[#6e081d]', 'bg-[black]'] },
-            
-            { id: 'moogledark', category: CAT_COMPANY, name: 'Moogle Dark', desc: 'Modern search-inspired dark mode.', icon: '⭐', file: 'pro-themes/google-theme.css', colors: ['bg-[#8ab4f8]', 'bg-[#111111]'] },
-            { id: 'ticroloft', category: CAT_COMPANY, name: 'Modern Ticroloft', desc: 'Clean, Corporate, and Professional', icon: '💻', file: 'pro-themes/microsofttheme.css', colors: ['bg-[white]', 'bg-[black]', 'bg-[#444]'] },
-            { id: 'acebukdark', category: CAT_COMPANY, name: 'AceBuk Light', desc: 'Classic social-style light mode.', icon: '⭐', file: 'pro-themes/facebooklight.css', colors: ['bg-[blue]', 'bg-[white]'] },
-            { id: 'ios-liquid', category: CAT_COMPANY, name: 'IOS Liquid', desc: 'light/dark mode IOS Liquid Theme.', icon: '⭐', file: 'pro-themes/ios-liquid.css', colors: ['bg-[blue]', 'bg-[dark]', 'bg-[white]'] },
-
-            { id: 'pink-theme', category: CAT_LIGHT, name: 'Pink Theme', desc: 'A soft pink and white theme.', icon: '⭐', file: 'pro-themes/pink-theme.css', colors: ['bg-[pink]', 'bg-[white]'] },
-            { id: 'barbie-pink', category: CAT_LIGHT, name: 'Barbie Pink', desc: 'Vibrant and iconic pink.', icon: '⭐', file: 'pro-themes/barbie-pink.css', colors: ['bg-[pink]', 'bg-[dark]'] },
-            
-            { id: 'christmas', category: CAT_SEAS, name: 'Christmas Spirit', desc: 'Holiday vibes for your app.', icon: '🎄', file: 'pro-themes/christmastheme.css', colors: ['bg-red-600', 'bg-green-700', 'bg-slate-100'] },
-            { id: 'Halloween', category: CAT_SEAS, name: 'Halloween', desc: 'Holiday vibes for your app.', icon: '🎃', file: 'pro-themes/halloween.css', colors: ['bg-orange-600', 'bg-[white]', 'bg-[black]'] },
-
-            { id: 'cocdark', category: CAT_GAME, name: 'COC Theme', desc: 'Inspired by the village strategy classic.', icon: '⭐', file: 'pro-themes/coc.css', colors: ['bg-[#4db848]', 'bg-[#f1c40f]', 'bg-[#121212]'] },
-            { id: 'breakcraft', category: CAT_GAME, name: 'Breakcraft', desc: 'A blocky, adventurous dark theme.', icon: '⭐', file: 'pro-themes/breakcraft.css', colors: ['bg-[#ffb000]', 'bg-[#da46ff]', 'bg-[#333]'] },
-            { id: 'exbox', category: CAT_GAME, name: 'ExBox Dark', desc: 'Sleek green and black console vibes.', icon: '⭐', file: 'pro-themes/exbox.css', colors: ['bg-[dark]', 'bg-[green]', 'bg-[#222]'] },
-            { id: 'ts4', category: CAT_GAME, name: 'TS4 Dark', desc: 'Simulated life in a dark palette.', icon: '⭐', file: 'pro-themes/ts4.css', colors: ['bg-[blue]', 'bg-[purple]', 'bg-[#222]', 'bg-[white]'] },
-            { id: 'tethesda', category: CAT_GAME, name: 'Tethesda', desc: 'A tribute to RPG aesthetics.', icon: '⭐', file: 'pro-themes/tethesda.css', colors: ['bg-[#6e081d]', 'bg-[black]'] }
+        const THEMES_DATA = [
+            { id: 'default', name: 'PassPro Default', category: 'Core', palette: ['#ff4d4d', '#222222', '#111111'] },
+            { id: 'themes/crimson-red.css', name: 'Crimson Red', category: 'Core', palette: ['#c64747', '#ff4d4d', '#ffffff'] },
+            { id: 'themes/legacy-blue.css', name: 'Classic Legacy Blue', category: 'Core', palette: ['#3b82f6', '#f97316', '#6666ff'] },
+            { id: 'themes/pro-hacker.css', name: 'Pro Hacker', category: 'Dark & Stealth', palette: ['#00FF41', '#003B00', '#0D0208'] },
+            { id: 'themes/purple-nitro.css', name: 'Purple Nitro', category: 'Dark & Stealth', palette: ['#8547c6', '#b559f3', '#1e112a'] },
+            { id: 'themes/ocean-blue.css', name: 'Ocean Blue', category: 'Dark & Stealth', palette: ['#0070f3', '#00c6ff', '#020c1b'] },
+            { id: 'themes/emerald-forest.css', name: 'Emerald Forest', category: 'Dark & Stealth', palette: ['#10b981', '#059669', '#06100d'] },
+            { id: 'themes/orange-ember.css', name: 'Orange Ember', category: 'Dark & Stealth', palette: ['#ff8c00', '#ff4500', '#2d1b0d'] },
+            { id: 'themes/acebuk.css', name: 'AceBuk (Social)', category: 'Light Themes', palette: ['#0866FF', '#F0F2F5', '#FFFFFF'] },
+            { id: 'themes/bos.css', name: 'BOS Theme', category: 'Light Themes', palette: ['#007AFF', '#F2F2F7', '#FFFFFF'] },
+            { id: 'themes/microloft.css', name: 'Microloft', category: 'Light Themes', palette: ['#0078D4', '#F3F3F3', '#FFFFFF'] },
+            { id: 'themes/moogle.css', name: 'Moogle', category: 'Tech Brands', palette: ['#ef4444', '#ffffff', '#f3f4f6'] },
+            { id: 'themes/tethesda.css', name: 'TSE', category: 'Tech Brands', palette: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'] },
+            { id: 'themes/ts5.css', name: 'Station Pro', category: 'Tech Brands', palette: ['#000000', '#1F1F1F', '#0072CE'] },
+            { id: 'themes/exbox.css', name: 'ExBox', category: 'Tech Brands', palette: ['#107C10', '#0A0A0A', '#1F1F1F'] },
+            { id: 'themes/cyber-pro.css', name: 'Cyber Pro', category: 'Gaming', palette: ['#00ffff', '#ff00ff', '#fdf004'] },
+            { id: 'themes/clash-season.css', name: 'Clash Season', category: 'Gaming', palette: ['#4C8C2B', '#FFD700', '#00D2FF'] },
+            { id: 'themes/game-interface.css', name: 'UI Interface', category: 'Gaming', palette: ['#4C8C2B', '#FFD700', '#00D2FF'] },
+            { id: 'themes/christmas.css', name: 'Christmas', category: 'Holiday & Seasonal', palette: ['#D42426', '#0D1B2A', '#F9D71C'] },
+            { id: 'themes/spooky-halloween.css', name: 'Spooky Halloween', category: 'Holiday & Seasonal', palette: ['#f97316', '#ea580c', '#8b5cf6'] },
+            { id: 'themes/winter-theme.css', name: 'Winter Theme', category: 'Holiday & Seasonal', palette: ['#38bdf8', '#ef4444', '#0f172a'] },
+            { id: 'themes/western.css', name: 'Western', category: 'Vibes', palette: ['#8b4513', '#f4e4bc', '#2b2b2b'] },
+            { id: 'themes/barbie-pink.css', name: 'Barbie Pink', category: 'Vibes', palette: ['#ff1493', '#ff69b4', '#2d0a1e'] }
         ];
 
-        let currentSearchQuery = "";
+        const container = document.getElementById('themes-grid');
+        const searchInput = document.getElementById('theme-search');
 
-        function renderThemes() {
-            const container = document.getElementById('themes-container');
-            const noResults = document.getElementById('no-results');
-            const currentFile = localStorage.getItem(STORAGE_KEY_CUSTOM_CSS) || '';
-
-            const filteredThemes = THEMES.filter(theme => 
-                theme.name.toLowerCase().includes(currentSearchQuery.toLowerCase()) || 
-                theme.desc.toLowerCase().includes(currentSearchQuery.toLowerCase())
+        function renderThemes(filter = '') {
+            const currentTheme = localStorage.getItem('passpro_theme') || 'default';
+            container.innerHTML = '';
+            
+            const searchTerm = filter.toLowerCase();
+            
+            const filteredData = THEMES_DATA.filter(t => 
+                t.name.toLowerCase().includes(searchTerm) || 
+                t.category.toLowerCase().includes(searchTerm)
             );
 
-            if (filteredThemes.length === 0) {
-                container.innerHTML = "";
-                noResults.classList.remove('hidden');
-                return;
-            }
+            const categories = [...new Set(filteredData.map(t => t.category))];
 
-            noResults.classList.add('hidden');
-            
-            const categories = [CAT_DARK, CAT_LIGHT, CAT_SEAS, CAT_COMPANY, CAT_GAME];
-            let html = "";
+            categories.forEach(catName => {
+                const section = document.createElement('section');
+                section.innerHTML = `<div class="category-header">${catName}</div>`;
+                
+                const list = document.createElement('div');
+                list.className = "flex flex-col gap-2";
 
-            categories.forEach(cat => {
-                const catThemes = filteredThemes.filter(t => t.category === cat);
-                if (catThemes.length > 0) {
-                    html += `<div class="category-header">${cat}</div>`;
-                    html += `<div class="grid grid-cols-1 gap-4">`;
-                    html += catThemes.map(theme => `
-                        <div onclick="selectTheme('${theme.id}')" 
-                             id="theme-${theme.id}" 
-                             class="theme-card cursor-pointer p-5 rounded-2xl shadow-sm ${theme.file === currentFile ? 'active-theme' : ''}">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-bold text-gray-100">${theme.name}</h3>
-                                    <p class="text-sm text-gray-400">${theme.desc}</p>
-                                </div>
-                            </div>
-                            <div class="mt-4 flex gap-2">
-                                ${theme.colors.map(c => `<div class="w-5 h-5 rounded-full ${c} border border-white/10"></div>`).join('')}
-                            </div>
+                const catThemes = filteredData.filter(t => t.category === catName);
+                
+                catThemes.forEach(theme => {
+                    const item = document.createElement('div');
+                    item.className = `theme-list-item p-4 rounded-2xl cursor-pointer flex items-center justify-between ${currentTheme === theme.id ? 'active' : ''}`;
+                    
+                    const paletteHtml = theme.palette.map(color => `<div class="palette-dot" style="background-color: ${color};"></div>`).join('');
+
+                    item.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 rounded-full ${currentTheme === theme.id ? 'bg-red-500' : 'bg-transparent'}"></div>
+                            <h3 class="font-semibold text-sm">${theme.name}</h3>
                         </div>
-                    `).join('');
-                    html += `</div>`;
-                }
+                        <div class="flex gap-1.5 bg-black/40 p-1.5 rounded-full border border-white/5">
+                            ${paletteHtml}
+                        </div>
+                    `;
+
+                    item.onclick = () => {
+                        localStorage.setItem('passpro_theme', theme.id);
+                        renderThemes(searchInput.value);
+                    };
+
+                    list.appendChild(item);
+                });
+
+                section.appendChild(list);
+                container.appendChild(section);
             });
 
-            container.innerHTML = html;
-        }
-
-        function handleSearch(query) {
-            currentSearchQuery = query;
-            renderThemes();
-        }
-
-        function selectTheme(themeId) {
-            const theme = THEMES.find(t => t.id === themeId);
-            if (!theme) return;
-
-            // All themes are free - directly set the CSS file
-            if (theme.file) {
-                localStorage.setItem(STORAGE_KEY_CUSTOM_CSS, theme.file);
-            } else {
-                localStorage.removeItem(STORAGE_KEY_CUSTOM_CSS);
+            if (filteredData.length === 0) {
+                container.innerHTML = `<div class="mt-12 text-center text-gray-500 italic">No themes matching "${filter}"</div>`;
             }
-
-            // Update active state in UI
-            document.querySelectorAll('.theme-card').forEach(card => card.classList.remove('active-theme'));
-            const selectedCard = document.getElementById('theme-' + themeId);
-            if (selectedCard) selectedCard.classList.add('active-theme');
-
-            // Success feedback
-            const msg = document.getElementById('statusMsg');
-            msg.style.opacity = '1';
-            setTimeout(() => msg.style.opacity = '0', 2000);
         }
 
-        window.onload = renderThemes;
+        searchInput.addEventListener('input', (e) => {
+            renderThemes(e.target.value);
+        });
+
+        renderThemes();
     </script>
 </body>
 </html>

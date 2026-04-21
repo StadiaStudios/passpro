@@ -1,0 +1,142 @@
+:root {
+    --nitro-bg-gradient: linear-gradient(135deg, #f3f3f3 0%, #e6e6e6 100%);
+    --nitro-surface: rgba(255, 255, 255, 0.7);
+    --nitro-surface-hover: rgba(255, 255, 255, 0.9);
+    --nitro-surface-solid: #ffffff;
+    
+    --nitro-primary: #0078d4;
+    --nitro-primary-gradient: linear-gradient(180deg, #0078d4 0%, #005a9e 100%);
+    --nitro-primary-hover: linear-gradient(180deg, #106ebe 0%, #005a9e 100%);
+    --nitro-accent: #0078d4;
+    
+    --nitro-text-main: #201f1e;
+    --nitro-text-muted: #605e5c;
+    
+    --nitro-glass-border: 1px solid rgba(0, 0, 0, 0.08);
+    --nitro-glass-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode {
+    background: var(--nitro-bg-gradient) !important;
+    background-attachment: fixed !important;
+    color: var(--nitro-text-main) !important;
+    font-family: 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif !important;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+#mobile-nav-menu {
+    background-color: #ffffff !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-link::after, 
+.link-effect::after, 
+.password-url-link::after, 
+.forgot-pin-link::after, 
+.terms-link::after {
+    background: var(--nitro-primary) !important;
+}
+
+.text-red-500 { color: #d13438 !important; }
+.text-secondary, .text-\[\#999\], .text-gray-300, .text-gray-400, .text-gray-500 { 
+    color: var(--nitro-text-muted) !important; 
+}
+.text-white { color: var(--nitro-text-main) !important; }
+
+.bg-red-500, button.bg-red-500, 
+#pin-submit-btn, #add-password-btn, .view-btn, .edit-btn, .delete-btn {
+    background: var(--nitro-primary) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 4px !important;
+    font-weight: 400 !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: none !important;
+}
+
+.bg-red-500:hover, button.bg-red-500:hover, 
+#pin-submit-btn:hover, #add-password-btn:hover, .view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background: #106ebe !important;
+    transform: none !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.bg-\[\#222\], button.bg-\[\#222\], .bg-gray-500, .bg-gray-600 {
+    background-color: #ffffff !important;
+    border: 1px solid #8a8886 !important;
+    color: #323130 !important;
+}
+
+.bg-\[\#222\]:hover, button.bg-\[\#222\]:hover, .bg-gray-500:hover, .bg-gray-600:hover {
+    background-color: #f3f2f1 !important;
+}
+
+.password-item, 
+.bg-\[\#1A1A1A\], 
+.bg-\[\#111\], 
+.bg-\[\#2A2A2A\] {
+    background: var(--nitro-surface) !important;
+    border: var(--nitro-glass-border) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--nitro-glass-shadow) !important;
+}
+
+.password-item:hover {
+    background: var(--nitro-surface-hover) !important;
+    border-color: rgba(0, 120, 212, 0.3) !important;
+}
+
+.input-field, #pin-input {
+    background-color: #ffffff !important;
+    border: 1px solid #8a8886 !important;
+    border-bottom: 2px solid #605e5c !important; 
+    color: #323130 !important;
+    border-radius: 4px 4px 0 0 !important;
+}
+
+.input-field:focus, #pin-input:focus {
+    border-bottom-color: var(--nitro-primary) !important;
+    outline: none !important;
+}
+
+#pin-lock-toggle:checked ~ .block {
+    background: var(--nitro-primary) !important;
+}
+
+.bg-red-700 { background-color: #a4262c !important; }
+.bg-red-600 { background: #d13438 !important; }
+
+#loading-screen { background: #ffffff !important; }
+
+.password-item.drag-over {
+    background: rgba(0, 120, 212, 0.05) !important;
+    border: 2px solid var(--nitro-primary) !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+::-webkit-scrollbar-thumb {
+    background: #c8c6c4 !important;
+    border: 4px solid transparent !important;
+    background-clip: padding-box !important;
+    border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #a19f9d !important;
+}
+
+#premium-badge {
+    background: #0078d4 !important;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+}

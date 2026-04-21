@@ -1,0 +1,97 @@
+:root {
+    --ocean-bg: linear-gradient(135deg, #0a192f 0%, #020c1b 100%);
+    --ocean-surface: rgba(10, 25, 47, 0.7);
+    --ocean-surface-hover: rgba(16, 42, 78, 0.9);
+    --ocean-surface-solid: #0a192f;
+    --ocean-primary: #0070f3;
+    --ocean-primary-gradient: linear-gradient(90deg, #0070f3, #00c6ff);
+    --ocean-primary-hover: linear-gradient(90deg, #0081ff, #33d4ff);
+    --ocean-text: #e6f1ff;
+    --ocean-text-muted: #8892b0;
+    --ocean-border: 1px solid rgba(0, 198, 255, 0.2);
+}
+
+body.dark-mode {
+    background: var(--ocean-bg) !important;
+    background-attachment: fixed !important;
+    color: var(--ocean-text) !important;
+}
+
+header {
+    background-color: rgba(2, 12, 27, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: var(--ocean-border);
+}
+
+#mobile-nav-menu {
+    background-color: var(--ocean-surface-solid) !important;
+    border-left: var(--ocean-border);
+}
+
+.nav-link::after, 
+.link-effect::after, 
+.password-url-link::after, 
+.forgot-pin-link::after, 
+.terms-link::after {
+    background: var(--ocean-primary-gradient) !important;
+}
+
+.text-red-500 { color: #00c6ff !important; }
+.text-secondary, .text-\[\#999\], .text-gray-300, .text-gray-400, .text-gray-500 { 
+    color: var(--ocean-text-muted) !important; 
+}
+.text-white { color: var(--ocean-text) !important; }
+
+.bg-red-500, button.bg-red-500, 
+#pin-submit-btn, #add-password-btn, .view-btn, .edit-btn, .delete-btn {
+    background: var(--ocean-primary-gradient) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 112, 243, 0.3) !important;
+}
+
+.bg-red-500:hover, button.bg-red-500:hover, 
+#pin-submit-btn:hover, #add-password-btn:hover, .view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background: var(--ocean-primary-hover) !important;
+    box-shadow: 0 6px 20px rgba(0, 112, 243, 0.5) !important;
+}
+
+.bg-\[\#222\], button.bg-\[\#222\], .bg-gray-500, .bg-gray-600 {
+    background-color: rgba(0, 112, 243, 0.15) !important;
+    border: var(--ocean-border) !important;
+}
+
+.password-item, 
+.bg-\[\#1A1A1A\], 
+.bg-\[\#111\], 
+.bg-\[\#2A2A2A\] {
+    background: var(--ocean-surface) !important;
+    border: var(--ocean-border) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.password-item:hover {
+    background: var(--ocean-surface-hover) !important;
+    border-color: rgba(0, 198, 255, 0.5) !important;
+}
+
+.input-field, #pin-input {
+    background-color: rgba(2, 12, 27, 0.6) !important;
+    border: 1px solid rgba(0, 112, 243, 0.3) !important;
+}
+
+#pin-lock-toggle:checked ~ .block {
+    background: var(--ocean-primary-gradient) !important;
+}
+
+.bg-red-700 { background-color: rgba(0, 112, 243, 0.2) !important; }
+.bg-red-600 { background: var(--ocean-primary-gradient) !important; }
+
+#loading-screen { background: var(--ocean-bg) !important; }
+
+#premium-badge {
+    background: var(--ocean-primary-gradient) !important;
+    box-shadow: 0 0 10px rgba(0, 198, 255, 0.4) !important;
+}

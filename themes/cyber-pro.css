@@ -1,0 +1,120 @@
+:root {
+    --cb-bg: #050505;
+    --cb-card: #0d0d0d;
+    --cb-neon-pink: #ff00ff;
+    --cb-neon-cyan: #00ffff;
+    --cb-neon-yellow: #fdf004;
+    --cb-text: #e0e0e0;
+    --cb-border: #333;
+    --cb-glow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+body {
+    background-color: var(--cb-bg) !important;
+    background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: var(--cb-text) !important;
+    font-family: 'Courier New', Courier, monospace !important; 
+}
+
+h1, h2, h3, .font-bold {
+    color: var(--cb-neon-cyan) !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px var(--cb-neon-pink);
+}
+
+.bg-\[\#1a1a1a\], 
+.bg-\[rgba\(26\,26\,26\,0\.8\)\],
+section > div {
+    background-color: var(--cb-card) !important;
+    border: 1px solid var(--cb-neon-cyan) !important;
+    box-shadow: 4px 4px 0px var(--cb-neon-pink) !important;
+    border-radius: 0px !important;
+}
+
+button, .cursor-pointer.p-4 {
+    background-color: transparent !important;
+    border: 2px solid var(--cb-neon-yellow) !important;
+    color: var(--cb-neon-yellow) !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    transition: all 0.2s ease;
+    border-radius: 0px !important;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover, .cursor-pointer.p-4:hover {
+    background-color: var(--cb-neon-yellow) !important;
+    color: black !important;
+    box-shadow: 0 0 15px var(--cb-neon-yellow) !important;
+}
+
+.bg-blue-600, .bg-indigo-600 {
+    background-color: var(--cb-neon-pink) !important;
+    border-color: var(--cb-neon-pink) !important;
+    color: white !important;
+    box-shadow: var(--cb-glow) !important;
+}
+
+input, select, textarea {
+    background-color: #000 !important;
+    border: 1px solid var(--cb-neon-cyan) !important;
+    color: var(--cb-neon-cyan) !important;
+    border-radius: 0px !important;
+}
+
+input:focus {
+    outline: none !important;
+    box-shadow: 0 0 10px var(--cb-neon-cyan) !important;
+}
+
+nav, .fixed.bottom-0 {
+    background-color: black !important;
+    border-top: 2px solid var(--cb-neon-pink) !important;
+}
+
+nav i, .fixed.bottom-0 i {
+    color: var(--cb-neon-cyan) !important;
+}
+
+.text-blue-500 {
+    color: var(--cb-neon-pink) !important;
+    text-shadow: 0 0 5px var(--cb-neon-pink);
+}
+
+.flex.items-center.justify-between.p-4 {
+    border-left: 4px solid var(--cb-neon-cyan) !important;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #111 0%, #050505 100%) !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--cb-neon-pink);
+}
+
+#loading-screen {
+    background-color: #000 !important;
+}
+
+#loading-screen div {
+    border-top-color: var(--cb-neon-cyan) !important;
+    border-right-color: var(--cb-neon-pink) !important;
+}
+
+.fixed.bottom-20.left-1\/2 {
+    background: var(--cb-neon-cyan) !important;
+    color: black !important;
+    font-weight: bold;
+    border-radius: 0px !important;
+    box-shadow: 5px 5px 0px var(--cb-neon-pink) !important;
+}
