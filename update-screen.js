@@ -2,8 +2,18 @@
     const slides = [
         {
             title: "PassPro Updated!",
-            text: "We've improved the Dashboard With new Custom App Themes! We have over 23+ currently with more to come! And as of V1.17.15 The themes save with your downloaded data.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.688-1.688h1.937c3.084 0 5.625-2.541 5.625-5.625 0-4.812-4.594-8.75-10-8.75Z"/></svg>`
+            text: "In V1.18.16 Users now have a New Digital Wallet System within their PassPro App! Try it Now",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M21 9v2"/><path d="M17 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>`        
+        },
+        {
+            title: "V1.18.16 Notes",
+            text: "Following This we added a Export Cards and Import Cards System so that way you never lose them. But Remember these are two seperate files for your Passwords And Cards",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/><rect x="5" y="14" width="4" height="2" rx="0.5"/></svg>`
+        },
+        {
+            title: "Contact Us Now Feature!",
+            text: "We also now have a Contact Us Feature you can click through settings that way if you dont join our discord you can reach us via Email.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
         },
         {
             title: "Zero-Knowledge",
@@ -11,20 +21,15 @@
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`
         },
         {
-            title: "Secure & Simple",
-            text: "A completely redesigned interface focused on speed and accessibility. And as of April 2026 and all the before we have remained a Free Service with no Subscriptions!",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`
-        },
-        {
-            title: "New Password Generator! V1.17.15",
-            text: "A Brand New Password Generator Tool has arrived Learn more and try it out now!",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2M15 16v-2M8 9h2M12 9h4M11 2l.912 2.736a2 2 0 0 0 1.352 1.352L16 7l-2.736.912a2 2 0 0 0 -1.352 1.352L11 12l-.912 -2.736a2 2 0 0 0 -1.352 -1.352L6 7l2.736 -.912a2 2 0 0 0 1.352 -1.352L11 2Z"/></svg>`        
+            title: "Terms Of Service Updates",
+            text: "Following the New Digital Wallet Updates, This comes with new Terms Of Service! Please make sure you read and agree to the Terms Of Service at all times!",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>`     
         }
     ];
 
     let currentIndex = 0;
     const VERSION_KEY = 'passpro_last_seen_version';
-    const CURRENT_VERSION = '1.17.15'; 
+    const CURRENT_VERSION = '1.18.16'; 
 
     function hasSeenPopup() {
         try {

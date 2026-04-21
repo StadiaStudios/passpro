@@ -217,7 +217,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.17.15</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.18.16</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -241,7 +241,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.17.15</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.18.16</span>
 </div>
     </div>
 
@@ -259,6 +259,7 @@
                     <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-passwords">View all passwords</button></li>
                     <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="lock-app-btn">Lock App</button></li>
                     <li><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect" id="go-to-import-account">Import Account</button></li>
+                    <li><a href="pages/card-vault.html"><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect">Digital Wallet</button></a></li>
                     <li><a href="pages/generator.html"><button class="text-[#999] hover:text-[white] transition-colors duration-200 link-effect">Password Generator</button></a></li>
                 </ul>
             </div>
@@ -285,15 +286,16 @@
     </a>
 </div>
 
-        <div class="mt-8 bg-[#1A1A1A] p-6 rounded-lg shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="mt-8 bg-[#1A1A1A] p-6 rounded-lg shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 border border-white/5">
     <div>
-        <h3 class="text-xl font-semibold text-white">🎨 New App Themes Available!</h3>
-        <p class="text-secondary">Explore our collection of new custom app themes to personalize PassPro.</p>
+        <h3 class="text-xl font-bold text-white">Digital Card Vault</h3>
+        <p class="text-secondary opacity-80">Securely store and manage your credit and debit card information.</p>
     </div>
-    <a href="themes.html" class="whitespace-nowrap bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
-        Browse Themes
+    <a href="pages/card-vault.html" class="whitespace-nowrap bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg">
+        OPEN VAULT
     </a>
 </div>
+
     </div>
 </section>
 
@@ -335,16 +337,19 @@
                     </div>
 
                     <div class="bg-[#1A1A1A] p-6 rounded-2xl border border-zinc-800">
-                            <h3 class="text-xl font-semibold mb-4 text-red-500">Community & Support</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <a href="https://discord.gg/UGBFVrcKKxk" target="_blank" class="flex items-center justify-center gap-2 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
-                                    <i class="fab fa-discord text-xl"></i> Join Discord
-                                </a>
-                                <a href="https://stadiastudios.github.io/stadia/" target="_blank" class="flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 border border-zinc-700">
-                                    <i data-lucide="globe" class="w-5 h-5"></i> Official Website
-                                </a>
-                            </div>
-                        </div>
+    <h3 class="text-xl font-semibold mb-4 text-red-500">Community & Support</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="https://discord.gg/UGBFVrcKKxk" target="_blank" class="flex items-center justify-center gap-2 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+            <i class="fab fa-discord text-xl"></i> Discord
+        </a>
+        <a href="https://stadiastudios.github.io/stadia/" target="_blank" class="flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 border border-zinc-700">
+    <i class="fas fa-globe text-xl"></i> Website
+</a>
+        <a href="mailto:stadiastudios.support@proton.me" class="flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 border border-zinc-700">
+            <i class="fas fa-envelope"></i> Support
+        </a>
+    </div>
+</div>
                     
                     <div class="bg-[#1A1A1A] p-6 rounded-lg shadow-xl">
                         <h3 class="text-xl font-semibold mb-4 text-red-500">Security Settings</h3>
@@ -360,7 +365,10 @@
                         </div><br>
                         <a href="pages/generator.html" class="block w-full text-center bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
                             <i class="fas fa-key mr-2"></i> Password Generator
-                        </a>
+                        </a><br>
+                        <a href="pages/card-vault.html" class="block w-full text-center bg-[#222] hover:bg-[#333] text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+            <i class="fas fa-credit-card mr-2"></i> Digital Wallet
+        </a>
                     </div>
                     
                     
@@ -394,7 +402,7 @@
 
                 </div>
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.17.15</span></p>
+                    <p>App Version: <span id="app-version">1.18.16</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
@@ -460,7 +468,7 @@
         let username = '';
         let isUnlocked = false;
         
-        const APP_VERSION = "1.17.15";
+        const APP_VERSION = "1.18.16";
         
         const dashboardSection = document.getElementById('dashboard-section');
         const passwordListSection = document.getElementById('password-list-section');
@@ -574,6 +582,13 @@ function getDeviceInfo() {
     mobileNavMenu.classList.remove('open');
 }
 
+
+lockAppBtn.addEventListener('click', () => {
+    isUnlocked = false;
+    sessionStorage.removeItem('session_unlocked'); 
+    pinModal.classList.remove('hidden');
+    pinInput.focus();
+});
 
         function saveData() {
             const pin = localStorage.getItem('pin'); 
@@ -895,14 +910,12 @@ if (pin) {
 function applyTheme(themeUrl) {
     let link = document.getElementById('dynamic-theme');
     
-    // If resetting to default or no theme provided
     if (themeUrl === 'default' || !themeUrl) {
         if (link) link.remove();
         localStorage.removeItem('passpro_theme');
         return;
     }
-    
-    // If applying a new theme
+
     if (!link) {
         link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -928,14 +941,12 @@ function applyTheme(themeUrl) {
                         passwords = importedData.passwords;
                         username = importedData.username;
                         
-                        // Handle Theme
                         if (importedData.theme) {
                             applyTheme(importedData.theme);
                         } else {
                             applyTheme('default');
                         }
 
-                        // Handle PIN
                         if (importedData.pin) {
                             localStorage.setItem('pin', importedData.pin);
                             if (typeof pinLockToggle !== 'undefined') pinLockToggle.checked = true;
@@ -1151,7 +1162,25 @@ passwordListContainer.addEventListener('touchend', (e) => {
             updateUI();
         });
 
-        document.getElementById('pin-submit-btn').addEventListener('click', validatePin);
+        document.getElementById('pin-submit-btn').addEventListener('click', () => {
+    const enteredPin = pinInput.value;
+    const correctPin = localStorage.getItem('pin');
+
+    if (enteredPin === correctPin) {
+        isUnlocked = true;
+        sessionStorage.setItem('session_unlocked', 'true'); 
+        
+        pinModal.classList.add('hidden');
+        pinErrorMessage.classList.add('hidden');
+        pinInput.value = '';
+        showPage('dashboard-section');
+        updateUI();
+    } else {
+        pinErrorMessage.classList.remove('hidden');
+        pinInput.value = '';
+    }
+});
+
         document.getElementById('pin-input').addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
                 validatePin();
@@ -1192,8 +1221,20 @@ passwordListContainer.addEventListener('touchend', (e) => {
         updateUI();
         
         const pin = localStorage.getItem('pin');
+const isSessionUnlocked = sessionStorage.getItem('session_unlocked') === 'true';
 
-if (pin && pin.trim() !== "") {
+if (pin && pin.trim() !== "" && !isSessionUnlocked) {
+    isUnlocked = false;
+    sessionStorage.setItem('session_unlocked', 'true');
+    pinModal.classList.remove('hidden');
+} else {
+    isUnlocked = true;
+    pinModal.classList.add('hidden');
+    showPage('dashboard-section');
+    updateUI(); 
+    
+    const loadingScreen = document.getElementById('loading-screen');
+    if (pin && pin.trim() !== "" && !isSessionUnlocked) {
     isUnlocked = false;
     pinModal.classList.remove('hidden');
 } else {
@@ -1202,7 +1243,7 @@ if (pin && pin.trim() !== "") {
     showPage('dashboard-section');
     updateUI(); 
 }
-
+}
         
     </script>
 
@@ -1220,13 +1261,62 @@ if (pin && pin.trim() !== "") {
     </script>
 
     <script>
-window.addEventListener('load', () => {
-setTimeout(() => {
-document.getElementById('loading-screen').classList.add('hidden');
-setTimeout(() => {
-document.getElementById('loading-screen').remove();
-}, 1000);
-}, 500);
+window.addEventListener('load', function() {
+    const loader = document.getElementById('loader');
+    const enterButton = document.getElementById('enter-button');
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    const bgVideo = document.getElementById('bg-video');
+
+    if (sessionStorage.getItem('hasVisited') === 'true') {
+        if (loadingScreen) loadingScreen.style.display = 'none';
+        if (mainContent) mainContent.classList.remove('hidden');
+        if (bgVideo) bgVideo.play();
+    } else {
+        sessionStorage.setItem('hasVisited', 'true');
+        sessionStorage.setItem('session_unlocked', 'true');
+
+        setTimeout(() => {
+            if (loader) loader.classList.add('fade-out');
+            setTimeout(() => {
+                if (loader) loader.style.display = 'none';
+                if (enterButton) {
+                    enterButton.classList.remove('hidden');
+                    enterButton.classList.add('fade-in');
+                }
+            }, 1000);
+        }, 2000);
+
+        if (enterButton) {
+            enterButton.addEventListener('click', function() {
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.classList.remove('hidden');
+                    mainContent.classList.add('fade-in');
+                    if (bgVideo) bgVideo.play();
+                }, 1000);
+            });
+        }
+    }
+});
+</script>
+
+<script>
+    window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    const isSessionUnlocked = sessionStorage.getItem('session_unlocked') === 'true';
+
+    if (isSessionUnlocked) {
+        if (loadingScreen) loadingScreen.remove();
+    } else {
+        setTimeout(() => {
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => loadingScreen.remove(), 1000);
+            }
+        }, 500);
+    }
 });
 </script>
 
@@ -1239,4 +1329,3 @@ document.getElementById('loading-screen').remove();
 </body>
 
 </html>
-

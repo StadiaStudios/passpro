@@ -1,3 +1,8 @@
+V1.18.16
+----------
+New Support Contact Email, PIN is no longer needed when going between pages, Seperate Navbar To Generator and Card page. New Wallet Feature to save Credit Cards!, 
+Terms Of Service Updates, New Quick Actions, Removes Notices, 
+
 V1.17.15
 ----------
 Downloading Data now includes your Current theme, New Discord and Official Website buttons in settings, New Advanced Password Generator, 
