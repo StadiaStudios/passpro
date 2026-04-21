@@ -1,0 +1,118 @@
+:root {
+--google-bg: #202124;
+--google-card-bg: #292a2d;
+--google-border: #3c4043;
+--google-text: #e8eaed;
+--google-text-secondary: #9aa0a6;
+--google-accent: #8ab4f8;
+--google-accent-hover: #aecbfa;
+--google-input-bg: #303134;
+}
+
+body {
+background-color: var(--google-bg) !important;
+color: var(--google-text) !important;
+font-family: 'Google Sans', 'Roboto', 'Inter', sans-serif !important;
+}
+
+header {
+background-color: var(--google-card-bg) !important;
+border-bottom: 1px solid var(--google-border) !important;
+box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15) !important;
+}
+
+header h1, header span {
+color: var(--google-text) !important;
+}
+
+.max-w-md, .theme-card, .bg-white, .bg-gray-800 {
+background-color: var(--google-card-bg) !important;
+border: 1px solid var(--google-border) !important;
+color: var(--google-text) !important;
+border-radius: 8px !important;
+}
+
+.theme-card {
+background-color: var(--google-card-bg) !important;
+border: 1px solid var(--google-border) !important;
+}
+
+.active-theme {
+border-color: var(--google-accent) !important;
+background-color: rgba(138, 180, 248, 0.04) !important;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+.bg-gray-100 {
+background-color: var(--google-input-bg) !important;
+border: 1px solid var(--google-border) !important;
+color: var(--google-text) !important;
+border-radius: 4px !important;
+}
+
+input:focus {
+border-color: var(--google-accent) !important;
+outline: none !important;
+}
+
+button,
+.bg-pink-600,
+.bg-blue-600,
+.bg-indigo-600 {
+background-color: var(--google-accent) !important;
+color: #202124 !important;
+font-weight: 500 !important;
+transition: background-color 0.2s, box-shadow 0.2s !important;
+border-radius: 4px !important;
+}
+
+button:hover {
+background-color: var(--google-accent-hover) !important;
+box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15) !important;
+}
+
+.bg-gray-200, .bg-gray-700 {
+background-color: transparent !important;
+border: 1px solid var(--google-border) !important;
+color: var(--google-accent) !important;
+}
+
+.text-gray-600, .text-gray-400, .text-gray-500 {
+color: var(--google-text-secondary) !important;
+}
+
+.text-pink-600, .text-indigo-600, .text-blue-600 {
+color: var(--google-accent) !important;
+}
+
+#years, #months, #days, #hours, #minutes {
+color: var(--google-accent) !important;
+}
+
+.peer:checked ~ .peer-checked:bg-pink-600 {
+background-color: var(--google-accent) !important;
+}
+
+svg {
+color: var(--google-text-secondary) !important;
+}
+
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+
+::-webkit-scrollbar-track {
+background: var(--google-bg);
+}
+
+::-webkit-scrollbar-thumb {
+background: var(--google-border);
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: var(--google-text-secondary);
+}

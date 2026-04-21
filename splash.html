@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Our Journey</title>
+    <script>
+    (function() {
+        const themeFile = localStorage.getItem('__app_custom_theme_file');
+        if (themeFile) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = themeFile;
+            document.head.appendChild(link);
+        }
+    })();
+</script>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 0;
+            margin: 0; 
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        #durationList li {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 0.75rem;
+            text-align: left;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        #durationList li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #d946ef;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .duration-value {
+            font-weight: 800;
+            color: #d946ef;
+            margin-right: 0.15rem;
+            transition: color 0.3s;
+        }
+        
+        #uploadedImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @media (min-width: 640px) {
+             #durationList li { font-size: 2rem; }
+        }
+
+        body.dark {
+            background-color: #111111;
+            color: #e2e8f0;
+        }
+        
+        body.dark header {
+            background-color: rgba(34, 34, 34, 0.7);
+            border-bottom-color: #334155;
+        }
+
+        body.dark .bg-white {
+            background-color: #222222;
+            color: #e2e8f0;
+        }
+
+        body.dark .shadow-lg {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+        }
+
+        body.dark #durationList li {
+            color: #cbd5e0;
+        }
+        
+        body.dark .text-gray-700 { color: #cbd5e0; }
+        body.dark .text-gray-600 { color: #a0aec0; }
+        body.dark .text-gray-500 { color: #718096; }
+        body.dark .text-gray-400 { color: #4a5568; }
+
+        body.dark .bg-pink-50 {
+            background-color: #222;
+        }
+        body.dark .border-pink-100,
+        body.dark .border-pink-200,
+        body.dark .border-pink-300,
+        body.dark .border-pink-400 { 
+             border-color: #4a5568;
+        }
+        body.dark .text-pink-600, body.dark .text-pink-700 { color: #e45fff; }
+
+        body.dark .duration-value {
+            color: #d946ef;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        
+        body.dark ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgb(122, 1, 116); 
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #da46ff; 
+        }
+        
+        body.dark input[type="date"] {
+            color: #e2e8f0; 
+            background-color: #222222;
+            border-color: #4a5568;
+        }
+
+        .alternate-units {
+            border-top: 1px solid #fce7f3;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+        }
+        body.dark .alternate-units {
+            border-top-color: #334155;
+        }
+
+        .milestone-card {
+            transition: all 0.2s ease;
+        }
+        body.dark .milestone-card {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+
+        body.dark #photoContainer {
+            background-color: #171717;
+        }
+        
+        body.dark #photoPlaceholder {
+            background-color: #262626;
+        }
+
+        body:not(.dark) .ai-button,
+        body:not(.dark) .ai-btn,
+        body:not(.dark) button[id*="aiButton" i],
+        body:not(.dark) button[class*="ai-btn"],
+        body:not(.dark) button[class*="ai-button"],
+        body:not(.dark) .ai-action-btn,
+        body:not(.dark) [class*="ai-generate"] {
+            background-color: #fdf2f8 !important;
+            color: #be185d !important;
+            border-color: #fbcfe8 !important;
+        }
+        
+        body:not(.dark) .ai-button:hover,
+        body:not(.dark) .ai-btn:hover {
+            background-color: #fce7f3 !important;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="fixed top-0 left-0 w-full z-50 shadow-lg p-4 text-center border-b border-pink-400 flex justify-between items-center">
+        <a href="settings.html" class="text-gray-500 hover:text-pink-600 transition duration-150">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings">
+                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.78 1.35a2 2 0 0 0 .73 2.73l.15.08a2 2 0 0 1 1 1.74v.44a2 2 0 0 1-1 1.73l-.15.08a2 2 0 0 0-.73 2.73l.78 1.35a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.78-1.35a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.44a2 2 0 0 1 1-1.73l.15-.08a2 2 0 0 0 .73-2.73l-.78-1.35a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+        </a>
+        <h1 class="text-2xl font-extrabold text-pink-700" id="mainTitle">Our Journey</h1>
+        <p class="text-sm w-8"></p>
+        <p id="dateDisplay" class="text-sm text-gray-600 font-medium absolute right-1/2 translate-x-1/2 bottom-1"></p>
+    </header>
+
+<div id="app" class="w-full max-w-xl text-center transition-all duration-300" style="padding-bottom: 2rem;">
+
+        <div id="welcomeMessage" class="p-8 mb-8 bg-pink-50 rounded-xl border-2 border-pink-300 shadow-lg hidden">
+            <h2 class="text-2xl font-bold text-pink-600 mb-4">Welcome to <span id="welcomeNames"></span>'s Journey!</h2>
+            <p class="text-gray-700 text-lg">To begin tracking your time together, please set your relationship start date below. And change names in settings.</p>
+        </div>
+        
+        <div id="photoWrapper" class="mb-8 hidden">
+    <div id="photoContainer" class="relative w-full aspect-square overflow-hidden cursor-pointer bg-gray-200">
+        <img id="uploadedImage" src="" alt="Our Couple Photo" class="absolute inset-0 w-full h-full object-cover hidden">
+        <div id="photoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-400 bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            <p class="text-sm font-semibold uppercase tracking-wider">Tap to Upload Photo</p>
+        </div>
+    </div>
+    <input type="file" id="photoUpload" accept="image/*" class="hidden">
+</div>
+
+<div class="px-6 md:px-8">
+        <div id="timerContainer" class="w-full p-6 mb-8 hidden">
+            <p class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4">We have been together for</p>
+            <ul id="durationList" class="list-none p-0 mb-6"></ul>
+            
+            <div class="alternate-units text-left">
+                <p class="text-xs font-bold text-pink-400 uppercase tracking-tighter mb-3">In other words...</p>
+                <div id="altStats" class="space-y-2 text-gray-600 font-medium italic"></div>
+            </div>
+        </div>
+
+        <div id="anniversaryContainer" class="mb-8 hidden"></div>
+
+        <button type="button" id="changeDateBtn" class="hidden mb-4 w-full text-sm font-semibold text-pink-600 hover:text-pink-700">
+            Change relationship start date
+        </button>
+        
+        <div id="inputSection" class="p-4 bg-pink-50 rounded-xl border border-pink-200 shadow-md">
+            <label for="startDate" class="block text-left text-sm font-semibold text-gray-700 mb-2">Set Our Start Date:</label>
+            <input type="date" id="startDate" required 
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500 mb-4 text-lg text-gray-700">
+            <button id="setDateButton" 
+                    class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-xl transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                Save Date
+            </button>
+        </div>
+
+        <div id="messageBox" class="fixed top-4 right-4 z-50 p-3 bg-green-500 text-white rounded-lg shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none" role="alert">
+            Date saved successfully!
+        </div>
+    </div>
+</div>
+
+    <script src="anniversaries-section.js"></script>
+    <script>
+        const STORAGE_KEY_DATE = '__relationship_start_date';
+        const STORAGE_KEY_PHOTO = '__relationship_photo_data';
+        const STORAGE_KEY_NAMES = '__relationship_names';
+        const STORAGE_KEY_THEME = '__app_theme';
+
+        const dateInput = document.getElementById('startDate');
+        const dateButton = document.getElementById('setDateButton');
+        const dateDisplay = document.getElementById('dateDisplay');
+        const messageBox = document.getElementById('messageBox');
+        const durationList = document.getElementById('durationList');
+        const altStats = document.getElementById('altStats');
+        const mainTitle = document.getElementById('mainTitle');
+        const welcomeNames = document.getElementById('welcomeNames');
+        const photoWrapper = document.getElementById('photoWrapper'); 
+        const photoContainer = document.getElementById('photoContainer');
+        const photoUploadInput = document.getElementById('photoUpload');
+        const uploadedImage = document.getElementById('uploadedImage');
+        const photoPlaceholder = document.getElementById('photoPlaceholder');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const timerContainer = document.getElementById('timerContainer');
+        const anniversaryContainer = document.getElementById('anniversaryContainer');
+        const inputSection = document.getElementById('inputSection');
+        const changeDateBtn = document.getElementById('changeDateBtn');
+        const pageHeader = document.querySelector('header');
+        const appContainer = document.getElementById('app');
+
+        let intervalId = null;
+        let dateEditorOpen = false;
+
+        function updateStartDateFormVisibility() {
+            if (!inputSection || !changeDateBtn) return;
+            const startDateString = localStorage.getItem(STORAGE_KEY_DATE);
+            if (startDateString) {
+                if (dateEditorOpen) {
+                    inputSection.classList.remove('hidden');
+                    changeDateBtn.textContent = 'Hide date editor';
+                } else {
+                    inputSection.classList.add('hidden');
+                    changeDateBtn.textContent = 'Change relationship start date';
+                }
+                changeDateBtn.classList.remove('hidden');
+            } else {
+                dateEditorOpen = false;
+                inputSection.classList.remove('hidden');
+                changeDateBtn.classList.add('hidden');
+                changeDateBtn.textContent = 'Change relationship start date';
+            }
+        }
+
+        function applyTheme() {
+            const savedTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'light';
+            document.body.classList.toggle('dark', savedTheme === 'dark');
+        }
+        
+        function updateNamesDisplay() {
+            const namesJson = localStorage.getItem(STORAGE_KEY_NAMES);
+            let names = { name1: "", name2: "" };
+            if (namesJson) {
+                try { names = JSON.parse(namesJson); } catch (e) {}
+            }
+            
+            let titleText = "";
+            const n1 = names.name1?.trim();
+            const n2 = names.name2?.trim();
+
+            if (n1 && n2) {
+                titleText = `${n1} & ${n2}`;
+            } else if (n1) {
+                titleText = n1;
+            } else if (n2) {
+                titleText = n2;
+            } else {
+                titleText = "Our Journey";
+            }
+
+            mainTitle.textContent = titleText;
+            welcomeNames.textContent = titleText;
+        }
+
+        function calculateAndDisplayTime() {
+            const startDateString = localStorage.getItem(STORAGE_KEY_DATE);
+            durationList.innerHTML = '';
+            altStats.innerHTML = '';
+            
+            if (!startDateString) {
+                if (intervalId) clearInterval(intervalId);
+                dateDisplay.textContent = "Your love story awaits!";
+                welcomeMessage.classList.remove('hidden');
+                photoWrapper.classList.add('hidden');
+                timerContainer.classList.add('hidden');
+                anniversaryContainer.classList.add('hidden');
+                return;
+            }
+
+            welcomeMessage.classList.add('hidden');
+            photoWrapper.classList.remove('hidden');
+            timerContainer.classList.remove('hidden');
+            anniversaryContainer.classList.remove('hidden');
+
+            const parts = startDateString.split('-');
+            const startDate = new Date(parts[0], parts[1] - 1, parts[2]);
+            const nowDate = new Date();
+            
+            if (window.renderAnniversaries) {
+                window.renderAnniversaries(startDate);
+            }
+            
+            if (startDate.getTime() > nowDate.getTime()) {
+                dateDisplay.textContent = `Awaiting our day: ${startDate.toLocaleDateString()}`;
+                durationList.innerHTML = '<li class="text-gray-500 text-base text-center">Counting down...</li>';
+                return;
+            }
+
+            dateDisplay.textContent = `Since: ${startDate.toLocaleDateString()}`;
+
+            let years = nowDate.getFullYear() - startDate.getFullYear();
+            let months = nowDate.getMonth() - startDate.getMonth();
+            let days = nowDate.getDate() - startDate.getDate();
+
+            if (months < 0) { years--; months += 12; }
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(nowDate.getFullYear(), nowDate.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+            if (months < 0) { years--; months += 12; }
+
+            const units = [
+                { value: years, label: 'Year' },
+                { value: months, label: 'Month' },
+                { value: days, label: 'Day' }
+            ];
+            
+            let displayedUnits = 0;
+            units.forEach(unit => {
+                if (unit.value > 0) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span class="duration-value">${unit.value.toLocaleString()}</span> ${unit.value === 1 ? unit.label : unit.label + 's'}`;
+                    durationList.appendChild(li);
+                    displayedUnits++;
+                }
+            });
+
+            if (displayedUnits === 0) {
+                durationList.innerHTML = '<li class="text-gray-500 text-xl text-center font-semibold">Today is Day One!</li>';
+            }
+
+            const diffMs = nowDate - startDate;
+            const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const totalWeeks = Math.floor(totalDays / 7);
+            const totalMonths = (years * 12) + months;
+
+            const altData = [
+                { value: totalMonths, label: 'month' },
+                { value: totalWeeks, label: 'week' },
+                { value: totalDays, label: 'day' }
+            ];
+
+            altData.forEach(item => {
+                const p = document.createElement('p');
+                p.className = "text-sm";
+                p.innerHTML = `<span class="font-bold">${item.value.toLocaleString()}</span> ${item.value === 1 ? item.label : item.label + 's'}`;
+                altStats.appendChild(p);
+            });
+        }
+
+        function showMessage(message, bgColor) {
+            messageBox.textContent = message;
+            messageBox.className = `fixed top-4 right-4 z-50 p-3 text-white rounded-lg shadow-xl opacity-100 transition-opacity duration-300 ${bgColor}`;
+            setTimeout(() => { messageBox.classList.replace('opacity-100', 'opacity-0'); }, 3000);
+        }
+
+        function saveDate() {
+            if (dateInput.value) {
+                localStorage.setItem(STORAGE_KEY_DATE, dateInput.value);
+                showMessage("Our special date has been set!", "bg-green-600");
+                dateEditorOpen = false;
+                initTimer();
+            } else {
+                showMessage("Please select a valid date.", "bg-red-600");
+            }
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem(STORAGE_KEY_PHOTO, e.target.result);
+                    displayPhoto(e.target.result);
+                    showMessage("Photo updated!", "bg-green-600");
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function displayPhoto(base64Image) {
+            if (base64Image) {
+                uploadedImage.src = base64Image;
+                uploadedImage.classList.remove('hidden');
+                photoPlaceholder.classList.add('hidden');
+            } else {
+                uploadedImage.classList.add('hidden');
+                photoPlaceholder.classList.remove('hidden');
+            }
+        }
+
+        function syncAppOffsetWithHeader() {
+            if (!pageHeader || !appContainer) return;
+            appContainer.style.paddingTop = `${pageHeader.offsetHeight}px`;
+        }
+
+        function initTimer() {
+            applyTheme();
+            updateNamesDisplay(); 
+            syncAppOffsetWithHeader();
+            const existingDate = localStorage.getItem(STORAGE_KEY_DATE);
+            if (existingDate) dateInput.value = existingDate;
+            displayPhoto(localStorage.getItem(STORAGE_KEY_PHOTO));
+            if (intervalId) clearInterval(intervalId);
+            calculateAndDisplayTime();
+            updateStartDateFormVisibility();
+            intervalId = setInterval(calculateAndDisplayTime, 60000);
+        }
+
+        changeDateBtn.addEventListener('click', () => {
+            if (!localStorage.getItem(STORAGE_KEY_DATE)) return;
+            dateEditorOpen = !dateEditorOpen;
+            updateStartDateFormVisibility();
+            if (dateEditorOpen) {
+                inputSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
+        dateButton.addEventListener('click', saveDate);
+        photoUploadInput.addEventListener('change', handlePhotoUpload);
+        photoContainer.addEventListener('click', () => photoUploadInput.click());
+        window.addEventListener('resize', syncAppOffsetWithHeader);
+        window.onload = initTimer;
+    </script>
+</body>
+</html>

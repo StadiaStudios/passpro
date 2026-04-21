@@ -1,0 +1,107 @@
+@import url('https://fonts.cdnfonts.com/css/minecraftia');
+
+:root {
+--mc-bg: #1a1a1a;
+--mc-dirt: #3d2923;
+--mc-grass: #416027;
+--mc-gray: #4d4d4d;
+--mc-border-light: #ffffff;
+--mc-border-dark: #000000;
+--mc-text-green: #55FF55;
+--mc-text-yellow: #FFFF55;
+}
+
+body {
+background-color: #1a1a1a !important;
+background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://www.transparenttextures.com/patterns/dark-matter.png');
+font-family: 'Minecraftia', sans-serif !important;
+color: #ffffff !important;
+image-rendering: pixelated;
+}
+
+header {
+background-color: #313131 !important;
+border-bottom: 4px solid #000000 !important;
+backdrop-filter: none !important;
+}
+
+header h1, header a {
+text-shadow: 2px 2px #000000;
+}
+
+.bg-white, .bg-gray-50, .bg-gray-100, .theme-card {
+background-color: #4d4d4d !important;
+border: 4px solid #000000 !important;
+box-shadow: inset -4px -4px #222, inset 4px 4px #888 !important;
+border-radius: 0 !important;
+}
+
+button:not([class="ai-"]), .bg-pink-500, .bg-blue-600, .bg-green-600 {
+background-color: #999999 !important;
+border: 3px solid #000000 !important;
+box-shadow: inset -3px -3px #444, inset 3px 3px #ccc !important;
+border-radius: 0 !important;
+color: #ffffff !important;
+text-shadow: 2px 2px #333;
+transition: all 0.1s;
+font-family: 'Minecraftia', sans-serif !important;
+position: relative;
+}
+
+button:not([class*="ai-"]):hover {
+background-color: #7a7a7a !important;
+box-shadow: inset -3px -3px #222, inset 3px 3px #999 !important;
+transform: scale(1.02);
+}
+
+button:not([class*="ai-"]):active {
+box-shadow: inset 3px 3px #222, inset -3px -3px #999 !important;
+}
+
+input[type="text"], input[type="date"], select {
+background-color: #000000 !important;
+border: 2px solid #555555 !important;
+color: var(--mc-text-green) !important;
+border-radius: 0 !important;
+font-family: 'Minecraftia', sans-serif !important;
+}
+
+#timeDisplay {
+color: var(--mc-text-yellow) !important;
+text-shadow: 3px 3px #333000;
+}
+
+.text-pink-600, .text-gray-600, .text-gray-500 {
+color: #aaaaaa !important;
+}
+
+#photoContainer {
+border: 4px dashed #555555 !important;
+background-color: #222222 !important;
+border-radius: 0 !important;
+}
+
+::-webkit-scrollbar {
+width: 12px;
+}
+::-webkit-scrollbar-track {
+background: #1e1e1e;
+}
+::-webkit-scrollbar-thumb {
+background: #4d4d4d;
+border: 2px solid #000000;
+}
+
+.active-theme {
+border-color: var(--mc-text-green) !important;
+outline: 2px solid var(--mc-text-green);
+}
+
+h1, h2, h3, p, label {
+color: #ffffff !important;
+text-shadow: 1px 1px #000000;
+}
+
+.ai-style-button, .ai-magic-button {
+/ These remain as defined in the HTML/Tailwind */
+}

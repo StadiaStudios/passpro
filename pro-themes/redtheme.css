@@ -1,0 +1,126 @@
+:root {
+    --red-bg-start: #2d0a0a;
+    --red-bg-end: #0f0202;
+    --crimson-accent: #9b1c1c;
+    --crimson-glow: #ff4d4d;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #d1d1d1;
+}
+
+body {
+    background: linear-gradient(135deg, var(--red-bg-start) 0%, var(--red-bg-end) 100%) !important;
+    background-attachment: fixed !important;
+    color: var(--text-primary) !important;
+}
+
+header {
+    background-color: rgba(15, 2, 2, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+header h1, #mainTitle {
+    color: var(--crimson-glow) !important;
+    text-shadow: 0 0 12px rgba(255, 77, 77, 0.4);
+}
+
+header svg {
+    color: var(--text-secondary) !important;
+}
+
+#app .bg-pink-50, 
+#app .bg-white,
+#inputSection,
+#welcomeMessage,
+.bg-white.rounded-2xl.shadow-xl {
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    backdrop-filter: blur(15px);
+    color: var(--text-primary) !important;
+}
+
+.bg-pink-50 { 
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-color: var(--glass-border) !important;
+}
+
+#timerContainer {
+    background: transparent !important;
+}
+
+.text-gray-700, .text-gray-600, .text-gray-500, #dateDisplay {
+    color: var(--text-secondary) !important;
+}
+
+.duration-value {
+    color: var(--crimson-glow) !important;
+    text-shadow: 0 0 8px rgba(255, 77, 77, 0.5);
+}
+
+#durationList li::before {
+    content: '❤️' !important;
+    filter: drop-shadow(0 0 5px var(--crimson-glow));
+}
+
+#setDateButton, 
+#saveNames,
+button.bg-pink-600 {
+    background: linear-gradient(90deg, #7f1d1d, #ef4444) !important;
+    border: none !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(127, 29, 29, 0.5) !important;
+    transition: transform 0.2s ease;
+}
+
+#setDateButton:active, #saveNames:active {
+    transform: scale(0.95);
+}
+
+#removePhoto {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #ff8080 !important;
+    border: 1px solid rgba(255, 128, 128, 0.2) !important;
+}
+
+input[type="date"],
+input[type="text"] {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: white !important;
+}
+
+.peer-checked\:bg-pink-600:checked + div,
+.peer-checked\:bg-pink-600 {
+    background-color: var(--crimson-accent) !important;
+}
+
+.alternate-units, .pt-6.text-center.border-t.border-pink-300 {
+    border-top-color: var(--glass-border) !important;
+}
+
+.text-pink-400, .text-pink-500, .text-pink-600, .text-pink-700 {
+    color: var(--crimson-glow) !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--red-bg-end);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--crimson-accent) !important;
+}
+
+#photoPlaceholder {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 2px dashed var(--glass-border) !important;
+    color: var(--text-secondary) !important;
+}
+
+.milestone-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: var(--glass-border) !important;
+}

@@ -1,0 +1,89 @@
+/* iOS 26 "Liquid Glass" Theme */
+
+:root {
+    --ios-bg: linear-gradient(135deg, #fce7f3 0%, #e0e7ff 100%);
+    --ios-glass: rgba(255, 255, 255, 0.4);
+    --ios-blur: blur(20px) saturate(170%);
+    --ios-border: 1px solid rgba(255, 255, 255, 0.5);
+    --ios-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.1);
+    --ios-text: #1d1d1f;
+}
+
+/* Dark Mode Variables */
+body.dark {
+    --ios-bg: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+    --ios-glass: rgba(30, 30, 30, 0.6);
+    --ios-border: 1px solid rgba(255, 255, 255, 0.1);
+    --ios-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+    --ios-text: #f5f5f7;
+}
+
+body {
+    background: var(--ios-bg) !important;
+    background-attachment: fixed !important;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif !important;
+    color: var(--ios-text) !important;
+    transition: background 0.5s ease;
+}
+
+/* The "Bubble" Containers */
+.max-w-md, 
+header, 
+.bg-white, 
+section, 
+.rounded-2xl {
+    background: var(--ios-glass) !important;
+    backdrop-filter: var(--ios-blur) !important;
+    -webkit-backdrop-filter: var(--ios-blur) !important;
+    border: var(--ios-border) !important;
+    border-radius: 2.5rem !important; /* The iOS 26 Bubble Look */
+    box-shadow: var(--ios-shadow) !important;
+    margin-bottom: 1.5rem !important;
+    padding: 1.5rem !important;
+}
+
+/* Glass Buttons */
+button, 
+.bg-pink-600, 
+.bg-blue-600, 
+a.block {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 1.2rem !important;
+    color: var(--ios-text) !important;
+    font-weight: 600 !important;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+button:active {
+    transform: scale(0.94) !important;
+}
+
+/* Fix for standard white text on pink buttons in dark mode */
+body.dark .text-white {
+    color: #ffffff !important;
+}
+
+/* Input Bubbles */
+input[type="text"], 
+input[type="date"], 
+input[type="file"],
+select {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: none !important;
+    border-radius: 1rem !important;
+    padding: 0.8rem !important;
+}
+
+body.dark input {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+/* iOS Toggle Switch Overrides */
+input[type="checkbox"] {
+    accent-color: #34c759;
+    width: 1.5rem;
+    height: 1.5rem;
+}

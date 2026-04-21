@@ -1,0 +1,127 @@
+:root {
+--xbox-green: #107C10;
+--xbox-green-hover: #159b15;
+--xbox-dark: #121212;
+--xbox-tile: #1e1e1e;
+--xbox-tile-hover: #2d2d2d;
+--xbox-text: #ffffff;
+--xbox-text-muted: #aaaaaa;
+--font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background-color: var(--xbox-dark) !important;
+background-image: radial-gradient(circle at top left, #1a1a1a 0%, #000000 100%) !important;
+color: var(--xbox-text) !important;
+font-family: var(--font-family) !important;
+margin: 0;
+padding: 0;
+-webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, p, span, label {
+color: var(--xbox-text) !important;
+}
+
+header {
+background-color: rgba(0, 0, 0, 0.8) !important;
+backdrop-filter: blur(10px);
+border-bottom: 2px solid var(--xbox-green);
+padding: 1rem !important;
+}
+
+.card, .tile, .bg-white, .dark:bg-gray-800 {
+background-color: var(--xbox-tile) !important;
+border: 2px solid transparent !important;
+border-radius: 4px !important; / Xbox uses very slight rounding or sharp corners */
+box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.card:hover, .tile:hover {
+transform: scale(1.02);
+border-color: var(--xbox-green) !important;
+background-color: var(--xbox-tile-hover) !important;
+box-shadow: 0 0 20px rgba(16, 124, 16, 0.3) !important;
+}
+
+button, .btn {
+background-color: var(--xbox-tile) !important;
+border: 2px solid #333 !important;
+color: white !important;
+text-transform: uppercase;
+font-weight: bold;
+letter-spacing: 1px;
+border-radius: 2px !important;
+padding: 10px 20px !important;
+transition: 0.2s ease !important;
+}
+
+button:active, .btn:active {
+transform: scale(0.95);
+background-color: var(--xbox-green) !important;
+}
+
+.btn-primary, button.bg-blue-600, button.bg-green-600 {
+background-color: var(--xbox-green) !important;
+border-color: var(--xbox-green) !important;
+}
+
+input[type="text"], input[type="date"], select {
+background-color: #000 !important;
+border: 2px solid #333 !important;
+color: white !important;
+border-radius: 0 !important;
+padding: 12px !important;
+}
+
+input:focus {
+border-color: var(--xbox-green) !important;
+outline: none;
+}
+
+input[type="checkbox"]:checked + div {
+background-color: var(--xbox-green) !important;
+}
+
+.nav-bar {
+background: #000 !important;
+border-top: 1px solid #333;
+}
+
+#photo-container {
+border: 4px solid var(--xbox-tile);
+border-radius: 8px;
+overflow: hidden;
+}
+
+#photo-container:hover {
+border-color: var(--xbox-green);
+}
+
+#toast {
+background-color: var(--xbox-green) !important;
+color: white !important;
+border-radius: 0 !important;
+font-weight: bold;
+border-left: 5px solid #0c5a0c;
+}
+
+::-webkit-scrollbar {
+width: 6px;
+}
+::-webkit-scrollbar-track {
+background: #121212;
+}
+::-webkit-scrollbar-thumb {
+background: var(--xbox-green);
+}
+
+@keyframes slideIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+main > div {
+animation: slideIn 0.4s ease-out;
+}
