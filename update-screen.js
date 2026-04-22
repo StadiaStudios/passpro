@@ -2,34 +2,29 @@
     const slides = [
         {
             title: "PassPro Updated!",
-            text: "In V1.18.16 Users now have a New Digital Wallet System within their PassPro App! Try it Now",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M21 9v2"/><path d="M17 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>`        
+            text: "V1.19.17 Now Includes IMPORTANT Bug Fixes to the loading screen, We also now have a few new themes",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.83 6.74 2.26L21 9"/><path d="M21 3v6h-6"/></svg>`
         },
         {
-            title: "V1.18.16 Notes",
-            text: "Following This we added a Export Cards and Import Cards System so that way you never lose them. But Remember these are two seperate files for your Passwords And Cards",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/><rect x="5" y="14" width="4" height="2" rx="0.5"/></svg>`
+            title: "Card Vault Updates",
+            text: "The Card Vault now has a Copy Feature for each item. And has a view mode instead of just a edit mode.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="8" y="10" width="8" height="5" rx="1"/></svg>` 
         },
         {
-            title: "Contact Us Now Feature!",
-            text: "We also now have a Contact Us Feature you can click through settings that way if you dont join our discord you can reach us via Email.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
+            title: "New Report a Bug Feature",
+            text: "Now as of April 22 of 2026. Users on PassPro can now report app bugs within the app. Bascially just changing the support Redirect url",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 7-3 2"/><path d="m5 7 3 2"/><path d="m19 19-3-2"/><path d="m5 19 3-2"/><path d="M12 10v9"/><path d="M12 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M16 11a4 4 0 0 1-8 0v-2a4 4 0 0 1 8 0v2Z"/></svg>` 
         },
         {
             title: "Zero-Knowledge",
             text: "Always Remember your data is encrypted locally. Not even WE can see your passwords. Make sure you download your account and have a backup somewhere safe like a USB!",
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`
-        },
-        {
-            title: "Terms Of Service Updates",
-            text: "Following the New Digital Wallet Updates, This comes with new Terms Of Service! Please make sure you read and agree to the Terms Of Service at all times!",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>`     
         }
     ];
 
     let currentIndex = 0;
     const VERSION_KEY = 'passpro_last_seen_version';
-    const CURRENT_VERSION = '1.18.16'; 
+    const CURRENT_VERSION = '1.19.17'; 
 
     function hasSeenPopup() {
         try {

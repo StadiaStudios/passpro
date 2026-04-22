@@ -1,6 +1,7 @@
-V1.19.16
+V1.19.17
 ----------
-Copy Feature for Card Vault, View Mode For Card Vault, 
+Copy Feature for Card Vault, View Mode For Card Vault, New Themes, Bug Fixes: (Loading Screen Fix, etc.), Card Vault Page Updates, Password Generator now has a Keywords input feature,
+
 
 V1.18.16
 ----------

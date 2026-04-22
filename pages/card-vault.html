@@ -52,28 +52,130 @@
             opacity: 1;
         }
 
-        .card-item-hover {
-            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        /* --- Apple Wallet Style Card Stack --- */
+        .apple-wallet-card {
+            position: relative;
+            min-width: 100%;
+            aspect-ratio: 1.58 / 1;
+            border-radius: 24px;
+            box-shadow: 0 10px 28px 0 rgba(0,0,0,0.32);
+            overflow: hidden;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s cubic-bezier(.4,0,.2,1);
             cursor: grab;
-            touch-action: none;
+            z-index: 1;
+            margin-bottom: 12px;
+            border: 2px solid #2020201a;
         }
-        .card-item-hover:active {
+        .apple-wallet-card:active {
             cursor: grabbing;
+            transform: scale(0.97) rotate(-1deg);
         }
-        .card-item-hover:hover {
-            background: rgba(255, 255, 255, 0.03);
-            transform: translateY(-2px);
+        .apple-wallet-card:hover {
+            transform: translateY(-3px) scale(1.012);
+            box-shadow: 0 16px 40px 0 rgba(0,0,0,0.36);
+        }
+        /* Card backgrounds will be assigned per-card via JS */
+        .aw-bg-custom0 { background: linear-gradient(120deg, #ff9966, #ff5e62); }
+        .aw-bg-custom1 { background: linear-gradient(120deg, #56ccf2, #2f80ed); }
+        .aw-bg-custom2 { background: linear-gradient(120deg, #a8ff78, #78ffd6); }
+        .aw-bg-custom3 { background: linear-gradient(120deg, #f7971e, #ffd200); }
+        .aw-bg-custom4 { background: linear-gradient(120deg, #ff5858, #f09819); }
+        .aw-bg-custom5 { background: linear-gradient(120deg, #e44d26, #f16529); }
+        .aw-bg-custom6 { background: linear-gradient(120deg, #43cea2, #185a9d); }
+        .aw-bg-custom7 { background: linear-gradient(120deg, #ee9ca7, #ffdde1); }
+        .aw-bg-custom8 { background: linear-gradient(120deg, #c33764, #1d2671); }
+        .aw-bg-custom9 { background: linear-gradient(120deg, #f7971e, #ffd200); }
+        .aw-bg-custom10 { background: linear-gradient(120deg, #7f7fd5, #86a8e7, #91eac9); }
+        .aw-bg-custom11 { background: linear-gradient(120deg, #fc5c7d, #6a82fb); }
+
+        .apple-wallet-chip {
+            width: 48px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f7e57c 60%, #b99a3a 100%);
+            box-shadow: 0 2px 8px 0 rgba(160,140,80,0.14);
+            margin-bottom: 10px;
+            border: 1.5px solid #dbc26599;
         }
 
+        .apple-wallet-card .card-logo {
+            font-size: 2.1rem;
+            opacity: 0.85;
+            margin-left: auto;
+        }
+
+        .apple-wallet-detail-row {
+            display: flex;
+            width: 100%;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+        .apple-wallet-numbers {
+            font-size: 1.38rem;
+            letter-spacing: 0.18em;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            margin-bottom: 8px;
+            user-select: none;
+        }
+        .apple-wallet-card .card-label {
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #f3f4f9;
+            margin-bottom: 0;
+            margin-top: 8px;
+            letter-spacing: 0.07em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.13);
+        }
+        .apple-wallet-card .card-holder {
+            font-size: 0.67rem;
+            font-weight: 500;
+            color: #d1d5db;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            line-height: 18px;
+            letter-spacing: 0.04em;
+        }
+        .apple-wallet-card .card-expiry-group {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #d1d5db;
+            text-align: right;
+            margin-bottom: 0;
+            line-height: 1.1rem;
+            letter-spacing: 0.08em;
+        }
+        .apple-wallet-card .final-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .apple-wallet-card .corner-gradient {
+            position: absolute;
+            bottom: -16px; right: -16px;
+            width: 92px; height: 92px;
+            background: radial-gradient(circle at right bottom, #fff3 30%, transparent 71%);
+            border-radius: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.27;
+        }
         .sortable-ghost {
             opacity: 0.3;
-            background: rgba(59, 130, 246, 0.1) !important;
-            border: 1px dashed rgba(59, 130, 246, 0.5) !important;
+            background: rgba(59, 130, 246, 0.15) !important;
+            border: 2px dashed #4f8cff !important;
         }
         .sortable-chosen {
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 12px 35px -10px rgba(0,0,0,0.18);
         }
-
         .copy-toast {
             position: fixed;
             bottom: 20px;
@@ -91,7 +193,8 @@
         ::-webkit-scrollbar { width: 0px; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" style="padding-top: 64px;">
+    <!-- Navbar will appear above, so add body padding-top to prevent content from being covered -->
 
     <div id="copyToast" class="copy-toast">Copied to clipboard</div>
 
@@ -120,7 +223,7 @@
             </p>
         </div>
 
-        <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9"></div>
 
         <div id="emptyState" class="hidden py-32 flex flex-col items-center justify-center text-center">
             <div class="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/5">
@@ -133,7 +236,7 @@
     </main>
 
     <div id="cardModal" class="fixed inset-0 z-[120] hidden bg-[#080808] overflow-y-auto">
-        <header class="sticky top-0 z-10 bg-black/80 backdrop-blur-xl border-b border-white/5 px-6 py-5 flex items-center justify-between">
+        <header class="sticky top-0 z-10 bg-[#111/50] backdrop-blur-xl border-b border-white/5 px-6 py-5 flex items-center justify-between">
             <button onclick="closeModal()" class="text-gray-400 hover:text-white transition flex items-center gap-2">
                 <i class="fas fa-times text-lg"></i>
                 <span id="closeBtnText" class="text-sm font-medium">Cancel</span>
@@ -235,6 +338,22 @@
         const preExp = document.getElementById('previewExpiry');
         const preType = document.getElementById('previewType');
 
+        // Array of unique gradient classes. Add more for even more diversity.
+        const CARD_GRADIENT_CLASSES = [
+            'aw-bg-custom0',
+            'aw-bg-custom1',
+            'aw-bg-custom2',
+            'aw-bg-custom3',
+            'aw-bg-custom4',
+            'aw-bg-custom5',
+            'aw-bg-custom6',
+            'aw-bg-custom7',
+            'aw-bg-custom8',
+            'aw-bg-custom9',
+            'aw-bg-custom10',
+            'aw-bg-custom11',
+        ];
+
         function init() {
             renderCards();
             setupListeners();
@@ -284,6 +403,38 @@
             });
         }
 
+        function getAppleWalletBgClass(cardIndex) {
+            // Assign a unique gradient class by modulating by available gradients count
+            return CARD_GRADIENT_CLASSES[cardIndex % CARD_GRADIENT_CLASSES.length];
+        }
+        function getBrand(cardNum) {
+            if (cardNum.startsWith('4')) return 'visa';
+            if (cardNum.startsWith('5')) return 'mastercard';
+            if (cardNum.startsWith('3')) return 'amex';
+            return 'generic';
+        }
+        function getBrandLogo(cardNum) {
+            if (cardNum.startsWith('4'))
+                return '<i class=\\"fab fa-cc-visa\\" style=\\"color:#fff;\\"></i>';
+            if (cardNum.startsWith('5'))
+                return '<i class=\\"fab fa-cc-mastercard\\" style=\\"color:#fff;\\"></i>';
+            if (cardNum.startsWith('3'))
+                return '<i class=\\"fab fa-cc-amex\\" style=\\"color:#fff;\\"></i>';
+            return '<i class=\\"fas fa-credit-card\\" style=\\"color:#fff;opacity:0.85;\\"></i>';
+        }
+
+        function maskMainCardNumber(number) {
+            number = (number || '').replace(/\D/g, '').slice(0, 16);
+            let chunks = number.match(/.{1,4}/g) || [];
+            if (chunks.length === 0) return "•••• •••• •••• ••••";
+            for(let i=0;i<chunks.length-1;i++) chunks[i] = "••••";
+            let shown = chunks.join(" ");
+            if (chunks.length<4) {
+                shown += " ".repeat(20-shown.length);
+            }
+            return shown;
+        }
+
         function renderCards(filter = '') {
             cardsGrid.innerHTML = '';
             const cards = vaultData.filter(item => item.type === 'card' && 
@@ -302,29 +453,39 @@
             if (!filter) sortHint.classList.remove('hidden');
             else sortHint.classList.add('hidden');
 
-            cards.forEach(card => {
+            cards.forEach((card, idx) => {
                 const cardEl = document.createElement('div');
-                cardEl.className = 'card-item-hover bg-white/5 rounded-2xl p-6 border border-white/5 flex flex-col justify-between h-44 relative';
+                // Assign each card a different gradient
+                const bgClass = getAppleWalletBgClass(idx);
+                const brandLogo = getBrandLogo(card.number ?? '');
+                const maskedNumber = maskMainCardNumber(card.number ?? '');
+                const last4 = (card.number ?? '').replace(/\D/g, '').slice(-4) || "----";
+
+                cardEl.className = `apple-wallet-card ${bgClass} card-item-hover shadow-lg relative`;
                 cardEl.setAttribute('data-id', card.id);
-                
+                cardEl.style.zIndex = '1';
                 cardEl.innerHTML = `
-                    <div class="flex justify-between items-start pointer-events-none">
-                        <div class="flex gap-4 items-center">
-                            <div class="w-12 h-12 rounded-xl bg-black/40 flex items-center justify-center border border-white/5">
-                                <i class="fab ${card.number.startsWith('4') ? 'fa-cc-visa text-blue-400' : 'fa-cc-mastercard text-orange-400'} text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white">${card.label}</h3>
-                                <p class="text-[10px] text-gray-500 tracking-widest uppercase mt-0.5">${card.holder}</p>
+                    <div style="padding: 28px 28px 18px 28px; height: 100%; display: flex; flex-direction: column; justify-content:space-between; position: relative;">
+                        <div style="display: flex; flex-direction: row; width: 100%; align-items: flex-start;">
+                            <div class="apple-wallet-chip"></div>
+                            <div class="card-logo" style="margin-left: auto;">${brandLogo}</div>
+                        </div>
+                        <div style="flex:1; display:flex; flex-direction:column; justify-content: flex-end;">
+                            <div class="apple-wallet-numbers">${maskedNumber.slice(0, -4)} <span style="letter-spacing: 0.22em;font-weight:bold;">${last4}</span></div>
+                            <div class="apple-wallet-detail-row">
+                                <div>
+                                    <div class="card-label">${card.label ?? ""}</div>
+                                    <div class="card-holder">${card.holder ?? ""}</div>
+                                </div>
+                                <div class="card-expiry-group">
+                                    <span style="font-size:0.65rem; font-weight:500;">EXPIRES</span><br>
+                                    <span style="font-size:0.91rem; font-weight:700;" class="mono">${card.expiry ?? "00/00"}</span>
+                                </div>
                             </div>
                         </div>
-                        <span class="text-[10px] bg-white/5 px-2 py-1 rounded text-gray-500 mono font-bold">${card.expiry}</span>
+                        <div class="corner-gradient"></div>
+                        <div class="absolute inset-0 z-[1] cursor-pointer" tabindex="0" role="button" aria-label="Select card" onclick="openModal('${card.id}')"></div>
                     </div>
-                    <div class="flex items-end justify-between pointer-events-none">
-                        <p class="mono text-lg tracking-widest text-gray-400">•••• •••• •••• ${card.number.slice(-4)}</p>
-                        <i class="fas fa-shield-alt text-gray-700 text-sm mb-1"></i>
-                    </div>
-                    <div class="absolute inset-0 z-[1] cursor-pointer" onclick="openModal('${card.id}')"></div>
                 `;
                 cardsGrid.appendChild(cardEl);
             });
@@ -371,7 +532,7 @@
                 input.readOnly = !enable;
                 if (!enable) {
                     input.classList.add('cursor-default');
-                    input.type = input.id === 'cardCvv' ? 'password' : 'text'; // Keep CVV masked in view
+                    input.type = input.id === 'cardCvv' ? 'password' : 'text';
                 } else {
                     input.classList.remove('cursor-default');
                 }
