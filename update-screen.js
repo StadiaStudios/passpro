@@ -1,19 +1,14 @@
 (function() {
     const slides = [
         {
-            title: "PassPro Updated!",
-            text: "V1.19.17 Now Includes IMPORTANT Bug Fixes to the loading screen, We also now have a few new themes",
+            title: "PassPro V1.20.18 Updated!",
+            text: "Adds back original App icon, Removes Action cards from homepage, Added a quick mobile toolbar across all pages, Cleans up Code for better experience, Fixes security issues in the card vault,",
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.83 6.74 2.26L21 9"/><path d="M21 3v6h-6"/></svg>`
         },
         {
             title: "Card Vault Updates",
-            text: "The Card Vault now has a Copy Feature for each item. And has a view mode instead of just a edit mode.",
+            text: "The Card Vault received major security bug fixes.",
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="8" y="10" width="8" height="5" rx="1"/></svg>` 
-        },
-        {
-            title: "New Report a Bug Feature",
-            text: "Now as of April 22 of 2026. Users on PassPro can now report app bugs within the app. Bascially just changing the support Redirect url",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 7-3 2"/><path d="m5 7 3 2"/><path d="m19 19-3-2"/><path d="m5 19 3-2"/><path d="M12 10v9"/><path d="M12 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M16 11a4 4 0 0 1-8 0v-2a4 4 0 0 1 8 0v2Z"/></svg>` 
         },
         {
             title: "Zero-Knowledge",
@@ -24,7 +19,7 @@
 
     let currentIndex = 0;
     const VERSION_KEY = 'passpro_last_seen_version';
-    const CURRENT_VERSION = '1.19.17'; 
+    const CURRENT_VERSION = '1.20.18'; 
 
     function hasSeenPopup() {
         try {

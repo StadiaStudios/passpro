@@ -1,3 +1,8 @@
+V1.20.18
+----------
+Adds back original App icon, Removes Action cards from homepage, Added a quick mobile toolbar across all pages, Cleans up Code for better experience, 
+Fixes security issues in the card vault, Themes Updates, Added and Removed Themes,
+
 V1.19.17
 ----------
 Copy Feature for Card Vault, View Mode For Card Vault, New Themes, Bug Fixes: (Loading Screen Fix, etc.), Card Vault Page Updates, Password Generator now has a Keywords input feature,

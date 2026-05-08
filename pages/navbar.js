@@ -45,10 +45,10 @@
         </div>
 
         <div id="mobileMenu" class="hidden md:hidden absolute top-16 left-0 right-0 bg-[#0a0a0a] border-b border-white/5 p-6 space-y-4 shadow-2xl">
-            <a href="index.html" class="block text-lg font-medium ${currentPage === 'index.html' ? 'text-white' : 'text-gray-400'} hover:text-white no-underline">Passwords</a>
+            <a href="../index.html" class="block text-lg font-medium ${currentPage === 'index.html' ? 'text-white' : 'text-gray-400'} hover:text-white no-underline">Passwords</a>
             <a href="generator.html" class="block text-lg font-medium ${currentPage === 'generator.html' ? 'text-white' : 'text-gray-400'} hover:text-white no-underline">Password Generator</a>
             <a href="card-vault.html" class="block text-lg font-medium ${currentPage === 'card-vault.html' ? 'text-white' : 'text-gray-400'} hover:text-white no-underline">Wallet</a>
-            <a href="themes.html" class="block text-lg font-medium ${currentPage === 'themes.html' ? 'text-white' : 'text-gray-400'} hover:text-white no-underline">Themes</a>
+            <a href="../themes.html" class="block text-lg font-medium ${currentPage === 'themes.html' ? 'text-white' : 'text-gray-400'} hover:text-white no-underline">Themes</a>
         </div>
     `;
 

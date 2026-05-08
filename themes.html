@@ -132,7 +132,6 @@
             { id: 'themes/emerald-forest.css', name: 'Emerald Forest', category: 'Dark & Stealth', palette: ['#10b981', '#059669', '#06100d'] },
             { id: 'themes/orange-ember.css', name: 'Orange Ember', category: 'Dark & Stealth', palette: ['#ff8c00', '#ff4500', '#2d1b0d'] },
             { id: 'themes/acebuk.css', name: 'AceBuk (Social)', category: 'Light Themes', palette: ['#0866FF', '#F0F2F5', '#FFFFFF'] },
-            { id: 'themes/bos.css', name: 'BOS Theme', category: 'Light Themes', palette: ['#007AFF', '#F2F2F7', '#FFFFFF'] },
             { id: 'themes/microloft.css', name: 'Microloft', category: 'Light Themes', palette: ['#0078D4', '#F3F3F3', '#FFFFFF'] },
             { id: 'themes/moogle.css', name: 'Moogle', category: 'Tech Brands', palette: ['#ef4444', '#ffffff', '#f3f4f6'] },
             { id: 'themes/tethesda.css', name: 'TSE', category: 'Tech Brands', palette: ['#4285F4', '#EA4335', '#FBBC05', '#34A853'] },
@@ -141,18 +140,22 @@
             { id: 'themes/cyber-pro.css', name: 'Cyber Pro', category: 'Gaming', palette: ['#00ffff', '#ff00ff', '#fdf004'] },
             { id: 'themes/clash-season.css', name: 'Clash Season', category: 'Gaming', palette: ['#4C8C2B', '#FFD700', '#00D2FF'] },
             { id: 'themes/game-interface.css', name: 'UI Interface', category: 'Gaming', palette: ['#4C8C2B', '#FFD700', '#00D2FF'] },
-            { id: 'themes/footneat.css', name: 'Footneat', category: 'Gaming', palette: ['#FFF100', '#00E5FF', '#3D1866', '#A333FF'] },
+            { id: 'themes/blue-fortress.css', name: 'Blue Fortress', category: 'Gaming', palette: ['#FFF100', '#00E5FF', '#3D1866', '#A333FF'] },
             { id: 'themes/christmas.css', name: 'Christmas', category: 'Holiday & Seasonal', palette: ['#D42426', '#0D1B2A', '#F9D71C'] },
             { id: 'themes/spooky-halloween.css', name: 'Spooky Halloween', category: 'Holiday & Seasonal', palette: ['#f97316', '#ea580c', '#8b5cf6'] },
-            { id: 'themes/winter-theme.css', name: 'Winter Theme', category: 'Holiday & Seasonal', palette: ['#38bdf8', '#ef4444', '#0f172a'] },
-            { id: 'themes/western.css', name: 'Western', category: 'Vibes', palette: ['#8b4513', '#f4e4bc', '#2b2b2b'] },
+            { id: 'themes/western.css', name: 'Western Wood', category: 'Vibes', palette: ['#8b4513', '#f4e4bc', '#2b2b2b'] },
+            { id: 'themes/chrome.css', name: 'Chrome', category: 'Desktop', palette: ['#202124', '#292A2D', '#8AB4F8', '#E8EAED'] },
+            { id: 'themes/mindews7.css', name: 'Mindews 7', category: 'Desktop', palette: ['#52A1D9', '#F0F0F0', '#003399'] },
+            { id: 'themes/finance.css', name: 'Finance', category: 'Desktop', palette: ['#52A1D9', '#F0F0F0', '#003399'] },
             { id: 'themes/barbie-pink.css', name: 'Barbie Pink', category: 'Vibes', palette: ['#ff1493', '#ff69b4', '#2d0a1e'] }
         ];
 
         const container = document.getElementById('themes-grid');
         const searchInput = document.getElementById('theme-search');
 
-        function renderThemes(filter = '') {
+        let didInitialScroll = false;
+
+        function renderThemes(filter = '', scrollToActive = false) {
             const currentTheme = localStorage.getItem('passpro_theme') || 'default';
             container.innerHTML = '';
             
@@ -164,6 +167,7 @@
             );
 
             const categories = [...new Set(filteredData.map(t => t.category))];
+            let activeThemeElement = null;
 
             categories.forEach(catName => {
                 const section = document.createElement('section');
@@ -178,6 +182,8 @@
                     const item = document.createElement('div');
                     item.className = `theme-list-item p-4 rounded-2xl cursor-pointer flex items-center justify-between ${currentTheme === theme.id ? 'active' : ''}`;
                     
+                    item.setAttribute('data-theme-id', theme.id);
+
                     const paletteHtml = theme.palette.map(color => `<div class="palette-dot" style="background-color: ${color};"></div>`).join('');
 
                     item.innerHTML = `
@@ -189,6 +195,10 @@
                             ${paletteHtml}
                         </div>
                     `;
+
+                    if (currentTheme === theme.id) {
+                        activeThemeElement = item;
+                    }
 
                     item.onclick = () => {
                         localStorage.setItem('passpro_theme', theme.id);
@@ -205,13 +215,21 @@
             if (filteredData.length === 0) {
                 container.innerHTML = `<div class="mt-12 text-center text-gray-500 italic">No themes matching "${filter}"</div>`;
             }
+
+            if (scrollToActive && activeThemeElement) {
+                setTimeout(() => {
+                    activeThemeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 0);
+            }
         }
 
         searchInput.addEventListener('input', (e) => {
             renderThemes(e.target.value);
         });
 
-        renderThemes();
+        renderThemes('', true);
     </script>
+
+<script src="mobiletoolbar.js"></script>
 </body>
 </html>

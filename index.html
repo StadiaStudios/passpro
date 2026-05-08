@@ -161,7 +161,6 @@
             transform: translateX(0);
         }
         .page-section {}
-
         #user-profile-section.page-section > div {
             background-color: transparent !important;
             box-shadow: none !important;
@@ -217,7 +216,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.19.17</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.20.18</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -241,7 +240,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.19.17</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.20.18</span>
 </div>
     </div>
 
@@ -275,35 +274,10 @@
                 <p class="text-secondary">Welcome! <span id="dashboard-username"></span>,</p>
             </div>
         </div>
-    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Password Generator Button -->
-        <a href="pages/generator.html" class="flex flex-col items-center justify-center bg-blue-700 hover:bg-blue-800 transition-colors duration-200 rounded-xl shadow-md py-7 px-4 group focus:outline-none border border-blue-800/30 hover:border-blue-400/40">
-            <div class="bg-blue-600 group-hover:bg-blue-700 transition-colors duration-200 p-3 rounded-full mb-3 flex items-center justify-center shadow">
-                <i class="fas fa-random text-2xl text-white"></i>
-            </div>
-            <span class="text-base font-semibold text-white mb-1 tracking-tight">Password Generator</span>
-            <span class="text-secondary text-sm text-center opacity-80">Generate secure passwords with custom settings.</span>
-        </a>
-        <!-- Digital Card Vault Button -->
-        <a href="pages/card-vault.html" class="flex flex-col items-center justify-center bg-red-700 hover:bg-red-800 transition-colors duration-200 rounded-xl shadow-md py-7 px-4 group focus:outline-none border border-red-800/30 hover:border-red-400/40">
-            <div class="bg-red-600 group-hover:bg-red-700 transition-colors duration-200 p-3 rounded-full mb-3 flex items-center justify-center shadow">
-                <i class="fas fa-wallet text-2xl text-white"></i>
-            </div>
-            <span class="text-base font-semibold text-white mb-1 tracking-tight">Card Vault</span>
-            <span class="text-secondary text-sm text-center opacity-80">Safely store & manage your payment cards.</span>
-        </a>
-        <!-- Themes Button -->
-        <a href="themes.html" class="flex flex-col items-center justify-center bg-yellow-600 hover:bg-yellow-700 transition-colors duration-200 rounded-xl shadow-md py-7 px-4 group focus:outline-none border border-yellow-800/30 hover:border-yellow-400/40">
-            <div class="bg-yellow-500 group-hover:bg-yellow-600 transition-colors duration-200 p-3 rounded-full mb-3 flex items-center justify-center shadow">
-                <i class="fas fa-palette text-2xl text-white"></i>
-            </div>
-            <span class="text-base font-semibold text-white mb-1 tracking-tight">Themes</span>
-            <span class="text-secondary text-sm text-center opacity-80">Personalize PassPro to suit your style.</span>
-        </a>
-    </div>
-
     </div>
 </section>
+
+<script src="mobiletoolbar.js"></script>
 
         <section id="password-list-section" class="page-section hidden w-full h-full p-0">
             <div class="p-6 md:p-8 text-white w-full h-full flex flex-col"><br>
@@ -408,7 +382,7 @@
 
                 </div>
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.19.17</span></p>
+                    <p>App Version: <span id="app-version">1.20.18</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
@@ -474,7 +448,7 @@
         let username = '';
         let isUnlocked = false;
         
-        const APP_VERSION = "1.19.17";
+        const APP_VERSION = "1.20.18";
         
         const dashboardSection = document.getElementById('dashboard-section');
         const passwordListSection = document.getElementById('password-list-section');
@@ -587,7 +561,6 @@ function getDeviceInfo() {
 
     mobileNavMenu.classList.remove('open');
 }
-
 
 lockAppBtn.addEventListener('click', () => {
     isUnlocked = false;
@@ -1260,7 +1233,6 @@ passwordListContainer.addEventListener('touchend', (e) => {
         const loadingScreen = document.getElementById('loading-screen');
         if (!loadingScreen) return;
 
-        // Keep loader visible long enough to avoid a flicker/glitch.
         setTimeout(() => {
             loadingScreen.classList.add('hidden');
             setTimeout(() => {

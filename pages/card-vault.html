@@ -52,7 +52,6 @@
             opacity: 1;
         }
 
-        /* --- Apple Wallet Style Card Stack --- */
         .apple-wallet-card {
             position: relative;
             min-width: 100%;
@@ -78,7 +77,6 @@
             transform: translateY(-3px) scale(1.012);
             box-shadow: 0 16px 40px 0 rgba(0,0,0,0.36);
         }
-        /* Card backgrounds will be assigned per-card via JS */
         .aw-bg-custom0 { background: linear-gradient(120deg, #ff9966, #ff5e62); }
         .aw-bg-custom1 { background: linear-gradient(120deg, #56ccf2, #2f80ed); }
         .aw-bg-custom2 { background: linear-gradient(120deg, #a8ff78, #78ffd6); }
@@ -190,11 +188,37 @@
             display: none;
         }
 
+        #unlockVaultOverlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(8, 8, 8, 0.99);
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        #unlockVaultOverlay.visible {
+            display: flex;
+        }
+
         ::-webkit-scrollbar { width: 0px; }
     </style>
 </head>
 <body class="antialiased" style="padding-top: 64px;">
-    <!-- Navbar will appear above, so add body padding-top to prevent content from being covered -->
+    <!-- PIN Required Overlay -->
+    <div id="unlockVaultOverlay">
+        <div class="bg-[#18181b] border border-gray-700 rounded-2xl p-8 shadow-xl flex flex-col items-center w-96 max-w-full">
+            <i class="fas fa-lock text-4xl text-gray-400 mb-4"></i>
+            <h2 class="text-2xl font-semibold mb-3">Unlock Required</h2>
+            <p class="mb-5 text-gray-400 text-center">For your security, please enter your PIN to access your Card Vault.</p>
+            <input id="unlockPinInput" type="password" maxlength="12" autocomplete="one-time-code" autofocus class="mb-3 px-5 py-3 rounded-lg bg-zinc-900 border border-zinc-700 outline-none text-lg text-center tracking-widest w-full" placeholder="Enter PIN">
+            <span id="unlockError" class="mb-3 text-red-400 text-sm hidden">Incorrect PIN. Please try again.</span>
+            <button id="unlockBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg py-3 transition mb-2">Unlock Vault</button>
+            <a href="forgot-pin.html" class="text-xs text-gray-500 hover:underline mt-2">Forgot your PIN?</a>
+        </div>
+    </div>
 
     <div id="copyToast" class="copy-toast">Copied to clipboard</div>
 
@@ -321,6 +345,104 @@
     </div>
 
     <script>
+        // PIN UNLOCK ENFORCEMENT FOR CARD VAULT
+
+        function checkUnlocked() {
+            // First check: If no PIN set, always allow access
+            const storedPin = localStorage.getItem('pin');
+            if (!storedPin) {
+                window.sessionStorage.setItem('session_unlocked', 'true');
+                return true;
+            }
+            // Check session unlock status
+            const isUnlocked = window.sessionStorage.getItem('session_unlocked') === 'true';
+            if (!isUnlocked) {
+                showVaultLockOverlay();
+                return false;
+            }
+            return true;
+        }
+
+        function showVaultLockOverlay() {
+            document.getElementById('unlockVaultOverlay').classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+        function hideVaultLockOverlay() {
+            document.getElementById('unlockVaultOverlay').classList.remove('visible');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!checkUnlocked()) {
+                // Block rest of functionality until unlocked
+                blockVaultScripts();
+            }
+        });
+
+        function blockVaultScripts() {
+            // Hide main vault area until unlocked
+            document.querySelector('main').style.filter = "blur(7px)";
+            document.querySelector('main').style.pointerEvents = "none";
+            document.querySelector('main').style.userSelect = "none";
+            document.getElementById('cardModal').style.display = "none";
+        }
+
+        function enableVaultScripts() {
+            document.querySelector('main').style.filter = "";
+            document.querySelector('main').style.pointerEvents = "";
+            document.querySelector('main').style.userSelect = "";
+        }
+
+        // PIN unlock handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const unlockBtn = document.getElementById('unlockBtn');
+            const pinInput = document.getElementById('unlockPinInput');
+            const unlockError = document.getElementById('unlockError');
+            // Enter key triggers unlock
+            pinInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') unlockBtn.click();
+            });
+            unlockBtn.addEventListener('click', function() {
+                const storedPin = localStorage.getItem('pin');
+                const enteredPin = pinInput.value;
+                if (!storedPin) {
+                    // No pin required, bypass overlay
+                    window.sessionStorage.setItem('session_unlocked', 'true');
+                    hideVaultLockOverlay();
+                    enableVaultScripts();
+                    initIfReady(); // Vault functionality now permitted
+                } else if (enteredPin === storedPin) {
+                    window.sessionStorage.setItem('session_unlocked', 'true');
+                    unlockError.classList.add('hidden');
+                    pinInput.value = "";
+                    hideVaultLockOverlay();
+                    enableVaultScripts();
+                    initIfReady(); // Vault functionality now permitted
+                } else {
+                    unlockError.classList.remove('hidden');
+                    pinInput.value = "";
+                    pinInput.focus();
+                }
+            });
+        });
+
+        // For double safety, ensure vault not loaded unless unlocked
+        let pageUnlocked = false;
+        function initIfReady() {
+            if (!pageUnlocked && checkUnlocked()) {
+                pageUnlocked = true;
+                setTimeout(init, 20); // Allow DOM update after overlay hide
+            }
+        }
+        // Try to initialize on page load if unlocked
+        window.onload = function() {
+            if (checkUnlocked()) {
+                pageUnlocked = true;
+                init();
+            }
+        };
+
+        // -- Vault Logic (original code, unchanged except triggering via initIfReady) --
         let vaultData = JSON.parse(localStorage.getItem('passpro_data') || '[]');
         let currentEditId = null;
         let isEditMode = false;
@@ -338,7 +460,6 @@
         const preExp = document.getElementById('previewExpiry');
         const preType = document.getElementById('previewType');
 
-        // Array of unique gradient classes. Add more for even more diversity.
         const CARD_GRADIENT_CLASSES = [
             'aw-bg-custom0',
             'aw-bg-custom1',
@@ -404,7 +525,6 @@
         }
 
         function getAppleWalletBgClass(cardIndex) {
-            // Assign a unique gradient class by modulating by available gradients count
             return CARD_GRADIENT_CLASSES[cardIndex % CARD_GRADIENT_CLASSES.length];
         }
         function getBrand(cardNum) {
@@ -455,7 +575,6 @@
 
             cards.forEach((card, idx) => {
                 const cardEl = document.createElement('div');
-                // Assign each card a different gradient
                 const bgClass = getAppleWalletBgClass(idx);
                 const brandLogo = getBrandLogo(card.number ?? '');
                 const maskedNumber = maskMainCardNumber(card.number ?? '');
@@ -509,10 +628,10 @@
                 inName.dispatchEvent(new Event('input'));
                 inExp.dispatchEvent(new Event('input'));
                 
-                toggleEditMode(false); // Open in view mode
+                toggleEditMode(false);
             } else {
                 resetForm();
-                toggleEditMode(true); // Open in edit mode for new card
+                toggleEditMode(true);
                 document.getElementById('modalTitle').innerText = "New Card";
                 document.getElementById('editBtn').classList.add('hidden');
             }
@@ -651,8 +770,10 @@
 
         searchInput.addEventListener('input', (e) => renderCards(e.target.value));
 
-        window.onload = init;
+        // -- End of vault logic
+
     </script>
     <script src="navbar.js"></script>
+    <script src="../mobiletoolbar.js"></script>
 </body>
 </html>
