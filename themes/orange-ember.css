@@ -1,0 +1,168 @@
+:root {
+--nitro-bg-gradient: linear-gradient(135deg, #2a1a11 0%, #140a06 100%);
+--nitro-surface: rgba(61, 41, 29, 0.6);
+--nitro-surface-hover: rgba(90, 58, 44, 0.8);
+--nitro-surface-solid: #2b1913;
+
+--nitro-primary: #c66e47;
+--nitro-primary-gradient: linear-gradient(90deg, #c66e47, #f39259);
+--nitro-primary-hover: linear-gradient(90deg, #db7b56, #f5a36b);
+--nitro-accent: #f39259;
+
+--nitro-text-main: #fff2e6;
+--nitro-text-muted: #ccb5a3;
+
+--nitro-glass-border: 1px solid rgba(243, 146, 89, 0.15);
+--nitro-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+
+}
+
+body.dark-mode {
+background: var(--nitro-bg-gradient) !important;
+background-attachment: fixed !important;
+color: var(--nitro-text-main) !important;
+}
+
+header {
+background-color: rgba(30, 15, 10, 0.8) !important;
+backdrop-filter: blur(12px) !important;
+-webkit-backdrop-filter: blur(12px) !important;
+border-bottom: var(--nitro-glass-border);
+}
+
+#mobile-nav-menu {
+background-color: var(--nitro-surface-solid) !important;
+border-left: var(--nitro-glass-border);
+}
+
+.nav-link::after,
+.link-effect::after,
+.password-url-link::after,
+.forgot-pin-link::after,
+.terms-link::after {
+background: var(--nitro-primary-gradient) !important;
+}
+
+.text-red-500 { color: var(--nitro-accent) !important; }
+.text-secondary, .text-
+
+$$\#999$$
+
+, .text-gray-300, .text-gray-400, .text-gray-500 {
+color: var(--nitro-text-muted) !important;
+}
+.text-white { color: var(--nitro-text-main) !important; }
+
+.bg-red-500, button.bg-red-500,
+#pin-submit-btn, #add-password-btn, .view-btn, .edit-btn, .delete-btn {
+background: var(--nitro-primary-gradient) !important;
+color: #fff !important;
+border: none !important;
+box-shadow: 0 4px 15px rgba(243, 146, 89, 0.2) !important;
+transition: all 0.3s ease !important;
+}
+
+.bg-red-500:hover, button.bg-red-500:hover,
+#pin-submit-btn:hover, #add-password-btn:hover, .view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+background: var(--nitro-primary-hover) !important;
+box-shadow: 0 6px 20px rgba(243, 146, 89, 0.4) !important;
+transform: translateY(-1px);
+}
+
+.bg-
+
+$$\#222$$
+
+, button.bg-
+
+$$\#222$$
+
+, .bg-gray-500, .bg-gray-600 {
+background-color: rgba(198, 110, 71, 0.2) !important;
+border: var(--nitro-glass-border) !important;
+color: var(--nitro-text-main) !important;
+}
+
+.bg-
+
+$$\#222$$
+
+:hover, button.bg-
+
+$$\#222$$
+
+:hover, .bg-gray-500:hover, .bg-gray-600:hover {
+background-color: rgba(198, 110, 71, 0.4) !important;
+}
+
+.password-item,
+.bg-
+
+$$\#1A1A1A$$
+
+,
+.bg-
+
+$$\#111$$
+
+,
+.bg-
+
+$$\#2A2A2A$$
+
+ {
+background: var(--nitro-surface) !important;
+border: var(--nitro-glass-border) !important;
+backdrop-filter: blur(8px) !important;
+-webkit-backdrop-filter: blur(8px) !important;
+box-shadow: var(--nitro-glass-shadow) !important;
+}
+
+.password-item:hover {
+background: var(--nitro-surface-hover) !important;
+border-color: rgba(243, 146, 89, 0.4) !important;
+box-shadow: 0 8px 25px rgba(198, 110, 71, 0.25) !important;
+}
+
+.input-field, #pin-input {
+background-color: rgba(30, 15, 10, 0.5) !important;
+border: 1px solid rgba(198, 110, 71, 0.3) !important;
+color: var(--nitro-text-main) !important;
+}
+
+.input-field:focus, #pin-input:focus {
+border-color: var(--nitro-accent) !important;
+box-shadow: 0 0 0 2px rgba(243, 146, 89, 0.2) !important;
+outline: none !important;
+}
+
+#pin-lock-toggle:checked ~ .block {
+background: var(--nitro-primary-gradient) !important;
+}
+
+.bg-red-700 { background-color: rgba(198, 110, 71, 0.3) !important; }
+.bg-red-600 { background: var(--nitro-primary-gradient) !important; }
+
+#loading-screen { background: var(--nitro-bg-gradient) !important; }
+
+.password-item.drag-over {
+border: 2px solid var(--nitro-accent) !important;
+box-shadow: 0 0 15px rgba(243, 146, 89, 0.5) !important;
+}
+
+::-webkit-scrollbar-track {
+background: rgba(30, 15, 10, 0.8) !important;
+}
+::-webkit-scrollbar-thumb {
+background: var(--nitro-primary) !important;
+}
+::-webkit-scrollbar-thumb:hover {
+background: var(--nitro-accent) !important;
+}
+
+#premium-badge {
+background: var(--nitro-primary-gradient) !important;
+color: white !important;
+box-shadow: 0 0 10px rgba(243, 146, 89, 0.4) !important;
+}

@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@400;600;800&display=swap');
+
+/* Main Background - The Storm / Night Sky */
+body.dark-mode {
+    background: linear-gradient(135deg, #1A0B2E 0%, #3D1866 50%, #0F051D 100%) !important;
+    background-size: 300% 300%;
+    animation: stormBG 15s ease infinite;
+    font-family: 'Nunito', sans-serif !important;
+    color: #E2E8F0 !important;
+}
+
+@keyframes stormBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Loading Screen */
+#loading-screen {
+    background: #0F051D !important;
+}
+
+#loading-screen img {
+    filter: drop-shadow(0 0 20px #00E5FF);
+    animation: slurpPulse 1.5s infinite;
+}
+
+@keyframes slurpPulse {
+    0% { filter: drop-shadow(0 0 10px #00E5FF); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 30px #00E5FF); transform: scale(1.1); }
+    100% { filter: drop-shadow(0 0 10px #00E5FF); transform: scale(1); }
+}
+
+/* Typography - Fortnite Vibes */
+h1, h2, h3, .font-bold, #modal-title, #pin-modal-title {
+    font-family: 'Luckiest Guy', cursive !important;
+    letter-spacing: 1.5px;
+    font-weight: normal !important; /* Luckiest Guy is naturally bold */
+}
+
+h2 {
+    color: #FFF100 !important; /* Legendary/Mythic Yellow */
+    text-shadow: 3px 3px 0px #FF9900 !important;
+    letter-spacing: 2px;
+}
+
+h1 {
+    color: #00E5FF !important; /* Slurp Juice / Shield Cyan */
+    text-shadow: 2px 2px 0px #0088CC !important;
+}
+
+/* Override standard text colors */
+.text-red-500 {
+    color: #00E5FF !important;
+    text-shadow: 1px 1px 0px #0088CC !important;
+}
+
+.text-white { color: #FFFFFF !important; }
+.text-secondary, .text-\[\#999\], .text-gray-300, .text-gray-400, .text-gray-500 {
+    color: #A3BFFA !important; /* Icy Shield Blue */
+}
+
+/* Header & Nav */
+header {
+    background-color: rgba(18, 7, 43, 0.95) !important;
+    border-bottom: 4px solid #00E5FF !important;
+    box-shadow: 0 4px 20px rgba(0, 229, 255, 0.3) !important;
+    backdrop-filter: blur(10px);
+}
+
+.nav-link::after, .link-effect::after, .password-url-link::after, .forgot-pin-link::after, .terms-link::after {
+    background-color: #00E5FF !important;
+    height: 3px !important;
+}
+
+.nav-link:hover, .nav-link.active, .link-effect:hover {
+    color: #00E5FF !important;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.6) !important;
+}
+
+/* Mobile Nav Menu */
+.mobile-nav-menu {
+    background-color: rgba(26, 11, 46, 0.98) !important;
+    border-left: 4px solid #00E5FF !important;
+}
+
+/* Panels, Modals, and Cards */
+.bg-\[\#1A1A1A\], .bg-\[\#111\], .bg-\[\#2A2A2A\], #modal > div, #pin-modal > div, #profile-modal > div, #password-modal > div {
+    background: linear-gradient(180deg, rgba(42, 26, 74, 0.9) 0%, rgba(26, 11, 46, 0.95) 100%) !important;
+    border: 3px solid #5A2E98 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(90, 46, 152, 0.5) !important;
+    backdrop-filter: blur(8px);
+}
+
+/* Chunky Fortnite Buttons */
+button, .bg-red-500, .bg-\[\#222\], .bg-blue-600, .bg-zinc-800, #copy-password {
+    font-family: 'Luckiest Guy', cursive !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    border-radius: 8px !important;
+    transition: all 0.1s ease-in-out !important;
+    border: 2px solid transparent !important;
+}
+
+/* Primary Action Buttons (Yellow/Legendary) */
+.bg-red-500 {
+    background-color: #FFF100 !important;
+    color: #111 !important;
+    border-color: #FF9900 !important;
+    box-shadow: 0 5px 0 #FF9900 !important;
+}
+
+.bg-red-500:hover {
+    background-color: #FFDE00 !important;
+    transform: translateY(3px) !important;
+    box-shadow: 0 2px 0 #FF9900 !important;
+}
+
+/* Secondary Action Buttons (Cyan/Rare) */
+.bg-\[\#222\], .bg-zinc-800, #copy-password {
+    background-color: #00E5FF !important;
+    color: #0F051D !important;
+    border-color: #0088CC !important;
+    box-shadow: 0 5px 0 #0088CC !important;
+}
+
+.bg-\[\#222\]:hover, .bg-zinc-800:hover, #copy-password:hover {
+    background-color: #00CCEE !important;
+    transform: translateY(3px) !important;
+    box-shadow: 0 2px 0 #0088CC !important;
+}
+
+/* Special Button (Purple/Epic) */
+.bg-blue-600 {
+    background-color: #A333FF !important; /* Epic Purple */
+    color: #FFF !important;
+    border-color: #6600CC !important;
+    box-shadow: 0 5px 0 #6600CC !important;
+}
+
+.bg-blue-600:hover {
+    background-color: #9900FF !important;
+    transform: translateY(3px) !important;
+    box-shadow: 0 2px 0 #6600CC !important;
+}
+
+/* Icons */
+i.fas, i.fab {
+    color: #00E5FF !important;
+    filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.4));
+}
+.bg-red-500 i, .bg-\[\#222\] i, .bg-blue-600 i {
+    color: inherit !important;
+    filter: none;
+}
+
+/* Password List Items */
+.password-item {
+    background: linear-gradient(180deg, rgba(61, 24, 102, 0.8) 0%, rgba(26, 11, 46, 0.9) 100%) !important;
+    border: 3px solid #5A2E98 !important;
+    border-radius: 12px !important;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s !important;
+}
+
+.password-item:hover {
+    transform: scale(1.03) !important;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4) !important;
+    border-color: #00E5FF !important;
+}
+
+/* Action Buttons inside Password Item */
+.view-btn, .edit-btn, .delete-btn {
+    border-radius: 50% !important;
+    box-shadow: none !important;
+    padding: 10px !important;
+    border: none !important;
+}
+.view-btn { background-color: #00E5FF !important; color: #111 !important; border: 2px solid #0088CC !important; box-shadow: 0 3px 0 #0088CC !important;}
+.edit-btn { background-color: #FFF100 !important; color: #111 !important; border: 2px solid #FF9900 !important; box-shadow: 0 3px 0 #FF9900 !important;}
+.delete-btn { background-color: #FF3366 !important; color: #FFF !important; border: 2px solid #CC0033 !important; box-shadow: 0 3px 0 #CC0033 !important;}
+
+.view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    transform: translateY(2px) !important;
+}
+.view-btn:hover { box-shadow: 0 1px 0 #0088CC !important; }
+.edit-btn:hover { box-shadow: 0 1px 0 #FF9900 !important; }
+.delete-btn:hover { box-shadow: 0 1px 0 #CC0033 !important; }
+
+/* Input Fields */
+.input-field, #pin-input {
+    background-color: rgba(15, 5, 29, 0.8) !important;
+    border: 3px solid #5A2E98 !important;
+    color: #FFF100 !important;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif !important;
+    border-radius: 8px !important;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5) !important;
+}
+
+.input-field:focus, #pin-input:focus {
+    border-color: #00E5FF !important;
+    outline: none !important;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 0 12px rgba(0, 229, 255, 0.5) !important;
+}
+
+.input-field::placeholder, #pin-input::placeholder {
+    color: #5A2E98 !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+}
+::-webkit-scrollbar-track {
+    background: #0F051D !important;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #00E5FF !important;
+    border: 2px solid #0F051D;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #FFF100 !important;
+}
+
+/* Toggles & Progress Bars */
+#pin-lock-toggle:checked ~ .block {
+    background-color: #00E5FF !important;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+.bg-gray-600 {
+    background-color: #3D1866 !important;
+}
+
+.bg-red-700 { background-color: #1A0B2E !important; border: 1px solid #5A2E98 !important; overflow: hidden !important;}
+.bg-red-600 { 
+    background: linear-gradient(90deg, #00E5FF, #FFF100) !important; 
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.8) !important; 
+}
+
+/* Premium Badge */
+#premium-badge {
+    background-color: #FFF100 !important;
+    color: #111 !important;
+    font-family: 'Luckiest Guy', cursive !important;
+    border: 2px solid #FF9900 !important;
+    box-shadow: 0 2px 0 #FF9900 !important;
+    padding: 4px 12px !important;
+    transform: rotate(-3deg);
+    letter-spacing: 1px;
+}
+
+/* Selected Drag/Arrange outlines */
+.password-item.drag-over {
+    border: 3px dashed #FFF100 !important;
+    box-shadow: 0 0 15px #FFF100 !important;
+}

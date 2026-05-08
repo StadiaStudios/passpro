@@ -1,0 +1,143 @@
+:root {
+    --hallow-bg: linear-gradient(180deg, #0a050d 0%, #17091f 100%);
+    --hallow-surface: rgba(28, 12, 38, 0.6);
+    --hallow-surface-hover: rgba(45, 17, 56, 0.9);
+    --hallow-surface-solid: #0a050d;
+    
+    --hallow-primary: #f97316;
+    --hallow-primary-gradient: linear-gradient(90deg, #ea580c, #f97316);
+    --hallow-primary-hover: linear-gradient(90deg, #f97316, #fb923c);
+    --hallow-accent: #8b5cf6; 
+    
+    --hallow-text: #f3f4f6;
+    --hallow-text-muted: #9ca3af;
+    --hallow-border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+body.dark-mode {
+    background: var(--hallow-bg) !important;
+    background-attachment: fixed !important;
+    color: var(--hallow-text) !important;
+    overflow-x: hidden;
+}
+
+body.dark-mode::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+    background-image: 
+        radial-gradient(3px 3px at 20px 30px, #f97316, rgba(0,0,0,0)),
+        radial-gradient(4px 4px at 60px 80px, #8b5cf6, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 110px 150px, #ea580c, rgba(0,0,0,0)),
+        radial-gradient(5px 5px at 180px 40px, #f97316, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 220px 120px, #8b5cf6, rgba(0,0,0,0)),
+        radial-gradient(4px 4px at 270px 190px, #f97316, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    animation: embers 15s linear infinite;
+    opacity: 0.65;
+}
+
+@keyframes embers {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px -300px; }
+}
+
+@keyframes spooky-glow {
+    0% { box-shadow: 0 0 5px rgba(249, 115, 22, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.7); }
+    100% { box-shadow: 0 0 5px rgba(249, 115, 22, 0.2); }
+}
+
+header {
+    background-color: rgba(10, 5, 13, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: var(--hallow-border);
+}
+
+#mobile-nav-menu {
+    background-color: var(--hallow-surface-solid) !important;
+    border-left: var(--hallow-border);
+}
+
+.nav-link::after, 
+.link-effect::after, 
+.password-url-link::after,
+.forgot-pin-link::after,
+.terms-link::after {
+    background: var(--hallow-primary-gradient) !important;
+}
+
+.text-red-500 { color: var(--hallow-primary) !important; }
+.text-secondary, .text-gray-400, .text-gray-500 { 
+    color: var(--hallow-text-muted) !important; 
+}
+
+.bg-red-500, button.bg-red-500, 
+#pin-submit-btn, #add-password-btn, .view-btn, .edit-btn, .delete-btn {
+    background: var(--hallow-primary-gradient) !important;
+    color: #110914 !important; /* Dark text on bright orange button */
+    font-weight: bold !important;
+    border: 1px solid #fb923c !important;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3) !important;
+}
+
+.bg-red-500:hover, button.bg-red-500:hover, 
+#pin-submit-btn:hover, #add-password-btn:hover, .view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background: var(--hallow-primary-hover) !important;
+    animation: spooky-glow 1.5s infinite;
+    transform: translateY(-2px);
+}
+
+.bg-\[\#222\], button.bg-\[\#222\], .bg-gray-500, .bg-gray-600 {
+    background-color: rgba(139, 92, 246, 0.15) !important;
+    border: 1px solid rgba(139, 92, 246, 0.3) !important;
+    color: var(--hallow-text) !important;
+}
+
+.password-item, 
+.bg-\[\#1A1A1A\], 
+.bg-\[\#111\], 
+.bg-\[\#2A2A2A\] {
+    background: var(--hallow-surface) !important;
+    border: var(--hallow-border) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+.password-item:hover {
+    background: var(--hallow-surface-hover) !important;
+    border-color: #fb923c !important;
+    box-shadow: 0 5px 25px rgba(139, 92, 246, 0.25) !important; 
+}
+
+.input-field, #pin-input {
+    background-color: rgba(10, 5, 13, 0.8) !important;
+    border: 1px solid rgba(139, 92, 246, 0.4) !important;
+}
+
+.input-field:focus, #pin-input:focus {
+    border-color: var(--hallow-primary) !important;
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.4) !important;
+}
+
+#pin-lock-toggle:checked ~ .block {
+    background: var(--hallow-primary-gradient) !important;
+}
+
+.bg-red-700 { background-color: rgba(249, 115, 22, 0.2) !important; }
+.bg-red-600 { background: var(--hallow-primary-gradient) !important; }
+
+#loading-screen { background: var(--hallow-bg) !important; }
+
+#premium-badge {
+    background: var(--hallow-primary-gradient) !important;
+    color: #110914 !important;
+    font-weight: bold;
+    box-shadow: 0 0 12px rgba(249, 115, 22, 0.6) !important;
+}

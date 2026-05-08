@@ -1,0 +1,132 @@
+:root {
+    --nitro-bg-gradient: linear-gradient(180deg, #f0f2f5 0%, #e4e6eb 100%);
+    --nitro-surface: #ffffff;
+    --nitro-surface-hover: #f2f2f2;
+    --nitro-surface-solid: #ffffff;
+    
+    --nitro-primary: #0866ff;
+    --nitro-primary-gradient: linear-gradient(180deg, #0866ff, #075ce4);
+    --nitro-primary-hover: linear-gradient(180deg, #1877f2, #0866ff);
+    --nitro-accent: #0866ff;
+    
+    --nitro-text-main: #050505;
+    --nitro-text-muted: #65676b;
+    
+    --nitro-glass-border: 1px solid #ced0d4;
+    --nitro-glass-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode {
+    background: var(--nitro-bg-gradient) !important;
+    background-attachment: fixed !important;
+    color: var(--nitro-text-main) !important;
+}
+
+header {
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    border-bottom: 1px solid #dddfe2 !important;
+}
+
+#mobile-nav-menu {
+    background-color: #ffffff !important;
+    border-left: 1px solid #ced0d4;
+}
+
+.nav-link::after, 
+.link-effect::after, 
+.password-url-link::after, 
+.forgot-pin-link::after, 
+.terms-link::after {
+    background: var(--nitro-primary) !important;
+}
+
+.text-red-500 { color: #f02849 !important; }
+.text-secondary, .text-\[\#999\], .text-gray-300, .text-gray-400, .text-gray-500 { 
+    color: var(--nitro-text-muted) !important; 
+}
+.text-white { color: var(--nitro-text-main) !important; }
+
+.bg-red-500, button.bg-red-500, 
+#pin-submit-btn, #add-password-btn, .view-btn, .edit-btn, .delete-btn {
+    background: var(--nitro-primary) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+    transition: background 0.2s ease !important;
+}
+
+.bg-red-500:hover, button.bg-red-500:hover, 
+#pin-submit-btn:hover, #add-password-btn:hover, .view-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background: #075ce4 !important;
+    transform: none !important;
+}
+
+.bg-\[\#222\], button.bg-\[\#222\], .bg-gray-500, .bg-gray-600 {
+    background-color: #e4e6eb !important;
+    border: none !important;
+    color: #050505 !important;
+}
+
+.bg-\[\#222\]:hover, button.bg-\[\#222\]:hover, .bg-gray-500:hover, .bg-gray-600:hover {
+    background-color: #d8dadf !important;
+}
+
+.password-item, 
+.bg-\[\#1A1A1A\], 
+.bg-\[\#111\], 
+.bg-\[\#2A2A2A\] {
+    background: var(--nitro-surface) !important;
+    border: 1px solid #ced0d4 !important;
+    border-radius: 8px !important;
+    box-shadow: var(--nitro-glass-shadow) !important;
+}
+
+.password-item:hover {
+    background: var(--nitro-surface-hover) !important;
+}
+
+.input-field, #pin-input {
+    background-color: #f0f2f5 !important;
+    border: 1px solid #ced0d4 !important;
+    color: #050505 !important;
+    border-radius: 6px !important;
+}
+
+.input-field:focus, #pin-input:focus {
+    border-color: var(--nitro-primary) !important;
+    box-shadow: 0 0 0 2px rgba(8, 102, 255, 0.2) !important;
+    outline: none !important;
+}
+
+#pin-lock-toggle:checked ~ .block {
+    background: var(--nitro-primary) !important;
+}
+
+.bg-red-700 { background-color: #f02849 !important; }
+.bg-red-600 { background: #fa3e3e !important; }
+
+#loading-screen { background: #ffffff !important; }
+
+.password-item.drag-over {
+    border: 2px solid var(--nitro-primary) !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f2f5 !important;
+}
+::-webkit-scrollbar-thumb {
+    background: #bcc0c4 !important;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #a2a5a9 !important;
+}
+
+#premium-badge {
+    background: #e7f3ff !important;
+    color: #1877f2 !important;
+    border-radius: 4px;
+}
