@@ -1,3 +1,7 @@
+V1.21.19
+----------
+Complete App Overhaul, Future Proof Protected, Data from Old Ver Supports New Ver, OverHaul starts with settings, Index, and Passwords, Backup app.
+
 V1.20.18
 ----------
 Adds back original App icon, Removes Action cards from homepage, Added a quick mobile toolbar across all pages, Cleans up Code for better experience, 
