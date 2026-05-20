@@ -216,7 +216,7 @@
     </div>
     <nav class="hidden md:flex items-center space-x-4">
         <span id="welcome-message" class="text-secondary text-sm hidden md:block"></span>
-        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.20.18</span>
+        <span id="version-display" class="text-secondary text-sm hidden md:block">v1.21.19</span>
         <a href="#" class="nav-link" data-page="dashboard-section">Dashboard</a>
         <a href="#" class="nav-link" data-page="password-list-section">Passwords</a>
         <a href="#" class="nav-link" data-page="user-profile-section">Settings</a>
@@ -240,7 +240,7 @@
         </nav>
         <div class="absolute bottom-6 left-6 w-full pr-12">
     <span id="mobile-welcome-message" class="text-secondary text-sm"></span>
-    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.20.18</span>
+    <span id="mobile-version-display" class="text-secondary text-sm block mt-1">v1.21.19</span>
 </div>
     </div>
 
@@ -314,6 +314,33 @@
                                 <i class="fas fa-palette mr-2"></i> Appearance & Themes
                             </a>
                         </div>
+                        <!-- Future Proof Ver Button ADDED below (simple) -->
+                        <div style="margin-top: 1rem;">
+                            <a href="future-proof/index.html">
+                                <button 
+                                    id="future-proof-btn"
+                                    style="
+                                        display: block;
+                                        width: 100%;
+                                        text-align: center;
+                                        background-color: #111;
+                                        color: #fff;
+                                        font-weight: bold;
+                                        padding: 0.75rem 1.5rem;
+                                        border-radius: 0.5rem;
+                                        transition: background 0.2s, color 0.2s;
+                                        font-size: 1rem;
+                                        border: none;
+                                        cursor: pointer;
+                                    "
+                                    onmouseover="this.style.backgroundColor='#222';"
+                                    onmouseout="this.style.backgroundColor='#111';"
+                                >
+                                    FUTURE PROOF
+                                </button>
+                            </a>
+                        </div>
+             
                     </div>
 
                     <div class="bg-[#1A1A1A] p-6 rounded-2xl border border-zinc-800">
@@ -382,7 +409,7 @@
 
                 </div>
                 <div class="text-center mt-8 text-sm text-gray-500 flex flex-col items-center">
-                    <p>App Version: <span id="app-version">1.20.18</span></p>
+                    <p>App Version: <span id="app-version">1.21.19</span></p>
                     <p class="mt-1 text-gray-500">StadiaStudios</p>
                     <div class="flex space-x-4 mt-2">
                     <a href="terms_of_service.html" id="terms-link" class="terms-link mt-2 text-white">TOS</a>
@@ -448,7 +475,7 @@
         let username = '';
         let isUnlocked = false;
         
-        const APP_VERSION = "1.20.18";
+        const APP_VERSION = "1.21.19";
         
         const dashboardSection = document.getElementById('dashboard-section');
         const passwordListSection = document.getElementById('password-list-section');

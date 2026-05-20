@@ -1,14 +1,9 @@
 (function() {
     const slides = [
         {
-            title: "PassPro V1.20.18 Updated!",
-            text: "Adds back original App icon, Removes Action cards from homepage, Added a quick mobile toolbar across all pages, Cleans up Code for better experience, Fixes security issues in the card vault,",
+            title: "PassPro V1.21.19 Future Proof!",
+            text: "In this important update we released a Public backup domain page for the website if it ever goes down or isnt working 100% properly.",
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.83 6.74 2.26L21 9"/><path d="M21 3v6h-6"/></svg>`
-        },
-        {
-            title: "Card Vault Updates",
-            text: "The Card Vault received major security bug fixes.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="8" y="10" width="8" height="5" rx="1"/></svg>` 
         },
         {
             title: "Zero-Knowledge",
@@ -19,7 +14,7 @@
 
     let currentIndex = 0;
     const VERSION_KEY = 'passpro_last_seen_version';
-    const CURRENT_VERSION = '1.20.18'; 
+    const CURRENT_VERSION = '1.21.19'; 
 
     function hasSeenPopup() {
         try {
