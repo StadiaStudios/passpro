@@ -111,7 +111,7 @@
 
         // SVG icons for an iOS-style look (Material icons, inline, fixed for correct alignment/appearance)
         const icons = {
-            "Add New": `
+            "Add": `
 <svg class="ppnav__icon-link__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="1em" height="1em">
   <g>
     <rect width="24" height="24" fill="none"/>
@@ -148,7 +148,7 @@
     <nav class="ppnav__bottom-navbar" aria-label="PassPro bottom navigation">
         <a href="index.html" class="ppnav__icon-link" aria-label="Add New" tabindex="0">
             ${icons["Add New"]}
-            <span class="ppnav__icon-link__label">Add New</span>
+            <span class="ppnav__icon-link__label">Add</span>
         </a>
         <a href="passwords.html" class="ppnav__icon-link" aria-label="Passwords" tabindex="0">
             ${icons["Passwords"]}
