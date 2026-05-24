@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=no">
+    <title>PassPro - Add New</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <script src="scripts/pinlock.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            min-height: 100vh;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #bb86fc;
+        }
+        button {
+            background-color: #bb86fc;
+            color: #121212;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: #181818;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d2d2d;
+            border-radius: 8px;
+            border: 2px solid #121212;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bb86fc;
+        }
+        ::-webkit-scrollbar-corner {
+            background: #181818;
+        }
+        button:hover {
+            background-color: #9965f4;
+        }
+        .info-section {
+            margin-top: 46px;
+            padding: 22px 0 8px 0;
+            border-top: 1px solid #24203a;
+            text-align: center;
+            color: #bbb;
+            font-size: 15px;
+        }
+        .info-section-username {
+            color: #bb86fc;
+            font-size: 1.13em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .info-section-count {
+            color: #82e3db;
+            font-size: 1em;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .info-section-sync {
+            color: #b388ff;
+            font-size: 0.96em;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div class="container">
+    <h2>Add New Password</h2>
+    <form id="addForm" autocomplete="off">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" required placeholder="e.g. Gmail" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="username">Username / Email</label>
+            <input type="text" id="username" required placeholder="e.g. asdaw@gmail.com" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required placeholder="Your password" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input type="url" id="url" placeholder="https://...">
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea id="notes" rows="3" placeholder="Optional notes..."></textarea>
+        </div>
+        <button type="submit">Save Password</button>
+    </form>
+
+    <!-- Info section -->
+    <div class="info-section" id="infos">
+        <span class="info-section-username" id="infoWelcome"></span>
+        <span class="info-section-count" id="infoCount"></span>
+        <span class="info-section-sync" id="infoSync"></span>
+    </div>
+</div>
+
+<script src="navbar.js"></script>
+
+<script>
+    // Utility to get vault data safely
+    function getVaultData() {
+        try {
+            const raw = localStorage.getItem('pm_data');
+            let data = raw ? JSON.parse(raw) : { passwords: [] };
+            if (!data.hasOwnProperty('username') || typeof data.username !== "string") {
+                data.username = "";
+            }
+            if (!data.hasOwnProperty('pin') || typeof data.pin !== "string") {
+                data.pin = "";
+            }
+            return data;
+        } catch {
+            return { passwords: [], username: "", pin: "" };
+        }
+    }
+
+    // Utility to find last export date (if available)
+    function getLastSyncDate() {
+        // We'll use a saved "pm_last_export" in localStorage if it exists (set during export)
+        // Fallback: show "Never exported"
+        const d = localStorage.getItem('pm_last_export');
+        if (d) {
+            const dt = new Date(parseInt(d));
+            return dt.toLocaleString();
+        }
+        return "Never exported";
+    }
+
+    // Setup info section
+    function updateBottomInfoSection() {
+        const data = getVaultData();
+        // Welcome
+        const uname = (data.username && typeof data.username === 'string' && data.username.trim().length) ? data.username.trim() : 'user';
+        document.getElementById('infoWelcome').textContent = `Glad to see you back! ${uname}`;
+
+        // Count
+        const count = (Array.isArray(data.passwords) ? data.passwords.length : 0);
+        document.getElementById('infoCount').textContent = `Passwords Count: ${count}`;
+
+        // Last sync
+        document.getElementById('infoSync').textContent = `Last Sync: ${getLastSyncDate()}`;
+    }
+
+    // Hook: also update on adding password
+    document.getElementById('addForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const data = getVaultData();
+
+        const entry = {
+            title: document.getElementById('title').value.trim(),
+            username: document.getElementById('username').value.trim(),
+            password: document.getElementById('password').value,
+            url: document.getElementById('url').value.trim(),
+            notes: document.getElementById('notes').value.trim()
+        };
+
+        data.passwords.push(entry);
+        localStorage.setItem('pm_data', JSON.stringify(data, null, 2));
+
+        alert('Password saved successfully!');
+        this.reset();
+        updateBottomInfoSection();
+    });
+
+    // Initial population
+    updateBottomInfoSection();
+</script>
+
+</body>
+</html>
