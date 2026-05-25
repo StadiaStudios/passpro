@@ -111,7 +111,7 @@
 
         // SVG icons for an iOS-style look (Material icons, inline, fixed for correct alignment/appearance)
         const icons = {
-            "Add": `
+            "Add New": `
 <svg class="ppnav__icon-link__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="1em" height="1em">
   <g>
     <rect width="24" height="24" fill="none"/>
