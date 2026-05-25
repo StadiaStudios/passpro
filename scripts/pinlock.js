@@ -100,7 +100,7 @@
             font-size: 1.82rem;
             width: 100%;
             outline: none;
-            background: #141414;
+            background:rgb(27, 27, 27);
             color: #fff;
             border: 1.5px solid #222;
             border-radius: 12px;
@@ -244,7 +244,6 @@
                             maxlength="4"
                             placeholder="PIN"
                             aria-label="PIN code"
-                            style="-webkit-text-security: disc;"
                         >
                         <button class="pin-lock-icon-btn" id="viewPinBtn" type="button" tabindex="0" aria-label="Show/hide PIN">
                             <span class="pin-lock-view-icon" id="viewPinIcon">
@@ -312,18 +311,14 @@
                 pinVisible = isVisible;
                 input.type = pinVisible ? "text" : "password";
                 renderEye(pinVisible);
-                if (!pinVisible) {
-                    input.style.setProperty('-webkit-text-security', 'disc');
-                } else {
-                    input.style.removeProperty('-webkit-text-security');
-                }
             }
+
+            setPinVisible(false);
 
             viewBtn.addEventListener('click', () => {
                 setPinVisible(!pinVisible);
                 input.focus({ preventScroll: true });
             });
-
             viewBtn.addEventListener('keydown', (e) => {
                 if (e.key === ' ' || e.key === 'Enter') {
                     e.preventDefault();
@@ -331,14 +326,13 @@
                 }
             });
 
-            setPinVisible(false);
-
             input.addEventListener('input', (e) => {
                 let value = e.target.value.replace(/\D/g, '').slice(0, 4);
                 if (value !== e.target.value) {
                     e.target.value = value;
                 }
                 errorElm.textContent = '';
+                unlockBtn.disabled = value.length !== 4;
             });
 
             input.addEventListener('paste', (e) => {
@@ -349,6 +343,11 @@
                 }
             });
 
+            function maybeEnableUnlockBtn() {
+                unlockBtn.disabled = input.value.trim().length !== 4;
+            }
+            maybeEnableUnlockBtn();
+
             function tryUnlock() {
                 let value = input.value.trim();
                 if (value.length === 4) {
@@ -358,23 +357,24 @@
                     } else {
                         errorElm.textContent = 'Incorrect PIN';
                         input.value = '';
+                        unlockBtn.disabled = true;
                         input.focus();
-                        unlockBtn.disabled = false;
                     }
                 } else {
                     errorElm.textContent = 'Please enter your 4-digit PIN';
+                    unlockBtn.disabled = input.value.trim().length !== 4;
                 }
             }
 
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
+                    e.preventDefault();
                     tryUnlock();
                 }
             });
 
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
-                unlockBtn.disabled = true;
                 tryUnlock();
             });
 
@@ -395,6 +395,8 @@
                     e.preventDefault();
                 }
             });
+
+            maybeEnableUnlockBtn();
         });
     }
 })();
