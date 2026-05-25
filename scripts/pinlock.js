@@ -235,7 +235,7 @@
                 <form id="pinLockForm" autocomplete="off" tabindex="0" style="width:100%;display:flex;flex-direction:column;align-items:center;">
                     <div class="pin-lock-input-group">
                         <input
-                            type="password"
+                            type="tel"
                             inputmode="numeric"
                             pattern="[0-9]*"
                             autocomplete="off"
@@ -275,15 +275,15 @@
             const unlockBtn = card.querySelector('#unlockBtn');
             const forgotBtn = card.querySelector('#forgotPinBtn');
 
-            try {
-                input.setAttribute('autocomplete', 'new-password');
-                input.setAttribute('autocapitalize', 'off');
-                input.setAttribute('autocorrect', 'off');
-            } catch (e) {}
-
-            input.focus();
-
             let pinVisible = false;
+
+            input.setAttribute('inputmode', 'numeric');
+            input.setAttribute('pattern', '[0-9]*');
+            input.setAttribute('maxlength', '4');
+            input.setAttribute('autocomplete', 'new-password');
+            input.setAttribute('autocapitalize', 'off');
+            input.setAttribute('autocorrect', 'off');
+            input.type = 'tel';
 
             function renderEye(open) {
                 if (open) {
@@ -309,8 +309,15 @@
 
             function setPinVisible(isVisible) {
                 pinVisible = isVisible;
-                input.type = pinVisible ? "text" : "password";
+                input.type = pinVisible ? 'text' : 'tel';
                 renderEye(pinVisible);
+                // Set masking state immediately after changing type
+                if (!pinVisible) {
+                    input.style.webkitTextSecurity = "disc";
+                } else {
+                    input.style.webkitTextSecurity = "";
+                }
+                // Only focus input if called by toggle button, NOT on focus/blur handlers
             }
 
             setPinVisible(false);
@@ -395,6 +402,24 @@
                     e.preventDefault();
                 }
             });
+
+            // Ensure masking or revealing is only tied to pinVisible, not on input focus state.
+            function fixPinMask() {
+                if (!pinVisible) {
+                    input.style.webkitTextSecurity = "disc";
+                } else {
+                    input.style.webkitTextSecurity = "";
+                }
+            }
+
+            // Remove the old "applyMaskIfNeeded" logic 
+            input.addEventListener('focus', fixPinMask);
+            input.addEventListener('blur', fixPinMask);
+
+            // Set correct state on load
+            fixPinMask();
+
+            input.focus();
 
             maybeEnableUnlockBtn();
         });
