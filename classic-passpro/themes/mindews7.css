@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap');
+
+body, body.dark-mode {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif !important;
+    background-color: #2b7095 !important;
+    background-image: radial-gradient(circle at center 30%, #457394 0%, #2b7095 40%, #134674 100%) !important;
+    background-attachment: fixed !important;
+    color: #000 !important;
+}
+
+header {
+    background: #165c93 !important;
+    border-bottom: 1px solid #114165 !important;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.15) !important;
+}
+
+header h1, header button i, header a, header .nav-link {
+    color: #fff !important;
+    text-shadow: none !important;
+}
+
+.passwords-tab-container,
+.settings-tab-container {
+    background: #fff !important;
+    border: 8px solid rgba(185, 209, 234, 0.5) !important;
+    border-radius: 9px !important;
+    box-shadow:
+        0 0 15px rgba(0,0,0,0.31),
+        0 2px 22px 2px rgba(175,195,229,0.12),
+        inset 0 0 1px #fff,
+        inset 0 0 0 1px rgba(0,0,0,0.11) !important;
+    background-clip: padding-box !important;
+    padding: 28px 34px 26px 34px !important;
+    margin-top: 36px !important;
+    margin-bottom: 36px !important;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+@media (max-width: 900px) {
+    .passwords-tab-container,
+    .settings-tab-container {
+        padding: 14px 4vw 12px 4vw !important;
+        max-width: 98vw;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+#dashboard-section, .dashboard-panel, .dashboard-top, .dashboard-info, .dashboard-welcome, .dashboard-data, .dashboard-section {
+    background: rgba(255,255,255,0.87) !important;
+    color: #003048 !important;
+    border-radius: 8px !important;
+    padding: 18px 18px 12px 18px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12), 0 1.5px 4px rgba(0,0,0,0.08) !important;
+}
+
+#dashboard-section h1, .dashboard-panel h1, .dashboard-top h1, .dashboard-welcome h1, .dashboard-info h1 {
+    color: #175b94 !important;
+    text-shadow: 0 2px 7px rgba(255,255,255,0.85) !important;
+    font-weight: 600 !important;
+}
+
+#dashboard-section h2, .dashboard-panel h2, .dashboard-info h2, .dashboard-welcome h2 {
+    color: #195e94 !important;
+    text-shadow: 0 1.5px 5px rgba(255,255,255,0.85) !important;
+    font-weight: 600 !important;
+}
+
+.dashboard-info, .dashboard-data, .dashboard-stats, .gladYoureBackSection, .dashboard-summary, .dashboard-list {
+    background: #ffffff !important;
+    color: #08325d !important;
+    border: 1px solid #c5d3e2 !important;
+    border-radius: 6px !important;
+    padding: 10px 15px 8px 15px !important;
+    box-shadow: 0 1px 7px 1px rgba(175,195,229,0.16) !important;
+    font-size: 1.02em !important;
+}
+
+.dashboard-data strong, .dashboard-info strong, .dashboard-stats strong, .dashboard-summary strong,
+.dashboard-info b, .dashboard-stats b, .dashboard-summary b {
+    color: #084f8a !important;
+    font-weight: bold !important;
+}
+
+.dashboard-info .label, .dashboard-data .label, .dashboard-stats .label, .dashboard-summary .label {
+    color: #195e94 !important;
+    font-weight: 500 !important;
+}
+
+#welcome-message, .dashboard-welcome, .gladYoureBackSection, #mobile-welcome-message {
+    color: #165c93 !important;
+    background: rgba(255,255,255,0.90) !important;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.6) !important;
+    font-weight: 600 !important;
+}
+
+#dashboard-section h2, #dashboard-section h3,
+#dashboard-section p, #dashboard-section span,
+.dashboard-info h2, .dashboard-info h3, .dashboard-info p, .dashboard-info span,
+.dashboard-data h3, .dashboard-data p, .dashboard-data span,
+.dashboard-welcome h1, .dashboard-welcome h2, .dashboard-welcome h3,
+.gladYoureBackSection, #gladYoureBackSection,
+#total-passwords, #last-sync, #display-username, #device-info,
+.dashboard-summary, .dashboard-list, .dashboard-panel, .dashboard-top
+{
+    color: #165c93 !important;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.7) !important;
+}
+
+#total-passwords, #last-sync, #display-username, #device-info {
+    font-weight: 600 !important;
+    color: #175b94 !important;
+    letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, label, td, li {
+    color: #000 !important;
+}
+
+h2, h3, #modal-title, #pin-modal-title, #password-modal-title, #profile-title {
+    color: #003399 !important;
+    font-weight: 400 !important;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.5) !important;
+}
+
+.bg-\[\#111\], .bg-\[\#1A1A1A\], .bg-\[\#2A2A2A\], .bg-\[\#222\] {
+    background: #f0f0f0 !important;
+    border: 1px solid #dfdfdf !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+#modal > div, #pin-modal > div, #password-modal > div, #profile-modal > div {
+    background: #ffffff !important;
+    border: 8px solid rgba(185, 209, 234, 0.5) !important;
+    border-radius: 8px !important;
+    background-clip: padding-box !important;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5), inset 0 0 1px rgba(255,255,255,1), inset 0 0 0 1px rgba(0,0,0,0.2) !important;
+    backdrop-filter: blur(5px);
+}
+
+button, .bg-red-500, .bg-\[\#222\], .bg-gray-500, .bg-gray-600, .bg-\[\#5865F2\], .bg-zinc-800 {
+    background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 49%, #dddddd 50%, #cfcfcf 100%) !important;
+    border: 1px solid #707070 !important;
+    border-radius: 3px !important;
+    color: #000 !important;
+    font-weight: normal !important;
+    padding: 6px 16px !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.1) !important;
+    text-shadow: none !important;
+    cursor: default !important;
+    /* Prevent button shrink on hover by keeping padding and min-width consistent */
+    min-width: 44px;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+button:hover, .bg-red-500:hover, .bg-\[\#222\]:hover, .bg-gray-500:hover, .bg-zinc-800:hover {
+    background: linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%) !important;
+    border-color: #3c7fb1 !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.1) !important;
+    padding: 6px 16px !important;
+    min-width: 44px;
+}
+
+button:active, .bg-red-500:active, .bg-\[\#222\]:active {
+    background: linear-gradient(to bottom, #e5f4fc 0%, #c4e5fa 49%, #98d1ef 50%, #68b3db 100%) !important;
+    border-color: #2c628b !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3) !important;
+    padding: 6px 16px !important;
+    min-width: 44px;
+}
+
+/* Prevent "Password Generator" and "Digital Wallet" buttons from shrinking on hover */
+.password-generator-btn,
+.digital-wallet-btn {
+    min-width: 120px;
+    padding: 6px 22px !important;
+    box-sizing: border-box !important;
+}
+
+.password-generator-btn:hover,
+.digital-wallet-btn:hover {
+    min-width: 120px;
+    padding: 6px 22px !important;
+}
+
+.view-btn, .edit-btn, .delete-btn {
+    padding: 4px 10px !important;
+    border-radius: 3px !important;
+}
+
+input, textarea, .input-field {
+    background: #fff !important;
+    border: 1px solid #abadb3 !important;
+    border-radius: 2px !important;
+    color: #000 !important;
+    padding: 6px 8px !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1) !important;
+}
+
+input:focus, textarea:focus, .input-field:focus {
+    border-color: #3D7BAD !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1), 0 0 4px rgba(91, 162, 230, 0.8) !important;
+    outline: none !important;
+}
+
+a, .nav-link, .link-effect, .forgot-pin-link, .terms-link, .password-url-link, button.link-effect {
+    color: #69abee !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
+a:hover, .nav-link:hover, .link-effect:hover, .forgot-pin-link:hover, .terms-link:hover, button.link-effect:hover {
+    color: #3399ff !important;
+    text-decoration: underline !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.nav-link::after, .link-effect::after, .password-url-link::after, .forgot-pin-link::after, .terms-link::after {
+    display: none !important;
+}
+
+.password-item {
+    background: #fff !important;
+    border: 1px solid #d9d9d9 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.password-item:hover {
+    background: #e5f3fb !important;
+    border-color: #70c0e7 !important;
+}
+
+::-webkit-scrollbar {
+    width: 17px !important;
+    height: 17px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0 !important;
+    border-left: 1px solid #e3e3e3 !important;
+    border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cdcdcd !important;
+    border: 1px solid #f0f0f0 !important;
+    border-radius: 0 !important;
+    box-shadow: inset 1px 0 0 rgba(255,255,255,0.8), inset -1px 0 0 rgba(0,0,0,0.1) !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a6a6a6 !important;
+}
+
+#pin-lock-toggle ~ .block {
+    background: #fff !important;
+    border: 1px solid #8e8f8f !important;
+    border-radius: 2px !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1) !important;
+    height: 16px !important;
+    width: 16px !important;
+    margin-right: 5px;
+}
+
+#pin-lock-toggle ~ .dot {
+    display: none !important;
+}
+
+#pin-lock-toggle:checked ~ .block {
+    background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M2 5 L4 7 L8 2" stroke="black" stroke-width="1.5" fill="none"/></svg>') no-repeat center center !important;
+    background-size: 80% 80% !important;
+}
+
+.w-full.bg-red-700 {
+    background: #e6e6e6 !important;
+    border: 1px solid #bcbcbc !important;
+    border-radius: 2px !important;
+    height: 15px !important;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1) !important;
+}
+
+#storage-progress-bar {
+    background: linear-gradient(to bottom, #74ec6a 0%, #30b124 50%, #1e8714 100%) !important;
+    border-radius: 0 !important;
+    height: 100% !important;
+    border-right: 1px solid #005000 !important;
+}
+
+#mobile-nav-menu {
+    background: #f0f0f0 !important;
+    border-left: 1px solid #ccc !important;
+}
+
+#loading-screen {
+    background: #000 !important;
+}
+
+#premium-badge {
+    background: linear-gradient(to bottom, #ffd700 0%, #ffaa00 100%) !important;
+    border: 1px solid #cc8800 !important;
+    color: #000 !important;
+    border-radius: 3px !important;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.5) !important;
+}
