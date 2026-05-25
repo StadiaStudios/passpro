@@ -1,0 +1,277 @@
+:root {
+  --background-color: #16130f;
+  --text-color: #fffbe6;
+  --accent: #ffd700;
+  --subtext: #d6c792;
+  --section-background: #221c13;
+  --section-border: #705d32;
+  --input-background: #191511;
+  --input-border: #8e7b4d;
+  --input-text: #fffbe6;
+  --button-background: #282010;
+  --button-border: #ffd700;
+  --button-text: #fdefb8;
+  --button-hover-background: #ffd700;
+  --button-hover-border: #ecd06e;
+  --primary-border: #ffd700;
+  --theme-radio-bg: #221c13;
+  --storage-bg: #191511;
+}
+
+html, body {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+  background: none;
+}
+
+.section {
+  background-color: var(--section-background);
+  border: 1px solid var(--section-border);
+  box-shadow: 0 6px 32px 0 rgba(255, 215, 0, 0.08);
+  border-radius: 12px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+p, .app-version, .app-version-links a, label, .entry-subtext {
+  color: var(--subtext);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--subtext);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+input[type="file"], input[type="text"], input[type="password"] {
+  color: var(--input-text);
+  background: var(--input-background);
+  border: 1.5px solid var(--input-border);
+  padding: 10px;
+  border-radius: 7px;
+  font-size: 15px;
+  transition: border 0.2s;
+  outline: none;
+  box-shadow: none;
+}
+
+input[type="file"]:focus, input[type="text"]:focus, input[type="password"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 1px 6px 0 rgba(255, 215, 0, 0.08);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--button-background);
+  color: var(--button-text);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1.5px solid var(--button-border);
+  border-radius: 7px;
+  transition: background 0.22s, color 0.18s, border 0.18s, box-shadow 0.16s;
+  box-shadow: 0 2px 10px 0 rgba(255, 215, 0, 0.10);
+}
+
+button:hover, button:focus {
+  background-color: var(--button-hover-background);
+  color: #191511;
+  border-color: var(--button-hover-border);
+  box-shadow: 0 0 12px 1px rgba(255, 215, 0, 0.22);
+}
+
+.theme-options-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.theme-radio-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 15px;
+  padding: 6px 18px 6px 10px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background: var(--theme-radio-bg);
+  color: inherit;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  box-shadow: 0 2px 8px 0 rgba(255,216,0,0.03);
+  position: relative;
+  min-width: 0;
+}
+
+.theme-radio-label.selected,
+.theme-radio-label:focus-within {
+  background: linear-gradient(90deg, #ffd700 40%, #e4c465 100%);
+  color: #2c230f;
+  border-color: var(--primary-border);
+  box-shadow: 0 0 0 3px #ffe06660;
+}
+
+.theme-radio-input {
+  accent-color: var(--accent);
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+.theme-radio-label .theme-radio-input {
+  flex-shrink: 0;
+}
+
+.theme-radio-label.selected .theme-radio-input {
+  filter: drop-shadow(0 0 3px #ffd700);
+}
+
+.storage-bar-container {
+  width: 100%;
+  background-color: var(--storage-bg);
+  border-radius: 8px;
+  margin: 15px 0 8px 0;
+  height: 22px;
+  position: relative;
+  border: 1px solid var(--section-border);
+  overflow: hidden;
+  box-shadow: 0 0 8px 1px rgba(255,216,0,0.08);
+}
+.storage-bar-fill {
+  background: linear-gradient(90deg, #ffd700 15%, #e4c465 100%);
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.storage-bar-label {
+  color: #312400;
+  font-size: 13px;
+  font-weight: 600;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  text-shadow: 0 1px 4px rgba(255, 215, 0, 0.3);
+}
+
+.app-version {
+  text-align: center;
+  color: #a3915f;
+  font-size: 13px;
+  margin-top: 20px;
+  margin-bottom: 4px;
+  user-select: text;
+}
+.app-version-links a {
+  color: #ffd700;
+  font-size: 14px;
+  text-decoration: underline;
+  transition: color 0.15s;
+}
+.app-version-links a:hover {
+  color: #ecd06e;
+  text-decoration: underline;
+}
+
+.btn-danger {
+  background: rgba(207, 162, 21, 0.08) !important;
+  color: #e3aa56 !important;
+  border: 1.5px solid #ffd700 !important;
+}
+.btn-danger:hover {
+  background: #ffd700 !important;
+  color: #16130f !important;
+}
+
+#removePinBtn {
+  background-color: rgba(255, 165, 31, 0.11);
+  color: #ffd700;
+  border: 1.5px solid #ffd700;
+}
+#removePinBtn:hover {
+  background: #ffd700 !important;
+  color: #191511 !important;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background: #181511;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(120deg, #b29957, #ffd700 60%);
+  border-radius: 8px;
+  border: 2px solid var(--background-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffd700;
+}
+::-webkit-scrollbar-corner {
+  background: #181511;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #ffd700 #181511;
+}
+
+::selection {
+  background: #ffd700;
+  color: #2d2000;
+}
+
+.theme-radio-label span[style*="background"] {
+  box-shadow: 0 0 8px 2px #ffd70070;
+  border: 2px solid #fff9d6;
+}
+
+hr {
+  border-color: #705d32;
+  opacity: 0.38;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline dotted;
+  transition: color 0.12s;
+}
+a:hover {
+  color: #fff9b7;
+}
+
+input[readonly] {
+  background: #201b11;
+  color: #e4d2a6;
+}
+
+input::placeholder {
+  color: #bdad6d;
+  opacity: 1;
+}
+
+::-webkit-input-placeholder { color: #bdad6d; opacity: 1; }
+::-moz-placeholder { color: #bdad6d; opacity: 1; }
+:-ms-input-placeholder { color: #bdad6d; opacity: 1; }
+::placeholder { color: #bdad6d; opacity: 1; }

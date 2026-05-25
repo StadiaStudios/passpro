@@ -2,141 +2,174 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>PassPro | Terms of Service</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
         body {
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease;
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
         }
-        body.dark-mode {
-            background-color: #111;
-            color: #ccc;
-        }
-        body.light-mode {
-            background-color: #f0f0f0;
-            color: #333;
-        }
-        .bg-nav {
-            background-color: #1A1A1A;
-        }
-        .light-mode .bg-nav {
-            background-color: #e0e0e0;
-        }
-        .nav-link {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 4px;
-            transition: all 0.3s ease-in-out;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background-color: rgb(255, 17, 17);
-            transition: width 0.3s ease-in-out;
-        }
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
+        .container {
+            max-width: 760px;
+            margin: 40px auto 0 auto;
+            padding: 0 18px 40px 18px;
         }
         ::-webkit-scrollbar {
-            width: 3px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #222;
-            border-radius: 10px;
+            width: 12px;
+            background: #181818;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgb(123, 123, 255);
-            border-radius: 10px;
+            background: #2d2d2d;
+            border-radius: 8px;
+            border: 2px solid #121212;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: blue;
+            background: #bb86fc;
+        }
+        ::-webkit-scrollbar-corner {
+            background: #181818;
+        }
+        .terms-card {
+            background: #222;
+            border: 1px solid #282842;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.21);
+            padding: 38px 24px 28px 24px;
+            margin-top: 38px;
+        }
+        h1 {
+            color: #bb86fc;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0 0 24px 0;
+            letter-spacing: 1px;
+        }
+        h2 {
+            color: #cf6679;
+            margin-top: 36px;
+            margin-bottom: 10px;
+            font-size: 1.23rem;
+            font-weight: 600;
+            letter-spacing: 0.1px;
+        }
+        p, ul, ol {
+            color: #e0e0e0;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+        ul, ol {
+            margin-top: 7px;
+            margin-bottom: 16px;
+            padding-left: 23px;
+        }
+        ul li, ol li {
+            margin-bottom: 7px;
+        }
+        strong {
+            color: #bb86fc;
+        }
+        .last-updated {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.98rem;
+            margin-top: 36px;
+            letter-spacing: 0.07em;
+        }
+        .important {
+            font-weight: bold;
+            color: #FFF;
+            background: #cf66791a;
+            padding: 7px 11px;
+            border-radius: 6px;
+            margin-bottom: 11px;
+            display: inline-block;
+        }
+        @media (max-width: 550px) {
+            .container, .terms-card {
+                padding-left: 4vw;
+                padding-right: 4vw;
+            }
+            h1 {
+                font-size: 1.24rem;
+            }
+            .terms-card {
+                padding: 20px 7px 17px 7px;
+            }
         }
     </style>
 </head>
-<body class="dark-mode min-h-screen flex flex-col items-center">
-    <nav class="w-full bg-nav shadow-sm sticky top-0 z-10">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center relative">
-            <div class="text-2xl font-bold text-white flex items-center">
-                <a href="index.html"><img src="assets/favicon.png" alt="PassPro Logo" class="w-8 h-8 rounded-md mr-2"></a>
-                PassPro
-            </div>
-            <div class="flex space-x-6 items-center">
-                <a href="index.html" class="nav-link text-white font-semibold text-lg transition-colors">Dashboard</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mx-auto px-4 py-8">
-        <div class="bg-[#222] p-8 rounded-lg shadow-xl max-w-4xl mx-auto mt-8">
-            <h1 class="text-3xl font-bold text-center mb-6 text-white">Terms of Service</h1>
-
-            <div class="prose max-w-none text-white leading-relaxed">
-                <p>Welcome to PassPro! By using our service, you agree to:
-                <ul class="list-disc list-inside space-y-2">
-                    <li>Use the Service in a way that follows all applicable laws and regulations.</li>
+<body>
+    <div id="nav-placeholder"></div>
+    <div class="container">
+        <div class="terms-card">
+            <h1>Terms of Service</h1>
+            <div>
+                <p>Welcome to PassPro! By using our service, you agree to:</p>
+                <ul>
+                    <li>Use the Service in compliance with all applicable laws and regulations.</li>
                     <li>Provide accurate and current information when creating your account.</li>
                     <li>Keep your master password confidential.</li>
-                    <li>Keep a Downloaded Account backup file somewhere else backed up.</li>
+                    <li>Maintain a backup copy of your account file in a secure location.</li>
                     <li>Keep your device and software secure and updated to prevent unauthorized access.</li>
                 </ul>
 
-                <h2 class="text-2xl font-bold mt-8 mb-4">Our Service and Data Handling</h2>
-                <p>PassPro is a zero-knowledge password manager. This means that all encryption and decryption of your data happen only on your device. We do not access or see any of the passwords, notes, or other data you store in the application. We do not have a copy of your master password and cannot recover it for you.</p>
-                <p>We are not responsible for any loss of data or unauthorized access to your files due to your failure to protect your master password or device, or from a security breach on your part.</p>
+                <h2>Our Service and Data Handling</h2>
+                <p>PassPro is a zero-knowledge password manager. All encryption and decryption of your data occur solely on your device. We never access or see any of the passwords, notes, or other data you store in the application. We do not have a copy of your master password and cannot recover it for you.</p>
+                <p>We are not responsible for any loss of data or unauthorized access to your files resulting from your failure to protect your master password or device, or from a security breach on your part.</p>
 
-                <h2 class="text-2xl font-bold mt-8 mb-4">Limitation of Liability</h2>
+                <h2>Limitation of Liability</h2>
                 <p>The Service is provided on an "as is" and "as available" basis. We make no warranties, express or implied, regarding the Service. We do not guarantee that the Service will be uninterrupted, error-free, or secure. To the fullest extent permitted by law, we shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages. This includes, but is not limited to, damages for loss of profits, goodwill, data, or other intangible losses, resulting from:</p>
-                <ul class="list-disc list-inside space-y-2">
+                <ul>
                     <li>Your use or inability to use the Service.</li>
                     <li>Unauthorized access to or alteration of your transmissions or data.</li>
                     <li>The acts or conduct of any third party on the Service.</li>
                     <li>Any other matter relating to the Service.</li>
                 </ul>
 
-                <h2 class="text-2xl font-bold mt-8 mb-4">Digital Card Vault</h2>
-                  <p>The Card Vault feature provides a convenient way to organize credit, debit, and other payment card information locally on your device. By using this feature, you acknowledge and agree to the following terms:</p>
-
-                <ul class="list-decimal list-inside space-y-2 mt-4">
+                <h2>Digital Card Vault</h2>
+                <p>The Card Vault feature provides a convenient way to organize credit, debit, and other payment card information locally on your device. By using this feature, you acknowledge and agree to the following terms:</p>
+                <ol>
                     <li><strong>Client-Side Storage:</strong> All card data is stored exclusively on your device's local browser storage. PassPro does not store, transmit, or have access to your card numbers, CVVs, or expiration dates.</li>
                     <li><strong>Security Responsibility:</strong> You are solely responsible for the security of your device. Because the data is stored locally, if your device is stolen, compromised, or accessible by unauthorized third parties, your stored card information may be at risk.</li>
-                    <li><strong>Data Permanence:</strong> Clearing your browser cache or site data will result in the permanent loss of all stored cards. We strongly advise users to regularly utilize the "Export" feature to create secure, offline backups of their data.</li>
+                    <li><strong>Data Permanence:</strong> Clearing your browser cache or site data will result in the permanent loss of all stored cards. We strongly advise users to regularly use the "Export" feature to create secure, offline backups of their data.</li>
                     <li><strong>Limitation of Liability:</strong> PassPro is a digital organization tool, not a financial institution. We are not liable for any financial loss, unauthorized transactions, or security breaches resulting from the loss of your device or the compromise of your exported backup files.</li>
                     <li><strong>Backup Security:</strong> If you choose to export your card vault data as a .json file, you accept full responsibility for the security of that file. Do not store these files in unsecured locations or share them with third parties.</li>
-                </ul>
+                </ol>
 
-                <h2 class="text-2xl font-bold mt-8 mb-4">Changes to the Terms</h2>
+                <h2>Changes to the Terms</h2>
                 <p>We reserve the right to modify these Terms at any time. We will notify you of any changes by posting the new Terms on our website or within the app. Your continued use of the Service after the changes take effect means you accept the revised Terms.</p>
 
-                <h2 class="text-2xl font-bold mt-8 mb-4">Governing Law</h2>
-                <p>These Terms shall be governed by and interpreted in accordance with the laws of The United States, without regard to its conflict of law provisions.</p>
+                <h2>Governing Law</h2>
+                <p>These Terms shall be governed by and interpreted in accordance with the laws of the United States, without regard to its conflict of law provisions.</p>
                 
-                <h2 class="text-2xl font-bold mt-8 mb-4">Purchase Terms</h2>
-                <p>All purchases made through the Service are non-refundable. PassPro is a digital service, and all sales are considered final upon completion of the transaction. By making a purchase, you acknowledge and agree to these terms. If you purchase a Service like for example PassPro Premium it will only be a one time payment. Unless official website says otherwise</p>
+                <h2>Purchase Terms</h2>
+                <p>All purchases made through the Service are non-refundable. PassPro is a digital service, and all sales are considered final upon completion of the transaction. By making a purchase, you acknowledge and agree to these terms. Services like PassPro Premium are one-time purchases unless stated otherwise on the official website.</p>
 
-                <h2 class="text-2xl font-bold mt-8 mb-4">Forgot Code but have the downloaded account?</h2>
-                <p class="font-bold">(Complex Process + Requires Backup, And can previously have a password as long as you have the file)</p>
-                <ol class="list-decimal list-inside space-y-2">
-                    <li>Download your account via the settings within PassPro.</li>
-                    <li>Open the .txt file with a code editor such as VSC or NotePad++ or any other NotePad or text editor works.</li>
-                    <li>Passwords and usernames will be listed within the file. You can change the password by changing the input value in “PIN Lock: Null (Displays Your Password)”.</li>
-                    <li>Simply change the Pin Lock number to “Null”.</li>
+                <h2>Forgot Code but have the downloaded account?</h2>
+                <p class="important">Complex process. Requires backup and previous password if applicable, as long as you have the file.</p>
+                <ol>
+                    <li>Download your account file via the settings within PassPro.</li>
+                    <li>Open the .txt file with a text editor such as VS Code, Notepad++, or any other text editor.</li>
+                    <li>Your passwords and usernames will be listed within the file. You can change the password by editing the input value in "PIN Lock: Null (Displays Your Password)".</li>
+                    <li>Change the Pin Lock number to "Null".</li>
                 </ol>
-                <p class="mt-4">If you’ve already lost your account beforehand and do not have any archives or trash bins unfortunately an account can't be recovered without the minimum requirement.</p>
+                <p>If you have already lost your account and have no backups or archived copies, unfortunately the account cannot be recovered without meeting minimum requirements.</p>
 
-                <p class="mt-8 text-center text-sm">Last updated: April 20, 2026</p>
+                <div class="last-updated">Last updated: April 20, 2026</div>
             </div>
         </div>
     </div>
+    <script src="navbar.js"></script>
 </body>
 </html>

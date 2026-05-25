@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
+    <title>Forgot PIN? - PassPro</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <style>
+        :root {
+            --background: #111111;
+            --surface: #171717;
+            --surface-alt: #181818;
+            --card: #181818;
+            --card-border: #232323;
+            --divider: #202020;
+            --text-main: #e5e5e6;
+            --text-faded: #bbbbbb;
+            --text-muted: #aaaaaa;
+            --text-yellow: #ffe075;
+            --text-orange: #ffd6a0;
+            --text-softerror: #fdcaca;
+            --text-error: #fd6868;
+            --btn-bg: #232323;
+            --btn-bg-hover: #232323;
+            --btn-restore-bg: #1a1a17;
+            --btn-wipe-bg: #231a1a;
+            --btn-border-error: #fcbbbb;
+            --tip-bg: rgba(255,153,153,0.10);
+            --shadow: 0 4px 32px rgba(0,0,0,0.18);
+            --box-shadow-btn: 0 2px 12px rgba(0,0,0,0.12);
+            --section-label: #ffd6a0;
+            --section-label-error: #fd6868;
+            --section-title: #ff9696;
+            --irreversible-bg: rgba(255,110,110,0.13);
+        }
+
+        html, body {
+            min-height: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            width: 100vw;
+            box-sizing: border-box;
+        }
+        body {
+            background: var(--background);
+            color: var(--text-main);
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 0;
+            overflow-x: hidden;
+            width: 100vw;
+            box-sizing: border-box;
+        }
+        .main-container {
+            width: 90vw;
+            max-width: 480px;
+            margin: 24px auto 42px auto;
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 32px 25px 44px 25px;
+            border: 1.5px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition:
+                max-width 0.3s cubic-bezier(.4,0,.2,1),
+                width 0.3s cubic-bezier(.4,0,.2,1),
+                padding 0.2s;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        h1 {
+            color: #ff7575;
+            font-size: 2.15rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            text-align: center;
+            text-shadow: 0 1px 8px rgba(22,0,0,0.16);
+        }
+        .desc {
+            color: var(--text-faded);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        section {
+            margin: 0;
+            padding: 0;
+        }
+        .section-title {
+            color: var(--section-title);
+            font-size: 1.10rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            margin-top: 0;
+        }
+        .tips-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 1.03rem;
+        }
+        .tip-number {
+            color: #ff7575;
+            background: var(--tip-bg);
+            border-radius: 5px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: inline-block;
+            width: 29px;
+            text-align: center;
+            margin-right: 10px;
+            padding: 2px 0;
+        }
+        .help-link,
+        .discord-link {
+            color: #249fee;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.17s;
+        }
+        .help-link:hover,
+        .discord-link:hover {
+            color: #56baff;
+            text-decoration: underline;
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid var(--divider);
+            margin: 30px 0;
+        }
+        .section-label {
+            color: var(--section-label);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .section-label[style*="color:#fd6868"] {
+            color: var(--section-label-error) !important;
+        }
+        .restore-controls,
+        .wipe-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+            margin-top: 6px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .btn {
+            background: var(--btn-bg);
+            color: var(--text-orange);
+            font-weight: 700;
+            border: none;
+            outline: none;
+            border-radius: 7px;
+            padding: 13px 0;
+            font-size: 1.08rem;
+            cursor: pointer;
+            transition: 
+                background 0.18s, 
+                color 0.15s, 
+                box-shadow 0.17s,
+                border 0.17s;
+            box-shadow: var(--box-shadow-btn);
+            overflow-x: hidden;
+            white-space: nowrap;
+        }
+        .btn:active, .btn:focus {
+            background: #1d1d1d;
+        }
+        .btn-wipe {
+            background: var(--btn-wipe-bg);
+            color: var(--text-softerror);
+            border: 1.2px solid var(--btn-border-error);
+            transition: background 0.17s, border 0.17s;
+        }
+        .btn-wipe:active {
+            background: #3b2323;
+        }
+        .irreversible-warning {
+            color: #fdcaca;
+            background: var(--irreversible-bg);
+            font-size: 0.98rem;
+            padding: 6px 8px;
+            border-radius: 5px;
+            margin-top: 0;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        ::-webkit-scrollbar {
+            width: 3px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #222;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgb(141, 29, 29);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgb(255, 98, 98);
+        }
+        .discord-link {
+            color: #49aaff;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 2px;
+        }
+        .discord-link:hover {
+            text-decoration: underline;
+            color: #85cbff;
+        }
+
+        ::selection {
+            background: #292929;
+        }
+
+        input, button, textarea, select {
+            outline-color: #333 !important;
+            box-shadow: none !important;
+        }
+
+        .return-login-link-wrapper {
+            width: 100%;
+            text-align: center;
+            margin: 8px 0 0 0;
+        }
+        .return-login-link {
+            display: inline-block;
+            color: #58adf5;
+            font-weight: 700;
+            font-size: 1.07rem;
+            margin-top: 0;
+            text-decoration: none;
+            padding: 10px 0 3px 0;
+            transition: color 0.17s;
+        }
+        .return-login-link:hover {
+            color: #81c7fd;
+            text-decoration: underline;
+        }
+
+        @media (min-width: 701px) {
+            .main-container {
+                width: 80vw;
+                max-width: 700px;
+                padding: 46px 50px 62px 50px;
+                border-radius: 26px;
+            }
+            h1 {
+                font-size: 2.7rem;
+            }
+            .desc {
+                font-size: 1.18rem;
+            }
+            .irreversible-warning {
+                font-size: 1.08rem;
+            }
+            .section-title {
+                font-size: 1.20rem;
+            }
+            .tips-steps {
+                font-size: 1.14rem;
+            }
+        }
+
+        @media (min-width: 500px) and (max-width: 900px) {
+            .main-container {
+                width: 94vw;
+                max-width: 540px;
+                padding: 38px 35px 53px 35px;
+                border-radius: 19px;
+            }
+            h1 {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            html, body {
+                max-width: 100vw;
+                overflow-x: hidden !important;
+            }
+            body {
+                padding-top: 0;
+            }
+            #nav-placeholder {
+                min-height: 48px;
+                display: block;
+            }
+            .main-container {
+                width: 100vw;
+                max-width: 100vw;
+                min-width: 0;
+                padding: 5vw 2vw 10vw 2vw;
+                margin-top: 2vw;
+                margin-bottom: 4vw;
+                border-radius: 3vw;
+                box-sizing: border-box;
+                overflow-x: hidden;
+            }
+            h1 {
+                font-size: 7.1vw;
+            }
+            .desc {
+                font-size: 1.0rem;
+            }
+            .irreversible-warning {
+                font-size: 0.91rem;
+            }
+            .return-login-link {
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .main-container {
+                width: 55vw;
+                max-width: 1000px;
+                border-radius: 32px;
+                padding: 56px 70px 72px 70px;
+            }
+            h1 {
+                font-size: 3.0rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <div class="main-container">
+        <h1>Forgot PIN?</h1>
+        <div class="desc">
+            For your privacy and security, your PIN is encrypted locally—<span style="color:var(--text-yellow);font-weight:600;">PassPro cannot recover or reset it.</span> Please review your self-help and recovery options below.
+        </div>
+
+        <section>
+            <p class="section-title">Self-Help PIN Tips</p>
+            <div class="tips-steps">
+                <div><span class="tip-number">01</span>Try commonly used PIN patterns or your favorite numbers.</div>
+                <div><span class="tip-number">02</span>Consider important dates <span style="color:var(--text-orange)">(device setup, birthdays, anniversaries)</span>.</div>
+                <div><span class="tip-number">03</span>Look for old written notes or a password manager containing your PIN.</div>
+                <div><span class="tip-number">04</span>Recall 4-8 digit PINs you may have used in apps or on devices.</div>
+            </div>
+        </section>
+
+        <section style="margin-top:22px;">
+            <div><span class="section-title" style="margin-bottom:5px;">05</span>
+                <b>Still can’t access?</b>
+                <br><br>
+                If you have a backup file, you can restore your account below.
+                Otherwise, join our
+                <a class="discord-link" href="https://discord.gg/UGBFVrcKKx" target="_blank" rel="noopener">Discord</a>
+                for help with manual recovery (requires backup).
+            </div>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+            <span class="section-label">Restore from Backup</span>
+            <div style="color:var(--text-muted); font-size:0.99rem; margin-bottom:12px;">
+                Upload a PassPro <b>.json</b> backup to restore your vault.
+            </div>
+            <div class="restore-controls">
+                <input type="file" id="backupFile" accept=".json">
+                <button class="btn" onclick="document.getElementById('backupFile').click();">Upload Backup (.json)</button>
+            </div>
+        </section>
+
+        <hr class="divider" />
+
+        <section>
+            <span class="section-label" style="color:#fd6868;">Wipe All Data</span>
+            <div class="irreversible-warning">
+                Erase all local PassPro data and restart setup.<br>
+                <b>This is irreversible.</b>
+            </div>
+            <div class="wipe-controls">
+                <button class="btn btn-wipe" onclick="clearAllSiteData()">Clear All Site Data</button>
+            </div>
+        </section>
+        <div class="return-login-link-wrapper">
+            <a class="return-login-link" href="../index.html">&larr; Return to Login</a>
+        </div>
+        <br><br>
+    </div>
+    <script src="../navbar.js"></script>
+    <script>
+        const backupInput = document.getElementById('backupFile');
+        if (backupInput) {
+            backupInput.addEventListener('change', function (evt) {
+                const file = evt.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const backupData = JSON.parse(e.target.result);
+                        if (!backupData || typeof backupData !== 'object') throw new Error();
+                        if (!backupData.passwords && !backupData.pin) {
+                            alert('Invalid backup file: not a valid PassPro backup.');
+                            return;
+                        }
+                        if (!confirm('Restore from this backup? This will replace your current vault and PIN.')) return;
+                        localStorage.setItem('pm_data', JSON.stringify(backupData));
+                        sessionStorage.removeItem('is_unlocked');
+                        alert('Restore complete. You may now log in with the PIN from your backup.');
+                        window.location.href = '../index.html';
+                    } catch {
+                        alert('Could not read backup. Are you sure this is a valid PassPro .json backup?');
+                    }
+                };
+                reader.readAsText(file);
+                evt.target.value = '';
+            });
+        }
+
+        function clearAllSiteData() {
+            if (confirm('Are you sure? This will ERASE all PassPro local data and restart setup. This cannot be undone.')) {
+                localStorage.removeItem('pm_data');
+                sessionStorage.clear();
+                if ('storage' in navigator && navigator.storage && navigator.storage.persist) {
+                    if ('clear' in localStorage) localStorage.clear();
+                }
+                alert('All PassPro local data wiped. Reloading...');
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
+</body>
+</html>

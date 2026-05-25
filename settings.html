@@ -1,313 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Our Journey - Settings</title>
-    <script>
-    (function() {
-        const themeFile = localStorage.getItem('__app_custom_theme_file');
-        if (themeFile) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = themeFile;
-            document.head.appendChild(link);
-        }
-    })();
-</script>
+    <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=no">
+    <title>PassPro - Settings</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="scripts/pinlock.js"></script>
+    <script src="scripts/themes.js"></script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            min-height: 100vh;
-            padding: 0;
-            margin: 0; 
+            background-color: var(--background-color, #121212);
+            color: var(--text-color, #e0e0e0);
+            font-family: system-ui, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .section {
+            background-color: var(--section-background, #1e1e1e);
+            border: 1px solid var(--section-border, #333);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        h3 {
+            margin-top: 0;
+            color: var(--accent, #bb86fc);
+            font-size: 1.2rem;
+        }
+        p {
+            color: var(--subtext, #aaa);
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        button {
             width: 100%;
-            transition: background-color 0.3s;
+            padding: 12px;
+            background-color: var(--button-background, #222);
+            color: var(--button-text, #e0e0e0);
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid var(--button-border, #444);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        button:hover {
+            background-color: var(--button-hover-background, #333);
+            border-color: var(--button-hover-border, #555);
+        }
+        input[type="file"], input[type="text"] {
+            margin-bottom: 15px;
+            color: var(--input-text, #e0e0e0);
+            width: 100%;
+            background: var(--input-background, #121212);
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px dashed var(--input-border, #444);
+        }
+        .btn-danger {
+            background-color: rgba(207, 102, 121, 0.1);
+            color: #cf6679;
+            border: 1px solid #cf6679;
+            margin-top: 25px;
+        }
+        .btn-danger:hover {
+            background-color: #cf6679;
+            color: #121212;
+        }
+        .btn-primary {
+            background-color: var(--primary-background, #111);
+            color: var(--primary-text, rgb(194, 193, 193));
+            border: 1px solid var(--primary-border, #bb86fc);
+            margin-top: 10px;
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-background, #111);
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #232334;
+            color: #64b5f6;
+            border: 1px solid #64b5f6;
+            margin-top: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 6px;
+            width: 100%;
+            padding: 12px;
+            transition: background 0.18s, color 0.18s, border 0.18s;
+            cursor: pointer;
+            display: block;
+            text-align: center;
+        }
+        .btn-secondary:hover {
+            background-color: #64b5f6;
+            color: #232334;
+            border-color: #64b5f6;
+        }
+        .username-box {
+            margin-bottom: 24px;
+            padding-bottom: 4px;
+        }
+        .storage-bar-container {
+            width: 100%;
+            background-color: var(--storage-bg, #121212);
+            border-radius: 8px;
+            margin: 15px 0 8px 0;
+            height: 22px;
+            position: relative;
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+        .storage-bar-fill {
+            background: linear-gradient(90deg, #cf6679, #bb86fc);
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .storage-bar-label {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            pointer-events: none;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
         }
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 12px;
+            background: #181818;
         }
-
-        ::-webkit-scrollbar-track {
-            background: #111;
-        }
-        
         ::-webkit-scrollbar-thumb {
-            background: rgb(122, 1, 116); 
-            border-radius: 10px;
+            background: #2d2d2d;
+            border-radius: 8px;
+            border: 2px solid var(--background-color, #121212);
         }
-
         ::-webkit-scrollbar-thumb:hover {
-            background: #da46ff; 
+            background: #bb86fc;
         }
-
-        header {
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        ::-webkit-scrollbar-corner {
+            background: #181818;
         }
-
-        body.dark {
-            background-color: #111111;
-            color: #e2e8f0;
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #2d2d2d #181818;
         }
-        
-        body.dark .bg-white {
-            background-color: #222222;
-            color: #e2e8f0;
+        .app-version {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: 20px;
+            margin-bottom: 4px;
+            user-select: text;
         }
-
-        body.dark .shadow-lg {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+        .app-version-box {
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
-
-        body.dark .text-gray-700 { color: #cbd5e0; }
-        body.dark .text-gray-600 { color: #8894a3; }
-        body.dark .text-gray-500 { color: #718096; }
-
-        body.dark .bg-pink-50 { background-color: #222; }
-        body.dark .border-pink-200 { border-color: #4a5568; }
-
-        body.dark input[type="text"] {
-            color: #e2e8f0; 
-            background-color: #222222;
-            border-color: #4a5568;
+        .app-version-links {
+            margin-top: 8px;
+            margin-bottom: 6px;
+            text-align: center;
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-        
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-button, input, textarea, select {
-    border: 2px solid rgb(255, 0, 149);
-    outline: none;
-    background: none;
-}
-
-        body.dark header {
-            background-color: rgba(34, 34, 34, 0.7);
-            border-bottom-color: #334155;
+        .app-version-links a {
+            color: #bb86fc;
+            font-size: 14px;
+            text-decoration: underline;
+            transition: color 0.15s;
         }
-
-        .ai-button-container {
-  display: inline-block;
-  text-decoration: none;
-  width: 100%;
-  margin-bottom: 12px;
-}
-
-.ai-button {
-  width: 100%;
-  background: #f9fafb;
-  color: #374151;
-  padding: 12px 24px;
-  border-radius: 10px;
-  border: 1px solid #f9a8d4;
-  font-weight: bold;
-  cursor: pointer;
-  display: block;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-body.dark .ai-button {
-  background: #161616;
-  color: #f3f4f6;
-  border-color: #4b5563;
-}
-
-.ai-button-container:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-.ai-button:hover {
-  background: #fdf2f8;
-  color: #be185d;
-  border-color: #f472b6;
-}
-
-body.dark .ai-button:hover {
-  background: #222;
-  color: #f9a8d4;
-  border-color: #6b7280;
-}
+        .app-version-links a:hover {
+            color: #cf6679;
+            text-decoration: underline;
+        }
+        .app-version-box-gap {
+            height: 90px;
+            width: 100%;
+        }
+        #removePinBtn {
+            background-color: rgba(207, 102, 121, 0.17);
+            color: #cf6679;
+            border: 1px solid #cf6679;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        #removePinBtn:hover {
+            background-color: #cf6679 !important;
+            color: #121212 !important;
+        }
+        .theme-options-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .theme-radio-label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 15px;
+            padding: 6px 16px;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            background: var(--theme-radio-bg, #1b1b1b);
+            color: inherit;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+            box-shadow: none;
+            position: relative;
+            min-width: 0;
+        }
+        .theme-radio-label.selected,
+        .theme-radio-label:focus-within {
+            background: var(--primary-border, #bb86fc);
+            color: #fff;
+            border-color: var(--accent, #bb86fc);
+        }
+        .theme-radio-input {
+            accent-color: #bb86fc;
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+        .theme-radio-label .theme-radio-input {
+            flex-shrink: 0;
+        }
+        .theme-radio-label.selected .theme-radio-input {
+            filter: drop-shadow(0 0 2px white);
+        }
     </style>
 </head>
 <body>
-    
-    <header class="fixed top-0 left-0 w-full z-50 shadow-lg p-4 text-center border-b border-pink-400 flex justify-between items-center">
-        <a href="splash.html" class="text-gray-500 hover:text-pink-600 transition duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left">
-                <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
-            </svg>
-        </a>
-<h1 class="text-2xl font-extrabold text-pink-700" id="mainTitle">SETTINGS</h1>
-        <div class="w-8"></div>
-    </header>
+<div id="nav-placeholder"></div>
 
-    <div class="w-full px-6 md:px-10 pt-24 pb-12">
-        <div class="w-full space-y-8">
-            
-            <section>
-                <h2 class="text-lg font-bold text-gray-700 mb-4 flex items-center">
-                    <span class="mr-2 text-pink-500">✨</span> Appearance
-                </h2>
-                <div class="flex items-center justify-between p-4 bg-pink-50 rounded-xl">
-                    <div>
-                        <p class="font-semibold text-gray-700">Dark Mode</p>
-                        <p class="text-sm text-gray-500">Switch between light and dark themes</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="darkModeToggle" class="sr-only peer">
-                        <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pink-600"></div>
-                    </label>
-                </div>
+<div class="container">
+    <h2>Settings</h2>
 
-                <a class="ai-button-container w-full block" href="themes.html"><button class="ai-button">
-                        APP THEMES
-                    </button>
-                    </a>
-                
-                <br>
-                    <h2 class="text-lg font-bold text-gray-700 mb-4 flex items-center">
-                    <span class="mr-2 text-pink-500">❤️</span> General
-                </h2>
-                    <a class="ai-button-container" href="#"><button class="ai-button">
-                       JOIN DISCORD 🔗
-                    </button>
-                    </a>
-                <a href="https://stadiastudios.github.io/stadia/" target="_blank" rel="noopener noreferrer" class="ai-button-container">
-  <button class="ai-button">
-    <span class="button-text">OFFICIAL WEBSITE 🔗</span>
-  </button>
-</a>
-                <a href="tos.html" class="ai-button-container">
-  <button class="ai-button">
-    <span class="button-text">TERMS OF SERVICE 🔗</span>
-  </button>
-</a>
-<a href="https://forms.gle/W3R8sizfH6YcUbeD9" class="ai-button-container">
-  <button class="ai-button">
-    <span class="button-text">CONTACT SUPPORT ✉️</span>
-  </button>
-</a>
-            </section>
-
-            <section>
-                <h2 class="text-lg font-bold text-gray-700 mb-4 flex items-center">
-                    <span class="mr-2 text-pink-500">📝</span> Customize Names
-                </h2>
-                <div class="space-y-4">
-                    <div class="p-4">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">First Name</label>
-                        <input type="text" id="name1" placeholder="Enter first name" 
-                               class="w-full p-3 rounded-lg focus:ring-pink-500 focus:border-pink-500">
-                    </div>
-                    <div class="p-4">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">Second Name</label>
-                        <input type="text" id="name2" placeholder="Enter second name" 
-                               class="w-full p-3 rounded-lg focus:ring-pink-500 focus:border-pink-500">
-                    </div>
-                    <button id="saveNames" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-xl transition shadow-md">
-                        Save Names
-                    </button>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="text-lg font-bold text-gray-700 mb-4 flex items-center">
-                    <span class="mr-2 text-pink-500">📸</span> Photo Management
-                </h2>
-                <button id="removePhoto" class="ai-button">
-                    RESET COUPLE PHOTO TO DEFAULT
-                </button>
-            </section>
-
-            <div class="pt-6 text-center border-t border-pink-300">
-                <p class="text-xs text-gray-400 font-semibold tracking-widest uppercase">
-                    Version 1.8.6
-                </p>
-            </div>
-
+    <div class="section" id="appearanceSection">
+        <h3>Appearance</h3>
+        <div>
+            <label style="font-weight: bold; margin-bottom: 6px; display: block;">Theme</label>
+            <div class="theme-options-group" id="themeOptionsGroup" style="flex-direction: column; gap: 0;"></div>
+            <p style="color:var(--subtext,#aaa); font-size:13px; margin:0;">Change the look of PassPro across this device.</p>
         </div>
     </div>
 
-    <div id="messageBox" class="fixed top-4 right-4 z-50 p-3 bg-green-500 text-white rounded-lg shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none" role="alert">
-        Settings saved!
+    <div style="text-align:right; margin-bottom:18px;">
+        <a href="classic-passpro/index.html"><button id="classicPassproBtn" class="btn-primary" style="padding:8px 20px; font-weight:bold;">Classic PassPro</button></a>
     </div>
 
-    <script src="premium.js"></script>
-    <script src="reset-theme.js"></script>
-    <script>
-        const STORAGE_KEY_NAMES = '__relationship_names';
-        const STORAGE_KEY_THEME = '__app_theme';
-        const STORAGE_KEY_PHOTO = '__relationship_photo_data';
+    <div class="section username-box">
+        <h3>Username</h3>
+        <div>
+            <label for="usernameInput" style="font-weight: bold; margin-bottom: 5px; display: block;">Display Username</label>
+            <input type="text" id="usernameInput" maxlength="30" placeholder="Set your username..." autocomplete="off" spellcheck="false">
+            <button id="usernameSaveBtn" class="btn-primary">Save</button>
+        </div>
+    </div>
 
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const name1Input = document.getElementById('name1');
-        const name2Input = document.getElementById('name2');
-        const saveNamesButton = document.getElementById('saveNames');
-        const removePhotoButton = document.getElementById('removePhoto');
-        const messageBox = document.getElementById('messageBox');
+    <div class="section">
+        <h3>Export Data</h3>
+        <p>Download your vault as a JSON file for safekeeping or as a disguised PNG file.</p>
+        <button onclick="exportData()" class="btn-primary">Export (.json)</button>
+        <button id="exportDisguiseBtn" class="btn-primary" style="margin-top:10px;">Export (.png)</button>
+    </div>
 
-        function showMessage(message, bgColor) {
-            messageBox.textContent = message;
-            messageBox.className = `fixed top-4 right-4 z-50 p-3 text-white rounded-lg shadow-xl opacity-100 transition-opacity duration-300 ${bgColor}`;
-            setTimeout(() => { messageBox.classList.replace('opacity-100', 'opacity-0'); }, 3000);
-        }
+    <div class="section">
+        <h3>Import Data</h3>
+        <p>Upload a JSON or PNG file to restore your passwords and username. This will merge imported entries and username with your current vault.</p>
+        <input type="file" id="importFile" accept=".json,.png,image/png">
+        <button onclick="importData()" class="btn-primary">Import Passwords</button>
+    </div>
 
-        function applyTheme() {
-            const savedTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'light';
-            const isDark = savedTheme === 'dark';
-            document.body.classList.toggle('dark', isDark);
-            darkModeToggle.checked = isDark;
-        }
+    <div class="section">
+        <h3>Security PIN</h3>
+        <p>Set a 4-digit PIN to lock your vault. Leave empty to disable.</p>
+        <input type="password" id="pinSetting" maxlength="4" placeholder="••••" style="width: 100%; padding: 12px; background: #1e1e1e; border: 1px solid #333; color: white; border-radius: 6px; margin-bottom: 10px;">
+        <button id="savePinBtn" class="btn-primary">Update PIN</button>
+        <button id="removePinBtn" style="display:none;">Remove PIN</button>
+    </div>
 
-        function toggleDarkMode() {
-            const isDark = darkModeToggle.checked;
-            const theme = isDark ? 'dark' : 'light';
-            localStorage.setItem(STORAGE_KEY_THEME, theme);
-            applyTheme();
-            showMessage(`Dark mode is now ${isDark ? 'ON' : 'OFF'}!`, 'bg-pink-600');
-        }
+    <div class="section" style="border-color: #cf6679;">
+        <h3 style="color: #cf6679;">Danger Zone</h3>
+        <div id="storageUsageBox">
+            <label style="color:#cf6679; font-weight:bold; margin-bottom:10px; display:block;">Vault Storage Usage</label>
+            <div class="storage-bar-container">
+                <div class="storage-bar-fill" id="storageBarFill" style="width:0%"></div>
+                <span class="storage-bar-label" id="storageBarLabel"></span>
+            </div>
+        </div>
+        <button class="btn-danger" onclick="clearAll()">Wipe All Data</button>
+    </div>
+    <div class="app-version-box">
+        <div class="app-version">App version: 1.23.21</div>
+        <div class="app-version-links">
+            <a href="rec/changelog.txt" target="_blank" rel="noopener">View Changelog</a>
+            <a href="terms_of_service.html" target="_blank" rel="noopener">Terms of Service</a>
+        </div>
+        <div class="app-version-box-gap"></div>
+    </div>
+</div>
 
-        function loadNames() {
-            const namesJson = localStorage.getItem(STORAGE_KEY_NAMES);
-            let names = { name1: "", name2: "" };
-            if (namesJson) {
-                try {
-                    names = JSON.parse(namesJson);
-                } catch (e) {}
+<script src="navbar.js"></script>
+<script src="scripts/themes.js"></script>
+<script>
+    // -- Themes: Single-source from themes.js --
+    function setupThemeOptions() {
+        const group = document.getElementById('themeOptionsGroup');
+        if (!group || typeof window.themes !== "object") return;
+        group.innerHTML = '';
+        const current = getSavedThemeName();
+        Object.entries(window.themes).forEach(([themeName, themeData]) => {
+            const label = document.createElement('label');
+            label.className = 'theme-radio-label' + (current === themeName ? ' selected' : '');
+            label.tabIndex = 0;
+
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.className = 'theme-radio-input';
+            radio.name = 'theme-select';
+            radio.value = themeName;
+            radio.checked = (current === themeName);
+            radio.setAttribute('aria-label', themeName);
+            radio.onclick = function() {
+                setTheme(themeName);
+                updateThemeRadioUI(themeName);
+            };
+
+            // If the theme has an accent color, show its swatch:
+            if (themeData && themeData.accent) {
+                let swatch = document.createElement('span');
+                swatch.style.display = 'inline-block';
+                swatch.style.width = '15px';
+                swatch.style.height = '15px';
+                swatch.style.borderRadius = '50%';
+                swatch.style.background = themeData.accent;
+                swatch.style.marginRight = '2px';
+                label.appendChild(swatch);
             }
-            name1Input.value = names.name1 || "";
-            name2Input.value = names.name2 || "";
+
+            label.appendChild(radio);
+            let txt = document.createElement('span');
+            txt.textContent = themeData && themeData.label ? themeData.label : (
+                themeName.charAt(0).toUpperCase() + themeName.slice(1)
+            );
+            label.appendChild(txt);
+            group.appendChild(label);
+        });
+    }
+
+    function updateThemeRadioUI(selected) {
+        const labels = document.querySelectorAll('.theme-radio-label');
+        labels.forEach(label => {
+            const input = label.querySelector('.theme-radio-input');
+            if (input && input.value === selected) {
+                label.classList.add('selected');
+                input.checked = true;
+            } else {
+                label.classList.remove('selected');
+                input.checked = false;
+            }
+        });
+    }
+
+    function getSavedThemeName() {
+        return (localStorage.getItem('themeName') || 'dark');
+    }
+
+    // -- End themes selection. The rest does not need to update for new themes. --
+
+    function randomFilename(ext) {
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let len = Math.floor(Math.random() * 8) + 8;
+        let out = "";
+        for (let i = 0; i < len; ++i) {
+            out += chars[Math.floor(Math.random() * chars.length)];
         }
-        
-        function saveNames() {
-            const name1 = name1Input.value.trim();
-            const name2 = name2Input.value.trim();
-            localStorage.setItem(STORAGE_KEY_NAMES, JSON.stringify({ name1, name2 }));
-            showMessage("Names saved successfully!", "bg-green-600");
+        return out + ext;
+    }
+
+    function getVaultData() {
+        try {
+            const raw = localStorage.getItem('pm_data');
+            let data = raw ? JSON.parse(raw) : { passwords: [] };
+            if (!data.hasOwnProperty('username') || typeof data.username !== "string") {
+                data.username = "";
+            }
+            if (!data.hasOwnProperty('pin') || typeof data.pin !== "string") {
+                data.pin = "";
+            }
+            return data;
+        } catch {
+            return { passwords: [], username: "", pin: "" };
+        }
+    }
+
+    function setVaultData(obj) {
+        if (!obj.hasOwnProperty('username') || typeof obj.username !== "string") {
+            obj.username = "";
+        }
+        if (!obj.hasOwnProperty('pin') || typeof obj.pin !== "string") {
+            obj.pin = "";
+        }
+        localStorage.setItem('pm_data', JSON.stringify(obj, null, 2));
+    }
+
+    function updateUsernameUI() {
+        const usernameInput = document.getElementById('usernameInput');
+        const saved = getVaultData().username || "";
+        usernameInput.value = saved;
+    }
+
+    function updatePinUI() {
+        const pinInput = document.getElementById('pinSetting');
+        const removePinBtn = document.getElementById('removePinBtn');
+        const data = getVaultData();
+        pinInput.value = (data.pin || "");
+        if (data.pin && data.pin.length === 4) {
+            removePinBtn.style.display = '';
+        } else {
+            removePinBtn.style.display = 'none';
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+        setupThemeOptions();
+
+        if (window.themes && typeof applyThemeFromStorage === "function")
+            applyThemeFromStorage();
+
+        updateUsernameUI();
+        updatePinUI();
+
+        document.getElementById('usernameSaveBtn').addEventListener('click', function () {
+            const inp = document.getElementById('usernameInput');
+            let username = inp.value.trim();
+            let data = getVaultData();
+            data.username = username;
+            setVaultData(data);
+            updateUsernameUI();
+        });
+
+        document.getElementById('removePinBtn').addEventListener('click', function () {
+            if (!confirm('Are you sure you want to remove your PIN?')) return;
+            let data = getVaultData();
+            data.pin = "";
+            setVaultData(data);
+            updatePinUI();
+            alert("PIN removed!");
+        });
+
+        document.getElementById('exportDisguiseBtn').addEventListener('click', exportDisguiseData);
+    });
+
+    function exportData() {
+        let data = getVaultData();
+        const jsonData = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonData], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = randomFilename(".json");
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function exportDisguiseData() {
+        const jsonData = JSON.stringify(getVaultData(), null, 2);
+        createBlankPng(function (basePng) {
+            const pngUint8 = new Uint8Array(basePng);
+            const encoder = new TextEncoder();
+            const jsonUint8 = encoder.encode(jsonData);
+            const marker = encoder.encode('\n<!--PASS_PRO_VAULT_JSON-->\n');
+            const combined = new Uint8Array(pngUint8.length + marker.length + jsonUint8.length);
+            combined.set(pngUint8, 0);
+            combined.set(marker, pngUint8.length);
+            combined.set(jsonUint8, pngUint8.length + marker.length);
+            const blob = new Blob([combined], { type: 'image/png' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = randomFilename(".png");
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    }
+
+    function createBlankPng(cb) {
+        const canvas = document.createElement('canvas');
+        canvas.width = 16; canvas.height = 16;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, 16, 16);
+        canvas.toBlob(function(blob) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                cb(e.target.result);
+            };
+            reader.readAsArrayBuffer(blob);
+        }, 'image/png');
+    }
+
+    function importData() {
+        const fileInput = document.getElementById('importFile');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("Please select a JSON or PNG file first.");
+            return;
         }
 
-        function removePhoto() {
-            localStorage.removeItem(STORAGE_KEY_PHOTO);
-            showMessage("Photo removed.", "bg-red-500");
+        const isPng = file.type === "image/png" || file.name.toLowerCase().endsWith(".png");
+        const isJson = file.type === "application/json" || file.name.toLowerCase().endsWith(".json");
+        const reader = new FileReader();
+
+        if (isPng) {
+            reader.onload = function (e) {
+                const binary = e.target.result;
+                const arr = new Uint8Array(binary);
+                const dec = new TextDecoder();
+                const markerStr = '\n<!--PASS_PRO_VAULT_JSON-->\n';
+                let marker = encoder_encodeText(markerStr);
+                let idx = findSubarrayIndex(arr, marker);
+                if (idx === -1) {
+                    alert("PNG does not contain embedded PassPro data.");
+                    return;
+                }
+                const start = idx + marker.length;
+                try {
+                    const jsonStr = dec.decode(arr.slice(start));
+                    const importedData = JSON.parse(jsonStr);
+                    processImportedVaultData(importedData, fileInput);
+                } catch (err) {
+                    alert("Error extracting PassPro data from PNG: " + err.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        } else if (isJson) {
+            reader.onload = function (e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    processImportedVaultData(importedData, fileInput);
+                } catch (err) {
+                    alert("Error importing file: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+        } else {
+            reader.onload = function (e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    processImportedVaultData(importedData, fileInput);
+                    return;
+                } catch (_) {}
+                try {
+                    const fallbackReader = new FileReader();
+                    fallbackReader.onload = function(evt) {
+                        const arr = new Uint8Array(evt.target.result);
+                        const markerStr = '\n<!--PASS_PRO_VAULT_JSON-->\n';
+                        let marker = encoder_encodeText(markerStr);
+                        let idx = findSubarrayIndex(arr, marker);
+                        if (idx === -1) {
+                            throw new Error("No embedded PassPro vault found in PNG.");
+                        }
+                        const dec = new TextDecoder();
+                        const start = idx + marker.length;
+                        const jsonStr = dec.decode(arr.slice(start));
+                        const importedData = JSON.parse(jsonStr);
+                        processImportedVaultData(importedData, fileInput);
+                    };
+                    fallbackReader.onerror = function() {
+                        alert("Unrecognized file format.");
+                    };
+                    fallbackReader.readAsArrayBuffer(file);
+                } catch (err) {
+                    alert("Could not import the provided file.");
+                }
+            };
+            reader.readAsText(file);
+        }
+    }
+
+    function encoder_encodeText(str) {
+        if (window.TextEncoder) {
+            return new TextEncoder().encode(str);
+        }
+        var arr = [];
+        for (let i = 0; i < str.length; i++) arr.push(str.charCodeAt(i));
+        return new Uint8Array(arr);
+    }
+    function findSubarrayIndex(buf, subarr) {
+        let max = buf.length - subarr.length;
+        outer: for (let i = 0; i <= max; ++i) {
+            for (let j = 0; j < subarr.length; ++j) {
+                if (buf[i + j] !== subarr[j]) continue outer;
+            }
+            return i;
+        }
+        return -1;
+    }
+    function processImportedVaultData(importedData, fileInput) {
+        if (!importedData.passwords || !Array.isArray(importedData.passwords)) {
+            throw new Error("Invalid format. Missing 'passwords' array.");
+        }
+        if (!importedData.hasOwnProperty('username') || typeof importedData.username !== "string") {
+            importedData.username = "";
+        }
+        if (!importedData.hasOwnProperty('pin') || typeof importedData.pin !== "string") {
+            importedData.pin = "";
+        }
+        let currentData = getVaultData();
+        currentData.passwords = currentData.passwords.concat(importedData.passwords);
+        currentData.username = importedData.username;
+        currentData.pin = importedData.pin;
+        setVaultData(currentData);
+        alert('Passwords, username, and PIN imported successfully!');
+        fileInput.value = "";
+        updateUsernameUI();
+        updatePinUI();
+        updateStorageBar();
+    }
+
+    function clearAll() {
+        if (confirm("WARNING: This will permanently delete all saved passwords and username from your browser. Continue?")) {
+            localStorage.removeItem('pm_data');
+            alert("All data wiped.");
+            updateUsernameUI();
+            updatePinUI();
+            updateStorageBar();
+        }
+    }
+
+    function updateStorageBar() {
+        const MAX_BYTES = 5 * 1024 * 1024;
+        const data = localStorage.getItem('pm_data');
+        let usedBytes = data ? new Blob([data]).size : 0;
+        const percent = Math.min(100, (usedBytes / MAX_BYTES) * 100).toFixed(1);
+
+        function formatBytes(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
         }
 
-        window.onload = function() {
-            applyTheme();
-            loadNames();
-            darkModeToggle.addEventListener('change', toggleDarkMode);
-            saveNamesButton.addEventListener('click', saveNames);
-            removePhotoButton.addEventListener('click', removePhoto);
+        document.getElementById('storageBarFill').style.width = percent + '%';
+        document.getElementById('storageBarLabel').textContent =
+            formatBytes(usedBytes) + ' / ' + formatBytes(MAX_BYTES) + ' (' + percent + '%)';
+    }
+
+    updateStorageBar();
+    if (typeof updatePinUI === "function") updatePinUI();
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'pm_data') {
+            updateStorageBar();
+            updateUsernameUI();
+            updatePinUI();
         }
-    </script>
+    });
+
+    document.getElementById('savePinBtn').addEventListener('click', function () {
+        const newPin = document.getElementById('pinSetting').value;
+        if (newPin.length !== 4 && newPin !== "") {
+            alert("PIN must be 4 digits.");
+            return;
+        }
+        let data = getVaultData();
+        data.pin = newPin;
+        setVaultData(data);
+        updatePinUI();
+        alert("PIN saved!");
+    });
+
+    if (typeof window !== "undefined" && window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+            if ((localStorage.getItem('themeName') || 'dark') === 'system' && typeof setTheme === 'function') {
+                setTheme('system');
+                updateThemeRadioUI('system');
+            }
+        });
+    }
+</script>
 </body>
 </html>
