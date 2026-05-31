@@ -1,3 +1,7 @@
+V1.25.23
+----------
+Fixes Classic PassPro, Improvements to Help & Guidebook, New App Icon, New Loading screen,
+
 V1.24.22 (Classic PassPro)
 ----------
 Adds Classic PassPro Manifest for Classic Theme, Download it by adding app to homescreen with share icon in the Classic PassPro pages.

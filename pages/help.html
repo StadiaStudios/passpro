@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PassPro - Help & Quick Guide</title>
+    <title>PassPro - Support & Guidebook</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <link rel="manifest" href="../manifest.json">
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+    <link rel="icon" type="image/x-icon" href="../assets/support.png">
     <style>
         :root {
             --bg-dark: #121212;
@@ -25,6 +25,7 @@
             --help-section-header: #dedede;
             --help-ul-color: #cccccc;
             --help-contact: #2196f3;
+            --side-nav-width: 340px;
         }
         html, body {
             height: 100%;
@@ -43,6 +44,7 @@
             width: 100vw;
             min-height: 100vh;
             background: var(--bg-dark);
+            overscroll-behavior-x: none;
         }
         ::-webkit-scrollbar {
             width: 12px;
@@ -59,11 +61,7 @@
         ::-webkit-scrollbar-corner {
             background: #181818;
         }
-        body {
-            overscroll-behavior-x: none;
-        }
 
-        /* Navbar Styles */
         .help-top-navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -119,7 +117,6 @@
             stroke: #cccccc !important;
         }
 
-        /* Main Header */
         .help-main-header {
             font-size: 2.35rem;
             font-weight: 800;
@@ -140,7 +137,6 @@
             stroke: #47a8f5 !important;
         }
 
-        /* Fullscreen Content Container */
         .help-container {
             width: 100vw;
             min-height: 100vh;
@@ -152,8 +148,9 @@
             box-shadow: none;
             border: none;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
         }
         .help-content {
             width: 100%;
@@ -161,6 +158,51 @@
             margin: 0 auto;
             padding: 0 28px;
             box-sizing: border-box;
+            min-width: 0;
+        }
+
+        .help-section-side-nav {
+            display: none;
+        }
+        @media (min-width: 950px) {
+            .help-section-side-nav {
+                display: block;
+                position: sticky;
+                top: 80px;
+                align-self: flex-start;
+                margin-right: 38px;
+                min-width: var(--side-nav-width);
+                max-width: var(--side-nav-width);
+                background: #181c25cc;
+                border-radius: 9px;
+                box-shadow: 0 2px 20px #0052a811, 0 1px 7px #141c2c1a;
+                padding: 30px 18px 30px 18px;
+                z-index: 3;
+                font-size: 1.05rem;
+            }
+            .help-content {
+                margin-left: 0;
+                padding-left: 0;
+                padding-bottom: 80px;
+            }
+            .help-section-nav-in-canvas {
+                display: none !important;
+            }
+            .help-contact {
+                margin-bottom: 60px;
+            }
+        }
+        @media (max-width: 949px) {
+            .help-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .help-section-side-nav {
+                display: none !important;
+            }
+            .help-section-nav-in-canvas {
+                display: block;
+            }
         }
 
         h2 {
@@ -221,35 +263,130 @@
                 font-size: 1.04rem;
             }
         }
+
+        .anchor-target {
+            display: block;
+            position: relative;
+            top: -80px;
+            visibility: hidden;
+            height: 0;
+        }
+
+        .help-section-nav, .help-section-side-nav {
+            background: #121212;
+            padding: 0.7em 0 0.7em 0.2em;
+            border-radius: 7px;
+            box-shadow: 0 1px 7px #141c2c1a;
+            text-align: left;
+        }
+        .help-section-nav ul,
+        .help-section-side-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: var(--text-secondary);
+        }
+        .section-link {
+            color: #2196f3;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .section-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #2196f3 0%, #42aaff 100%);
+            border-radius: 1px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.16s;
+            pointer-events: none;
+        }
+        .section-link:hover {
+            color: #42aaff;
+        }
+        .section-link:hover::after {
+            transform: scaleX(1);
+        }
+        .help-section-nav li,
+        .help-section-side-nav li {
+            margin-bottom: 0.2em;
+            font-size: 1.08em;
+        }
+        .help-section-nav a,
+        .help-section-side-nav a {
+            color: var(--link-main);
+            text-decoration: none;
+            transition: color 0.17s;
+        }
+        .help-section-nav a:hover,
+        .help-section-side-nav a:hover {
+            color: var(--link-hover);
+        }
+        .help-section-nav-in-canvas {
+            margin-bottom: 2.4em;
+        }
     </style>
     <script src="navbar.js"></script>
 </head>
 <body>
     <nav class="help-top-navbar">
         <span class="help-top-navbar-title">
-            <img style="width:30px;" src="../assets/favicon.png">
-            Help & Guidebook
+            <img style="width:30px;" src="../assets/support.png" alt="Support Icon">
+            PassPro Support
         </span>
-        <a href="../index.html"><button class="help-top-navbar-backbtn" id="help-go-home">
+        <a href="../index.html"><button class="help-top-navbar-backbtn" id="help-go-home" type="button">
             <span>Back</span>
-            <svg style="margin-left:3px" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <svg style="margin-left:3px" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M10 6l6 6-6 6"/>
             </svg>
         </button></a>
     </nav>
     <div class="help-container">
+        <nav class="help-section-side-nav" aria-label="Jump to section">
+            <ul>
+                <li><a class="section-link" href="#getting-started">🗝️ Getting Started</a></li>
+                <li><a class="section-link" href="#install-app">📲 How to Install the App</a></li>
+                <li><a class="section-link" href="#settings">⚙️ Settings</a></li>
+                <li><a class="section-link" href="#reset">🔑 Reset & Troubleshooting</a></li>
+                <li><a class="section-link" href="#forgot-pin">🔒 Forgot PIN / Locked Out?</a></li>
+                <li><a class="section-link" href="#report-bug">🐞 How to Report a Bug</a></li>
+                <li><a class="section-link" href="#classic-revert">↩️ Revert to Classic PassPro</a></li>
+                <li><a class="section-link" href="#tips">💡 More Tips</a></li>
+            </ul>
+        </nav>
         <div class="help-content">
+
             <h1 class="help-main-header">
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#47a8f5" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#47a8f5" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="12" cy="12" r="10"/>
                     <path d="M9.09 9a3 3 0 1 1 5.83 1c0 2-3 3-3 3"/>
                     <line x1="12" y1="17" x2="12.01" y2="17"/>
                 </svg>
                 Need Help?
             </h1>
+
+            <nav class="help-section-nav help-section-nav-in-canvas" aria-label="Jump to section">
+                <ul>
+                    <li><a class="section-link" href="#getting-started">🗝️ Getting Started</a></li>
+                    <li><a class="section-link" href="#install-app">📲 How to Install the App</a></li>
+                    <li><a class="section-link" href="#settings">⚙️ Settings</a></li>
+                    <li><a class="section-link" href="#reset">🔑 Reset & Troubleshooting</a></li>
+                    <li><a class="section-link" href="#forgot-pin">🔒 Forgot PIN / Locked Out?</a></li>
+                    <li><a class="section-link" href="#report-bug">🐞 How to Report a Bug</a></li>
+                    <li><a class="section-link" href="#classic-revert">↩️ Revert to Classic PassPro</a></li>
+                    <li><a class="section-link" href="#tips">💡 More Tips</a></li>
+                </ul>
+            </nav>
+
             <p>
                 Welcome to PassPro! Here’s how to get the most out of your new password manager.
             </p>
+            <span class="anchor-target" id="getting-started"></span>
             <section>
                 <h2>🗝️ Getting Started</h2>
                 <ul>
@@ -257,6 +394,17 @@
                     <li>From the home page, unlock your vault and you’re good to go!</li>
                 </ul>
             </section>
+            <span class="anchor-target" id="install-app"></span>
+            <section>
+                <h2>📲 How to Install the App</h2>
+                <ul>
+                    <li><b>On Desktop (Chrome, Edge, Brave):</b> Look for the <b>install icon</b> (a computer with a down arrow) in your browser’s address bar, or open your browser’s menu and select <b>“Install PassPro”</b>.</li>
+                    <li><b>On Android (Chrome):</b> Tap the <b>three dots</b> menu &gt; <b>“Install app”</b>. The app will appear on your home screen and app drawer for quick access.</li>
+                    <li><b>On iPhone/iPad (Safari):</b> Tap the <b>Share</b> icon, then choose <b>“Add to Home Screen”</b> to create a quick-launch icon just like a native app.</li>
+                    <li>Once installed, PassPro data saves with app instead of Safari Data and it's more protected!</li>
+                </ul>
+            </section>
+            <span class="anchor-target" id="settings"></span>
             <section>
                 <h2>⚙️ Settings</h2>
                 <ul>
@@ -265,6 +413,7 @@
                     <li><b>Device backup</b> (e.g. iCloud, Android Backup) includes PassPro data on most browsers.</li>
                 </ul>
             </section>
+            <span class="anchor-target" id="reset"></span>
             <section>
                 <h2>🔑 Reset & Troubleshooting</h2>
                 <ul>
@@ -272,22 +421,54 @@
                     <li>Contact support if you have issues migrating from Classic PassPro, or for help with lost data/backups.</li>
                 </ul>
             </section>
+            <span class="anchor-target" id="report-bug"></span>
+            <section>
+                <h2>🐞 How to Report a Bug</h2>
+                <ul>
+                    <li>If you notice something isn’t working quite right or find a bug, we appreciate your help in making PassPro better!</li>
+                    <li><b>Step 1:</b> Take note of what you were doing when the issue happened (which page, which device/browser, any steps to reproduce).</li>
+                    <li><b>Step 2:</b> If you can, include screenshots or error messages. This helps us fix the bug faster!</li>
+                    <li><b>Step 3:</b> Email all the details to <a class="section-link" href="mailto:stadiastudios.support@proton.me">stadiastudios.support@proton.me</a>. We review all reports and will get back to you as soon as possible.</li>
+                    <li><b>Optional:</b> We also have a Google Form that is more likely to be reviewed as well here: <a class="section-link" href="https://forms.gle/W3R8sizfH6YcUbeD9">Report Bug Form</a></li>
+                </ul>
+            </section>
+            <span class="anchor-target" id="forgot-pin"></span>
+            <section>
+                <h2>🔒 Forgot PIN / Locked Out?</h2>
+                <ul>
+                    <li>If you've forgotten your PIN or have been locked out of the app, you still have options!</li>
+                    <li><b>Try unlocking with your PIN First:</b> Try unlocking with your PIN first. If you fail after a couple attempts, move to step 2.</li>
+                    <li><b>Search for a Recovery Backup:</b> The new Export as Disguise PNG function in settings allows you to backup a blank image as data or your .json file. If you've backed up your data before, try searching again.</li>
+                    <li><b>Permanently locked out?</b> If you cannot remember your master password and no other recovery is available, you can reset your vault from the Settings or Login page. This will <b>erase all existing data for security reasons</b> but allow you to set a new password and PIN.</li>
+                    <li>Need help backing up before a reset or have another issue? <a class="section-link" href="mailto:stadiastudios.support@proton.me">Contact Support</a> for personal assistance. But remember, as mentioned in the <a class="section-link" href="../terms_of_service.html">TOS</a>, we are not responsible for any data loss.</li>
+                </ul>
+            </section>
+            <span class="anchor-target" id="classic-revert"></span>
+            <section>
+                <h2>↩️ How to Revert to Classic PassPro</h2>
+                <ul>
+                    <li>If you prefer using Classic PassPro, you can return to it any time.</li>
+                    <li><b>Step 1:</b> Go to the <a class="section-link" href="../classic-passpro/index.html" target="_blank" rel="noopener">Classic PassPro site</a>.</li>
+                    <li><b>Step 2:</b> If you've exported your data from the new PassPro, use the import function in Classic PassPro to restore your vault. Be sure to back up any important data before reverting.</li>
+                    <li><b>Note:</b> Some features or data formats in the new PassPro may not be supported exactly the same way in Classic PassPro. However, some updates may come for bug fixes and minor improvements. <a class="section-link" href="../classic-passpro/changelog.txt" target="_blank" rel="noopener">View separate changelog here</a></li>
+                </ul>
+            </section>
+            <span class="anchor-target" id="tips"></span>
             <section>
                 <h2>💡 More Tips</h2>
                 <ul>
                     <li>For syncing across devices, use <b>Settings &gt; Export/Import</b> as needed, or rely on your browser's own backup system.</li>
-                    <li>Curious about <b>privacy</b>? PassPro never uploads your data or secrets. Everything is handled locally unless you export somewhere yourself.</li>
+                    <li>Curious about <b>privacy</b>? PassPro never uploads your data or secrets. Everything is handled locally unless you export it yourself.</li>
                 </ul>
             </section>
+            <div class="help-contact">
+                <b>Still need help? <a href="mailto:stadiastudios.support@proton.me">Contact Support</a></b>
+            </div>
+            <br><br><br>
         </div>
-        <div class="help-contact">
-            <b>Still need help? <a href="mailto:stadiastudios.support@proton.me">Contact Support</a></b>
-        </div>
-        <br><br><br>
     </div>
     <script>
         document.getElementById('help-go-home').addEventListener('click', function () {
-            // SPA navigation support: go to home if in help
             if (window.location && (window.location.pathname.includes('help') || window.location.hash.includes('help'))) {
                 window.location.href = '/';
             }
