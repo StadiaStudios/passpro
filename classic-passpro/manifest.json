@@ -1,7 +1,7 @@
 {
-  "name": "PassPro",
-  "short_name": "PassPro",
-  "description": "A simple password manager",
+  "name": "PassPro Classic",
+  "short_name": "PassPro Classic",
+  "description": "A simple password manager, Classic Edition",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#111",

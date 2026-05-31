@@ -1,31 +1,43 @@
 (function() {
     const slides = [
         {
-            title: "PassPro V1.21.19 Future Proof!",
-            text: "In this important update we released a Public backup domain page for the website if it ever goes down or isnt working 100% properly.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.85.83 6.74 2.26L21 9"/><path d="M21 3v6h-6"/></svg>`
+            title: "PassPro Classic",
+            text: "Welcome to PassPro Classic. This is the official last version released before the major overhaul. You can access the Password Generator, Digital Wallet, and other features from this version.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16"/><path d="M16 8h2"/><path d="M16 12h2"/><path d="M16 16h2"/></svg>`
+        },
+        {
+            title: "How to Revert Back",
+            text: "To return to the new PassPro app, go to settings and use the Revert Back button.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l6-6"/><path d="M3 12l6 6"/><path d="M3 12h13a6 6 0 0 1 0 12v0"/></svg>`
+        },
+        {
+            title: "Install the Classic App",
+            text: "Use your browser’s add-to-home-screen or install prompt while visiting the classic homepage to install the Classic PassPro App.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/><rect x="5" y="19" width="14" height="2" rx="1"/></svg>`
         },
         {
             title: "Zero-Knowledge",
-            text: "Always Remember your data is encrypted locally. Not even WE can see your passwords. Make sure you download your account and have a backup somewhere safe like a USB!",
+            text: "Your data is encrypted locally – not even we can see your passwords. Download and keep your account backed up somewhere safe, like a USB drive.",
             svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`
         }
     ];
 
     let currentIndex = 0;
     const VERSION_KEY = 'passpro_last_seen_version';
-    const CURRENT_VERSION = '1.21.19'; 
+    const CURRENT_VERSION = '1.24.22';
 
     function hasSeenPopup() {
         try {
             return localStorage.getItem(VERSION_KEY) === CURRENT_VERSION;
-        } catch (e) { return false; }
+        } catch {
+            return false;
+        }
     }
 
     function markAsSeen() {
         try {
             localStorage.setItem(VERSION_KEY, CURRENT_VERSION);
-        } catch (e) {}
+        } catch {}
     }
 
     function createPopup() {
@@ -35,8 +47,8 @@
         overlay.id = 'passpro-update-overlay';
         Object.assign(overlay.style, {
             position: 'fixed',
-            top: '0',
-            left: '0',
+            top: 0,
+            left: 0,
             width: '100vw',
             height: '100vh',
             backgroundColor: '#09090b',
@@ -45,10 +57,10 @@
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            zIndex: '99999',
+            zIndex: 99999,
             opacity: '0',
             transition: 'opacity 0.5s ease',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+            fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
             color: '#fff',
             overflow: 'hidden'
         });
@@ -63,13 +75,12 @@
                 padding: 40px;
                 text-align: center;
                 max-width: 500px;
-                transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+                transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
             ">
                 <div id="popup-icon" style="margin-bottom: 40px; transition: all 0.5s ease; transform: translateY(20px); opacity: 0;"></div>
-                <h2 id="popup-title" style="font-size: 32px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.025em; transition: all 0.5s ease; transform: translateY(20px); opacity: 0;"></h2>
-                <p id="popup-text" style="font-size: 18px; color: #a1a1aa; line-height: 1.6; transition: all 0.5s ease; transform: translateY(20px); opacity: 0;"></p>
+                <h2 id="popup-title" style="font-size:32px; font-weight:800; margin-bottom:16px; letter-spacing:-0.025em; transition: all 0.5s ease; transform: translateY(20px); opacity:0;"></h2>
+                <p id="popup-text" style="font-size:18px; color:#a1a1aa; line-height:1.6; transition: all 0.5s ease; transform: translateY(20px); opacity:0;"></p>
             </div>
-
             <div style="
                 width: 100%;
                 max-width: 400px;
@@ -80,18 +91,17 @@
                 gap: 32px;
             ">
                 <div id="dots-container" style="display: flex; justify-content: center; gap: 10px;"></div>
-                
                 <button id="popup-next-btn" style="
                     width: 100%;
                     background-color: #6366f1;
-                    color: white;
+                    color: #fff;
                     border: none;
                     padding: 18px;
                     border-radius: 16px;
                     font-size: 18px;
                     font-weight: 600;
                     cursor: pointer;
-                    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+                    box-shadow: 0 10px 15px -3px rgba(99,102,241,0.3);
                     transition: transform 0.2s, background 0.2s;
                 ">Next</button>
             </div>
@@ -118,7 +128,6 @@
         const textEl = document.getElementById('popup-text');
         const dotsContainer = document.getElementById('dots-container');
         const nextBtn = document.getElementById('popup-next-btn');
-
         const elements = [iconContainer, titleEl, textEl];
 
         if (!isInitial) {
@@ -132,7 +141,6 @@
             iconContainer.innerHTML = slide.svg;
             titleEl.textContent = slide.title;
             textEl.textContent = slide.text;
-            
             dotsContainer.innerHTML = '';
             slides.forEach((_, i) => {
                 const dot = document.createElement('div');
@@ -140,17 +148,15 @@
                 dot.style.height = '8px';
                 dot.style.borderRadius = '4px';
                 dot.style.backgroundColor = i === currentIndex ? '#6366f1' : '#27272a';
-                dot.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                dot.style.transition = 'all 0.4s cubic-bezier(0.4,0,0.2,1)';
                 dotsContainer.appendChild(dot);
             });
-
             nextBtn.textContent = currentIndex === slides.length - 1 ? "Get Started" : "Next";
-
-            elements.forEach((el, index) => {
+            elements.forEach((el, idx) => {
                 setTimeout(() => {
                     el.style.opacity = '1';
                     el.style.transform = 'translateY(0)';
-                }, index * 100);
+                }, idx * 100);
             });
         }, isInitial ? 0 : 300);
     }
@@ -168,7 +174,8 @@
         const overlay = document.getElementById('passpro-update-overlay');
         if (overlay) {
             overlay.style.opacity = '0';
-            overlay.querySelector('#popup-content').style.transform = 'scale(1.05)';
+            const popupContent = overlay.querySelector('#popup-content');
+            if (popupContent) popupContent.style.transform = 'scale(1.05)';
             setTimeout(() => {
                 overlay.remove();
                 markAsSeen();
@@ -189,7 +196,7 @@
     }
 
     window.PassProUpdate = {
-        reset: function() {
+        reset() {
             localStorage.removeItem(VERSION_KEY);
             location.reload();
         }

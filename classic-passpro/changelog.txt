@@ -1,10 +1,6 @@
-V1.21.19 (Future Proof)
+V1.24.22 (Classic PassPro)
 ----------
-Complete App Overhaul, Future Proof Protected, Data from Old Ver Supports New Ver, OverHaul starts with settings, Index, and Passwords, Backup app.
-
-Version Notes:
-Future Proof is a Beta Program that is Redesigning PassPro to be Future Proof and More Reliable. You can access it in settings, However if your using the Classic PassPro you can navigate back.
-This Version will no longer recieve updates. We're Sorry..
+Adds Classic PassPro Manifest for Classic Theme, Download it by adding app to homescreen with share icon in the Classic PassPro pages.
 
 V1.20.18
 ----------
