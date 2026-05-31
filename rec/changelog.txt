@@ -1,3 +1,11 @@
+V1.24.22 (Classic PassPro)
+----------
+Adds Classic PassPro Manifest for Classic Theme, Download it by adding app to homescreen with share icon in the Classic PassPro pages.
+
+V1.24.22 (Future Proof BETA)
+----------
+Bug Fixes to My Passwords, Small Color Changes, Navbar Improvements, Old PassPro is in the Footer of Settings, New Update Screen, Report a Bug Feature, Help Page and Guide, Last Sync Fix,
+
 V1.23.21 (Future Proof BETA)
 ----------
 Major Bug Fixes, Layout Fixes, Break text feature in notes, New "Show" Popup Display, New Disguise Download Option, Polished Code, 6 New themes to Future Proof, Can Now arrange passwords or sort them,

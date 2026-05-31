@@ -8,15 +8,11 @@
     <script src="scripts/pinlock.js"></script>
     <script src="scripts/themes.js"></script>
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
         body {
             background-color: #121212;
             color: #e0e0e0;
             min-height: 100vh;
+            margin: 0;
             font-family: 'Inter', system-ui, sans-serif;
         }
         .container {
@@ -86,21 +82,21 @@
             font-size: 15px;
         }
         .info-section-username {
-            color: #bb86fc;
+            color: #fff;
             font-size: 1.13em;
             font-weight: 600;
             margin-bottom: 8px;
             display: block;
         }
         .info-section-count {
-            color: #82e3db;
+            color: #e3cc82;
             font-size: 1em;
             font-weight: 500;
             display: block;
             margin-bottom: 3px;
         }
         .info-section-sync {
-            color: #b388ff;
+            color: #b8b8b8;
             font-size: 0.96em;
             margin-bottom: 5px;
             display: block;
@@ -145,14 +141,13 @@
 </div>
 
 <script src="navbar.js"></script>
-
 <script>
     function getVaultData() {
         try {
             const raw = localStorage.getItem('pm_data');
             let data = raw ? JSON.parse(raw) : { passwords: [] };
-            if (!data.hasOwnProperty('username') || typeof data.username !== "string") data.username = "";
-            if (!data.hasOwnProperty('pin') || typeof data.pin !== "string") data.pin = "";
+            data.username = typeof data.username === "string" ? data.username : "";
+            data.pin = typeof data.pin === "string" ? data.pin : "";
             return data;
         } catch {
             return { passwords: [], username: "", pin: "" };
@@ -170,8 +165,8 @@
 
     function updateBottomInfoSection() {
         const data = getVaultData();
-        const uname = (data.username && typeof data.username === 'string' && data.username.trim().length) ? data.username.trim() : 'user';
-        document.getElementById('infoWelcome').textContent = `Glad to see you back! ${uname}`;
+        const uname = (data.username && data.username.trim().length) ? data.username.trim() : 'user';
+        document.getElementById('infoWelcome').textContent = `Glad to see you back! ${uname} 👋`;
         const count = Array.isArray(data.passwords) ? data.passwords.length : 0;
         document.getElementById('infoCount').textContent = `Passwords Count: ${count}`;
         document.getElementById('infoSync').textContent = `Last Sync: ${getLastSyncDate()}`;
@@ -179,9 +174,7 @@
 
     document.getElementById('addForm').addEventListener('submit', function (e) {
         e.preventDefault();
-
         const data = getVaultData();
-
         const entry = {
             title: document.getElementById('title').value.trim(),
             username: document.getElementById('username').value.trim(),
@@ -189,10 +182,8 @@
             url: document.getElementById('url').value.trim(),
             notes: document.getElementById('notes').value.trim()
         };
-
         data.passwords.push(entry);
         localStorage.setItem('pm_data', JSON.stringify(data, null, 2));
-
         alert('Password saved successfully!');
         this.reset();
         updateBottomInfoSection();
@@ -200,6 +191,6 @@
 
     updateBottomInfoSection();
 </script>
-
+<script src="scripts/update-screen.js"></script>
 </body>
 </html>

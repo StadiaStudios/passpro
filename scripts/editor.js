@@ -1,10 +1,24 @@
 (function () {
 
+    function getRealIndexFromCard(card) {
+        if (card && card.dataset && card.dataset.realIndex !== undefined) {
+            return Number(card.dataset.realIndex);
+        }
+        if (typeof window._arrangedIndexes !== "undefined" && Array.isArray(window._arrangedIndexes)) {
+            const cards = Array.from(card.parentNode.getElementsByClassName('card'));
+            const idx = cards.indexOf(card);
+            if (idx >= 0 && idx < window._arrangedIndexes.length) {
+                return window._arrangedIndexes[idx];
+            }
+        }
+        return Array.from(card.parentNode.getElementsByClassName('card')).indexOf(card);
+    }
+
     function injectEditButtons() {
         const vault = document.getElementById('vault');
         if (!vault) return;
         setTimeout(() => {
-            Array.from(vault.getElementsByClassName('card')).forEach((card, i) => {
+            Array.from(vault.getElementsByClassName('card')).forEach((card) => {
                 const controls = card.querySelector('.controls');
                 if (!controls || controls.querySelector('.btn-edit')) return;
 
@@ -15,7 +29,8 @@
                 editBtn.style.color = '#fff';
 
                 editBtn.onclick = function () {
-                    openEditDialog(i);
+                    const realIndex = getRealIndexFromCard(card);
+                    openEditDialog(realIndex);
                 };
                 controls.insertBefore(editBtn, controls.firstChild);
             });
@@ -23,7 +38,7 @@
     }
 
     function openEditDialog(index) {
-        let data = JSON.parse(localStorage.getItem('pm_data')) || { passwords: [] };
+        const data = JSON.parse(localStorage.getItem('pm_data')) || { passwords: [] };
         const entry = data.passwords[index];
         if (!entry) return;
 

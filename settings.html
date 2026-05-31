@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>PassPro - Settings</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
@@ -53,7 +53,19 @@
             background-color: var(--button-hover-background, #333);
             border-color: var(--button-hover-border, #555);
         }
-        input[type="file"], input[type="text"] {
+        input[type="file"] {
+            margin-bottom: 15px;
+            color: var(--input-text, #e0e0e0);
+            max-width: 220px;
+            background: var(--input-background, #121212);
+            padding: 9px 3px 9px 0;
+            border-radius: 6px;
+            border: 1px dashed var(--input-border, #444);
+            display: block;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        input[type="text"] {
             margin-bottom: 15px;
             color: var(--input-text, #e0e0e0);
             width: 100%;
@@ -79,28 +91,7 @@
             margin-top: 10px;
         }
         .btn-primary:hover {
-            background-color: var(--primary-background, #111);
             color: white;
-        }
-        .btn-secondary {
-            background-color: #232334;
-            color: #64b5f6;
-            border: 1px solid #64b5f6;
-            margin-top: 10px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 6px;
-            width: 100%;
-            padding: 12px;
-            transition: background 0.18s, color 0.18s, border 0.18s;
-            cursor: pointer;
-            display: block;
-            text-align: center;
-        }
-        .btn-secondary:hover {
-            background-color: #64b5f6;
-            color: #232334;
-            border-color: #64b5f6;
         }
         .username-box {
             margin-bottom: 24px;
@@ -145,7 +136,7 @@
         ::-webkit-scrollbar-thumb {
             background: #2d2d2d;
             border-radius: 8px;
-            border: 2px solid var(--background-color, #121212);
+            border: 2px solid #121212;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #bb86fc;
@@ -190,7 +181,6 @@
         }
         .app-version-links a:hover {
             color: #cf6679;
-            text-decoration: underline;
         }
         .app-version-box-gap {
             height: 90px;
@@ -225,9 +215,7 @@
             background: var(--theme-radio-bg, #1b1b1b);
             color: inherit;
             transition: background 0.15s, color 0.15s, border-color 0.15s;
-            box-shadow: none;
             position: relative;
-            min-width: 0;
         }
         .theme-radio-label.selected,
         .theme-radio-label:focus-within {
@@ -240,12 +228,62 @@
             width: 18px;
             height: 18px;
             margin: 0;
-        }
-        .theme-radio-label .theme-radio-input {
             flex-shrink: 0;
         }
         .theme-radio-label.selected .theme-radio-input {
             filter: drop-shadow(0 0 2px white);
+        }
+        @media (max-width: 450px) {
+            input[type="file"] {
+                max-width: 100%;
+                font-size: 14px;
+            }
+        }
+        .report-bug-link {
+            display: inline-block;
+            margin-top: 14px;
+            color: #64b5f6;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.15s;
+        }
+        .report-bug-link:hover {
+            color: #cf6679;
+        }
+        .new-here-section {
+            background-color: #181818;
+            border: 1.5px solid #64b5f6;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            padding: 22px 24px 20px 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(100, 181, 246, 0.11);
+        }
+        .new-here-section h3 {
+            color: #64b5f6;
+            margin-bottom: 6px;
+            font-size: 1.18rem;
+            font-weight: bold;
+            letter-spacing: 0.02em;
+        }
+        .btn-guidebook {
+            display: inline-block;
+            background-color: #64b5f6;
+            color: #1b1b1b;
+            border: none;
+            border-radius: 5px;
+            padding: 11px 22px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: background 0.18s, color 0.16s;
+        }
+        .btn-guidebook:hover {
+            background-color: #7ebeff;
+            color: #202034;
         }
     </style>
 </head>
@@ -253,6 +291,17 @@
 <div id="nav-placeholder"></div>
 
 <div class="container">
+
+    <div class="new-here-section">
+        <h3>New Here?</h3>
+        <div style="color: #bbdefb; font-size: 14px; margin-bottom: 13px;">
+            Access tips and answers to common questions, or learn how to use PassPro from our full guidebook.
+        </div>
+        <a href="pages/help.html" target="_blank" rel="noopener">
+            <button class="btn-guidebook">Visit Help &amp; Guidebook</button>
+        </a>
+    </div>
+
     <h2>Settings</h2>
 
     <div class="section" id="appearanceSection">
@@ -262,10 +311,6 @@
             <div class="theme-options-group" id="themeOptionsGroup" style="flex-direction: column; gap: 0;"></div>
             <p style="color:var(--subtext,#aaa); font-size:13px; margin:0;">Change the look of PassPro across this device.</p>
         </div>
-    </div>
-
-    <div style="text-align:right; margin-bottom:18px;">
-        <a href="classic-passpro/index.html"><button id="classicPassproBtn" class="btn-primary" style="padding:8px 20px; font-weight:bold;">Classic PassPro</button></a>
     </div>
 
     <div class="section username-box">
@@ -287,7 +332,9 @@
     <div class="section">
         <h3>Import Data</h3>
         <p>Upload a JSON or PNG file to restore your passwords and username. This will merge imported entries and username with your current vault.</p>
-        <input type="file" id="importFile" accept=".json,.png,image/png">
+        <div style="width:100%; display:flex; flex-direction:row; align-items:center; gap:10px; max-width:270px;">
+            <input type="file" id="importFile" accept=".json,.png,image/png">
+        </div>
         <button onclick="importData()" class="btn-primary">Import Passwords</button>
     </div>
 
@@ -311,11 +358,19 @@
         <button class="btn-danger" onclick="clearAll()">Wipe All Data</button>
     </div>
     <div class="app-version-box">
-        <div class="app-version">App version: 1.23.21</div>
+        <div class="app-version">App version: 1.24.22</div>
         <div class="app-version-links">
             <a href="rec/changelog.txt" target="_blank" rel="noopener">View Changelog</a>
             <a href="terms_of_service.html" target="_blank" rel="noopener">Terms of Service</a>
+            <a href="classic-passpro/index.html" rel="noopener">Perfer Old PassPro?</a>
         </div>
+        <a
+            href="https://forms.gle/W3R8sizfH6YcUbeD9"
+            target="_blank"
+            rel="noopener"
+            class="report-bug-link"
+            title="Report a bug or issue on Google Forms"
+        >🐞 Report a Bug</a>
         <div class="app-version-box-gap"></div>
     </div>
 </div>
@@ -323,7 +378,6 @@
 <script src="navbar.js"></script>
 <script src="scripts/themes.js"></script>
 <script>
-    // -- Themes: Single-source from themes.js --
     function setupThemeOptions() {
         const group = document.getElementById('themeOptionsGroup');
         if (!group || typeof window.themes !== "object") return;
@@ -346,7 +400,6 @@
                 updateThemeRadioUI(themeName);
             };
 
-            // If the theme has an accent color, show its swatch:
             if (themeData && themeData.accent) {
                 let swatch = document.createElement('span');
                 swatch.style.display = 'inline-block';
@@ -383,10 +436,8 @@
     }
 
     function getSavedThemeName() {
-        return (localStorage.getItem('themeName') || 'dark');
+        return localStorage.getItem('themeName') || 'dark';
     }
-
-    // -- End themes selection. The rest does not need to update for new themes. --
 
     function randomFilename(ext) {
         const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -434,12 +485,8 @@
         const pinInput = document.getElementById('pinSetting');
         const removePinBtn = document.getElementById('removePinBtn');
         const data = getVaultData();
-        pinInput.value = (data.pin || "");
-        if (data.pin && data.pin.length === 4) {
-            removePinBtn.style.display = '';
-        } else {
-            removePinBtn.style.display = 'none';
-        }
+        pinInput.value = data.pin || "";
+        removePinBtn.style.display = (data.pin && data.pin.length === 4) ? '' : 'none';
     }
 
     window.addEventListener('DOMContentLoaded', function () {
@@ -477,7 +524,6 @@
         const jsonData = JSON.stringify(data, null, 2);
         const blob = new Blob([jsonData], { type: "application/json" });
         const url = URL.createObjectURL(blob);
-
         const a = document.createElement('a');
         a.href = url;
         a.download = randomFilename(".json");
@@ -485,6 +531,7 @@
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+        localStorage.setItem('pm_last_export', Date.now().toString());
     }
 
     function exportDisguiseData() {
@@ -500,7 +547,6 @@
             combined.set(jsonUint8, pngUint8.length + marker.length);
             const blob = new Blob([combined], { type: 'image/png' });
             const url = URL.createObjectURL(blob);
-
             const a = document.createElement('a');
             a.href = url;
             a.download = randomFilename(".png");
@@ -508,6 +554,7 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+            localStorage.setItem('pm_last_export', Date.now().toString());
         });
     }
 
@@ -613,6 +660,7 @@
         for (let i = 0; i < str.length; i++) arr.push(str.charCodeAt(i));
         return new Uint8Array(arr);
     }
+
     function findSubarrayIndex(buf, subarr) {
         let max = buf.length - subarr.length;
         outer: for (let i = 0; i <= max; ++i) {
@@ -623,6 +671,7 @@
         }
         return -1;
     }
+
     function processImportedVaultData(importedData, fileInput) {
         if (!importedData.passwords || !Array.isArray(importedData.passwords)) {
             throw new Error("Invalid format. Missing 'passwords' array.");
