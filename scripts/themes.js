@@ -3,7 +3,7 @@ const themes = {
     midnight:    { name: "Midnight",    file: "themes/midnight.css" },
     light:       { name: "Light",       file: "themes/light.css" },
     solarized:   { name: "Solarized",   file: "themes/solarized.css" },
-    premium:     { name: "Premium Gold",file: "themes/premium.css" },
+    aurora:     { name: "aurora",       file: "themes/aurora.css" },
     barbiepink:  { name: "Barbie Pink", file: "themes/barbie-pink.css" }
 };
 

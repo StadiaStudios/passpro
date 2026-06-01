@@ -104,7 +104,6 @@
 }
 `;
 
-        // Single Back icon/button only
         const iconBack = `
 <svg class="ppnav__icon-link__icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g><rect width="24" height="24" fill="none"/><path fill="currentColor" d="M15.41 7.41a1 1 0 0 0-1.41-1.41l-5 5a1 1 0 0 0 0 1.41l5 5a1 1 0 1 0 1.41-1.41L11.83 12l3.58-3.59z"/></g></svg>
 `;
@@ -125,7 +124,6 @@
         wrapper.innerHTML = html.trim();
         wrapper.childNodes.forEach(n => shadow.appendChild(n));
 
-        // Highlight the back button if this is not the main page
         const backLink = shadow.querySelector('.ppnav__icon-link');
         const current = window.location.pathname.replace(/^\//, '');
         if (backLink && !current.endsWith('index.html')) {

@@ -351,6 +351,8 @@
             <ul>
                 <li><a class="section-link" href="#getting-started">🗝️ Getting Started</a></li>
                 <li><a class="section-link" href="#install-app">📲 How to Install the App</a></li>
+                <li><a class="section-link" href="#generator-guide">🔐 How to Use Password Generator</a></li>
+                <li><a class="section-link" href="#import-export">💾 Import/Export Account</a></li>
                 <li><a class="section-link" href="#settings">⚙️ Settings</a></li>
                 <li><a class="section-link" href="#reset">🔑 Reset & Troubleshooting</a></li>
                 <li><a class="section-link" href="#forgot-pin">🔒 Forgot PIN / Locked Out?</a></li>
@@ -374,6 +376,8 @@
                 <ul>
                     <li><a class="section-link" href="#getting-started">🗝️ Getting Started</a></li>
                     <li><a class="section-link" href="#install-app">📲 How to Install the App</a></li>
+                    <li><a class="section-link" href="#generator-guide">🔐 How to Use Password Generator</a></li>
+                    <li><a class="section-link" href="#import-export">💾 Import/Export Account</a></li>
                     <li><a class="section-link" href="#settings">⚙️ Settings</a></li>
                     <li><a class="section-link" href="#reset">🔑 Reset & Troubleshooting</a></li>
                     <li><a class="section-link" href="#forgot-pin">🔒 Forgot PIN / Locked Out?</a></li>
@@ -386,6 +390,8 @@
             <p>
                 Welcome to PassPro! Here’s how to get the most out of your new password manager.
             </p>
+
+            <!-- Getting Started section MOVED FIRST -->
             <span class="anchor-target" id="getting-started"></span>
             <section>
                 <h2>🗝️ Getting Started</h2>
@@ -394,6 +400,7 @@
                     <li>From the home page, unlock your vault and you’re good to go!</li>
                 </ul>
             </section>
+
             <span class="anchor-target" id="install-app"></span>
             <section>
                 <h2>📲 How to Install the App</h2>
@@ -402,6 +409,67 @@
                     <li><b>On Android (Chrome):</b> Tap the <b>three dots</b> menu &gt; <b>“Install app”</b>. The app will appear on your home screen and app drawer for quick access.</li>
                     <li><b>On iPhone/iPad (Safari):</b> Tap the <b>Share</b> icon, then choose <b>“Add to Home Screen”</b> to create a quick-launch icon just like a native app.</li>
                     <li>Once installed, PassPro data saves with app instead of Safari Data and it's more protected!</li>
+                </ul>
+            </section>
+            <span class="anchor-target" id="generator-guide"></span>
+            <section>
+                <h2>🔐 How to Use the Password Generator</h2>
+                <ul>
+                    <li>
+                        <b>In New PassPro (recommended):</b>
+                        <ol>
+                            <li>Go to <a class="section-link" href="../password-generator.html" target="_blank">Password Generator</a> from the main menu or sidebar.</li>
+                            <li>Choose the desired <b>password length</b> using the slider.</li>
+                            <li>Toggle which types of characters to include (uppercase, lowercase, numbers, symbols, or even custom keywords).</li>
+                            <li>Click the <b>“Generate”</b> button. Your new password instantly appears above!</li>
+                            <li>Click the <b>copy</b> button to copy the generated password, or generate again for a new one. You can view <b>password strength</b> and your generator <b>history</b> as well.</li>
+                            <li><b>Pro Tip:</b> The new generator dynamically shows strength and lets you adjust options for your needs!</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <b>Using Classic PassPro Generator:</b>
+                        <ol>
+                            <li>Go to the <a class="section-link" href="../classic-passpro/pages/generator.html" target="_blank">Classic Generator</a> if you prefer the old style.</li>
+                            <li>Select your options (length, types, keywords) as desired.</li>
+                            <li>Click “Generate” and copy your password as needed.</li>
+                            <li>Note: The classic version’s UI is a bit different, but all basic functions work the same way. Strength indicators and history are also included!</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p>
+                    You can use either version, but we recommend the <b>new generator</b> for more features and a more modern experience.
+                </p>
+            </section>
+
+            <span class="anchor-target" id="import-export"></span>
+            <section>
+                <h2>💾 How to Import/Export Your Account</h2>
+                <ul>
+                    <li>
+                        <b>Export Your Account Data:</b>
+                        <ol>
+                            <li>Go to <b>Settings</b> in PassPro.</li>
+                            <li>Find the <b>Export Data</b> option.</li>
+                            <li>Choose your preferred format: <b>.json file</b> for standard backup or <b>Disguise PNG</b> for an image-based encrypted backup.</li>
+                            <li>After exporting, store the file somewhere safe, such as a USB drive, external storage, or a secure cloud platform.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <b>Import Data to Restore or Transfer Your Account:</b>
+                        <ol>
+                            <li>On a new device, or after resetting, go to <b>Settings &gt; Import Data</b>.</li>
+                            <li>Choose your exported <b>.json</b> or <b>Disguise PNG</b> backup file.</li>
+                            <li>Follow the prompts to complete the import. Your vault will be restored—existing data may be overwritten, so make sure you've backed up recent changes.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <b>Tips for Import/Export:</b>
+                        <ul>
+                            <li>Always keep your backup files private and secure. Anyone with access to your export file could potentially access your data.</li>
+                            <li>If you use multiple devices, repeat the Export/Import process to keep them in sync.</li>
+                            <li>For switching between Classic and New PassPro, export/import features are compatible, but some advanced features in the new version might not transfer perfectly to Classic.</li>
+                        </ul>
+                    </li>
                 </ul>
             </section>
             <span class="anchor-target" id="settings"></span>
@@ -458,8 +526,10 @@
                 <h2>💡 More Tips</h2>
                 <ul>
                     <li>For syncing across devices, use <b>Settings &gt; Export/Import</b> as needed, or rely on your browser's own backup system.</li>
+                    <li>You can back up your passwords and data by exporting your vault (as a .json file or Disguise PNG) and saving it to a USB drive, external storage, or your file manager for safe keeping. On iPhones, backups to iCloud can also securely include your PassPro app data if enabled in your device's settings. And PassPro downloaded.</li>
                     <li>Curious about <b>privacy</b>? PassPro never uploads your data or secrets. Everything is handled locally unless you export it yourself.</li>
                 </ul>
+      
             </section>
             <div class="help-contact">
                 <b>Still need help? <a href="mailto:stadiastudios.support@proton.me">Contact Support</a></b>

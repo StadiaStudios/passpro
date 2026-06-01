@@ -1,3 +1,9 @@
+V1.26.24
+----------
+Search Bar to Passwords, New Password Generator, Settings Enhancements, Removed Premium theme + Replaced with Aurora theme, 
+Pages Navbar Improvements, Loading Screen Bug Fixes and Improvements, Minor Bug Fixes to Some Settings, 
+
+
 V1.25.23
 ----------
 Fixes Classic PassPro, Improvements to Help & Guidebook, New App Icon, New Loading screen,
@@ -8,12 +14,13 @@ Adds Classic PassPro Manifest for Classic Theme, Download it by adding app to ho
 
 V1.24.22 (Future Proof BETA)
 ----------
-Bug Fixes to My Passwords, Small Color Changes, Navbar Improvements, Old PassPro is in the Footer of Settings, New Update Screen, Report a Bug Feature, Help Page and Guide, Last Sync Fix,
+Bug Fixes to My Passwords, Small Color Changes, Navbar Improvements, Old PassPro is in the Footer of Settings, New Update Screen, Report a Bug Feature, 
+Help Page and Guide, Last Sync Fix,
 
 V1.23.21 (Future Proof BETA)
 ----------
-Major Bug Fixes, Layout Fixes, Break text feature in notes, New "Show" Popup Display, New Disguise Download Option, Polished Code, 6 New themes to Future Proof, Can Now arrange passwords or sort them,
-Digital Wallet was removed and may return in the future but isnt promised. Pin Lock updates, Forgot Pin Page Re implemented, 
+Major Bug Fixes, Layout Fixes, Break text feature in notes, New "Show" Popup Display, New Disguise Download Option, Polished Code, 6 New themes to Future Proof, 
+Can Now arrange passwords or sort them, Digital Wallet was removed and may return in the future but isnt promised. Pin Lock updates, Forgot Pin Page Re implemented, 
 
 
 Version Notes:

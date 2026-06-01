@@ -36,7 +36,7 @@
             #cursor-temp-loading-overlay {
                 position: fixed;
                 inset: 0;
-                background: linear-gradient(135deg, #191926 78%, #111 100%);
+                background-color: #050505 !important;
                 z-index: 100000;
                 display: flex;
                 flex-direction: column;
@@ -45,7 +45,47 @@
                 transition: opacity 0.36s cubic-bezier(.77, .16, .4, 1.07);
                 opacity: 1;
                 visibility: visible;
+                overflow: hidden;
             }
+            
+            /* Moving liquid blobs behind the glass */
+            #cursor-temp-loading-overlay::before {
+                content: '';
+                position: absolute;
+                width: 150vw;
+                height: 150vh;
+                top: -25vh;
+                left: -25vw;
+                background: 
+                    radial-gradient(circle at 35% 35%, rgba(60, 90, 180, 0.8) 0%, transparent 20%),
+                    radial-gradient(circle at 65% 65%, rgba(40, 70, 140, 0.7) 0%, transparent 25%),
+                    radial-gradient(circle at 40% 70%, rgba(90, 50, 150, 0.6) 0%, transparent 20%);
+                animation: liquidMovement 8s ease-in-out infinite alternate;
+                z-index: 0;
+                pointer-events: none;
+                will-change: transform;
+            }
+
+            /* Frosted glass layer */
+            #cursor-temp-loading-overlay::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: rgba(10, 10, 15, 0.35);
+                backdrop-filter: blur(18px) saturate(140%);
+                -webkit-backdrop-filter: blur(18px) saturate(140%);
+                box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.03);
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            @keyframes liquidMovement {
+                0% { transform: translate(-10%, -10%) scale(1) rotate(0deg); }
+                50% { transform: translate(10%, 5%) scale(1.1) rotate(5deg); }
+                100% { transform: translate(-5%, 15%) scale(0.9) rotate(-5deg); }
+            }
+
+            /* Content lifted above the glass layer */
             .cursor-lock-anim-box {
                 display: flex;
                 flex-direction: column;
@@ -54,6 +94,7 @@
                 margin-bottom: 24px;
                 min-height: 120px;
                 position: relative;
+                z-index: 2; 
             }
             .cursor-loading-png {
                 width: 76px;
@@ -87,12 +128,8 @@
                 margin-top: 8px;
                 margin-bottom: 0;
                 text-align: center;
-                animation: fadeTextIn 0.85s cubic-bezier(.33,1.25,.48,1.01) 1.27s both;
-            }
-            @keyframes fadeTextIn {
-                0% { opacity: 0; transform: translateY(11px);}
-                78% { opacity: .12;}
-                100% { opacity: 1; transform: none;}
+                position: relative;
+                z-index: 2; 
             }
         `;
         document.head.appendChild(overlayStyle);

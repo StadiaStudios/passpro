@@ -1,25 +1,21 @@
 (function () {
     const slides = [
         {
-            title: "Welcome to PassPro!",
-            text: "This is the latest version of PassPro, redesigned for speed, simplicity, and powerful new features. Your passwords and secrets are still protected with modern zero-knowledge encryption.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 5.25-7 9-7 9s-7-3.75-7-9V7l7-4z"/><circle cx="12" cy="12" r="3"/><path d="M12 12v2.5"/><path d="M12 16h.01"/></svg>`
+            title: "What's New in PassPro",
+            text: "Search Bar added to Passwords, brand new Password Generator, and various Settings enhancements. Premium theme removed and replaced with the new Aurora theme.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10c0 3.866-2.239 7-5 7s-5-3.134-5-7 2.239-7 5-7 5 3.134 5 7z"/><path d="M21 21l-4.35-4.35"/></svg>`
         },
         {
-            title: "Your Data, Your Device",
-            text: "Everything is stored securely in your browser using local encryption no cloud by default. Settings and account data are managed right from the Settings page.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2" /><path d="M8 20h8"/><path d="M12 16v4"/></svg>`
+            title: "Navigation & Experience",
+            text: "Pages Navbar improvements, loading screen bug fixes and improvements for a smoother experience.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9l9 9"/><path d="M4 10v10h16V10"/></svg>`
         },
         {
-            title: "Easy Backup & Sync",
-            text: "Export your vault safely from <b>Settings > Export Data</b>. Import anytime using <b>Settings > Import Data.</b> You can keep a backup on your computer or a USB drive for extra security. iCloud And Device Backup should include data as well!",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 16l-4 4-4-4"/><path d="M12 12v8"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 16.25"/><rect x="10" y="20" width="4" height="2" rx="1"/></svg>`
+            title: "Other Improvements",
+            text: "Minor bug fixes to some Settings. Enjoy a better, more stable PassPro!",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`
         },
-        {
-            title: "Switch or Reset Fast",
-            text: "Manage migrations, reset your account, and toggle between Classic PassPro and New PassPro from <b>Settings</b>. Looking for more help? Tap <b>Help</b> at any time, or review docs on the homepage.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v5h.582M19.418 4A9 9 0 1 0 21 12.35"/><path d="M20 9V4h-5"/></svg>`
-        },
+   
         {
             title: "Zero-Knowledge",
             text: "Always remember your data is encrypted locally – not even WE can see your passwords. Make sure you download your account and have a backup somewhere safe, like a USB!",
@@ -29,7 +25,7 @@
 
     let currentIndex = 0;
     const VERSION_KEY = 'passpro_2024_welcome_seen';
-    const CURRENT_VERSION = '1.24.22';
+    const CURRENT_VERSION = '1.25.24';
 
     function hasSeenPopup() {
         try {
@@ -252,7 +248,7 @@
             window.removeEventListener('keydown', escListener);
             document.body.style.overflow = oldOverflow;
             if (navPlaceholder) navPlaceholder.style.display = '';
-        }
+        };
     }
 
     function updateSlide(isInitial = false) {

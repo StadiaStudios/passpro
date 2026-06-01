@@ -253,55 +253,12 @@
         .report-bug-link:hover {
             color: #cf6679;
         }
-        .new-here-section {
-            background-color: #181818;
-            border: 1.5px solid #64b5f6;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            padding: 22px 24px 20px 24px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(100, 181, 246, 0.11);
-        }
-        .new-here-section h3 {
-            color: #64b5f6;
-            margin-bottom: 6px;
-            font-size: 1.18rem;
-            font-weight: bold;
-            letter-spacing: 0.02em;
-        }
-        .btn-guidebook {
-            display: inline-block;
-            background-color: #64b5f6;
-            color: #1b1b1b;
-            border: none;
-            border-radius: 5px;
-            padding: 11px 22px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 12px;
-            transition: background 0.18s, color 0.16s;
-        }
-        .btn-guidebook:hover {
-            background-color: #7ebeff;
-            color: #202034;
-        }
     </style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
 
 <div class="container">
-
-    <div class="new-here-section">
-        <h3>New Here?</h3>
-        <div style="color: #bbdefb; font-size: 14px; margin-bottom: 13px;">
-            Access tips and answers to common questions, or learn how to use PassPro from our full guidebook.
-        </div>
-        <a href="pages/help.html" rel="noopener">
-            <button class="btn-guidebook">Visit Help &amp; Guidebook</button>
-        </a>
-    </div>
 
     <h2>Settings</h2>
 
@@ -321,6 +278,20 @@
             <input type="text" id="usernameInput" maxlength="30" placeholder="Set your username..." autocomplete="off" spellcheck="false">
             <button id="usernameSaveBtn" class="btn-primary">Save</button>
         </div>
+    </div>
+
+    <div class="section">
+        <h3>Resources</h3>
+        <p>List of our Helpful Resources!</p>
+        <a href="pages/help.html" rel="noopener">
+            <button class="btn-primary">Support & Help Page</button>
+        </a>
+        <a href="pages/password-generator.html" rel="noopener">
+            <button class="btn-primary">Password Generator</button>
+        </a>
+        <a href="classic-passpro/pages/generator.html" target="_blank" rel="noopener">
+            <button class="btn-primary">OLD Password Generator</button>
+        </a>
     </div>
 
     <div class="section">
@@ -698,7 +669,9 @@
     function clearAll() {
         if (confirm("WARNING: This will permanently delete all saved passwords and username from your browser. Continue?")) {
             localStorage.removeItem('pm_data');
-            alert("All data wiped.");
+            localStorage.removeItem('themeName');
+            localStorage.removeItem('hasUpdatedScreen');
+            alert("All data wiped (and theme reset).");
             updateUsernameUI();
             updatePinUI();
             updateStorageBar();
