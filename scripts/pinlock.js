@@ -187,12 +187,29 @@
             color: #fff !important;
             background: none !important;
         }
+        .second-recovery-link {
+            color: #aaa !important;
+            background: none !important;
+            border: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.98rem;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.14s;
+            font-weight: 500;
+            outline: none;
+        }
+        .second-recovery-link:hover,
+        .second-recovery-link:focus {
+            color: #fff !important;
+            background: none !important;
+        }
         .pin-input::placeholder {
             color: #888;
             letter-spacing: 0.02em;
             opacity: 1;
         }
-
         @media (max-width: 540px) {
             .pin-overlay {
                 padding: 0;
@@ -257,9 +274,12 @@
                         </button>
                     </div>
                     <p id="errorMsg" class="pin-error" role="alert" aria-live="polite"></p>
-                    <div class="pin-lock-actions">
-                        <button type="button" class="forgot-pin-link" id="forgotPinBtn" tabindex="0">Forgot PIN?</button>
-                        <button type="submit" id="unlockBtn" class="pin-unlock-btn" tabindex="0">Unlock</button>
+                    <div class="pin-lock-actions" style="flex-direction: column; align-items: flex-start;">
+                        <div style="display: flex; gap: 10px; width: 100%;">
+                            <button type="button" class="forgot-pin-link" id="forgotPinBtn" tabindex="0">Forgot PIN?</button>
+                            <button type="button" class="second-recovery-link" id="secondRecoveryBtn" tabindex="0">2nd Recovery</button>
+                        </div>
+                        <button type="submit" id="unlockBtn" class="pin-unlock-btn" tabindex="0" style="margin-top:12px;">Unlock</button>
                     </div>
                 </form>
             `;
@@ -274,6 +294,7 @@
             const viewIcon = card.querySelector('#viewPinIcon');
             const unlockBtn = card.querySelector('#unlockBtn');
             const forgotBtn = card.querySelector('#forgotPinBtn');
+            const secondRecoveryBtn = card.querySelector('#secondRecoveryBtn');
 
             let pinVisible = false;
 
@@ -311,13 +332,11 @@
                 pinVisible = isVisible;
                 input.type = pinVisible ? 'text' : 'tel';
                 renderEye(pinVisible);
-                // Set masking state immediately after changing type
                 if (!pinVisible) {
                     input.style.webkitTextSecurity = "disc";
                 } else {
                     input.style.webkitTextSecurity = "";
                 }
-                // Only focus input if called by toggle button, NOT on focus/blur handlers
             }
 
             setPinVisible(false);
@@ -389,7 +408,13 @@
                 window.open('pages/forgot-pin.html', '_blank', 'noopener');
             });
 
-            const focusable = [input, viewBtn, forgotBtn, unlockBtn];
+            if (secondRecoveryBtn) {
+                secondRecoveryBtn.addEventListener('click', () => {
+                    window.open('2ndrecovery.html', '_blank', 'noopener');
+                });
+            }
+
+            const focusable = [input, viewBtn, forgotBtn, secondRecoveryBtn, unlockBtn];
             let lastFocus = 0;
             card.addEventListener('keydown', (e) => {
                 if (e.key === "Tab") {
@@ -398,12 +423,11 @@
                     } else {
                         lastFocus = (lastFocus + 1) % focusable.length;
                     }
-                    focusable[lastFocus].focus();
+                    if (focusable[lastFocus]) focusable[lastFocus].focus();
                     e.preventDefault();
                 }
             });
 
-            // Ensure masking or revealing is only tied to pinVisible, not on input focus state.
             function fixPinMask() {
                 if (!pinVisible) {
                     input.style.webkitTextSecurity = "disc";
@@ -412,11 +436,9 @@
                 }
             }
 
-            // Remove the old "applyMaskIfNeeded" logic 
             input.addEventListener('focus', fixPinMask);
             input.addEventListener('blur', fixPinMask);
 
-            // Set correct state on load
             fixPinMask();
 
             input.focus();

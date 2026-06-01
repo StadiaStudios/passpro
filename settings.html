@@ -313,9 +313,29 @@
     <div class="section">
         <h3>Security PIN</h3>
         <p>Set a 4-digit PIN to lock your vault. Leave empty to disable.</p>
-        <input type="password" id="pinSetting" maxlength="4" placeholder="••••" style="width: 100%; padding: 12px; background: #1e1e1e; border: 1px solid #333; color: white; border-radius: 6px; margin-bottom: 10px;">
+        <input type="password" id="pinSetting" maxlength="4" placeholder="••••" style="width: 95%; padding: 12px; background: #1e1e1e; border: 1px solid #333; color: white; border-radius: 6px; margin-bottom: 10px;">
         <button id="savePinBtn" class="btn-primary">Update PIN</button>
         <button id="removePinBtn" style="display:none;">Remove PIN</button>
+    </div>
+
+    <div class="section">
+        <h3>2nd Recovery</h3>
+        <p>Set a 6-digit backup PIN and two security questions to recover your data! Disabled by default.<br>
+        <strong>Note:</strong> Your recovery answers cannot contain uppercase letters or spaces.</p>
+        
+        <label style="display:block; text-align:left; color:#bb86fc; font-weight:bold; font-size:13px; margin-bottom:5px;">Recovery PIN</label>
+        <input type="password" id="recoveryPinSetting" maxlength="6" placeholder="••••••" style="width: 100%; box-sizing: border-box; padding: 12px; background: #1e1e1e; border: 1px dashed #444; color: white; border-radius: 6px; margin-bottom: 15px; font-size: 16px; letter-spacing: 4px; text-align: center;">
+        
+        <label style="display:block; text-align:left; color:#bb86fc; font-weight:bold; font-size:13px; margin-bottom:5px;">Security Question 1</label>
+        <input type="text" id="recoveryQ1" placeholder="e.g. In what city were you born?" style="width: 100%; box-sizing: border-box; padding: 12px; background: #1e1e1e; border: 1px solid #333; color: white; border-radius: 6px; margin-bottom: 8px;">
+        <input type="text" id="recoveryA1" placeholder="Answer 1 (no spaces, no uppercase)" style="width: 100%; box-sizing: border-box; padding: 12px; background: #1e1e1e; border: 1px solid #333; color: white; border-radius: 6px; margin-bottom: 20px;">
+
+        <label style="display:block; text-align:left; color:#bb86fc; font-weight:bold; font-size:13px; margin-bottom:5px;">Security Question 2</label>
+        <input type="text" id="recoveryQ2" placeholder="e.g. What is your favorite soda?" style="width: 100%; box-sizing: border-box; padding: 12px; background: #1e1e1e; border: 1px solid #333; color: white; border-radius: 6px; margin-bottom: 8px;">
+        <input type="text" id="recoveryA2" placeholder="Answer 2 (no spaces, no uppercase)" style="width: 100%; box-sizing: border-box; padding: 12px; background: #1e1e1e; border: 1px solid #333; color: white; border-radius: 6px; margin-bottom: 15px;">
+
+        <button id="saveRecoveryPinBtn" class="btn-primary">Update Recovery Settings</button>
+        <button id="removeRecoveryPinBtn" class="btn-danger" style="display:none; margin-top:10px;">Remove Recovery Settings</button>
     </div>
 
     <div class="section" style="border-color: #cf6679;">
@@ -330,7 +350,7 @@
         <button class="btn-danger" onclick="clearAll()">Wipe All Data</button>
     </div>
     <div class="app-version-box">
-        <div class="app-version">App version: 1.25.23</div>
+        <div class="app-version">App version: 1.27.24</div>
         <div class="app-version-links">
             <a href="rec/changelog.txt" target="_blank" rel="noopener">View Changelog</a>
             <a href="terms_of_service.html" target="_blank" rel="noopener">Terms of Service</a>
@@ -407,6 +427,14 @@
         });
     }
 
+    function updateRecoveryPinUI() {
+        const recPinInput = document.getElementById('recoveryPinSetting');
+        const removeRecPinBtn = document.getElementById('removeRecoveryPinBtn');
+        const data = getVaultData();
+        recPinInput.value = data.recoveryPin || "";
+        removeRecPinBtn.style.display = (data.recoveryPin && data.recoveryPin.length === 6) ? '' : 'none';
+    }
+
     function getSavedThemeName() {
         return localStorage.getItem('themeName') || 'dark';
     }
@@ -431,6 +459,9 @@
             if (!data.hasOwnProperty('pin') || typeof data.pin !== "string") {
                 data.pin = "";
             }
+            if (!data.hasOwnProperty('recoveryPin') || typeof data.recoveryPin !== "string") {
+                data.recoveryPin = "";
+            }
             return data;
         } catch {
             return { passwords: [], username: "", pin: "" };
@@ -443,6 +474,9 @@
         }
         if (!obj.hasOwnProperty('pin') || typeof obj.pin !== "string") {
             obj.pin = "";
+        }
+        if (!obj.hasOwnProperty('recoveryPin') || typeof obj.recoveryPin !== "string") {
+            obj.recoveryPin = "";
         }
         localStorage.setItem('pm_data', JSON.stringify(obj, null, 2));
     }
@@ -469,6 +503,7 @@
 
         updateUsernameUI();
         updatePinUI();
+        updateRecoveryPinUI();
 
         document.getElementById('usernameSaveBtn').addEventListener('click', function () {
             const inp = document.getElementById('usernameInput');
@@ -488,11 +523,74 @@
             alert("PIN removed!");
         });
 
+        document.getElementById('saveRecoveryPinBtn').addEventListener('click', function () {
+            const newPin = document.getElementById('recoveryPinSetting').value;
+            const q1 = document.getElementById('recoveryQ1').value.trim();
+            const a1 = document.getElementById('recoveryA1').value.trim();
+            const q2 = document.getElementById('recoveryQ2').value.trim();
+            const a2 = document.getElementById('recoveryA2').value.trim();
+
+            function isValidRecoveryAnswer(ans) {
+                return /^[^A-Z\s]+$/.test(ans) && ans.length > 0;
+            }
+
+            if (newPin !== "" || q1 !== "" || a1 !== "" || q2 !== "" || a2 !== "") {
+                if (newPin.length !== 6) {
+                    alert("Recovery PIN must be exactly 6 digits.");
+                    return;
+                }
+                if (!q1 || !a1 || !q2 || !a2) {
+                    alert("Please fill out both security questions and answers to enable 2nd Recovery.");
+                    return;
+                }
+                if (!isValidRecoveryAnswer(a1) || !isValidRecoveryAnswer(a2)) {
+                    alert("Recovery answers cannot have uppercase letters or spaces.");
+                    return;
+                }
+            }
+
+            let data = getVaultData();
+            data.recoveryPin = newPin;
+            data.recoveryQ1 = q1;
+            data.recoveryA1 = a1;
+            data.recoveryQ2 = q2;
+            data.recoveryA2 = a2;
+            setVaultData(data);
+            updateRecoveryPinUI();
+            alert("2nd Recovery settings saved successfully!");
+        });
+
+        document.getElementById('removeRecoveryPinBtn').addEventListener('click', function () {
+            if (!confirm('Are you sure you want to remove your 2nd Recovery settings?')) return;
+            let data = getVaultData();
+            data.recoveryPin = "";
+            data.recoveryQ1 = "";
+            data.recoveryA1 = "";
+            data.recoveryQ2 = "";
+            data.recoveryA2 = "";
+            setVaultData(data);
+            updateRecoveryPinUI();
+            alert("2nd Recovery settings disabled.");
+        });
+
         document.getElementById('exportDisguiseBtn').addEventListener('click', exportDisguiseData);
     });
 
+    function getVaultDataNoRecovery() {
+        const data = getVaultData();
+        const {
+            recoveryPin,
+            recoveryQ1,
+            recoveryA1,
+            recoveryQ2,
+            recoveryA2,
+            ...clone
+        } = data;
+        return clone;
+    }
+
     function exportData() {
-        let data = getVaultData();
+        let data = getVaultDataNoRecovery();
         const jsonData = JSON.stringify(data, null, 2);
         const blob = new Blob([jsonData], { type: "application/json" });
         const url = URL.createObjectURL(blob);
@@ -507,7 +605,7 @@
     }
 
     function exportDisguiseData() {
-        const jsonData = JSON.stringify(getVaultData(), null, 2);
+        const jsonData = JSON.stringify(getVaultDataNoRecovery(), null, 2);
         createBlankPng(function (basePng) {
             const pngUint8 = new Uint8Array(basePng);
             const encoder = new TextEncoder();
@@ -658,6 +756,7 @@
         currentData.passwords = currentData.passwords.concat(importedData.passwords);
         currentData.username = importedData.username;
         currentData.pin = importedData.pin;
+
         setVaultData(currentData);
         alert('Passwords, username, and PIN imported successfully!');
         fileInput.value = "";

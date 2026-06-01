@@ -1,3 +1,7 @@
+V1.27.24
+----------
+2ND Recovery Option in Settings, 6 Digit Pin Recovery Code-2 Custom Recovery Questions, Password Count in Passwords, No Search Results Screen update, 
+
 V1.26.24
 ----------
 Search Bar to Passwords, New Password Generator, Settings Enhancements, Removed Premium theme + Replaced with Aurora theme, 

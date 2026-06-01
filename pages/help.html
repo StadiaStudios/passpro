@@ -61,7 +61,6 @@
         ::-webkit-scrollbar-corner {
             background: #181818;
         }
-
         .help-top-navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -116,7 +115,6 @@
         .help-top-navbar-backbtn svg {
             stroke: #cccccc !important;
         }
-
         .help-main-header {
             font-size: 2.35rem;
             font-weight: 800;
@@ -136,7 +134,6 @@
             flex-shrink: 0;
             stroke: #47a8f5 !important;
         }
-
         .help-container {
             width: 100vw;
             min-height: 100vh;
@@ -160,7 +157,6 @@
             box-sizing: border-box;
             min-width: 0;
         }
-
         .help-section-side-nav {
             display: none;
         }
@@ -204,7 +200,6 @@
                 display: block;
             }
         }
-
         h2 {
             font-size: 1.34rem;
             font-weight: 700;
@@ -240,7 +235,6 @@
         .help-contact a:hover {
             color: var(--link-hover);
         }
-
         @media (max-width: 850px) {
             .help-content {
                 max-width: 97vw;
@@ -263,7 +257,6 @@
                 font-size: 1.04rem;
             }
         }
-
         .anchor-target {
             display: block;
             position: relative;
@@ -271,7 +264,6 @@
             visibility: hidden;
             height: 0;
         }
-
         .help-section-nav, .help-section-side-nav {
             background: #121212;
             padding: 0.7em 0 0.7em 0.2em;
@@ -354,6 +346,7 @@
                 <li><a class="section-link" href="#generator-guide">🔐 How to Use Password Generator</a></li>
                 <li><a class="section-link" href="#import-export">💾 Import/Export Account</a></li>
                 <li><a class="section-link" href="#settings">⚙️ Settings</a></li>
+                <li><a class="section-link" href="#second-recovery">🛡️ 2nd Recovery System</a></li>
                 <li><a class="section-link" href="#reset">🔑 Reset & Troubleshooting</a></li>
                 <li><a class="section-link" href="#forgot-pin">🔒 Forgot PIN / Locked Out?</a></li>
                 <li><a class="section-link" href="#report-bug">🐞 How to Report a Bug</a></li>
@@ -379,6 +372,7 @@
                     <li><a class="section-link" href="#generator-guide">🔐 How to Use Password Generator</a></li>
                     <li><a class="section-link" href="#import-export">💾 Import/Export Account</a></li>
                     <li><a class="section-link" href="#settings">⚙️ Settings</a></li>
+                    <li><a class="section-link" href="#second-recovery">🛡️ 2nd Recovery System</a></li>
                     <li><a class="section-link" href="#reset">🔑 Reset & Troubleshooting</a></li>
                     <li><a class="section-link" href="#forgot-pin">🔒 Forgot PIN / Locked Out?</a></li>
                     <li><a class="section-link" href="#report-bug">🐞 How to Report a Bug</a></li>
@@ -391,7 +385,6 @@
                 Welcome to PassPro! Here’s how to get the most out of your new password manager.
             </p>
 
-            <!-- Getting Started section MOVED FIRST -->
             <span class="anchor-target" id="getting-started"></span>
             <section>
                 <h2>🗝️ Getting Started</h2>
@@ -481,6 +474,54 @@
                     <li><b>Device backup</b> (e.g. iCloud, Android Backup) includes PassPro data on most browsers.</li>
                 </ul>
             </section>
+            
+            <span class="anchor-target" id="second-recovery"></span>
+            <section>
+                <h2>🛡️ How to Access and Use the 2ND Recovery System (and how it works)</h2>
+                <ul>
+                    <li>
+                        <b>What is the 2ND Recovery System?</b><br>
+                        The 2ND Recovery system is an extra failsafe to help you regain access to your PassPro vault in the rare event your primary recovery/backup fails or you lose your main credentials.
+                    </li>
+                    <li>
+                        <b>How it Works:</b>
+                        <ul>
+                            <li>The 2ND Recovery system lets you create a 6 digit recovery pin or set questions (in Settings) that can be used to unlock or restore your vault if you've lost both your PIN and master password.</li>
+                            <li>You may be prompted to set up a 2ND Recovery when you create your vault or through the <b>Settings</b> page at any time.</li>
+                            <li>The 2ND Recovery code/backup is <b>encrypted and device-specific</b> (unless you export it) and can only be used once if activated, after which it is disabled to protect your security.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>How to Set Up:</b>
+                        <ol>
+                            <li>Open PassPro and go to <b>Settings</b>.</li>
+                            <li>Scroll to the <b>2ND Recovery</b> or <b>Security Pin</b> section.</li>
+                            <li>Follow the instructions to setup your 2nd Recovery Methods.</li>
+                            <li><b>Important:</b> Make sure you remember this will not save with your exported data</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <b>How to Use 2ND Recovery:</b>
+                        <ol>
+                            <li>If you can't access your vault by normal or primary methods, click the <b>"Use 2ND Recovery"</b> option on the login or recovery page.</li>
+                            <li>Enter your 2ND Recovery code or upload the backup file as prompted.</li>
+                            <li>Once verified, you'll be able to set a new master password/PIN and access your vault. Your prior vault credentials will be invalidated for your protection.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <b>Best Practices:</b>
+                        <ul>
+                            <li>Store your 2ND Recovery information somewhere totally separate from your main device and main backups, ideally offline.</li>
+                            <li>Never share or email your 2ND Recovery code as it can unlock your vault if obtained by someone else.</li>
+                            <li>If you generate a new 2ND Recovery, old ones become invalid and should be deleted/destroyed if stored physically.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>
+                    The 2ND Recovery feature is recommended for peace of mind. If you need further help using it, <a class="section-link" href="mailto:stadiastudios.support@proton.me">contact PassPro support</a>.
+                </p>
+            </section>
+
             <span class="anchor-target" id="reset"></span>
             <section>
                 <h2>🔑 Reset & Troubleshooting</h2>
@@ -529,7 +570,6 @@
                     <li>You can back up your passwords and data by exporting your vault (as a .json file or Disguise PNG) and saving it to a USB drive, external storage, or your file manager for safe keeping. On iPhones, backups to iCloud can also securely include your PassPro app data if enabled in your device's settings. And PassPro downloaded.</li>
                     <li>Curious about <b>privacy</b>? PassPro never uploads your data or secrets. Everything is handled locally unless you export it yourself.</li>
                 </ul>
-      
             </section>
             <div class="help-contact">
                 <b>Still need help? <a href="mailto:stadiastudios.support@proton.me">Contact Support</a></b>

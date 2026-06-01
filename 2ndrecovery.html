@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>PassPro - 2nd Recovery</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <script src="scripts/themes.js"></script>
+    <style>
+        body {
+            background-color: var(--background-color, #121212);
+            color: var(--text-color, #e0e0e0);
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: #181818;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d2d2d;
+            border-radius: 8px;
+            border: 2px solid #121212;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bb86fc;
+        }
+        ::-webkit-scrollbar-corner {
+            background: #181818;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .section {
+            background-color: var(--section-background, #1e1e1e);
+            border: 1px solid var(--section-border, #333);
+            padding: 30px 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 25px;
+        }
+        h3 {
+            margin-top: 0;
+            color: var(--accent, #bb86fc);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        p {
+            color: var(--subtext, #aaa);
+            font-size: 15px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            max-width: 250px;
+            padding: 15px;
+            background-color: var(--input-background, #121212);
+            border: 1px dashed var(--input-border, #444);
+            color: var(--input-text, #e0e0e0);
+            font-size: 24px;
+            letter-spacing: 12px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            border-color: var(--accent, #bb86fc);
+            border-style: solid;
+        }
+        input[type="text"].answer-input {
+            font-size: 16px;
+            letter-spacing: 1px;
+            max-width: 300px;
+        }
+        button {
+            width: 100%;
+            max-width: 250px;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+            margin: 5px;
+        }
+        .btn-primary {
+            background-color: var(--primary-background, #111);
+            color: var(--primary-text, rgb(194, 193, 193));
+            border: 1px solid var(--primary-border, #bb86fc);
+        }
+        .btn-primary:hover {
+            color: white;
+            background-color: var(--button-hover-background, #222);
+        }
+        .hidden {
+            display: none !important;
+        }
+        .success-msg {
+            color: var(--accent, #bb86fc);
+            font-size: 1.1rem;
+            margin: 20px 0 18px 0;
+        }
+        .alt-label {
+            color: var(--subtext, #bbb);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .alt-section-divider {
+            border: 0;
+            border-top: 1px dashed #444;
+            margin: 30px 0 16px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div class="container">
+    <h2>2nd Recovery</h2>
+
+    <div id="disabledState" class="section hidden">
+        <h3>Recovery Not Enabled</h3>
+        <p>You haven't set up a 6-digit recovery PIN yet. Please go back to Settings to enable and configure 2nd Recovery.</p>
+        <a href="settings.html">
+            <button class="btn-primary">Go to Settings</button>
+        </a>
+    </div>
+
+    <div id="verifyRecoveryState" class="section hidden">
+        <h3>Reset Your Main PIN</h3>
+        <p>To verify your identity, enter <u>either</u> your 6-digit recovery PIN <b>or</b> an answer to <b>one</b> of your security questions below. Only one is required.</p>
+        
+        <input type="password" id="recoveryInput" maxlength="6" placeholder="••••••" autocomplete="off" style="margin-bottom: 5px;">
+
+        <div class="alt-label">— or —</div>
+        
+        <div style="margin-top: 10px;">
+            <p id="displayQ1" style="color: var(--accent, #bb86fc); font-weight: bold; margin-bottom: 8px; font-size: 16px;"></p>
+            <input type="text" id="answer1Input" class="answer-input" placeholder="Answer to Question 1" autocomplete="off">
+        </div>
+        
+        <div style="margin-top: 5px;">
+            <p id="displayQ2" style="color: var(--accent, #bb86fc); font-weight: bold; margin-bottom: 8px; font-size: 16px;"></p>
+            <input type="text" id="answer2Input" class="answer-input" placeholder="Answer to Question 2" autocomplete="off">
+        </div>
+        
+        <br>
+        <button id="verifyRecoveryBtn" class="btn-primary">Verify and Continue</button>
+    </div>
+
+    <div id="resetPinState" class="section hidden">
+        <h3>Set a New Main PIN</h3>
+        <p>Type your new 4-digit main vault PIN below and confirm it.</p>
+        <input type="password" id="newPinInput" maxlength="4" placeholder="New PIN" inputmode="numeric" pattern="\d*">
+        <br>
+        <input type="password" id="confirmPinInput" maxlength="4" placeholder="Confirm PIN" inputmode="numeric" pattern="\d*">
+        <br>
+        <button id="setNewPinBtn" class="btn-primary">Reset Main PIN</button>
+    </div>
+
+    <div id="successState" class="section hidden">
+        <h3>PIN Reset Successful</h3>
+        <div class="success-msg">Your primary vault PIN has been reset.<br>You will now be returned to login.</div>
+        <button id="gotoLoginBtn" class="btn-primary">Go to Login</button>
+    </div>
+</div>
+
+<script src="navbar.js"></script>
+<script>
+    function getVaultData() {
+        try {
+            const raw = localStorage.getItem('pm_data');
+            return raw ? JSON.parse(raw) : {};
+        } catch {
+            return {};
+        }
+    }
+    function setVaultData(obj) {
+        localStorage.setItem('pm_data', JSON.stringify(obj, null, 2));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        let data = getVaultData();
+
+        const disabledState = document.getElementById('disabledState');
+        const verifyRecoveryState = document.getElementById('verifyRecoveryState');
+        const resetPinState = document.getElementById('resetPinState');
+        const successState = document.getElementById('successState');
+
+        const recoveryInput = document.getElementById('recoveryInput');
+        const answer1Input = document.getElementById('answer1Input');
+        const answer2Input = document.getElementById('answer2Input');
+        const displayQ1 = document.getElementById('displayQ1');
+        const displayQ2 = document.getElementById('displayQ2');
+        const verifyRecoveryBtn = document.getElementById('verifyRecoveryBtn');
+        const newPinInput = document.getElementById('newPinInput');
+        const confirmPinInput = document.getElementById('confirmPinInput');
+        const setNewPinBtn = document.getElementById('setNewPinBtn');
+        const gotoLoginBtn = document.getElementById('gotoLoginBtn');
+
+        if (
+            !data.recoveryPin ||
+            data.recoveryPin.length !== 6 ||
+            !data.recoveryQ1 ||
+            !data.recoveryQ2
+        ) {
+            disabledState.classList.remove('hidden');
+        } else {
+            verifyRecoveryState.classList.remove('hidden');
+            displayQ1.textContent = data.recoveryQ1;
+            displayQ2.textContent = data.recoveryQ2;
+        }
+
+        verifyRecoveryBtn.addEventListener('click', () => {
+            const enteredPin = recoveryInput.value.trim();
+            const enteredA1 = answer1Input.value.trim().toLowerCase();
+            const enteredA2 = answer2Input.value.trim().toLowerCase();
+
+            const correctA1 = (data.recoveryA1 || "").trim().toLowerCase();
+            const correctA2 = (data.recoveryA2 || "").trim().toLowerCase();
+
+            if (
+                (enteredPin && enteredPin === data.recoveryPin) ||
+                (enteredA1 && enteredA1 === correctA1) ||
+                (enteredA2 && enteredA2 === correctA2)
+            ) {
+                verifyRecoveryState.classList.add('hidden');
+                resetPinState.classList.remove('hidden');
+                newPinInput.focus();
+            } else {
+                alert("Incorrect recovery PIN or security answers. Please try again.\n(Remember: you may use just one method, either answer to a security question or the recovery pin.)");
+                recoveryInput.value = "";
+                answer1Input.value = "";
+                answer2Input.value = "";
+                recoveryInput.focus();
+            }
+        });
+
+        const enterSubmit = (e) => {
+            if (e.key === 'Enter') verifyRecoveryBtn.click();
+        };
+        recoveryInput.addEventListener('keypress', enterSubmit);
+        answer1Input.addEventListener('keypress', enterSubmit);
+        answer2Input.addEventListener('keypress', enterSubmit);
+
+        setNewPinBtn.addEventListener('click', () => {
+            const newPin = newPinInput.value.trim();
+            const confirmPin = confirmPinInput.value.trim();
+            if (!/^\d{4}$/.test(newPin)) {
+                alert('Your new PIN must be exactly 4 digits.');
+                newPinInput.focus();
+                return;
+            }
+            if (newPin !== confirmPin) {
+                alert('PINs do not match. Try again.');
+                confirmPinInput.value = '';
+                confirmPinInput.focus();
+                return;
+            }
+            data = getVaultData();
+            data.pin = newPin;
+            setVaultData(data);
+
+            resetPinState.classList.add('hidden');
+            successState.classList.remove('hidden');
+
+            localStorage.removeItem('pm_locked');
+        });
+        newPinInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') setNewPinBtn.click();
+        });
+        confirmPinInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') setNewPinBtn.click();
+        });
+
+        gotoLoginBtn.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        successState.addEventListener('transitionstart', () => {
+            if (!successState.classList.contains('hidden')) {
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            }
+        });
+    });
+</script>
+</body>
+</html>
