@@ -1,3 +1,7 @@
+V1.28.24
+----------
+Terms Of Service Page update With Dark and Light Reader and Responsiveness, Incorrect Attempts Cooldown to Lock added, Blur When opening a Different App,
+
 V1.27.24
 ----------
 2ND Recovery Option in Settings, 6 Digit Pin Recovery Code-2 Custom Recovery Questions, Password Count in Passwords, No Search Results Screen update, 

@@ -3,6 +3,47 @@
     const isUnlocked = sessionStorage.getItem('is_unlocked');
     const data = JSON.parse(localStorage.getItem('pm_data')) || {};
 
+    const COOLDOWN_MINUTES = 10;
+    const COOLDOWN_MS = COOLDOWN_MINUTES * 60 * 1000;
+    const MAX_ATTEMPTS = 3;
+    const ATTEMPT_KEY = '__pinlock_attempts_v1';
+    const COOLDOWN_KEY = '__pinlock_cooldown_until_v1';
+
+    // No more 2nd recovery permanent lock logic.
+    function getAttempts() {
+        let val = localStorage.getItem(ATTEMPT_KEY);
+        return val ? parseInt(val, 10) || 0 : 0;
+    }
+    function setAttempts(n) {
+        localStorage.setItem(ATTEMPT_KEY, String(n));
+    }
+    function clearAttempts() {
+        localStorage.removeItem(ATTEMPT_KEY);
+    }
+    function getCooldownUntil() {
+        let val = localStorage.getItem(COOLDOWN_KEY);
+        return val ? parseInt(val, 10) || 0 : 0;
+    }
+    function setCooldownUntil(ts) {
+        localStorage.setItem(COOLDOWN_KEY, String(ts));
+    }
+    function clearCooldown() {
+        localStorage.removeItem(COOLDOWN_KEY);
+    }
+    function isCooldownActive() {
+        const until = getCooldownUntil();
+        return until && Date.now() < until;
+    }
+    function getCooldownRemainingMs() {
+        const until = getCooldownUntil();
+        return Math.max(0, until - Date.now());
+    }
+
+    // Permanent lockout is now disabled, only always use cooldown regardless of 2nd recovery.
+    function isPermanentlyLocked() {
+        return false;
+    }
+
     if (
         !isUnlocked &&
         data.pin &&
@@ -181,6 +222,8 @@
             transition: color 0.14s;
             font-weight: 500;
             outline: none;
+            float: right;
+            margin-left: auto;
         }
         .forgot-pin-link:hover,
         .forgot-pin-link:focus {
@@ -236,6 +279,25 @@
             .pin-lock-card { padding: 18px 2vw; }
             .pin-lock-title { font-size: 0.97rem; }
         }
+        .pin-cooldown-msg {
+            color: #e6af2e;
+            background: none;
+            font-size: 1.09rem;
+            margin: 9px auto 6px auto;
+            text-align: center;
+            min-height: 2em;
+            transition: color .25s;
+            font-weight: 600;
+        }
+        .pin-final-lock-msg {
+            color: #e94f18;
+            background: none;
+            font-size: 1.12rem;
+            margin: 15px auto 8px auto;
+            text-align: center;
+            min-height: 2.5em;
+            font-weight: 800;
+        }
     `;
     document.head.appendChild(style);
 
@@ -246,8 +308,9 @@
 
             const card = document.createElement('div');
             card.className = 'pin-lock-card';
+
             card.innerHTML = `
-                <div class="pin-lock-title">Vault Locked</div>
+                <div class="pin-lock-title">App Locked</div>
                 <div class="pin-lock-desc">Enter your 4-digit PIN to unlock your vault.</div>
                 <form id="pinLockForm" autocomplete="off" tabindex="0" style="width:100%;display:flex;flex-direction:column;align-items:center;">
                     <div class="pin-lock-input-group">
@@ -274,6 +337,8 @@
                         </button>
                     </div>
                     <p id="errorMsg" class="pin-error" role="alert" aria-live="polite"></p>
+                    <p id="cooldownMsg" class="pin-cooldown-msg" style="display:none;"></p>
+                    <p id="finalLockMsg" class="pin-final-lock-msg" style="display:none;"></p>
                     <div class="pin-lock-actions" style="flex-direction: column; align-items: flex-start;">
                         <div style="display: flex; gap: 10px; width: 100%;">
                             <button type="button" class="forgot-pin-link" id="forgotPinBtn" tabindex="0">Forgot PIN?</button>
@@ -290,6 +355,8 @@
             const form = card.querySelector('#pinLockForm');
             const input = card.querySelector('#pinInput');
             const errorElm = card.querySelector('#errorMsg');
+            const cooldownElm = card.querySelector('#cooldownMsg');
+            const finalLockElm = card.querySelector('#finalLockMsg');
             const viewBtn = card.querySelector('#viewPinBtn');
             const viewIcon = card.querySelector('#viewPinIcon');
             const unlockBtn = card.querySelector('#unlockBtn');
@@ -297,6 +364,7 @@
             const secondRecoveryBtn = card.querySelector('#secondRecoveryBtn');
 
             let pinVisible = false;
+            let cooldownTimer = null;
 
             input.setAttribute('inputmode', 'numeric');
             input.setAttribute('pattern', '[0-9]*');
@@ -358,7 +426,7 @@
                     e.target.value = value;
                 }
                 errorElm.textContent = '';
-                unlockBtn.disabled = value.length !== 4;
+                maybeEnableUnlockBtn();
             });
 
             input.addEventListener('paste', (e) => {
@@ -370,21 +438,112 @@
             });
 
             function maybeEnableUnlockBtn() {
+                if (isPermanentlyLocked()) {
+                    unlockBtn.disabled = true;
+                    input.disabled = true;
+                } else if (isCooldownActive()) {
+                    unlockBtn.disabled = true;
+                } else {
+                    unlockBtn.disabled = input.value.trim().length !== 4;
+                    input.disabled = false;
+                }
+            }
+
+            // This will never show, but we keep it for structure (could hide via display:none)
+            function showFinalLock() {
+                finalLockElm.innerHTML =
+                    `Too many failed attempts.<br>` +
+                    `You cannot unlock with your PIN.<br>` +
+                    `<b>Please use <a href="2ndrecovery.html" target="_blank" style="color:#fff;text-decoration:underline;">2nd Recovery</a> to reset your PIN.</b>`;
+                finalLockElm.style.display = 'none'; // Never shown
+                cooldownElm.style.display = 'none';
+                errorElm.textContent = '';
+                unlockBtn.disabled = true;
+                input.disabled = true;
+            }
+
+            function hideFinalLock() {
+                finalLockElm.style.display = 'none';
+                input.disabled = false;
                 unlockBtn.disabled = input.value.trim().length !== 4;
             }
-            maybeEnableUnlockBtn();
+
+            function showCooldown(remMs) {
+                if (remMs <= 0) {
+                    cooldownElm.style.display = 'none';
+                    unlockBtn.disabled = input.value.trim().length !== 4 ? true : false;
+                } else {
+                    const min = Math.floor(remMs / 60000);
+                    const sec = Math.floor((remMs % 60000) / 1000);
+                    cooldownElm.innerHTML = `Too many attempts.<br>Please wait <b>${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}</b> before trying again.`;
+                    cooldownElm.style.display = '';
+                    unlockBtn.disabled = true;
+                }
+            }
+            function updateCooldownDisplay() {
+                if (isPermanentlyLocked()) {
+                    showFinalLock();
+                    if (cooldownTimer) clearTimeout(cooldownTimer);
+                    return;
+                }
+                if (isCooldownActive()) {
+                    showCooldown(getCooldownRemainingMs());
+                    if (cooldownTimer) clearTimeout(cooldownTimer);
+                    cooldownTimer = setTimeout(updateCooldownDisplay, 1000);
+                } else {
+                    clearCooldown();
+                    showCooldown(0);
+                    clearTimeout(cooldownTimer);
+                }
+            }
+            function checkAndApplyCooldownOnStart() {
+                if (isPermanentlyLocked()) {
+                    showFinalLock();
+                } else if (isCooldownActive()) {
+                    showCooldown(getCooldownRemainingMs());
+                    cooldownTimer = setTimeout(updateCooldownDisplay, 1000);
+                } else {
+                    cooldownElm.style.display = 'none';
+                    hideFinalLock();
+                }
+            }
+            checkAndApplyCooldownOnStart();
 
             function tryUnlock() {
+                if (isPermanentlyLocked()) {
+                    showFinalLock();
+                    return;
+                }
+                if (isCooldownActive()) {
+                    showCooldown(getCooldownRemainingMs());
+                    return;
+                }
                 let value = input.value.trim();
                 if (value.length === 4) {
                     if (value === String(data.pin)) {
                         sessionStorage.setItem('is_unlocked', 'true');
+                        clearAttempts();
+                        clearCooldown();
                         overlay.remove();
                     } else {
-                        errorElm.textContent = 'Incorrect PIN';
-                        input.value = '';
-                        unlockBtn.disabled = true;
-                        input.focus();
+                        let curAttempts = getAttempts() + 1;
+                        setAttempts(curAttempts);
+
+                        if (curAttempts >= MAX_ATTEMPTS) {
+                            const until = Date.now() + COOLDOWN_MS;
+                            setCooldownUntil(until);
+                            showCooldown(COOLDOWN_MS);
+                            if (cooldownTimer) clearTimeout(cooldownTimer);
+                            cooldownTimer = setTimeout(updateCooldownDisplay, 1000);
+                            errorElm.textContent = '';
+                            unlockBtn.disabled = true;
+                            input.blur();
+                        } else {
+                            errorElm.textContent = `Incorrect PIN (${curAttempts} of ${MAX_ATTEMPTS} attempts)`;
+                            input.value = '';
+                            unlockBtn.disabled = true;
+                            input.focus();
+                        }
                     }
                 } else {
                     errorElm.textContent = 'Please enter your 4-digit PIN';
@@ -408,11 +567,9 @@
                 window.open('pages/forgot-pin.html', '_blank', 'noopener');
             });
 
-            if (secondRecoveryBtn) {
-                secondRecoveryBtn.addEventListener('click', () => {
-                    window.open('2ndrecovery.html', '_blank', 'noopener');
-                });
-            }
+            secondRecoveryBtn.addEventListener('click', () => {
+                window.open('2ndrecovery.html', '_blank', 'noopener');
+            });
 
             const focusable = [input, viewBtn, forgotBtn, secondRecoveryBtn, unlockBtn];
             let lastFocus = 0;
@@ -423,7 +580,13 @@
                     } else {
                         lastFocus = (lastFocus + 1) % focusable.length;
                     }
-                    if (focusable[lastFocus]) focusable[lastFocus].focus();
+                    // Skip disabled/unfocusable
+                    let count = 0;
+                    while (focusable[lastFocus] && focusable[lastFocus].disabled && count < focusable.length) {
+                        lastFocus = (lastFocus + 1) % focusable.length;
+                        count++;
+                    }
+                    if (focusable[lastFocus] && !focusable[lastFocus].disabled) focusable[lastFocus].focus();
                     e.preventDefault();
                 }
             });
@@ -441,9 +604,13 @@
 
             fixPinMask();
 
+            // No more final lock logic. Always cooldown.
             input.focus();
 
             maybeEnableUnlockBtn();
+
+            window.addEventListener('focus', updateCooldownDisplay);
+            input.addEventListener('input', maybeEnableUnlockBtn);
         });
     }
 })();
