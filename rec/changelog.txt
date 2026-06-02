@@ -1,3 +1,7 @@
+V1.28.25
+----------
+Minor Bug Fixes, Forgot Pin Page updates, Blurred Out-of-Window update, 
+
 V1.28.24
 ----------
 Terms Of Service Page update With Dark and Light Reader and Responsiveness, Incorrect Attempts Cooldown to Lock added, Blur When opening a Different App,

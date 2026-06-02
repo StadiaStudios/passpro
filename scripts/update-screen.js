@@ -1,31 +1,36 @@
 (function () {
     const slides = [
         {
-            title: "What's New in PassPro",
-            text: "Search Bar added to Passwords, brand new Password Generator, and various Settings enhancements. Premium theme removed and replaced with the new Aurora theme.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10c0 3.866-2.239 7-5 7s-5-3.134-5-7 2.239-7 5-7 5 3.134 5 7z"/><path d="M21 21l-4.35-4.35"/></svg>`
+            title: "V1.28.24 - Improved Security & Polish",
+            text: "• Added cooldown and lock feature after incorrect PIN attempts for increased security. <br>• Forgot PIN page received a visual and functional update.<br>• New blurred-out-of-window protection for enhanced privacy.<br>• Minor bug fixes for greater reliability.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#21c55d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
         },
         {
-            title: "Navigation & Experience",
-            text: "Pages Navbar improvements, loading screen bug fixes and improvements for a smoother experience.",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9l9 9"/><path d="M4 10v10h16V10"/></svg>`
+            title: "V1.27.24 - More Recovery, Easier Search",
+            text: "• Introduced second recovery method: choose two custom recovery questions alongside the 6-digit pin recovery code.<br>• Password count now displayed on password list for keeping track.<br>• Enhanced 'No Search Results' screen for better clarity.<br>• Various fixes and improvements to search functionality.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>`
         },
         {
-            title: "Other Improvements",
-            text: "Minor bug fixes to some Settings. Enjoy a better, more stable PassPro!",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`
+            title: "V1.26.24 - Search, Generate, Personalize",
+            text: "• Search bar now available in Passwords for instant filtering.<br>• Completely new and advanced Password Generator added.<br>• Settings have been improved with UI and functional upgrades.<br>• Classic 'Premium' theme has been replaced with the modern 'Aurora' theme.<br>• Navigation bar improvements across pages for smoother experience.<br>• Loading screen bugs squashed for a seamless start.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#f59e42" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-3 3-3-3"/></svg>`
         },
-   
         {
-            title: "Zero-Knowledge",
-            text: "Always remember your data is encrypted locally – not even WE can see your passwords. Make sure you download your account and have a backup somewhere safe, like a USB!",
-            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`
+            title: "V1.25.23 - Classic PassPro & UI Refresh",
+            text: "• Classic PassPro is now available for users who love the old look.<br>• Help & Guidebook has seen significant improvements.<br>• All-new app icon now represents PassPro.<br>• Introduced a polished and reliable loading screen.",
+            svg: `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="18" height="9" rx="2" ry="2"/><path d="M9 7V3h6v4"/></svg>`
+        },
+        {
+            title: "Zero-Knowledge Guarantee",
+            text: "Zero knowledge means that <b>only you</b> can ever access your passwords. <br>Your vault is encrypted and decrypted <b>solely on your device</b>—nobody (not even PassPro developers) can see your secrets. Be sure to <b>back up</b> your vault or PIN in a safe place. If you lose both, we <b>cannot recover your data</b>.",
+            svg: `<svg width="80" height="80" viewBox="0 0 18 18" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.4" y="8.5" width="13.2" height="6.7" rx="1.2"/><path d="M5.4 8.5v-2A3.6 3.6 0 0 1 13 6.5v2"/></svg>`
         }
+   
     ];
 
     let currentIndex = 0;
     const VERSION_KEY = 'passpro_2024_welcome_seen';
-    const CURRENT_VERSION = '1.25.24';
+    const CURRENT_VERSION = '1.28.25';
 
     function hasSeenPopup() {
         try {

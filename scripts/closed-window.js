@@ -38,7 +38,9 @@
 
         const removeBlur = () => {
             document.body.classList.remove('security-blur-active');
-            overlay.remove();
+            if (overlay.parentNode) {
+                overlay.parentNode.removeChild(overlay);
+            }
         };
 
         overlay.addEventListener('click', removeBlur);
@@ -56,22 +58,34 @@
     function removeOverlay() {
         document.body.classList.remove('security-blur-active');
         const overlay = document.getElementById(OVERLAY_ID);
-        if (overlay) overlay.remove();
+        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
     }
 
-    function handleVisibility() {
+    document.addEventListener('visibilitychange', function () {
         if (document.hidden || document.visibilityState !== 'visible') {
             createOverlay();
+        } else {
+            removeOverlay();
         }
-    }
+    });
 
-    document.addEventListener('visibilitychange', handleVisibility, false);
+    window.addEventListener('blur', function () {
+        createOverlay();
+    });
 
-    window.addEventListener('focus', () => {
-        if (document.getElementById(OVERLAY_ID)) {
+    window.addEventListener('focus', function () {
+        removeOverlay();
+    });
+
+    document.addEventListener('mouseleave', function (e) {
+        if (!e.relatedTarget && !e.toElement) {
             createOverlay();
         }
-    }, false);
+    });
+
+    document.addEventListener('mouseenter', function () {
+        removeOverlay();
+    });
 
     if (document.hidden || document.visibilityState !== 'visible') {
         createOverlay();
