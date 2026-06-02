@@ -61,6 +61,38 @@
         if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
     }
 
+    // Basic screenshot detection for iOS Safari via page visibility or userAgent checks (not 100% reliable, but best effort)
+    function isIos() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+
+    // iOS 16.4+ "screenshot detection" using undocumented visualViewport resize hack (sometimes works, but not always)
+    function tryEnableIosScreenshotBlur() {
+        if (!isIos()) return;
+        let lastInnerHeight = window.innerHeight;
+        let lastVisualHeight = window.visualViewport ? window.visualViewport.height : null;
+
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', function () {
+                // iOS screenshot event may briefly shrink viewport; blur when a sudden height change detected
+                if (
+                    Math.abs(window.visualViewport.height - lastVisualHeight) > 100 &&
+                    Math.abs(window.innerHeight - lastInnerHeight) < 2
+                ) {
+                    createOverlay();
+                    setTimeout(removeOverlay, 1500); // Auto-unblur after short time
+                }
+                lastInnerHeight = window.innerHeight;
+                lastVisualHeight = window.visualViewport.height;
+            });
+        }
+
+        // Fallback: try deviceorientation event. Not all versions will fire anything during screenshot.
+        window.addEventListener('deviceorientation', function () {
+            // If iOS, optionally blur on suspicious device motion
+        });
+    }
+
     document.addEventListener('visibilitychange', function () {
         if (document.hidden || document.visibilityState !== 'visible') {
             createOverlay();
@@ -92,6 +124,9 @@
     }
 
     window.addEventListener('beforeunload', removeOverlay);
+
+    // Attempt to enable screenshot blur for iOS
+    tryEnableIosScreenshotBlur();
 
     window.SecurityBlur = {
         activate: createOverlay,
