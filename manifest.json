@@ -2,7 +2,7 @@
   "name": "PassPro",
   "short_name": "PassPro",
   "description": "A simple password manager",
-  "start_url": "index.html",
+  "start_url": "passwords.html",
   "display": "standalone",
   "background_color": "#111",
   "theme_color": "#111",
