@@ -102,6 +102,15 @@
             margin-bottom: 5px;
             display: block;
         }
+        .setup-link {
+            color: #bb86fc;
+            text-decoration: underline;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .setup-link:hover {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -166,8 +175,14 @@
 
     function updateBottomInfoSection() {
         const data = getVaultData();
-        const uname = (data.username && data.username.trim().length) ? data.username.trim() : 'user';
-        document.getElementById('infoWelcome').textContent = `Glad to see you back! ${uname} 👋`;
+        const welcomeElem = document.getElementById('infoWelcome');
+        const trimU = (typeof data.username === "string") ? data.username.trim() : "";
+        if (trimU.length) {
+            welcomeElem.innerHTML = `Glad to see you back! ${trimU} 👋`;
+        } else {
+            welcomeElem.innerHTML = `Welcome to PassPro, <a href="setup.html" class="setup-link">Start your Setup here</a>`;
+        }
+
         const count = Array.isArray(data.passwords) ? data.passwords.length : 0;
         document.getElementById('infoCount').textContent = `Passwords Count: ${count}`;
         document.getElementById('infoSync').textContent = `Last Sync: ${getLastSyncDate()}`;

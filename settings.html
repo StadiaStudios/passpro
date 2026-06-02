@@ -350,7 +350,7 @@
         <button class="btn-danger" onclick="clearAll()">Wipe All Data</button>
     </div>
     <div class="app-version-box">
-        <div class="app-version">App version: 1.28.25</div>
+        <div class="app-version">App version: 1.29.25</div>
         <div class="app-version-links">
             <a href="rec/changelog.txt" target="_blank" rel="noopener">View Changelog</a>
             <a href="terms_of_service.html" target="_blank" rel="noopener">Terms of Service</a>
@@ -727,6 +727,108 @@
             return new TextEncoder().encode(str);
         }
         var arr = [];
+        for (let i = 0; i < str.length; i++) arr.push(str.charCodeAt(i));
+        return new Uint8Array(arr);
+    }
+
+    function findSubarrayIndex(buf, subarr) {
+        let max = buf.length - subarr.length;
+        outer: for (let i = 0; i <= max; ++i) {
+            for (let j = 0; j < subarr.length; ++j) {
+                if (buf[i + j] !== subarr[j]) continue outer;
+            }
+            return i;
+        }
+        return -1;
+    }
+
+    function processImportedVaultData(importedData, fileInput) {
+        if (!importedData.passwords || !Array.isArray(importedData.passwords)) {
+            throw new Error("Invalid format. Missing 'passwords' array.");
+        }
+        if (!importedData.hasOwnProperty('username') || typeof importedData.username !== "string") {
+            importedData.username = "";
+        }
+        if (!importedData.hasOwnProperty('pin') || typeof importedData.pin !== "string") {
+            importedData.pin = "";
+        }
+        let currentData = getVaultData();
+        currentData.passwords = currentData.passwords.concat(importedData.passwords);
+        currentData.username = importedData.username;
+        currentData.pin = importedData.pin;
+
+        setVaultData(currentData);
+        alert('Passwords, username, and PIN imported successfully!');
+        fileInput.value = "";
+        updateUsernameUI();
+        updatePinUI();
+        updateStorageBar();
+    }
+
+    function clearAll() {
+        if (confirm("WARNING: This will permanently delete all saved passwords and username from your browser. Continue?")) {
+            localStorage.removeItem('pm_data');
+            localStorage.removeItem('themeName');
+            localStorage.removeItem('hasUpdatedScreen');
+            alert("All data wiped (and theme reset).");
+            updateUsernameUI();
+            updatePinUI();
+            updateStorageBar();
+        }
+    }
+
+    function updateStorageBar() {
+        const MAX_BYTES = 5 * 1024 * 1024;
+        const data = localStorage.getItem('pm_data');
+        let usedBytes = data ? new Blob([data]).size : 0;
+        const percent = Math.min(100, (usedBytes / MAX_BYTES) * 100).toFixed(1);
+
+        function formatBytes(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+
+        document.getElementById('storageBarFill').style.width = percent + '%';
+        document.getElementById('storageBarLabel').textContent =
+            formatBytes(usedBytes) + ' / ' + formatBytes(MAX_BYTES) + ' (' + percent + '%)';
+    }
+
+    updateStorageBar();
+    if (typeof updatePinUI === "function") updatePinUI();
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'pm_data') {
+            updateStorageBar();
+            updateUsernameUI();
+            updatePinUI();
+        }
+    });
+
+    document.getElementById('savePinBtn').addEventListener('click', function () {
+        const newPin = document.getElementById('pinSetting').value;
+        if (newPin.length !== 4 && newPin !== "") {
+            alert("PIN must be 4 digits.");
+            return;
+        }
+        let data = getVaultData();
+        data.pin = newPin;
+        setVaultData(data);
+        updatePinUI();
+        alert("PIN saved!");
+    });
+
+    if (typeof window !== "undefined" && window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+            if ((localStorage.getItem('themeName') || 'dark') === 'system' && typeof setTheme === 'function') {
+                setTheme('system');
+                updateThemeRadioUI('system');
+            }
+        });
+    }
+</script>
+</body>
+</html>
         for (let i = 0; i < str.length; i++) arr.push(str.charCodeAt(i));
         return new Uint8Array(arr);
     }

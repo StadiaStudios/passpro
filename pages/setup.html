@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>PassPro - Quick Setup</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+    <link rel="manifest" href="../manifest.json">
+    <script src="navbar.js"></script>
+    <style>
+        body {
+            background-color: var(--background-color, #121212);
+            color: var(--text-color, #e0e0e0);
+            font-family: system-ui, sans-serif;
+        }
+        .container {
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 36px 28px 28px 28px;
+            background-color: var(--section-background, #1e1e1e);
+            border: 1px solid var(--section-border, #333);
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+        }
+        h2 {
+            color: var(--accent, #bb86fc);
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        p {
+            color: var(--subtext, #aaa);
+            font-size: 15px;
+            margin-bottom: 26px;
+            text-align: center;
+        }
+        label {
+            color: var(--accent, #bb86fc);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 7px;
+            margin-top: 12px;
+            font-size: 15px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            background: var(--input-background, #121212);
+            color: var(--input-text, #e0e0e0);
+            border: 1px dashed var(--input-border, #444);
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 18px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .input-group {
+            margin-bottom: 6px;
+        }
+        .btn-primary, .btn-import {
+            width: 100%;
+            padding: 13px;
+            background-color: var(--primary-background, #111);
+            color: var(--primary-text, #e0e0e0);
+            border: 1px solid var(--primary-border, #bb86fc);
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.15s;
+            margin-top: 12px;
+        }
+        .btn-primary:hover, .btn-import:hover {
+            color: white;
+            background-color: #232323;
+            border-color: #bb86fc;
+        }
+        .divider {
+            text-align: center;
+            margin: 34px 0 18px 0;
+            color: #777;
+            font-size: 13px;
+            position: relative;
+        }
+        .divider:before, .divider:after {
+            content: "";
+            display: inline-block;
+            height: 1px;
+            width: 44px;
+            background: #393939;
+            vertical-align: middle;
+            margin: 0 6px;
+        }
+        input[type="file"] {
+            color: var(--input-text, #e0e0e0);
+            background: var(--input-background, #121212);
+            border-radius: 6px;
+            border: 1px dashed var(--input-border, #444);
+            margin: 0 auto 12px auto;
+            display: block;
+            font-size: 15px;
+            max-width: 95%;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .setup-choice-btn {
+            display: block;
+            width: 100%;
+            margin: 18px 0 0 0;
+            padding: 15px;
+            border-radius: 7px;
+            border: 1px solid var(--primary-border, #bb86fc);
+            background: var(--primary-background, #111);
+            color: var(--primary-text, #e0e0e0);
+            font-size: 1.08em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .setup-choice-btn:hover {
+            background: #1d1d20;
+            color: #fff;
+            border-color: #bb86fc;
+        }
+        .step-header {
+            margin-bottom: 20px;
+            color: var(--accent, #bb86fc);
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .step-back {
+            background: none;
+            border: none;
+            color: #bb86fc;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 0 0 15px 0;
+            padding: 0;
+            display: block;
+            text-align: left;
+        }
+        .modal {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #1e1e1e;
+            padding: 32px 24px 24px 24px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            max-width: 96vw;
+            width: 320px;
+            box-shadow: 0 6px 32px rgba(0,0,0,0.38);
+            text-align: center;
+        }
+        .modal label {
+            display:block;
+            margin: 0 0 10px 0;
+            color: var(--accent, #bb86fc);
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .modal input[type="password"] {
+            width: 100%;
+            font-size: 17px;
+            padding: 11px;
+            margin-bottom: 18px;
+            border: 1px dashed #503c6a;
+            border-radius: 7px;
+            background: #111;
+            color: #ebecef;
+            text-align: center;
+            letter-spacing: 6px;
+        }
+        .modal button {
+            background: var(--primary-background,#111);
+            color: var(--primary-text,#e0e0e0);
+            border-radius: 7px;
+            border: 1px solid #bb86fc;
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 32px;
+            cursor: pointer;
+            transition: 0.12s;
+        }
+        .modal button:hover {
+            background: #222;
+            color: #fff;
+        }
+        .modal .error-msg {
+            color: #ff4b7e;
+            margin-bottom: 5px;
+            font-size: 0.99em;
+        }
+        .tos-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--subtext, #aaa);
+            margin-top: 0;
+            margin-bottom: 14px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .tos-checkbox-label input[type="checkbox"] {
+            accent-color: #bb86fc;
+        }
+        .tos-checkbox-label a {
+            color: var(--accent, #bb86fc);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .tos-error-message {
+            color: #ff4b7e;
+            font-size: 13px;
+            text-align: center;
+            margin-top: -10px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        .help-guide-step {
+            text-align: center;
+            padding-right: 4px;
+            padding-left: 4px;
+        }
+        .help-guide-step .btn-help-guide {
+            width: 100%;
+            margin-top: 14px;
+            margin-bottom: 8px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1.03em;
+            border: 1px solid var(--primary-border, #bb86fc);
+            background: var(--primary-background, #111);
+            color: var(--primary-text, #e0e0e0);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.14s;
+        }
+        .help-guide-step .btn-help-guide:hover {
+            background: #1d1d20;
+            color: #fff;
+            border-color: #bb86fc;
+        }
+        .help-guide-step .btn-skip-guide {
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 6px;
+            background: none;
+            color: #bb86fc;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        /* Match Go Back button styling to other setup buttons */
+        .setup-choice-btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 14px;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1.13em;
+            border: 1.5px solid var(--accent,#bb86fc);
+            background: #111;
+            color: var(--accent,#bb86fc);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.12s;
+        }
+        .setup-choice-btn:hover {
+            background: #222;
+            color: #fff;
+            border-color: #bb86fc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Quick Setup</h2>
+    <p>Welcome to PassPro! Choose whether to start a fresh vault or import your existing data.</p>
+
+    <div id="choiceStep">
+        <button class="setup-choice-btn" id="chooseSetupBtn">Start Fresh Setup</button>
+        <button class="setup-choice-btn" id="chooseImportBtn">Import My Data</button>
+        <a href="../index.html" style="text-decoration:none;">
+            <button type="button" class="setup-choice-btn" id="goBackHomeBtn">Go Back Home</button>
+        </a>
+        <a href="../pages/help.html" style="text-decoration:none;">
+            <button type="button" class="setup-choice-btn" id="supportBtn">View Support</button>
+        </a>
+        <a href="https://stadiastudios.github.io/stadia/" style="text-decoration:none;">
+            <button type="button" class="setup-choice-btn" id="supportBtn">StadiaStudios</button>
+        </a>
+    </div>
+
+    <form id="usernameStep" class="hidden" autocomplete="off">
+        <div class="step-header">Set Your Username</div>
+        <label for="setup-username">Username</label>
+        <input type="text" id="setup-username" maxlength="30" placeholder="Your display name..." spellcheck="false" autocomplete="off" required>
+        <label class="tos-checkbox-label">
+            <input type="checkbox" id="setupTosCheckbox" required>
+            I agree to the <a href="../terms.html" target="_blank" rel="noopener">Terms of Service</a>
+        </label>
+        <div id="setupTosError" class="tos-error-message"></div>
+        <button type="submit" class="btn-primary" id="toPinStepBtn" style="margin-top:8px;">Next</button><br><br>
+        <button type="button" class="step-back" id="usernameBackBtn">&larr; Back</button>
+    </form>
+
+    <form id="pinStep" class="hidden" autocomplete="off">
+        <div class="step-header">Set a PIN Lock <span style="color:#aaa;font-size:0.95em;">(optional)</span></div>
+        <label for="setup-pin">PIN (Optional)</label>
+        <input type="password" id="setup-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="4-digit PIN (optional)">
+        <button type="submit" class="btn-primary" id="finishSetupBtn" style="margin-top:8px;">Finish Setup</button><br><br>
+        <button type="button" class="step-back" id="pinBackBtn">&larr; Back</button>
+    </form>
+
+    <div id="helpGuideStep" class="hidden help-guide-step">
+        <div style="font-size:1.11em; color:var(--accent,#bb86fc); margin-bottom:10px;">
+            Want to learn how to use PassPro?
+        </div>
+        <div style="font-size: 0.98em; color:var(--subtext,#aaa); margin-bottom:18px;">
+            You can read our quick support &amp; guide page that explains all the basics, features, and usage tips.
+        </div><br><br>
+        <a href="../pages/help.html" class="btn-help-guide" id="readHelpGuideBtn" target="_blank" rel="noopener">
+            Read the Support & Guide
+        </a><br><br><br>
+        <button type="button" class="btn-skip-guide" id="skipHelpGuideBtn">
+            Skip for now &rarr;
+        </button>
+    </div>
+
+    <form id="importStep" class="hidden">
+        <div class="step-header">Import an Existing Vault</div>
+        <input type="file" id="importFile" accept=".json,.png,image/png">
+        <label class="tos-checkbox-label">
+            <input type="checkbox" id="importTosCheckbox" required>
+            I agree to the <a href="../terms.html" target="_blank" rel="noopener">Terms of Service</a>
+        </label>
+        <div id="importTosError" class="tos-error-message"></div>
+        <button type="button" class="btn-import" id="importBtn">Import Data</button><br><br>
+        <button type="button" class="step-back" id="importBackBtn">&larr; Back</button>
+    </form>
+</div>
+
+<div id="importPinModal" class="modal hidden">
+    <div class="modal-content">
+        <form id="importPinForm" autocomplete="off">
+            <label for="import-pin">This vault is protected. Enter 4-digit PIN to unlock:</label>
+            <input type="password" id="import-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" required placeholder="PIN">
+            <div class="error-msg" id="importPinError" style="display:none;"></div>
+            <button type="submit" id="importPinUnlockBtn">Unlock Vault</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const setupTosCheckbox = document.getElementById('setupTosCheckbox');
+    const importTosCheckbox = document.getElementById('importTosCheckbox');
+    const setupTosError = document.getElementById('setupTosError');
+    const importTosError = document.getElementById('importTosError');
+
+    const choiceStep = document.getElementById('choiceStep');
+    const usernameStep = document.getElementById('usernameStep');
+    const pinStep = document.getElementById('pinStep');
+    const helpGuideStep = document.getElementById('helpGuideStep');
+    const importStep = document.getElementById('importStep');
+    const setupUsername = document.getElementById('setup-username');
+    const setupPin = document.getElementById('setup-pin');
+
+    const importPinModal = document.getElementById('importPinModal');
+    const importPinInput = document.getElementById('import-pin');
+    const importPinForm = document.getElementById('importPinForm');
+    const importPinError = document.getElementById('importPinError');
+    const skipHelpGuideBtn = document.getElementById('skipHelpGuideBtn');
+
+    function showStep(...steps) {
+        [choiceStep, usernameStep, pinStep, helpGuideStep, importStep].forEach(el => {
+            if (steps.includes(el)) el.classList.remove('hidden');
+            else el.classList.add('hidden');
+        });
+    }
+
+    function showModal(modal) {
+        modal.classList.remove('hidden');
+    }
+    function hideModal(modal) {
+        modal.classList.add('hidden');
+    }
+
+    let enteredUsername = "";
+
+    document.getElementById('chooseSetupBtn').onclick = function() {
+        showStep(usernameStep);
+        setTimeout(() => { setupUsername.focus(); }, 80);
+    };
+
+    document.getElementById('chooseImportBtn').onclick = function() {
+        showStep(importStep);
+    };
+
+    document.getElementById('usernameBackBtn').onclick = function() {
+        showStep(choiceStep);
+    };
+    document.getElementById('pinBackBtn').onclick = function() {
+        showStep(usernameStep);
+        setTimeout(() => { setupUsername.focus(); }, 80);
+    };
+    document.getElementById('importBackBtn').onclick = function() {
+        showStep(choiceStep);
+    };
+
+    usernameStep.addEventListener('submit', function(e) {
+        e.preventDefault();
+        enteredUsername = setupUsername.value.trim();
+        if (!enteredUsername) {
+            setupTosError.style.display = "none";
+            alert("Please enter a username.");
+            setupUsername.focus();
+            return;
+        }
+        if (!setupTosCheckbox.checked) {
+            setupTosError.textContent = "You must agree to the Terms of Service to proceed.";
+            setupTosError.style.display = "block";
+            setupTosCheckbox.focus();
+            return;
+        }
+        setupTosError.style.display = "none";
+        showStep(pinStep);
+        setTimeout(() => { setupPin.focus(); }, 80);
+    });
+
+    pinStep.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let pin = setupPin.value.trim();
+        if (pin && (pin.length !== 4 || !/^\d{4}$/.test(pin))) {
+            alert("PIN must be exactly 4 digits.");
+            setupPin.focus();
+            return;
+        }
+        if (!setupTosCheckbox.checked) {
+            showStep(usernameStep);
+            setupTosError.textContent = "You must agree to the Terms of Service.";
+            setupTosError.style.display = "block";
+            setupTosCheckbox.focus();
+            return;
+        }
+        setupTosError.style.display = "none";
+        showStep(helpGuideStep);
+    });
+
+    skipHelpGuideBtn.addEventListener('click', function() {
+        finishFreshSetup();
+    });
+    document.getElementById('readHelpGuideBtn').addEventListener('click', function() {
+        finishFreshSetup();
+    });
+
+    function finishFreshSetup() {
+        const pin = setupPin.value.trim();
+        const vault = {
+            passwords: [],
+            username: enteredUsername,
+            pin: pin
+        };
+        localStorage.setItem('pm_data', JSON.stringify(vault));
+        window.location.href = "../index.html";
+    }
+
+    setupPin.addEventListener('keyup', function(e) {
+        if (e.key === "Enter" && setupPin.value.trim() === "") {
+            pinStep.dispatchEvent(new Event('submit', { cancelable: true }));
+        }
+    });
+
+    function pinlock_decrypt(dataObj, pin) {
+        if (!dataObj || !Array.isArray(dataObj.passwords) || typeof dataObj.pin !== "string" || !dataObj.pin)
+            return dataObj;
+        if (!/^\d{4}$/.test(pin)) return null;
+        try {
+            let arr = dataObj.passwords;
+            let pinArr = pin.split('').map(d => parseInt(d));
+            if (Array.isArray(arr)) return null;
+            if (typeof arr !== "string") return null;
+
+            let out = "";
+            for (let i = 0; i < arr.length; ++i) {
+                let code = arr.charCodeAt(i) ^ pinArr[i % 4];
+                out += String.fromCharCode(code);
+            }
+            let parsed = JSON.parse(out);
+            let unlockedObj = Object.assign({}, dataObj, {passwords: parsed, pin: pin});
+            return unlockedObj;
+        } catch(err) {
+            return null;
+        }
+    }
+
+    async function hashPin(pin) {
+        if (!window.crypto || !crypto.subtle) return null;
+        let enc = new TextEncoder().encode(pin);
+        let hashbuf = await crypto.subtle.digest("SHA-256", enc);
+        let hex = Array.from(new Uint8Array(hashbuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+        return hex;
+    }
+
+    document.getElementById('importBtn').addEventListener('click', function() {
+        const fileInput = document.getElementById('importFile');
+        const file = fileInput.files[0];
+
+        if (!importTosCheckbox.checked) {
+            importTosError.textContent = "You must agree to the Terms of Service to import.";
+            importTosError.style.display = "block";
+            importTosCheckbox.focus();
+            return;
+        } else {
+            importTosError.style.display = "none";
+        }
+
+        if (!file) {
+            alert("Please select a JSON or PNG file first.");
+            return;
+        }
+
+        const isPng = file.type === "image/png" || file.name.toLowerCase().endsWith(".png");
+        const isJson = file.type === "application/json" || file.name.toLowerCase().endsWith(".json");
+        const reader = new FileReader();
+
+        function encoder_encodeText(str) {
+            if (window.TextEncoder) return new TextEncoder().encode(str);
+            var arr = [];
+            for (let i = 0; i < str.length; i++) arr.push(str.charCodeAt(i));
+            return new Uint8Array(arr);
+        }
+        function findSubarrayIndex(buf, subarr) {
+            let max = buf.length - subarr.length;
+            outer: for (let i = 0; i <= max; ++i) {
+                for (let j = 0; j < subarr.length; ++j) {
+                    if (buf[i + j] !== subarr[j]) continue outer;
+                }
+                return i;
+            }
+            return -1;
+        }
+
+        function promptForPinUnlock(importedData) {
+            return new Promise((resolve) => {
+                importPinError.style.display = "none";
+                importPinInput.value = "";
+                showModal(importPinModal);
+                setTimeout(()=>{importPinInput.focus();}, 60);
+
+                let finished = false;
+
+                async function handleUnlock(e) {
+                    if (e) e.preventDefault();
+                    if (finished) return;
+                    let pin = importPinInput.value.trim();
+                    if (!/^\d{4}$/.test(pin)) {
+                        importPinError.textContent = "PIN must be 4 digits.";
+                        importPinError.style.display = "block";
+                        importPinInput.focus();
+                        return;
+                    }
+                    importPinError.style.display = "none";
+
+                    if (importedData.pin && importedData.pin.length === 64) {
+                        let pinhash = await hashPin(pin);
+                        if (pinhash !== importedData.pin) {
+                            importPinError.textContent = "Incorrect PIN.";
+                            importPinError.style.display = "block";
+                            importPinInput.value = "";
+                            importPinInput.focus();
+                            return;
+                        }
+                        let vault = Object.assign({}, importedData, {pin: pin});
+                        finished = true;
+                        hideModal(importPinModal);
+                        resolve(vault);
+                        return;
+                    }
+
+                    if (importedData.pin === pin) {
+                        finished = true;
+                        hideModal(importPinModal);
+                        resolve(importedData);
+                        return;
+                    }
+
+                    let unlocked = pinlock_decrypt(importedData, pin);
+                    if (!unlocked || unlocked === importedData) {
+                        importPinError.textContent = "Incorrect PIN or cannot unlock this vault.";
+                        importPinError.style.display = "block";
+                        importPinInput.value = "";
+                        importPinInput.focus();
+                        return;
+                    }
+                    finished = true;
+                    hideModal(importPinModal);
+                    resolve(unlocked);
+                }
+                importPinForm.onsubmit = handleUnlock;
+                importPinInput.onkeyup = (e) => {
+                    if (e.key === "Enter") {
+                        handleUnlock(e);
+                    }
+                };
+            });
+        }
+
+        async function processImportedVaultData(importedData) {
+            let needPinUnlock = false;
+            if (importedData.pin && typeof importedData.pin === "string" && importedData.pin.length > 0) {
+                needPinUnlock = true;
+            }
+
+            if (needPinUnlock) {
+                let unlocked = await promptForPinUnlock(importedData);
+                if (!unlocked) {
+                    return;
+                }
+                importedData = unlocked;
+            } else {
+                if (!importedData.hasOwnProperty('pin') || typeof importedData.pin !== "string")
+                    importedData.pin = "";
+            }
+
+            if (!importedData.passwords || !Array.isArray(importedData.passwords)) {
+                alert("Invalid file format. No passwords array found.");
+                return;
+            }
+            if (!importedData.hasOwnProperty('username') || typeof importedData.username !== "string")
+                importedData.username = "";
+
+            localStorage.setItem('pm_data', JSON.stringify(importedData));
+            alert('Imported successfully!');
+            fileInput.value = "";
+            window.location.href = "../index.html";
+        }
+
+        if (isPng) {
+            reader.onload = function (e) {
+                const arr = new Uint8Array(e.target.result);
+                const markerStr = '\n<!--PASS_PRO_VAULT_JSON-->\n';
+                let marker = encoder_encodeText(markerStr);
+                let idx = findSubarrayIndex(arr, marker);
+                if (idx === -1) {
+                    alert("PNG does not contain embedded PassPro data.");
+                    return;
+                }
+                const dec = new TextDecoder();
+                const start = idx + marker.length;
+                try {
+                    const jsonStr = dec.decode(arr.slice(start));
+                    const importedData = JSON.parse(jsonStr);
+                    processImportedVaultData(importedData);
+                } catch (err) {
+                    alert("Error extracting PassPro data from PNG: " + err.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        } else if (isJson) {
+            reader.onload = function (e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    processImportedVaultData(importedData);
+                } catch (err) {
+                    alert("Error importing file: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+        } else {
+            reader.onload = function (e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    processImportedVaultData(importedData);
+                    return;
+                } catch(_) {}
+                try {
+                    const fallbackReader = new FileReader();
+                    fallbackReader.onload = function(evt) {
+                        const arr = new Uint8Array(evt.target.result);
+                        const markerStr = '\n<!--PASS_PRO_VAULT_JSON-->\n';
+                        let marker = encoder_encodeText(markerStr);
+                        let idx = findSubarrayIndex(arr, marker);
+                        if (idx === -1) {
+                            throw new Error("No embedded PassPro vault found in PNG.");
+                        }
+                        const dec = new TextDecoder();
+                        const start = idx + marker.length;
+                        const jsonStr = dec.decode(arr.slice(start));
+                        const importedData = JSON.parse(jsonStr);
+                        processImportedVaultData(importedData);
+                    };
+                    fallbackReader.onerror = function() {
+                        alert("Unrecognized file format.");
+                    };
+                    fallbackReader.readAsArrayBuffer(file);
+                } catch (err) {
+                    alert("Could not import the provided file.");
+                }
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    showStep(choiceStep);
+
+    choiceStep.addEventListener('submit', function(e){ e.preventDefault(); });
+</script>
+</body>
+</html>

@@ -1,3 +1,7 @@
+V1.29.25
+----------
+Minor Dashboard Improvements, Added Quick Setup for New Users,
+
 V1.28.25
 ----------
 Minor Bug Fixes, Forgot Pin Page updates, Blurred Out-of-Window update, 
