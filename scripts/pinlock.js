@@ -9,7 +9,6 @@
     const ATTEMPT_KEY = '__pinlock_attempts_v1';
     const COOLDOWN_KEY = '__pinlock_cooldown_until_v1';
 
-    // No more 2nd recovery permanent lock logic.
     function getAttempts() {
         let val = localStorage.getItem(ATTEMPT_KEY);
         return val ? parseInt(val, 10) || 0 : 0;
@@ -39,7 +38,6 @@
         return Math.max(0, until - Date.now());
     }
 
-    // Permanent lockout is now disabled, only always use cooldown regardless of 2nd recovery.
     function isPermanentlyLocked() {
         return false;
     }
@@ -580,7 +578,6 @@
                     } else {
                         lastFocus = (lastFocus + 1) % focusable.length;
                     }
-                    // Skip disabled/unfocusable
                     let count = 0;
                     while (focusable[lastFocus] && focusable[lastFocus].disabled && count < focusable.length) {
                         lastFocus = (lastFocus + 1) % focusable.length;
@@ -604,7 +601,6 @@
 
             fixPinMask();
 
-            // No more final lock logic. Always cooldown.
             input.focus();
 
             maybeEnableUnlockBtn();
