@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimal-ui">
+    <title>App Details - {{APP_TITLE}}</title>
+    <script src="rec/screenshot-viewer.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --accent: #4CA1C4;
+            --accent-hover: #318EB8;
+            --bg-light: #f7fafc;
+            --panel: #fff;
+            --gray-800: #1e293b;
+            --gray-600: #475569;
+            --gray-400: #94a3b8;
+            --border: #e5e7eb;
+            --rounded-lg: 0.75rem;
+            --rounded-xl: 1rem;
+            --text-title: #002642;
+            --text-detail: #69829a;
+            --price-bg: #e3eefb;
+            --shadow: 0 8px 40px 0 rgba(38,40,88,.17);
+            --container-width: 100vw;
+            --scrollbar-bg: #e3eefb;
+            --scrollbar-thumb: #4CA1C4;
+            --scrollbar-thumb-hover: #318EB8;
+        }
+        html, body { box-sizing: border-box; height: 100%; }
+        *, *:before, *:after { box-sizing: inherit; }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: var(--bg-light);
+            color: var(--gray-800);
+            font-family: 'Inter', -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 100vw;
+            min-height: 100vh;
+            max-width: 100vw;
+            margin: 0;
+            background: var(--panel);
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            display: flex;
+            align-items: flex-end;
+            gap: 40px;
+            background: #dbe9f7;
+            padding: 48px 64px 32px 64px;
+            flex-wrap: wrap;
+        }
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            min-width: 90px;
+            min-height: 90px;
+            border-radius: 22px;
+            box-shadow: 0 4px 22px rgba(60,80,120,0.16);
+            border: 6px solid #fff;
+            background: #fff;
+            object-fit: cover;
+        }
+        .header-info {
+            flex: 1 1 220px;
+            min-width: 185px;
+        }
+        .app-title {
+            font-size: clamp(1.6rem,2.5vw,2.1rem);
+            font-weight: 700;
+            color: var(--text-title);
+            margin: 0 0 10px 0;
+            line-height: 1.12;
+            letter-spacing: -0.01em;
+        }
+        .developer {
+            color: var(--gray-600);
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .meta-bar {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 1.01rem;
+            margin-bottom: 6px;
+        }
+        .meta-block {
+            display: flex;
+            align-items: center;
+            gap: 0.35em;
+            color: var(--gray-600);
+            font-size: 1em;
+        }
+        .app-price {
+            padding: .22em .96em;
+            background: var(--price-bg);
+            border-radius: 2em;
+            font-weight: 700;
+            font-size: 1.03rem;
+            color: var(--accent);
+        }
+        .rating-stars {
+            color: #fcba33;
+            font-size: 1.09em;
+        }
+        .screenshots-bar {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 36px 64px 0 64px;
+            background: #f8fafc;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scrollbar-height: thin;
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+        }
+        .screenshots-bar::-webkit-scrollbar {
+            height: 8px;
+            background: var(--scrollbar-bg);
+            border-radius: 6px;
+        }
+        .screenshots-bar::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+            transition: background .2s;
+        }
+        .screenshots-bar::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+        .screenshots-bar::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+        body, .container { overflow-x: hidden; }
+        html { overflow-x: hidden; }
+        .screenshot {
+            width: 250px;
+            height: 420px;
+            border-radius: calc(var(--rounded-lg) * 1.2);
+            object-fit: cover;
+            background: #eee;
+            border: 1.6px solid #f2f3f8;
+            box-shadow: 0 4px 26px rgba(0,0,0,0.12);
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+        }
+        .details-section {
+            padding: 36px 64px 36px 64px;
+        }
+        .button-bar {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 26px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.52em;
+            font-size: 1.09rem;
+            font-weight: 600;
+            padding: 1em 2.2em;
+            border-radius: var(--rounded-lg);
+            border: none;
+            cursor: pointer;
+            transition: background .2s, color .2s, box-shadow .22s;
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 1px 4px rgba(76,161,196,.08);
+            outline: none;
+        }
+        .action-btn.secondary {
+            background: #e8f3fa;
+            color: var(--accent);
+            border: 1.5px solid var(--accent);
+        }
+        .action-btn:focus-visible {
+            box-shadow: 0 0 0 2px var(--accent), 0 2px 8px 0 rgba(38,40,88,0.06);
+        }
+        .action-btn:hover:not(.secondary), .action-btn:active:not(.secondary) {
+            background: var(--accent-hover);
+        }
+        .action-btn.secondary:hover, .action-btn.secondary:active {
+            background: var(--accent);
+            color: #fff;
+            border: 1.5px solid var(--accent);
+        }
+        .app-description {
+            font-size: 1.12rem;
+            line-height: 1.75;
+            color: var(--gray-800);
+            margin-bottom: 22px;
+            margin-top: 2px;
+        }
+        .feature-list {
+            padding-left: 1.2em;
+            color: var(--gray-600);
+            font-size: 1.03rem;
+            margin-bottom: 34px;
+            margin-top: 0;
+            list-style: disc inside;
+        }
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 26px 0 13px 0;
+            color: var(--gray-800);
+            letter-spacing: .01em;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--gray-600);
+            font-size: 1.01rem;
+        }
+        .info-table tr td {
+            padding: 10px 0;
+            vertical-align: top;
+        }
+        .info-table tr td:first-child {
+            width: 112px;
+            font-weight: 600;
+            color: var(--gray-800);
+            padding-right: 18px;
+        }
+        @media (max-width: 1400px) {
+            .header, .screenshots-bar, .details-section { padding-left: 32px; padding-right: 32px;}
+        }
+        @media (max-width: 1200px) {
+            .header, .screenshots-bar, .details-section { padding-left: 18px; padding-right: 18px;}
+            .screenshot { width: 178px; height: 320px;}
+        }
+        @media (max-width: 900px) {
+            .container { max-width: 98vw; }
+            .header, .screenshots-bar, .details-section { padding-left: 6vw; padding-right: 6vw;}
+            .screenshot { width: 158px; height: 280px;}
+        }
+        @media (max-width: 700px) {
+            .container { border-radius: 0; }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 22px;
+                padding-top: 28px;
+                padding-bottom: 20px;
+                padding-left: 5vw;
+                padding-right: 5vw;
+            }
+            .header-info { min-width: 0; }
+            .screenshots-bar { padding: 28px 4vw 0 4vw;}
+            .details-section { padding: 20px 4vw 16px 4vw;}
+            .screenshot { width: 110px; height: 210px;}
+            .feature-list { font-size: 0.98rem;}
+        }
+        @media (max-width: 540px) {
+            .container { border-radius: 0; box-shadow: none; }
+            .app-icon { width: 72px; height: 72px; }
+            .screenshots-bar { gap: 9px; padding: 12px 0 0 0;}
+            .screenshot { width: 78px; height: 148px;}
+            .header, .details-section { padding: 16px 3vw 10px 3vw;}
+        }
+        @media (max-width: 420px) {
+            .app-title { font-size: 1.17rem;}
+            .info-table tr td:first-child { font-size: 0.93em; }
+        }
+        .action-btn:focus-visible {
+           outline: 2px solid var(--accent);
+           outline-offset: 1.5px;
+        }
+    </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <div class="header">
+      <img class="app-icon" src="assets/app/{{APP_IMAGE_FILENAME}}" alt="{{APP_TITLE}} App Icon" loading="eager" onerror="this.src='{{APP_PLACEHOLDER_ICON_FALLBACK}}'">
+      <div class="header-info">
+        <div class="app-title" id="app-title">{{APP_TITLE}}</div>
+        <div class="developer">by {{APP_DEVELOPER}}</div>
+        <div class="meta-bar" aria-label="App Price and Rating">
+          <span class="app-price">{{APP_PRICE}}</span>
+          <div class="meta-block">
+            <span class="rating-stars" title="{{APP_RATING}} of 5 stars">
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+            </span>
+            <span aria-label="{{APP_RATING}} out of 5">{{APP_RATING}}</span>
+            <span style="font-size:0.97em;color:var(--gray-400);" aria-label="{{APP_REVIEWS}} reviews">
+                ({{APP_REVIEWS}})
+            </span>
+          </div>
+        </div>
+        <div class="meta-bar" style="margin-bottom:0;">
+          <div class="meta-block"><i class="fas fa-shipping-fast" aria-hidden="true"></i> {{APP_FEATURE_META_1}}</div>
+          <div class="meta-block"><i class="fas fa-mobile-alt" aria-hidden="true"></i> {{APP_FEATURE_META_2}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="screenshots-bar" aria-label="App Screenshots">
+      <img class="screenshot" src="assets/app/{{SCREENSHOT_1_FILENAME}}" alt="{{SCREENSHOT_1_ALT}}" loading="lazy" onerror="this.src='{{SCREENSHOT_PLACEHOLDER}}'">
+      <img class="screenshot" src="assets/app/{{SCREENSHOT_2_FILENAME}}" alt="{{SCREENSHOT_2_ALT}}" loading="lazy" onerror="this.src='{{SCREENSHOT_PLACEHOLDER}}'">
+      <img class="screenshot" src="assets/app/{{SCREENSHOT_3_FILENAME}}" alt="{{SCREENSHOT_3_ALT}}" loading="lazy" onerror="this.src='{{SCREENSHOT_PLACEHOLDER}}'">
+    </div>
+    <div class="details-section">
+      <div class="button-bar">
+        <a href="{{APP_GET_LINK}}" target="_blank" rel="noopener">
+          <button class="action-btn" aria-label="Get {{APP_TITLE}}">
+            <i class="fas fa-download" aria-hidden="true"></i> GET
+          </button>
+        </a>
+        <a href="{{APP_OPEN_LINK}}" target="_blank" rel="noopener">
+          <button class="action-btn secondary" aria-label="Open {{APP_TITLE}}">
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> Open
+          </button>
+        </a>
+        <button class="action-btn secondary" aria-label="Share App" id="share-btn">
+          <i class="fas fa-share-alt" aria-hidden="true"></i> Share
+        </button>
+      </div>
+      <div class="app-description">
+        {{APP_DESCRIPTION_LINE_1}}<br>
+        {{APP_DESCRIPTION_LINE_2}}<br>
+        {{APP_DESCRIPTION_LINE_3}}
+      </div>
+      <ul class="feature-list">
+        <li>{{FEATURE_1}}</li>
+        <li>{{FEATURE_2}}</li>
+        <li>{{FEATURE_3}}</li>
+        <li>{{FEATURE_4}}</li>
+        <li>{{FEATURE_5}}</li>
+      </ul>
+      <div class="section-title">Information</div>
+      <table class="info-table" aria-label="App Information">
+        <tr>
+          <td>Seller</td>
+          <td>{{APP_DEVELOPER}}</td>
+        </tr>
+        <tr>
+          <td>Size</td>
+          <td>{{APP_SIZE}}</td>
+        </tr>
+        <tr>
+          <td>Category</td>
+          <td>{{APP_CATEGORY}}</td>
+        </tr>
+        <tr>
+          <td>Compatibility</td>
+          <td>{{APP_COMPATIBILITY_LINE_1}}<br>
+              {{APP_COMPATIBILITY_LINE_2}}</td>
+        </tr>
+        <tr>
+          <td>Languages</td>
+          <td>{{APP_LANGUAGES}}</td>
+        </tr>
+        <tr>
+          <td>Age Rating</td>
+          <td>{{APP_AGE_RATING}}</td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td>{{APP_PRICE_DETAIL}}</td>
+        </tr>
+      </table>
+      <div class="section-title" style="margin-top: 26px;">Developer Links</div>
+      <table class="info-table" aria-label="Developer Links" style="margin-bottom: 0;">
+        <tr>
+          <td style="font-weight: 600;">GitHub</td>
+          <td>
+            <a href="https://stadiastudios.github.io/passpro" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:none;">
+              <i class="fab fa-github" aria-hidden="true"></i> stadiastudios.github.io/passpro
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Contact</td>
+          <td>
+            <a href="mailto:stadiastudios.support@proton.me" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:none;">
+              <i class="fas fa-envelope" aria-hidden="true"></i> stadiastudios.support@proton.me
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600;">Website</td>
+          <td>
+            <a href="https://stadiastudios.github.io/stadia/" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:none;">
+              <i class="fas fa-globe" aria-hidden="true"></i> stadiastudios.github.io/stadia/
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const shareBtn = document.getElementById('share-btn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', async function() {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            shareBtn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> Copied!';
+            setTimeout(() => {
+              shareBtn.innerHTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share';
+            }, 1200);
+          } catch (err) {
+            shareBtn.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i> Failed';
+            setTimeout(() => {
+              shareBtn.innerHTML = '<i class="fas fa-share-alt" aria-hidden="true"></i> Share';
+            }, 1200);
+          }
+        });
+      }
+    });
+  </script>
+  <script src="store-nav.js"></script>
+</body>
+</html>

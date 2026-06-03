@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About – Stadia App Store</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #212b35;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 0 1.6rem;
+        }
+        .about-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+        .about-logo {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(120deg, #4ca1c4 60%, #eaf0f7 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 16px 0 rgba(60,140,180,0.15);
+        }
+        .about-logo img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 7px;
+        }
+        .about-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #254356;
+            margin-bottom: 0.2rem;
+        }
+        .about-subtitle {
+            font-size: 1.14rem;
+            color: #6e8898;
+            font-weight: 500;
+            margin-top: 0.33rem;
+        }
+        .about-section {
+            background: #fff;
+            border-radius: 1.1rem;
+            box-shadow: 0 2px 12px 0 rgba(44,71,130,0.06);
+            padding: 2.3rem 2.1rem 2.5rem 2.1rem;
+            margin: 2em 0;
+        }
+        .about-section h2 {
+            margin-top: 0;
+            color: #254356;
+            font-size: 1.28rem;
+            font-weight: 700;
+        }
+        .about-section p {
+            font-size: 1.04rem;
+            line-height: 1.8;
+            color: #42515a;
+            margin-bottom: 1.2em;
+        }
+        .about-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.3rem;
+            margin-top: 1.2em;
+        }
+        .about-link {
+            color: #4ca1c4;
+            font-weight: 650;
+            text-decoration: none;
+            font-size: 1.02rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5em;
+            transition: color 0.14s;
+        }
+        .about-link:hover {
+            color: #176aa3;
+        }
+        @media (max-width: 600px) {
+            .about-section {
+                padding: 1.2rem 0.8rem 1.8rem 0.8rem;
+            }
+            .about-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.7rem;
+            }
+            .about-title {
+                font-size: 1.23rem;
+            }
+        }
+        #store-navbar-spacer {
+            height: 60px;
+        }
+    </style>
+    <script src="store-nav.js"></script>
+</head>
+<body>
+    <div id="store-navbar-spacer"></div>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            if (!document.getElementById('store-navbar')) {
+                var navDiv = document.createElement('div');
+                navDiv.id = 'store-navbar';
+                document.body.insertBefore(navDiv, document.body.firstChild);
+                var tryInsert = function() {
+                    if (window.simpleNavbarInitialized) return;
+                    if (typeof window.createStadiaStoreNavbar === 'function') {
+                        window.createStadiaStoreNavbar(document.getElementById('store-navbar'));
+                        window.simpleNavbarInitialized = true;
+                    } else {
+                        setTimeout(tryInsert, 20);
+                    }
+                };
+                tryInsert();
+            }
+        });
+    </script>
+    <div class="container">
+        <div class="about-header">
+            <span class="about-logo">
+                <img src="assets/favicon.png" alt="Stadia Logo" width="38" height="38">
+            </span>
+            <div>
+                <div class="about-title">Stadia <span style="color:#4ca1c4">App Store</span></div>
+                <div class="about-subtitle">Empowering projects. Discover quality web apps, fast.</div>
+            </div>
+        </div>
+        <section class="about-section">
+            <h2>About This Store</h2>
+            <p>
+                <b>Stadia App Store</b> is a curated listing of modern, high-quality applications and tools, built with a focus on usability, performance, and open web technologies. Our mission is to elevate productivity and creativity by showcasing purposeful, delightful software – whether you're a developer, designer, hobbyist, or everyday user.
+            </p>
+            <p>
+                Every app here is selected for polish, utility, and reliability, aiming to meet the practical needs of today's creators. From productivity boosters to fun games and developer utilities, Stadia makes it easy to find and access great web experiences with no install required.
+            </p>
+            <div class="about-links">
+                <a href="store.html" class="about-link"><i class="fas fa-arrow-left"></i> Back to Store</a>
+                <a href="https://github.com/StadiaStudios" target="_blank" rel="noopener" class="about-link">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="mailto:stadiastudios.support@proton.me" class="about-link"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="https://discord.gg/UGBFVrcKKx" target="_blank" rel="noopener" class="about-link"><i class="fab fa-discord"></i> Discord</a>
+            </div>
+        </section>
+        <section class="about-section">
+            <h2>Who We Are</h2>
+            <p>
+                <b>Stadia Studios</b> is an independent tech lab passionate about helping people create more, with less friction. We believe in the open web and the power of accessible, thoughtfully-designed software.<br>
+                If you have suggestions, want to propose your app, or just want to say hi, <a href="mailto:stadiastudios.support@proton.me" style="color:#4ca1c4;">reach out!</a>
+            </p>
+        </section>
+        <section class="about-section">
+            <h2>Frequently Asked Questions</h2>
+            <p>
+                <b>Q: Can I submit my own app?</b><br>
+                A: Yes! If you built something awesome and want it considered, <a href="mailto:stadiastudios.support@proton.me" style="color:#4ca1c4;">email us</a> or open an issue on <a href="https://github.com/StadiaStudios" target="_blank" style="color:#4ca1c4;">GitHub</a>.
+            </p>
+            <p>
+                <b>Q: Are all apps here free?</b><br>
+                A: Most are free to use or try. Some may offer upgrades or pro features, always with transparent info before you launch the app.
+            </p>
+            <p>
+                <b>Q: Is my data safe?</b><br>
+                A: We list only apps that respect privacy and do not require unnecessary data. For external apps, refer to each app's own privacy policy.
+            </p>
+        </section>
+    </div>
+    <div id="footer-placeholder"></div>
+    <script>
+        (function() {
+            function tryFooter() {
+                if (window.components && window.components.footer) {
+                    document.getElementById('footer-placeholder').innerHTML = window.components.footer;
+                } else if (!window._footerTries || window._footerTries < 40) {
+                    window._footerTries = (window._footerTries || 0) + 1;
+                    setTimeout(tryFooter, 25);
+                }
+            }
+            tryFooter();
+        })();
+    </script>
+</body>
+</html>
