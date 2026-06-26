@@ -1,3 +1,7 @@
+V1.29.26
+----------
+Important Bug Fixes in settings, Fixes Setup page incorrect ref, 
+
 V1.29.25
 ----------
 Minor Dashboard Improvements, Added Quick Setup for New Users,
