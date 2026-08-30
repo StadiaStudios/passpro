@@ -157,7 +157,7 @@
 
         document.body.appendChild(overlay);
 
-        const minDisplayMs = 4000;
+        const minDisplayMs = 1000;
         const startTime = Date.now();
 
         window.addEventListener('load', () => {
