@@ -1,6 +1,6 @@
 V1.29.26
 ----------
-Important Bug Fixes in settings, Fixes Setup page incorrect ref, 
+Important Bug Fixes in settings, Fixes Setup page incorrect ref, Updated Loading screen times.
 
 V1.29.25
 ----------
