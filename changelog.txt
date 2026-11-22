@@ -1,3 +1,7 @@
+V1.22.19
+----------
+New Winter 2026 Theme, New Temporary App Icon.
+
 V1.21.19
 ----------
 Complete App Overhaul, Future Proof Protected, Data from Old Ver Supports New Ver, OverHaul starts with settings, Index, and Passwords, Backup app.

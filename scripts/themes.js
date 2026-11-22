@@ -4,6 +4,7 @@ const themes = {
     light:       { name: "Light",       file: "themes/light.css" },
     solarized:   { name: "Solarized",   file: "themes/solarized.css" },
     aurora:     { name: "aurora",       file: "themes/aurora.css" },
+    winter2026:     { name: "Winter 2026",       file: "themes/winter2026.css" },
     barbiepink:  { name: "Barbie Pink", file: "themes/barbie-pink.css" }
 };
 
